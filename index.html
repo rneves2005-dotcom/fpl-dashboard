@@ -749,6 +749,173 @@ tbody tr:hover { background: var(--bg-inset); }
 .main-tab-panel.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
+/* ===== APP LAYOUT — main content + sticky right rail ===== */
+.app-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+.main-col { min-width: 0; /* prevent overflow */ }
+.right-rail {
+  position: sticky;
+  top: 12px;
+  align-self: start;
+  max-height: calc(100vh - 24px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding-right: 2px;
+}
+.right-rail::-webkit-scrollbar { width: 4px; }
+.right-rail::-webkit-scrollbar-thumb { background: var(--line); border-radius: 2px; }
+
+/* Compact 3×2 stats grid in the rail */
+.rail-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--line-strong);
+  margin-bottom: 16px;
+}
+.rail-stat {
+  padding: 10px 12px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+.rail-stat:nth-child(even) { border-right: none; }
+.rail-stat:nth-last-child(-n+2) { border-bottom: none; }
+.rail-stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+.rail-stat-value {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rail-stat-value.rail-small { font-size: 16px; }
+.rail-stat-value.good { color: var(--good); }
+.rail-stat-value.bad { color: var(--bad); }
+.rail-stat-value.warn { color: var(--warn); }
+.rail-stat-sub {
+  font-size: 10px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Rail sections (fixtures) */
+.rail-section {
+  background: var(--bg-card);
+  border: 1px solid var(--line-strong);
+  margin-bottom: 12px;
+}
+.rail-section-title {
+  padding: 8px 12px;
+  background: var(--bg-inset);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Compact vertical fixtures list in rail (overrides horizontal ticker) */
+.rail-fixtures {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+.rail-fixtures .ticker-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 12px;
+  border-right: none !important;
+  border-bottom: 0.5px solid var(--line);
+  border-top: none !important;
+  min-width: 0;
+  border-left: 3px solid var(--line);
+}
+.rail-fixtures .ticker-item.live { border-left-color: var(--warn); background: #FFF9EC; }
+.rail-fixtures .ticker-item.finished { border-left-color: var(--ink-muted); }
+.rail-fixtures .ticker-item.pending { border-left-color: var(--line); }
+.rail-fixtures .ticker-item:last-child { border-bottom: none; }
+.rail-fixtures .ticker-teams {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+.rail-fixtures .ticker-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 0;
+  white-space: nowrap;
+}
+.rail-fixtures .ticker-item.live .ticker-status { color: var(--warn); font-weight: 600; }
+
+/* Mobile/tablet: rail moves to top */
+@media (max-width: 960px) {
+  .app-layout { grid-template-columns: 1fr; gap: 16px; }
+  .right-rail {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    order: -1; /* show BEFORE the tabs on mobile */
+  }
+  .rail-stats { grid-template-columns: repeat(3, 1fr); }
+  .rail-stat:nth-child(3n) { border-right: none; }
+  .rail-stat:nth-child(even) { border-right: 1px solid var(--line); }
+  .rail-stat:nth-last-child(-n+3) { border-bottom: none; }
+  .rail-fixtures {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  .rail-fixtures .ticker-item {
+    flex: 0 0 auto;
+    min-width: 140px;
+    flex-direction: column;
+    align-items: flex-start;
+    border-bottom: none !important;
+    border-right: 0.5px solid var(--line) !important;
+    border-left: none;
+    border-top: 3px solid var(--line) !important;
+  }
+  .rail-fixtures .ticker-item.live { border-top-color: var(--warn) !important; }
+  .rail-fixtures .ticker-item.finished { border-top-color: var(--ink-muted) !important; }
+}
+
+@media (max-width: 640px) {
+  .rail-stats { grid-template-columns: 1fr 1fr; }
+  .rail-stat:nth-child(3n) { border-right: 1px solid var(--line); }
+  .rail-stat:nth-child(even) { border-right: none; }
+  .rail-stat:nth-last-child(-n+2) { border-bottom: none; }
+  .rail-stat:nth-last-child(-n+3):nth-child(odd) { border-bottom: 1px solid var(--line); }
+  .rail-stat-value { font-size: 18px; }
+  .rail-stat-value.rail-small { font-size: 14px; }
+}
+
 /* Tablet — allow text truncation */
 @media (max-width: 900px) {
   .main-tab { font-size: 13px; padding: 12px 10px; gap: 6px; }
@@ -830,26 +997,11 @@ tbody tr:hover { background: var(--bg-inset); }
   <button class="btn" onclick="refreshAll()">Load</button>
 </div>
 
-<!-- Fixture ticker — MOVED TO TOP -->
-<div class="section" style="margin-bottom:18px">
-  <div class="section-head">
-    <div class="section-title">Current Gameweek Fixtures</div>
-    <div class="section-kicker">Live scores & status</div>
-  </div>
-  <div class="ticker" id="ticker"><div class="loading">Loading fixtures...</div></div>
-</div>
+<!-- Main layout: content left, sticky rail right -->
+<div class="app-layout">
 
-<!-- Hero stats -->
-<div class="hero" id="hero-stats">
-  <div class="hero-cell"><div class="hero-label">GW Live</div><div class="hero-value" id="stat-gw-pts">—</div><div class="hero-sub" id="stat-gw-rank">Points this GW</div></div>
-  <div class="hero-cell"><div class="hero-label">Total Points</div><div class="hero-value" id="stat-total">—</div><div class="hero-sub" id="stat-chip-active">—</div></div>
-  <div class="hero-cell"><div class="hero-label">Live Rank</div><div class="hero-value" id="stat-live-rank">—</div><div class="hero-sub" id="stat-rank-change">Rank change —</div></div>
-  <div class="hero-cell"><div class="hero-label">League Rank</div><div class="hero-value" id="stat-league-rank">—</div><div class="hero-sub" id="stat-league-name">—</div></div>
-  <div class="hero-cell"><div class="hero-label">ITB</div><div class="hero-value" id="stat-itb">—</div><div class="hero-sub" id="stat-tv">Team value —</div></div>
-  <div class="hero-cell"><div class="hero-label">Chips Left</div><div class="hero-value" id="stat-chips">—</div><div class="hero-sub" id="stat-chips-list">—</div></div>
-</div>
-
-<!-- Main tabbed content -->
+<!-- MAIN CONTENT (tabs) -->
+<div class="main-col">
 <div class="main-tabs-wrap">
   <div class="main-tabs">
     <button class="main-tab active" data-tab="squad" onclick="switchTab('squad')">
@@ -949,6 +1101,28 @@ tbody tr:hover { background: var(--bg-inset); }
     </div>
   </div>
 </div>
+</div><!-- /.main-col -->
+
+<!-- STICKY RIGHT RAIL — always visible -->
+<aside class="right-rail">
+  <!-- Compact stats grid -->
+  <div class="rail-stats">
+    <div class="rail-stat"><div class="rail-stat-label">GW Live</div><div class="rail-stat-value" id="stat-gw-pts">—</div><div class="rail-stat-sub" id="stat-gw-rank">—</div></div>
+    <div class="rail-stat"><div class="rail-stat-label">Total</div><div class="rail-stat-value" id="stat-total">—</div><div class="rail-stat-sub" id="stat-chip-active">—</div></div>
+    <div class="rail-stat"><div class="rail-stat-label">Live Rank</div><div class="rail-stat-value rail-small" id="stat-live-rank">—</div><div class="rail-stat-sub" id="stat-rank-change">—</div></div>
+    <div class="rail-stat"><div class="rail-stat-label">League</div><div class="rail-stat-value" id="stat-league-rank">—</div><div class="rail-stat-sub" id="stat-league-name">—</div></div>
+    <div class="rail-stat"><div class="rail-stat-label">ITB</div><div class="rail-stat-value" id="stat-itb">—</div><div class="rail-stat-sub" id="stat-tv">—</div></div>
+    <div class="rail-stat"><div class="rail-stat-label">Chips</div><div class="rail-stat-value" id="stat-chips">—</div><div class="rail-stat-sub" id="stat-chips-list">—</div></div>
+  </div>
+
+  <!-- Fixtures -->
+  <div class="rail-section">
+    <div class="rail-section-title">Gameweek Fixtures</div>
+    <div class="rail-fixtures" id="ticker"><div class="loading">Loading...</div></div>
+  </div>
+</aside>
+
+</div><!-- /.app-layout -->
 
 <!-- Footer -->
 <div class="foot">
@@ -1318,15 +1492,20 @@ function computeLivePoints(picks) {
 function renderTicker() {
   const ticker = document.getElementById('ticker');
   if (!STATE.fixtures.length) { ticker.innerHTML = '<div class="loading">No fixtures in this gameweek</div>'; return; }
-  ticker.innerHTML = STATE.fixtures.map(f => {
+  // Sort: live first, then pending (not started), then finished last
+  const sorted = [...STATE.fixtures].sort((a, b) => {
+    const order = (f) => f.started && !f.finished_provisional ? 0 : !f.started ? 1 : 2;
+    return order(a) - order(b);
+  });
+  ticker.innerHTML = sorted.map(f => {
     const home = STATE.teamMap[f.team_h].short;
     const away = STATE.teamMap[f.team_a].short;
     let status, cls;
-    if (f.finished_provisional) { status = 'Finished'; cls = 'finished'; }
+    if (f.finished_provisional) { status = 'Final'; cls = 'finished'; }
     else if (f.started) { status = f.minutes + "'"; cls = 'live'; }
     else if (f.kickoff_time) { const t = new Date(f.kickoff_time); status = t.toLocaleString('en-GB', {weekday:'short', hour:'2-digit', minute:'2-digit'}); cls = 'pending'; }
     else { status = 'TBD'; cls = 'pending'; }
-    const score = f.started ? `${f.team_h_score ?? 0} — ${f.team_a_score ?? 0}` : 'vs';
+    const score = f.started ? `${f.team_h_score ?? 0}–${f.team_a_score ?? 0}` : 'vs';
     return `<div class="ticker-item ${cls}">
       <div class="ticker-teams">${home} ${score} ${away}</div>
       <div class="ticker-status">${status}</div>
