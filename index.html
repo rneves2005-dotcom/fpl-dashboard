@@ -238,64 +238,51 @@ tbody tr:hover { background: var(--bg-inset); }
 
 /* Name + points card — white rounded box (FPL-style) */
 .player-info {
-  background: white;
+  background: transparent;
   border-radius: 4px;
   width: 86px;
-  padding: 12px 4px 0;
-  margin-top: -8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  padding: 0;
+  margin-top: -4px;
   text-align: center;
   position: relative;
   z-index: 0;
   overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 .player-name {
   color: white;
   font-family: 'Inter Tight', sans-serif;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 3px 4px;
+  padding: 5px 4px 4px;
   background: #1A4A3A;
-  margin: 0 -4px;
+  margin: 0;
+  border-radius: 3px 3px 0 0;
 }
-.player-fix {
-  color: #5F5E5A;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  margin-top: 3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 2px 3px;
-  background: white;
-  display: none; /* hidden by default — can add back if wanted */
-}
-.player-fix .fix-live { color: #BA7517; font-weight: 600; }
-.player-fix .fix-done { color: #A5A099; }
+.player-fix { display: none; }
 
 /* Points bar — SAME dark teal for ALL players (matches FPL official style) */
 .player-points-bar {
   margin: 0;
-  padding: 7px 4px;
+  padding: 5px 4px;
   background: #06443A;
   color: white;
   font-family: 'Inter Tight', sans-serif;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.2;
-  border-top: 2px solid #1A6B5E;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  min-height: 24px;
-  border-radius: 0 0 4px 4px;
+  min-height: 22px;
+  border-radius: 0 0 3px 3px;
 }
-.player-points-bar .pts-num { font-family: 'Inter Tight', sans-serif; font-size: 14px; font-weight: 700; color: white; }
+.player-points-bar .pts-num { font-family: 'Inter Tight', sans-serif; font-size: 13px; font-weight: 700; color: white; }
 .player-points-bar .pts-label { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.8); }
 .player-points-bar .pt-mult { font-family: 'JetBrains Mono', monospace; font-size: 10px; opacity: 0.85; font-weight: 600; color: #FFD76E; }
 /* Only use color state on notable extremes */
@@ -450,7 +437,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .pitch-bench .player-card { width: 76px; }
 .pitch-bench .shirt { width: 42px; height: 56px; }
 .pitch-bench .player-info { width: 70px; }
-.pitch-bench .player-name { font-size: 10px; }
+.pitch-bench .player-name { font-size: 12px; }
 .pitch-bench .player-fix { font-size: 8px; }
 .bench-label {
   color: rgba(255,255,255,0.85);
