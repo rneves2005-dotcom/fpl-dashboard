@@ -63,15 +63,15 @@ html, body { background: var(--bg); color: var(--ink); font-family: 'Inter Tight
 .btn.ghost:hover { background: var(--ink); color: var(--bg); }
 
 /* Hero stats */
-.hero { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; border: 1px solid var(--line-strong); margin-bottom: 28px; background: var(--bg-card); }
-.hero-cell { padding: 16px 18px; border-right: 1px solid var(--line); }
+.hero { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; border: 1px solid var(--line-strong); margin-bottom: 20px; background: var(--bg-card); }
+.hero-cell { padding: 11px 14px; border-right: 1px solid var(--line); }
 .hero-cell:last-child { border-right: none; }
-.hero-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 6px; }
-.hero-value { font-family: 'Fraunces', serif; font-weight: 500; font-size: 30px; letter-spacing: -0.02em; line-height: 1; }
+.hero-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px; }
+.hero-value { font-family: 'Fraunces', serif; font-weight: 500; font-size: 25px; letter-spacing: -0.02em; line-height: 1; }
 .hero-value.good { color: var(--good); }
 .hero-value.bad { color: var(--bad); }
 .hero-value.warn { color: var(--warn); }
-.hero-sub { font-size: 11px; color: var(--ink-muted); margin-top: 4px; }
+.hero-sub { font-size: 10px; color: var(--ink-muted); margin-top: 3px; }
 
 /* Layout — two column */
 .cols { display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; }
@@ -380,9 +380,12 @@ tbody tr:hover { background: var(--bg-inset); }
   top: 0; left: 0; right: 0;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   padding: 14px 18px;
   z-index: 3;
+  pointer-events: none;
 }
+.pitch-header > * { pointer-events: auto; }
 .xi-total {
   background: rgba(0,0,0,0.78);
   color: white;
@@ -420,6 +423,45 @@ tbody tr:hover { background: var(--bg-inset); }
   line-height: 1;
   box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
+
+/* Live Rank banner — centre of pitch header, above GK */
+.pitch-rank {
+  background: rgba(255,255,255,0.95);
+  color: #1A1815;
+  border-radius: 5px;
+  padding: 5px 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  line-height: 1.1;
+  min-width: 100px;
+}
+.pitch-rank-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #5F5E5A;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.pitch-rank-value {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1A1815;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.pitch-rank-change {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  margin-top: 1px;
+  line-height: 1;
+}
+.pitch-rank-change.up { color: #2B6B3F; }
+.pitch-rank-change.down { color: #9A2626; }
+.pitch-rank-change.same { color: #A5A099; }
 
 /* Bench */
 .pitch-bench {
@@ -513,10 +555,34 @@ tbody tr:hover { background: var(--bg-inset); }
 .live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--warn); animation: pulse 1.4s infinite; }
 @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
 .fixture-body { padding: 0; }
-.bps-row { display: grid; grid-template-columns: 24px 1fr auto auto; gap: 10px; padding: 6px 14px; align-items: center; border-bottom: 0.5px solid var(--line); font-size: 12px; }
+.bps-row { display: grid; grid-template-columns: 24px 1fr 36px 44px 50px; gap: 8px; padding: 6px 12px; align-items: center; border-bottom: 0.5px solid var(--line); font-size: 12px; }
 .bps-row:last-child { border-bottom: none; }
 .bps-rank { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-muted); }
-.bps-val { font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+.bps-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bps-val { font-family: 'JetBrains Mono', monospace; font-weight: 600; text-align: right; font-size: 12px; }
+.bps-dc { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-muted); text-align: center; font-weight: 500; }
+.bps-dc.dc-hit { color: var(--good); background: var(--good-soft); padding: 1px 5px; border-radius: 3px; font-weight: 600; }
+.bps-dc.dc-near { color: var(--warn); font-weight: 600; }
+.bps-bonus { text-align: right; }
+
+/* Header row for column labels */
+.bps-header { background: var(--bg-inset); font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); padding: 5px 12px; font-weight: 600; }
+.bps-header .bps-rank, .bps-header .bps-name, .bps-header .bps-val, .bps-header .bps-dc, .bps-header .bps-bonus { color: var(--ink-muted); font-weight: 600; }
+
+/* "Your other players" divider for owned players outside top 5 */
+.bps-divider {
+  padding: 5px 12px;
+  background: var(--good-soft);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--good);
+  font-weight: 600;
+  border-top: 1px solid var(--line);
+  border-bottom: 0.5px solid var(--line);
+}
+
 .owned { background: var(--good-soft); }
 
 /* Price change cards */
@@ -561,11 +627,11 @@ tbody tr:hover { background: var(--bg-inset); }
 .tab-content.active { display: block; }
 
 /* Fixture ticker */
-.ticker { display: flex; gap: 0; overflow-x: auto; margin-bottom: 20px; background: var(--bg-card); border: 1px solid var(--line); }
-.ticker-item { padding: 10px 14px; border-right: 1px solid var(--line); min-width: 180px; flex-shrink: 0; }
+.ticker { display: flex; gap: 0; overflow-x: auto; margin-bottom: 14px; background: var(--bg-card); border: 1px solid var(--line); }
+.ticker-item { padding: 7px 12px; border-right: 1px solid var(--line); min-width: 160px; flex-shrink: 0; }
 .ticker-item:last-child { border-right: none; }
-.ticker-teams { font-family: 'Fraunces', serif; font-weight: 500; font-size: 14px; margin-bottom: 2px; }
-.ticker-score { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; }
+.ticker-teams { font-family: 'Fraunces', serif; font-weight: 500; font-size: 13px; margin-bottom: 1px; }
+.ticker-score { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; }
 .ticker-status { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px; }
 .ticker-item.live { border-top: 3px solid var(--warn); }
 .ticker-item.finished { border-top: 3px solid var(--ink-muted); }
@@ -606,6 +672,15 @@ tbody tr:hover { background: var(--bg-inset); }
   <button class="btn" onclick="refreshAll()">Load</button>
 </div>
 
+<!-- Fixture ticker — MOVED TO TOP -->
+<div class="section" style="margin-bottom:18px">
+  <div class="section-head">
+    <div class="section-title">Current Gameweek Fixtures</div>
+    <div class="section-kicker">Live scores & status</div>
+  </div>
+  <div class="ticker" id="ticker"><div class="loading">Loading fixtures...</div></div>
+</div>
+
 <!-- Hero stats -->
 <div class="hero" id="hero-stats">
   <div class="hero-cell"><div class="hero-label">GW Live</div><div class="hero-value" id="stat-gw-pts">—</div><div class="hero-sub" id="stat-gw-rank">Points this GW</div></div>
@@ -614,15 +689,6 @@ tbody tr:hover { background: var(--bg-inset); }
   <div class="hero-cell"><div class="hero-label">League Rank</div><div class="hero-value" id="stat-league-rank">—</div><div class="hero-sub" id="stat-league-name">—</div></div>
   <div class="hero-cell"><div class="hero-label">ITB</div><div class="hero-value" id="stat-itb">—</div><div class="hero-sub" id="stat-tv">Team value —</div></div>
   <div class="hero-cell"><div class="hero-label">Chips Left</div><div class="hero-value" id="stat-chips">—</div><div class="hero-sub" id="stat-chips-list">—</div></div>
-</div>
-
-<!-- Fixture ticker -->
-<div class="section">
-  <div class="section-head">
-    <div class="section-title">Current Gameweek Fixtures</div>
-    <div class="section-kicker">Live scores & status</div>
-  </div>
-  <div class="ticker" id="ticker"><div class="loading">Loading fixtures...</div></div>
 </div>
 
 <!-- Main columns -->
@@ -1368,6 +1434,28 @@ function renderPitch() {
   const fwdRow = xiByPos[4].map(cardFor).join('');
   const benchRow = bench.map(cardFor).join('');
 
+  // Live rank + change for the pitch banner
+  const liveRank = STATE.entryData ? STATE.entryData.summary_overall_rank : null;
+  const pastGWs = (STATE.history && STATE.history.current) || [];
+  const prevFinishedGW = pastGWs.filter(g => g.event < STATE.currentGW).pop();
+  const lastGWRank = prevFinishedGW ? prevFinishedGW.overall_rank : null;
+
+  let rankBannerHtml = '';
+  if (liveRank) {
+    let changeHtml = '';
+    if (lastGWRank) {
+      const diff = liveRank - lastGWRank;
+      if (diff < 0) changeHtml = `<div class="pitch-rank-change up">▲ ${Math.abs(diff).toLocaleString()}</div>`;
+      else if (diff > 0) changeHtml = `<div class="pitch-rank-change down">▼ ${diff.toLocaleString()}</div>`;
+      else changeHtml = `<div class="pitch-rank-change same">— unchanged</div>`;
+    }
+    rankBannerHtml = `<div class="pitch-rank">
+      <div class="pitch-rank-label">Live Rank</div>
+      <div class="pitch-rank-value">${liveRank.toLocaleString()}</div>
+      ${changeHtml}
+    </div>`;
+  }
+
   document.getElementById('squad-pitch').innerHTML = `
     <div class="pitch" style="padding-bottom:140px">
       <div class="pitch-markings"></div>
@@ -1375,6 +1463,7 @@ function renderPitch() {
       <div class="penalty-spot"></div>
       <div class="pitch-header">
         <div class="xi-total">${xiTotal}<em>${chip ? chipLabel(chip).toUpperCase() : formation}</em></div>
+        ${rankBannerHtml}
         <div class="formation-label">${formation}</div>
       </div>
       <div class="pitch-rows">
@@ -1499,15 +1588,28 @@ function renderBonus() {
       if ((stats.minutes || 0) === 0) return;
       playersInFix.push({
         id: +id, name: el.web_name, team: STATE.teamMap[el.team].short,
-        bps: stats.bps || 0, bonus: stats.bonus || 0, owned: squadIds.has(+id)
+        bps: stats.bps || 0, bonus: stats.bonus || 0, owned: squadIds.has(+id),
+        dc: stats.defensive_contribution || 0,
+        pos: el.element_type,
+        posLabel: ['','GK','DEF','MID','FWD'][el.element_type]
       });
     });
     playersInFix.sort((a,b) => b.bps - a.bps);
     const top5 = playersInFix.slice(0, 5);
 
+    // Find OWNED players NOT already in top 5 — always show them
+    const top5Ids = new Set(top5.map(p => p.id));
+    const ownedOutsideTop5 = playersInFix
+      .filter(p => p.owned && !top5Ids.has(p.id));
+    // Add their actual rank from full list
+    ownedOutsideTop5.forEach(p => {
+      p.actualRank = playersInFix.findIndex(x => x.id === p.id) + 1;
+    });
+
     // Check which of YOUR players are in the top 3 BPS
     const ownedInTop3 = top5.slice(0, 3).filter(p => p.owned);
     const ownedInTop5 = top5.filter(p => p.owned);
+    const allOwned = [...ownedInTop5, ...ownedOutsideTop5];
 
     let statusHtml, statusClass;
     if (f.finished_provisional) {
@@ -1530,22 +1632,23 @@ function renderBonus() {
       else isCollapsed = false;
     }
 
-    // Summary line shown when collapsed — "Struijk ⭐ 31 BPS +1" or "No owned players in top 3"
+    // Summary line shown when collapsed — prioritises your owned players
     let summaryHtml = '';
-    if (ownedInTop5.length > 0) {
-      const topOwned = ownedInTop5[0];
-      const ownedRank = top5.findIndex(p => p.id === topOwned.id) + 1;
+    if (allOwned.length > 0) {
+      const topOwned = allOwned[0];
+      const ownedRank = topOwned.actualRank || (top5.findIndex(p => p.id === topOwned.id) + 1);
       const rankLabels = ['1st','2nd','3rd','4th','5th'];
+      const rankLabel = ownedRank <= 5 ? rankLabels[ownedRank-1] : `${ownedRank}th`;
       const bonusNote = topOwned.bonus > 0 ? ` <span class="bonus-${topOwned.bonus}">+${topOwned.bonus}</span>` :
                         ownedRank === 1 ? ' <span class="bonus-3">+3?</span>' :
                         ownedRank === 2 ? ' <span class="bonus-2">+2?</span>' :
                         ownedRank === 3 ? ' <span class="bonus-1">+1?</span>' : '';
-      summaryHtml = `⭐ <b>${topOwned.name}</b> ${rankLabels[ownedRank-1]} · ${topOwned.bps} BPS${bonusNote}`;
-      if (ownedInTop5.length > 1) {
-        summaryHtml += ` · +${ownedInTop5.length - 1} more`;
+      summaryHtml = `⭐ <b>${topOwned.name}</b> ${rankLabel} · ${topOwned.bps} BPS${bonusNote}`;
+      if (allOwned.length > 1) {
+        summaryHtml += ` · +${allOwned.length - 1} more`;
       }
     } else if (top5.length > 0) {
-      summaryHtml = `<span style="color:var(--ink-muted)">No owned player in top 5 · leader ${top5[0].name} ${top5[0].bps} BPS</span>`;
+      summaryHtml = `<span style="color:var(--ink-muted)">No owned player · leader ${top5[0].name} ${top5[0].bps} BPS</span>`;
     }
 
     const rows = top5.map((p, i) => {
@@ -1557,13 +1660,49 @@ function renderBonus() {
       else if (i === 1) bonusCell = '<span class="bonus-2">+2?</span>';
       else if (i === 2) bonusCell = '<span class="bonus-1">+1?</span>';
       else bonusCell = '<span style="color:var(--ink-faint)">—</span>';
+
+      // DC cell — threshold 10 DEF, 12 MID/FWD/GK
+      const dcThreshold = p.pos === 2 ? 10 : 12;
+      const dcHit = p.dc >= dcThreshold;
+      const dcClass = dcHit ? 'dc-hit' : (p.dc >= dcThreshold - 2 ? 'dc-near' : '');
+      const dcCell = `<span class="bps-dc ${dcClass}" title="Defensive contribution (needs ${dcThreshold} for +2 pts)">${p.dc}${dcHit ? ' ✓' : ''}</span>`;
+
       return `<div class="bps-row ${p.owned ? 'owned':''}">
         <span class="bps-rank">${rank}</span>
-        <span>${p.name}<span class="pmeta"> · ${p.team}</span>${p.owned ? ' ⭐' : ''}</span>
-        <span class="bps-val">${p.bps}</span>
-        <span>${bonusCell}</span>
+        <span class="bps-name">${p.name}<span class="pmeta"> · ${p.team}</span>${p.owned ? ' ⭐' : ''}</span>
+        <span class="bps-val" title="BPS">${p.bps}</span>
+        ${dcCell}
+        <span class="bps-bonus">${bonusCell}</span>
       </div>`;
     }).join('');
+
+    // Owned players outside top 5 — always show them after a divider
+    const ownedExtraRows = ownedOutsideTop5.map(p => {
+      const dcThreshold = p.pos === 2 ? 10 : 12;
+      const dcHit = p.dc >= dcThreshold;
+      const dcClass = dcHit ? 'dc-hit' : (p.dc >= dcThreshold - 2 ? 'dc-near' : '');
+      const dcCell = `<span class="bps-dc ${dcClass}" title="Defensive contribution (needs ${dcThreshold} for +2 pts)">${p.dc}${dcHit ? ' ✓' : ''}</span>`;
+      return `<div class="bps-row owned">
+        <span class="bps-rank">${p.actualRank}th</span>
+        <span class="bps-name">${p.name}<span class="pmeta"> · ${p.team}</span> ⭐</span>
+        <span class="bps-val" title="BPS">${p.bps}</span>
+        ${dcCell}
+        <span class="bps-bonus"><span style="color:var(--ink-faint)">—</span></span>
+      </div>`;
+    }).join('');
+
+    const ownedExtraBlock = ownedOutsideTop5.length > 0
+      ? `<div class="bps-divider">Your other players</div>${ownedExtraRows}`
+      : '';
+
+    // Header row for column labels
+    const headerRow = `<div class="bps-row bps-header">
+      <span class="bps-rank">#</span>
+      <span class="bps-name">Player</span>
+      <span class="bps-val">BPS</span>
+      <span class="bps-dc">DC</span>
+      <span class="bps-bonus">Bonus</span>
+    </div>`;
 
     return `<div class="fixture-box ${isCollapsed ? 'collapsed' : ''}" data-fixkey="${fixtureKey}">
       <div class="fixture-header" onclick="toggleFixture('${fixtureKey}')">
@@ -1574,7 +1713,7 @@ function renderBonus() {
         <div class="fixture-status ${statusClass}">${statusHtml}</div>
       </div>
       ${summaryHtml ? `<div class="fixture-summary">${summaryHtml}</div>` : ''}
-      <div class="fixture-body">${rows}</div>
+      <div class="fixture-body">${headerRow}${rows}${ownedExtraBlock}</div>
     </div>`;
   }).join('');
 
