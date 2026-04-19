@@ -490,8 +490,21 @@ tbody tr:hover { background: var(--bg-inset); }
 .inj { color: var(--bad); font-family: 'JetBrains Mono', monospace; font-size: 10px; }
 
 /* Fixture cards for bonus */
-.fixture-box { background: var(--bg-card); border: 1px solid var(--line); margin-bottom: 12px; }
-.fixture-header { padding: 10px 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; background: var(--bg-inset); }
+.fixture-box { background: var(--bg-card); border: 1px solid var(--line); margin-bottom: 8px; overflow: hidden; transition: all 0.2s; }
+.fixture-header { padding: 10px 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; background: var(--bg-inset); cursor: pointer; user-select: none; transition: background 0.15s; }
+.fixture-header:hover { background: #EBE6D6; }
+.fixture-chevron { display: inline-block; font-size: 12px; color: var(--ink-muted); margin-right: 6px; transition: transform 0.2s; }
+.fixture-box.collapsed .fixture-chevron { transform: rotate(-90deg); }
+.fixture-box.collapsed .fixture-header { border-bottom: none; }
+.fixture-box.collapsed .fixture-body { display: none; }
+.fixture-summary { padding: 8px 14px; background: var(--bg-card); border-bottom: 1px solid var(--line); font-size: 12px; color: var(--ink); line-height: 1.4; }
+.fixture-summary b { font-weight: 600; }
+.fixture-box.collapsed .fixture-summary { border-bottom: none; }
+.fixture-box:not(.collapsed) .fixture-summary { display: none; }
+
+.bonus-toolbar { display: flex; gap: 6px; justify-content: flex-end; margin-bottom: 10px; }
+.bonus-tool-btn { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; background: transparent; color: var(--ink-muted); border: 1px solid var(--line); border-radius: 2px; cursor: pointer; transition: all 0.15s; }
+.bonus-tool-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
 .fixture-teams { font-family: 'Fraunces', serif; font-weight: 500; font-size: 15px; }
 .fixture-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
 .fixture-status.live { color: var(--warn); display: flex; align-items: center; gap: 6px; }
@@ -1467,10 +1480,14 @@ function renderBonus() {
     return;
   }
 
-  container.innerHTML = started.map(f => {
+  // Retrieve saved collapse preferences
+  const collapsedState = JSON.parse(localStorage.getItem('fpl-bonus-collapsed') || '{}');
+
+  const fixtureBoxes = started.map(f => {
     const home = STATE.teamMap[f.team_h].short;
     const away = STATE.teamMap[f.team_a].short;
     const score = `${f.team_h_score ?? 0}–${f.team_a_score ?? 0}`;
+    const fixtureKey = `${home}-${away}-${STATE.currentGW}`;
 
     // Collect BPS from both teams
     const playersInFix = [];
@@ -1488,6 +1505,10 @@ function renderBonus() {
     playersInFix.sort((a,b) => b.bps - a.bps);
     const top5 = playersInFix.slice(0, 5);
 
+    // Check which of YOUR players are in the top 3 BPS
+    const ownedInTop3 = top5.slice(0, 3).filter(p => p.owned);
+    const ownedInTop5 = top5.filter(p => p.owned);
+
     let statusHtml, statusClass;
     if (f.finished_provisional) {
       const hasBonus = playersInFix.some(p => p.bonus > 0);
@@ -1496,6 +1517,35 @@ function renderBonus() {
     } else {
       statusHtml = `<span class="live-dot"></span>${f.minutes}'`;
       statusClass = 'live';
+    }
+
+    // Default collapse behavior:
+    // - If user has explicit pref, use it
+    // - Else: LIVE fixtures expanded, FINISHED with bonus awarded collapsed, FINISHED awaiting bonus expanded
+    let isCollapsed;
+    if (collapsedState[fixtureKey] !== undefined) {
+      isCollapsed = collapsedState[fixtureKey];
+    } else {
+      if (f.finished_provisional && playersInFix.some(p => p.bonus > 0)) isCollapsed = true;
+      else isCollapsed = false;
+    }
+
+    // Summary line shown when collapsed — "Struijk ⭐ 31 BPS +1" or "No owned players in top 3"
+    let summaryHtml = '';
+    if (ownedInTop5.length > 0) {
+      const topOwned = ownedInTop5[0];
+      const ownedRank = top5.findIndex(p => p.id === topOwned.id) + 1;
+      const rankLabels = ['1st','2nd','3rd','4th','5th'];
+      const bonusNote = topOwned.bonus > 0 ? ` <span class="bonus-${topOwned.bonus}">+${topOwned.bonus}</span>` :
+                        ownedRank === 1 ? ' <span class="bonus-3">+3?</span>' :
+                        ownedRank === 2 ? ' <span class="bonus-2">+2?</span>' :
+                        ownedRank === 3 ? ' <span class="bonus-1">+1?</span>' : '';
+      summaryHtml = `⭐ <b>${topOwned.name}</b> ${rankLabels[ownedRank-1]} · ${topOwned.bps} BPS${bonusNote}`;
+      if (ownedInTop5.length > 1) {
+        summaryHtml += ` · +${ownedInTop5.length - 1} more`;
+      }
+    } else if (top5.length > 0) {
+      summaryHtml = `<span style="color:var(--ink-muted)">No owned player in top 5 · leader ${top5[0].name} ${top5[0].bps} BPS</span>`;
     }
 
     const rows = top5.map((p, i) => {
@@ -1515,14 +1565,52 @@ function renderBonus() {
       </div>`;
     }).join('');
 
-    return `<div class="fixture-box">
-      <div class="fixture-header">
-        <div class="fixture-teams">${home} ${score} ${away}</div>
+    return `<div class="fixture-box ${isCollapsed ? 'collapsed' : ''}" data-fixkey="${fixtureKey}">
+      <div class="fixture-header" onclick="toggleFixture('${fixtureKey}')">
+        <div class="fixture-teams">
+          <span class="fixture-chevron">▾</span>
+          ${home} ${score} ${away}
+        </div>
         <div class="fixture-status ${statusClass}">${statusHtml}</div>
       </div>
+      ${summaryHtml ? `<div class="fixture-summary">${summaryHtml}</div>` : ''}
       <div class="fixture-body">${rows}</div>
     </div>`;
   }).join('');
+
+  // Add toolbar at top: expand all / collapse all
+  const totalFixtures = started.length;
+  const collapsedCount = Object.values(collapsedState).filter(v => v === true).length;
+  const toolbarHtml = `<div class="bonus-toolbar">
+    <button class="bonus-tool-btn" onclick="toggleAllFixtures(true)">Collapse all</button>
+    <button class="bonus-tool-btn" onclick="toggleAllFixtures(false)">Expand all</button>
+  </div>`;
+  container.innerHTML = toolbarHtml + fixtureBoxes;
+}
+
+// Toggle individual fixture
+function toggleFixture(fixtureKey) {
+  const box = document.querySelector(`[data-fixkey="${fixtureKey}"]`);
+  if (!box) return;
+  const isCollapsing = !box.classList.contains('collapsed');
+  box.classList.toggle('collapsed');
+  // Persist
+  const state = JSON.parse(localStorage.getItem('fpl-bonus-collapsed') || '{}');
+  state[fixtureKey] = isCollapsing;
+  localStorage.setItem('fpl-bonus-collapsed', JSON.stringify(state));
+}
+
+// Collapse/expand all fixtures
+function toggleAllFixtures(collapsed) {
+  const boxes = document.querySelectorAll('.fixture-box[data-fixkey]');
+  const state = JSON.parse(localStorage.getItem('fpl-bonus-collapsed') || '{}');
+  boxes.forEach(box => {
+    const key = box.getAttribute('data-fixkey');
+    if (collapsed) box.classList.add('collapsed');
+    else box.classList.remove('collapsed');
+    state[key] = collapsed;
+  });
+  localStorage.setItem('fpl-bonus-collapsed', JSON.stringify(state));
 }
 
 // ============================================================
