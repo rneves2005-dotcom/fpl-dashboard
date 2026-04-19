@@ -595,12 +595,12 @@ tbody tr:hover { background: var(--bg-inset); }
 
 <!-- Hero stats -->
 <div class="hero" id="hero-stats">
-  <div class="hero-cell"><div class="hero-label">GW Live</div><div class="hero-value" id="stat-gw-pts">—</div><div class="hero-sub" id="stat-gw-rank">Live rank</div></div>
-  <div class="hero-cell"><div class="hero-label">Season Total</div><div class="hero-value" id="stat-total">—</div><div class="hero-sub" id="stat-overall-rank">Overall rank</div></div>
+  <div class="hero-cell"><div class="hero-label">GW Live</div><div class="hero-value" id="stat-gw-pts">—</div><div class="hero-sub" id="stat-gw-rank">Points this GW</div></div>
+  <div class="hero-cell"><div class="hero-label">Total Points</div><div class="hero-value" id="stat-total">—</div><div class="hero-sub" id="stat-chip-active">—</div></div>
+  <div class="hero-cell"><div class="hero-label">Live Rank</div><div class="hero-value" id="stat-live-rank">—</div><div class="hero-sub" id="stat-rank-change">Rank change —</div></div>
   <div class="hero-cell"><div class="hero-label">League Rank</div><div class="hero-value" id="stat-league-rank">—</div><div class="hero-sub" id="stat-league-name">—</div></div>
-  <div class="hero-cell"><div class="hero-label">ITB</div><div class="hero-value" id="stat-itb">—</div><div class="hero-sub">In the bank</div></div>
-  <div class="hero-cell"><div class="hero-label">Team Value</div><div class="hero-value" id="stat-tv">—</div><div class="hero-sub" id="stat-tv-profit">Season profit</div></div>
-  <div class="hero-cell"><div class="hero-label">Chips Left</div><div class="hero-value" id="stat-chips">—</div><div class="hero-sub" id="stat-chip-active">—</div></div>
+  <div class="hero-cell"><div class="hero-label">ITB</div><div class="hero-value" id="stat-itb">—</div><div class="hero-sub" id="stat-tv">Team value —</div></div>
+  <div class="hero-cell"><div class="hero-label">Chips Left</div><div class="hero-value" id="stat-chips">—</div><div class="hero-sub" id="stat-chips-list">—</div></div>
 </div>
 
 <!-- Fixture ticker -->
@@ -934,13 +934,48 @@ function renderHero() {
   const ed = STATE.entryData;
   const activeChip = STATE.picks ? STATE.picks.active_chip : null;
 
+  // GW live points
   document.getElementById('stat-gw-pts').textContent = gwPts;
   document.getElementById('stat-gw-pts').className = 'hero-value ' + (gwPts >= 50 ? 'good' : gwPts >= 30 ? '' : gwPts >= 20 ? 'warn' : 'bad');
-  document.getElementById('stat-gw-rank').textContent = ed.summary_event_rank ? 'Rank ' + ed.summary_event_rank.toLocaleString() : 'Live';
+  document.getElementById('stat-gw-rank').textContent = ed.summary_event_rank
+    ? 'GW rank ' + ed.summary_event_rank.toLocaleString()
+    : 'Points this GW';
 
+  // Total points (live total)
   const totalPts = (ed.summary_overall_points || 0) + gwPts;
   document.getElementById('stat-total').textContent = totalPts;
-  document.getElementById('stat-overall-rank').textContent = ed.summary_overall_rank ? 'Rank ' + ed.summary_overall_rank.toLocaleString() : '—';
+
+  // Live rank + rank change (from history)
+  const liveRank = ed.summary_overall_rank;
+  const pastGWs = STATE.history.current || [];
+  // Previous GW rank = last FINISHED GW rank (i.e. rank after GW32, since GW33 is in play)
+  const prevFinishedGW = pastGWs.filter(g => g.event < STATE.currentGW).pop();
+  const lastGWRank = prevFinishedGW ? prevFinishedGW.overall_rank : null;
+
+  const liveRankEl = document.getElementById('stat-live-rank');
+  const rankChangeEl = document.getElementById('stat-rank-change');
+
+  if (liveRank) {
+    liveRankEl.textContent = liveRank.toLocaleString();
+    liveRankEl.className = 'hero-value';
+
+    if (lastGWRank) {
+      const diff = liveRank - lastGWRank; // Positive = rank dropped (worse), negative = improved
+      if (diff < 0) {
+        // Rank improved (number went down)
+        rankChangeEl.innerHTML = `<span style="color:#2B6B3F;font-weight:600">▲ ${Math.abs(diff).toLocaleString()}</span> vs last GW`;
+      } else if (diff > 0) {
+        rankChangeEl.innerHTML = `<span style="color:#9A2626;font-weight:600">▼ ${diff.toLocaleString()}</span> vs last GW`;
+      } else {
+        rankChangeEl.innerHTML = `<span style="color:var(--ink-muted)">— unchanged</span>`;
+      }
+    } else {
+      rankChangeEl.textContent = 'Prev GW: —';
+    }
+  } else {
+    liveRankEl.textContent = '—';
+    rankChangeEl.textContent = 'Live';
+  }
 
   // League rank + auto-update saved league name from API
   if (STATE.leagueStandings) {
@@ -959,14 +994,14 @@ function renderHero() {
     }
   }
 
+  // ITB + TV combined
   document.getElementById('stat-itb').textContent = '£' + (ed.last_deadline_bank / 10).toFixed(1) + 'm';
-  document.getElementById('stat-tv').textContent = '£' + (ed.last_deadline_value / 10).toFixed(1) + 'm';
+  const tv = (ed.last_deadline_value / 10).toFixed(1);
   const profit = ((ed.last_deadline_value - 1000) / 10);
-  document.getElementById('stat-tv-profit').textContent = (profit >= 0 ? '+' : '') + '£' + profit.toFixed(1) + 'm';
+  const profitStr = (profit >= 0 ? '+' : '') + '£' + profit.toFixed(1) + 'm';
+  document.getElementById('stat-tv').textContent = 'TV £' + tv + 'm · ' + profitStr;
 
   // Chips remaining — FPL gives 2 of each chip per season (H1 + H2 halves)
-  // Chip names in API: wildcard, freehit, bboost, 3xc (triple captain), manager
-  // Determine which half (H1 = GW1-19, H2 = GW20-38)
   const chipsUsed = (STATE.history.chips || []);
   const h2Chips = chipsUsed.filter(c => c.event >= 20);
   const h2Names = h2Chips.map(c => c.name);
@@ -980,7 +1015,15 @@ function renderHero() {
   if (activeIdx >= 0) remaining.splice(activeIdx, 1);
 
   document.getElementById('stat-chips').textContent = remaining.length;
-  document.getElementById('stat-chip-active').textContent = activeChip ? ('ACTIVE: ' + chipLabel(activeChip)) : (remaining.length ? remaining.join(' · ') : 'All chips used');
+  document.getElementById('stat-chips-list').textContent = remaining.length ? remaining.join(' · ') : 'All chips used';
+
+  // Chip-active indicator under total points
+  const chipActiveEl = document.getElementById('stat-chip-active');
+  if (activeChip) {
+    chipActiveEl.innerHTML = `<span style="background:var(--warn-soft);color:var(--warn);padding:2px 8px;border-radius:3px;font-weight:500">● ${chipLabel(activeChip)} ACTIVE</span>`;
+  } else {
+    chipActiveEl.textContent = 'Season total';
+  }
 }
 
 function chipLabel(c) {
