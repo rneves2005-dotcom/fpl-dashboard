@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPL Toolkit · The Comeback Kids</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F1E5;
+  --bg-card: #FDFBF3;
+  --bg-inset: #EFEADB;
+  --ink: #1A1815;
+  --ink-muted: #5F5E5A;
+  --ink-faint: #A5A099;
+  --line: #E0D9C4;
+  --line-strong: #C8BFA5;
+  --accent: #2B4A6B;
+  --accent-soft: #E4EBF2;
+  --good: #2B6B3F;
+  --good-soft: #DEEAE0;
+  --bad: #9A2626;
+  --bad-soft: #F2DEDE;
+  --warn: #B07A1F;
+  --warn-soft: #F5E9CE;
+  --blue: #1E4F80;
+  --blue-soft: #DDE6F0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ===== Masthead ===== */
+.masthead {
+  border-bottom: 1px solid var(--line-strong);
+  padding: 8px 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 20px;
+}
+.masthead-title {
+  font-family: 'Fraunces', serif;
+  font-size: 26px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.masthead-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.masthead a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.masthead a:hover { text-decoration: underline; }
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 38px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 8px 0 6px;
+}
+h1 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.tagline {
+  color: var(--ink-muted);
+  font-size: 14px;
+  margin-bottom: 30px;
+  max-width: 720px;
+}
+
+/* ===== Section ===== */
+section {
+  margin-bottom: 36px;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 8px;
+  margin-bottom: 18px;
+}
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.section-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 16px 0 8px;
+}
+h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 600;
+  margin: 14px 0 6px;
+}
+
+p { margin-bottom: 10px; }
+ul { padding-left: 20px; margin: 8px 0; }
+li { margin-bottom: 4px; }
+strong { font-weight: 600; color: var(--ink); }
+em { color: var(--ink-muted); }
+
+/* ===== Card ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+.card.accent { border-left: 3px solid var(--accent); }
+.card.good { border-left: 3px solid var(--good); background: var(--good-soft); }
+.card.warn { border-left: 3px solid var(--warn); background: var(--warn-soft); }
+.card.bad { border-left: 3px solid var(--bad); background: var(--bad-soft); }
+.card.blue { border-left: 3px solid var(--blue); background: var(--blue-soft); }
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+.card-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* ===== Grid ===== */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 860px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  body { padding: 14px; }
+  h1 { font-size: 28px; }
+  .section-title { font-size: 18px; }
+}
+
+/* ===== Tables ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+}
+th, td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 0.5px solid var(--line);
+}
+th {
+  background: var(--bg-inset);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--bg-inset); }
+
+/* ===== Pills / badges ===== */
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.pill.good { background: var(--good-soft); color: var(--good); }
+.pill.bad { background: var(--bad-soft); color: var(--bad); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.blue { background: var(--blue-soft); color: var(--blue); }
+.pill.accent { background: var(--accent-soft); color: var(--accent); }
+
+/* ===== Inline code ===== */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--bg-inset);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--ink);
+}
+
+/* ===== Checklist ===== */
+.checklist {
+  list-style: none;
+  padding: 0;
+}
+.checklist li {
+  padding: 6px 0;
+  padding-left: 26px;
+  position: relative;
+  border-bottom: 0.5px dashed var(--line);
+}
+.checklist li:before {
+  content: '☐';
+  position: absolute;
+  left: 0;
+  font-size: 16px;
+  color: var(--ink-muted);
+  top: 4px;
+}
+.checklist li:last-child { border-bottom: none; }
+
+/* ===== Table of contents / nav ===== */
+.toc {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 14px 18px;
+  margin-bottom: 30px;
+}
+.toc-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.toc ol {
+  list-style: none;
+  counter-reset: sec;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 4px 16px;
+  padding: 0;
+}
+.toc li {
+  counter-increment: sec;
+  font-size: 13px;
+}
+.toc li:before {
+  content: counter(sec, decimal-leading-zero) '. ';
+  color: var(--ink-faint);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  margin-right: 4px;
+}
+.toc a { color: var(--ink); text-decoration: none; }
+.toc a:hover { color: var(--accent); text-decoration: underline; }
+
+/* ===== Prompt template box ===== */
+.prompt-box {
+  background: #FAFAF5;
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--accent);
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  position: relative;
+}
+.prompt-box .copy-btn {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--line-strong);
+  padding: 3px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  cursor: pointer;
+  border-radius: 3px;
+}
+.prompt-box .copy-btn:hover { color: var(--accent); border-color: var(--accent); }
+.prompt-box .copy-btn.done { color: var(--good); border-color: var(--good); }
+
+/* ===== Callout ===== */
+.callout {
+  background: var(--warn-soft);
+  border-left: 3px solid var(--warn);
+  padding: 12px 16px;
+  margin: 14px 0;
+  font-size: 13px;
+}
+.callout.good { background: var(--good-soft); border-color: var(--good); }
+.callout.bad { background: var(--bad-soft); border-color: var(--bad); }
+
+/* ===== Footer ===== */
+.foot {
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-strong);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.foot a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div>FPL TOOLKIT · RUI NEVES · ENTRY 2938711</div>
+  <div class="masthead-title">The <em>Comeback</em> Kids</div>
+  <div><a href="./index.html">← Live Dashboard</a></div>
+</div>
+
+<h1>The <em>Dollimore</em> Toolkit</h1>
+<p class="tagline">A decision framework for making consistently good FPL calls — distilled from Dollimore's process work, OPTA-backed position-specific metrics, and the hard lessons from our own recent weeks (Tavernier vs Scott, GW33 Free Hit, Ekitiké's injury). Reference this before every deadline.</p>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ol>
+    <li><a href="#process">Decision Process</a></li>
+    <li><a href="#position-metrics">Position Metrics</a></li>
+    <li><a href="#xdc">The xDC Framework</a></li>
+    <li><a href="#chips">Chip Strategy</a></li>
+    <li><a href="#transfers">Transfer Plan</a></li>
+    <li><a href="#league">League Chip Tracker</a></li>
+    <li><a href="#prompts">Prompt Templates</a></li>
+    <li><a href="#lessons">Retrospectives</a></li>
+  </ol>
+</div>
+
+<!-- SECTION 1 — DECISION PROCESS -->
+<section id="process">
+  <div class="section-head">
+    <div class="section-title">01 · Decision Process</div>
+    <div class="section-kicker">The filter you skip at your peril</div>
+  </div>
+
+  <p>The single biggest process lesson of the season: <strong>never do a 1-for-1 club swap</strong> without running the full filter. The Tavernier-vs-Scott miss happened because the short-circuit <em>"replace Scott with another BOU asset"</em> felt complete. It wasn't.</p>
+
+  <div class="card accent">
+    <div class="card-head">
+      <div class="card-title">The 5-Step Filter</div>
+      <div class="card-meta">Run every transfer</div>
+    </div>
+    <ol style="padding-left: 22px;">
+      <li><strong>Fixture horizon (next 3-5 GWs).</strong> FDR weighted, check both DGW and blank risk. Bench cover included.</li>
+      <li><strong>Role security.</strong> On pens? On corners? On FKs? Starting 11 nailed? Check rotation risk for big clubs.</li>
+      <li><strong>Underlying numbers.</strong> xGI/90, xG, xA, threat, xDC — position-appropriate (see §02).</li>
+      <li><strong>Ownership / EO delta.</strong> What's the template carry? What's the opportunity cost if you fade?</li>
+      <li><strong>Price pressure.</strong> Rising/falling? Does delay cost £?</li>
+    </ol>
+  </div>
+
+  <div class="callout">
+    <strong>Anti-pattern to avoid:</strong> "I'm selling X from Club A, I'll buy Y from Club A." Club swaps only pass the filter when Y genuinely wins steps 1–4 on its own merits. <strong>Tavernier (FDR fine, set-pieces P2, xGI/90 0.47) was objectively superior to Scott (xGI/90 0.22).</strong> Process would have caught this. Shortcut didn't.
+  </div>
+</section>
+
+<!-- SECTION 2 — POSITION METRICS -->
+<section id="position-metrics">
+  <div class="section-head">
+    <div class="section-title">02 · Position-Specific Metrics</div>
+    <div class="section-kicker">What matters for each role</div>
+  </div>
+
+  <div class="grid-2">
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Goalkeepers</div>
+        <div class="card-meta">GK · 1</div>
+      </div>
+      <h4>Primary signals</h4>
+      <ul>
+        <li><strong>xGC/90</strong> (expected goals conceded) — ceiling of clean sheets</li>
+        <li><strong>Saves/90</strong> — busy keepers bank points even on defeats (3 saves = +1 pt)</li>
+        <li><strong>Save pts rate</strong> — Saves/90 ÷ 3 (historical: Petrović, Dúbravka, Raya)</li>
+        <li><strong>xCS%</strong> — derived from xGC via Poisson (FFH OPTA has this direct)</li>
+      </ul>
+      <h4>Tiebreakers</h4>
+      <ul>
+        <li>Pen save history (Raya, Pickford outliers)</li>
+        <li>Bonus magnet? (CBI + saves → BPS)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Defenders</div>
+        <div class="card-meta">DEF · 2</div>
+      </div>
+      <h4>Primary signals</h4>
+      <ul>
+        <li><strong>xCS%</strong> — fixture-adjusted, from FFH</li>
+        <li><strong>xDC/90</strong> — expected defensive contributions (threshold 10 for +2 pts)</li>
+        <li><strong>xGI/90</strong> — attacking threat for FB/WB</li>
+        <li><strong>Set-piece role</strong> — corners P1/P2, FKs, direct threats</li>
+      </ul>
+      <h4>Archetypes</h4>
+      <ul>
+        <li><em>Nailed CB in top-6 defence</em>: xCS + xDC (Gvardiol, Saliba)</li>
+        <li><em>Attacking FB</em>: xGI dominant (Gabriel M, Lewis, Udogie)</li>
+        <li><em>Budget CB with xDC ceiling</em>: Senesi, Tarkowski, Van Hecke</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Midfielders</div>
+        <div class="card-meta">MID · 3</div>
+      </div>
+      <h4>Primary signals</h4>
+      <ul>
+        <li><strong>xGI/90</strong> — single most predictive mid metric</li>
+        <li><strong>Shots in Box/90</strong> (OPTA) — separates decoys from real threats</li>
+        <li><strong>Big Chances/90</strong> — golden chance volume</li>
+        <li><strong>Set-piece role</strong> — pen taker > direct FK > corners</li>
+      </ul>
+      <h4>xGI/90 tiers</h4>
+      <ul>
+        <li><span class="pill good">Elite</span> 0.55+ (Salah, Palmer in peak form)</li>
+        <li><span class="pill accent">Strong</span> 0.40–0.55 (Saka, Son, Mbeumo)</li>
+        <li><span class="pill warn">Decent</span> 0.30–0.40 (most premium mids)</li>
+        <li><span class="pill bad">Fade</span> &lt;0.25 (even if hot form, regression coming)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Forwards</div>
+        <div class="card-meta">FWD · 4</div>
+      </div>
+      <h4>Primary signals</h4>
+      <ul>
+        <li><strong>xG/90</strong> — not xGI (forwards create less, score more)</li>
+        <li><strong>Shots in Box/90</strong> — crucial separator</li>
+        <li><strong>Big Chances/90</strong> — Haaland outlier live here</li>
+        <li><strong>Pen role</strong> — P1 taker adds ~0.15 xG/90</li>
+      </ul>
+      <h4>xG/90 tiers</h4>
+      <ul>
+        <li><span class="pill good">Elite</span> 0.70+ (Haaland, Isak peak)</li>
+        <li><span class="pill accent">Strong</span> 0.50–0.70 (Watkins, JP, Gyökeres)</li>
+        <li><span class="pill warn">Decent</span> 0.35–0.50</li>
+        <li><span class="pill bad">Fade</span> &lt;0.30 (regress to mean or bench warmer)</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 3 — xDC -->
+<section id="xdc">
+  <div class="section-head">
+    <div class="section-title">03 · The xDC Framework</div>
+    <div class="section-kicker">New scoring rule · huge edge if used</div>
+  </div>
+
+  <p>Defensive Contribution is new this season. Players earn +2 pts for hitting a position-specific threshold per 90. Most managers underuse it. Your live dashboard shows DC counts inline on both the pitch view and Match View.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Position</th>
+        <th>Threshold</th>
+        <th>What counts</th>
+        <th>Best-in-class xDC/90</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>GK</strong></td>
+        <td>12</td>
+        <td>CBI + recoveries</td>
+        <td>rare — saves are already GK's pathway</td>
+      </tr>
+      <tr>
+        <td><strong>DEF</strong></td>
+        <td><span class="pill good">10</span></td>
+        <td>CBI + tackles</td>
+        <td>Tarkowski ~11, Senesi ~10, Van Hecke ~9</td>
+      </tr>
+      <tr>
+        <td><strong>MID</strong></td>
+        <td>12</td>
+        <td>CBI + tackles + recoveries</td>
+        <td>Lewis-Skelly, Caicedo, Rodri ~13</td>
+      </tr>
+      <tr>
+        <td><strong>FWD</strong></td>
+        <td>12</td>
+        <td>CBI + tackles + recoveries</td>
+        <td>very rare — only pressers like Jackson, Evanilson</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout good">
+    <strong>Why this matters:</strong> A defender at xDC/90 ≥ 10 gets an almost-automatic +2 per week on top of CS + attacking. That's a 6-pt floor on weeks without CS, which is huge for "floor" consistency. Dollimore's modelling suggests xDC adds ~8-12 pts per DEF per half-season vs non-xDC peers.
+  </div>
+</section>
+
+<!-- SECTION 4 — CHIPS -->
+<section id="chips">
+  <div class="section-head">
+    <div class="section-title">04 · Chip Strategy</div>
+    <div class="section-kicker">H1 done · H2 chips remaining</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Wildcard (WC)</div>
+        <div class="card-meta">Used: GW20</div>
+      </div>
+      <h4>Trigger conditions</h4>
+      <ul>
+        <li>Team value ceiling reached AND squad broken</li>
+        <li>Pre-DGW setup (WC → next GW BB combo)</li>
+        <li>Fixture swing window (≥4 players hit bad FDR block simultaneously)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Free Hit (FH)</div>
+        <div class="card-meta">Used: GW33 ✓</div>
+      </div>
+      <h4>Trigger conditions</h4>
+      <ul>
+        <li>Blank gameweek (BGW) with &lt;7 players fixturing</li>
+        <li>One-off monster fixture week where your squad's the wrong shape</li>
+      </ul>
+      <p style="margin-top:8px; font-size:12px; color:var(--ink-muted);">GW33 FH33: Petrović · Senesi/Guéhi/Struijk · Groß/Scott/Palmer/Semenyo · Haaland(C)/CLV/JP. Rank drop in the event due to BB managers (Miguel, Dennys, Anthoni) outscoring — lesson: FH against BBs is a big ask.</p>
+    </div>
+
+    <div class="card warn">
+      <div class="card-head">
+        <div class="card-title">Bench Boost (BB)</div>
+        <div class="card-meta">Remaining · H2</div>
+      </div>
+      <h4>Trigger conditions</h4>
+      <ul>
+        <li><strong>DGW with 15 fixturing players</strong> — ideal</li>
+        <li>WC→BB combo on DGW (most common optimal use)</li>
+        <li>Fixture-rich GW where bench has 3+ strong matchups</li>
+      </ul>
+      <p style="margin-top:8px; font-size:12px;"><strong>Plan:</strong> Save for likely DGW36 — MCI vs CRY postponement expected to be rescheduled there. Monitor fixture list updates weekly.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Triple Captain (TC)</div>
+        <div class="card-meta">Remaining · H2</div>
+      </div>
+      <h4>Trigger conditions</h4>
+      <ul>
+        <li>Premium player DGW with both fixtures favourable</li>
+        <li>Haaland vs bottom-4 home double</li>
+        <li>Salah vs bottom-4 home double</li>
+      </ul>
+      <p style="margin-top:8px; font-size:12px;">Haaland TC in DGW36 is under consideration if fixtures confirm.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5 — TRANSFERS -->
+<section id="transfers">
+  <div class="section-head">
+    <div class="section-title">05 · Upcoming Transfer Plan</div>
+    <div class="section-kicker">Current through GW36</div>
+  </div>
+
+  <div class="card good">
+    <div class="card-head">
+      <div class="card-title">GW34 · Semenyo → Ndiaye</div>
+      <div class="card-meta">Priority 1</div>
+    </div>
+    <ul>
+      <li><strong>Out:</strong> Semenyo (BOU MID, £6.4m) — fixtures softening, attacking role less central</li>
+      <li><strong>In:</strong> Ndiaye (EVE MID, £6.2m) — P1 pen taker, EVE @WHU FDR2, status "a" 100%/100%</li>
+      <li><strong>Saves:</strong> £0.2m into bank</li>
+      <li><strong>Confirmed:</strong> Deadline check passed</li>
+    </ul>
+  </div>
+
+  <div class="card good">
+    <div class="card-head">
+      <div class="card-title">GW35 · Ekitiké → Calvert-Lewin</div>
+      <div class="card-meta">Priority 1 · FORCED</div>
+    </div>
+    <ul>
+      <li><strong>Out:</strong> Ekitiké (LIV FWD, £9.2m) — ruled out season, Achilles, return 01 Jul</li>
+      <li><strong>In:</strong> Calvert-Lewin (LEE FWD, £5.6m) — P1 pen taker, LEE fixtures good through EoS</li>
+      <li><strong>Saves:</strong> £3.6m — opens a premium upgrade elsewhere later</li>
+    </ul>
+  </div>
+
+  <div class="card accent">
+    <div class="card-head">
+      <div class="card-title">GW36+ · Under review</div>
+      <div class="card-meta">Monitoring</div>
+    </div>
+    <ul>
+      <li><strong>Thiago sell trigger:</strong> BRE @MCI is FDR5 — if fixtures stay that way, move on</li>
+      <li><strong>Candidates:</strong> N.Williams (NFO, form 8.7), Tarkowski (EVE, xDC 34), Senesi (BOU, xDC 39)</li>
+      <li><strong>BB deployment:</strong> Wait for DGW36 confirmation from MCI vs CRY reschedule</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SECTION 6 — LEAGUE -->
+<section id="league">
+  <div class="section-head">
+    <div class="section-title">06 · League Chip Tracker</div>
+    <div class="section-kicker">League 595244 · Premier League 25/26</div>
+  </div>
+
+  <p>Keep updated after every GW via dashboard. Top rivals' chip usage determines relative strategy — can't save chips conservatively if they've already fired theirs.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Manager</th>
+        <th>WC</th>
+        <th>FH</th>
+        <th>BB</th>
+        <th>TC</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Miguel B</td>
+        <td>–</td>
+        <td>–</td>
+        <td><span class="pill bad">GW33</span></td>
+        <td>–</td>
+        <td>WC+BB combo paid off</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Anthoni</td>
+        <td>–</td>
+        <td>–</td>
+        <td><span class="pill bad">GW33</span></td>
+        <td>–</td>
+        <td>Same playbook as Miguel</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Dennys</td>
+        <td>–</td>
+        <td>–</td>
+        <td><span class="pill bad">GW33</span></td>
+        <td>–</td>
+        <td>Same</td>
+      </tr>
+      <tr style="background: var(--accent-soft); font-weight: 500;">
+        <td>8</td>
+        <td>You · Rui N</td>
+        <td>GW20</td>
+        <td><span class="pill blue">GW33</span></td>
+        <td>–</td>
+        <td>–</td>
+        <td>BB + TC remaining for H2</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="margin-top:10px; font-size:12px; color:var(--ink-muted);">Update after every GW finalises. Pull live data from dashboard → Mini-League tab.</p>
+</section>
+
+<!-- SECTION 7 — PROMPTS -->
+<section id="prompts">
+  <div class="section-head">
+    <div class="section-title">07 · Prompt Templates</div>
+    <div class="section-kicker">Copy-paste into Claude</div>
+  </div>
+
+  <h3>Pre-deadline transfer check</h3>
+  <div class="prompt-box">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>I'm planning transfer [PLAYER OUT] → [PLAYER IN] for GW[N]. Run the 5-step filter from my toolkit:
+
+1. Fixture horizon (next 5 GWs, FDR weighted)
+2. Role security (pens, corners, FKs, starter status)
+3. Underlying numbers (xGI/90, xG, xA, xDC for position)
+4. Ownership/EO delta + template carry
+5. Price pressure
+
+Then compare to the next 2-3 alternatives in the same price band at the same position. Don't accept "same-club swap" as default. Give me a verdict: GO / WAIT / PIVOT TO X.</div>
+
+  <h3>Mid-week captain decision</h3>
+  <div class="prompt-box">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Captain options for GW[N]: [A] vs [B]. Compare:
+- xGI/90 current form (last 5 GWs + season)
+- Fixture FDR
+- Opponent defensive record (xGC/90, CS%)
+- Home/away split for the player
+- Penalty role
+- OPTA Shots in Box/90 if available
+
+Recommend captain + vice. If it's close, tell me by how much (EV points).</div>
+
+  <h3>Live-GW check-in (mid-game)</h3>
+  <div class="prompt-box">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Pull live data from dashboard. Summarise:
+- Current GW pts + rank change
+- BPS positions of my owned players (who's tracking bonus)
+- DC progress for my DEFs (hitting 10 threshold?)
+- What needs to happen for me to gain rank vs Miguel/Anthoni/Dennys
+- Any owned players blanking — is it process failure or variance?</div>
+
+  <h3>Chip decision</h3>
+  <div class="prompt-box">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Evaluate playing [CHIP] in GW[N]. Consider:
+- Fixture set strength (DGW? BGW? Normal week?)
+- My squad shape vs. ideal shape for this chip
+- Rivals' chip state — can I afford to save it?
+- Expected point differential vs. saving the chip for a later GW
+- What the template is doing
+
+Verdict: PLAY / SAVE, with rationale.</div>
+</section>
+
+<!-- SECTION 8 — LESSONS -->
+<section id="lessons">
+  <div class="section-head">
+    <div class="section-title">08 · Retrospectives</div>
+    <div class="section-kicker">Mistakes worth remembering</div>
+  </div>
+
+  <div class="card bad">
+    <div class="card-head">
+      <div class="card-title">GW31 · Tavernier over Scott</div>
+      <div class="card-meta">Process fail</div>
+    </div>
+    <p><strong>What happened:</strong> Sold Scott (BOU), bought another BOU mid (Scott → Scott replacement mindset). Ignored Tavernier who had xGI/90 of 0.47 (2× Scott's 0.22), was on BOU's P2 corners and P2 FKs, and cost similar.</p>
+    <p style="margin-top:8px;"><strong>Lesson:</strong> Club-swap heuristic isn't a transfer method. It's a shortcut that bypasses step 3 (underlying numbers) of the 5-step filter.</p>
+    <p style="margin-top:8px; font-size:12px; color:var(--ink-muted);"><strong>Cost estimate:</strong> ~8-12 pts over 4 weeks. Reversible by GW35 if Tavernier still available.</p>
+  </div>
+
+  <div class="card bad">
+    <div class="card-head">
+      <div class="card-title">GW33 · FH against BBs</div>
+      <div class="card-meta">Context fail</div>
+    </div>
+    <p><strong>What happened:</strong> Played FH in GW33. Miguel, Dennys, Anthoni all BB'd same GW. Their 15-man teams vs. our 11 meant baseline differential of ~30-40 pts against us before any captaincy variance.</p>
+    <p style="margin-top:8px;"><strong>Lesson:</strong> Chip selection must consider rivals' simultaneous chip use. If 3+ top-10 managers are BBing, FH ≠ fair comparison — they have a 4-player extra pool. Should've either matched with BB or waited a week.</p>
+  </div>
+
+  <div class="card good">
+    <div class="card-head">
+      <div class="card-title">Estève DC hit · GW33</div>
+      <div class="card-meta">xDC validation</div>
+    </div>
+    <p>Estève (BUR DEF) earned 4 FPL pts despite conceding 2 goals — because he hit the DC threshold (9 CBI + 1 tackle = 10). Without DC he'd have 1 pt. The Dollimore framework's xDC emphasis is paying out live.</p>
+    <p style="margin-top:8px;"><strong>Takeaway:</strong> Continue screening defenders on xDC/90 &gt;= 8 (high-hit probability). Even in losses, 4-6 pt floors are possible.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<div class="foot">
+  <div>FPL Toolkit · built with the <a href="./index.html">live dashboard</a> · Rui Neves · 2025/26</div>
+  <div>Last updated: 19 Apr 2026 · GW33</div>
+</div>
+
+<script>
+function copyPrompt(btn) {
+  const box = btn.parentElement;
+  const text = box.textContent.replace(/^Copy/, '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied';
+    btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1500);
+  });
+}
+</script>
+
+</body>
+</html>
