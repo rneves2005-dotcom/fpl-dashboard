@@ -667,13 +667,86 @@ tbody tr:hover { background: var(--bg-inset); }
 .foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line-strong); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--ink-muted); display: flex; justify-content: space-between; }
 .foot a { color: var(--accent); text-decoration: none; }
 
-/* Tabs for sections */
+/* Tabs for sections (legacy, kept for other places) */
 .tabs { display: flex; gap: 0; margin-bottom: 16px; border-bottom: 1px solid var(--line-strong); }
 .tab { padding: 8px 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; }
 .tab:hover { color: var(--ink); }
 .tab.active { color: var(--ink); border-bottom-color: var(--accent); font-weight: 500; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
+
+/* ===== MAIN TABS — primary navigation ===== */
+.main-tabs-wrap { margin-top: 8px; }
+.main-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--line-strong);
+  margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.main-tabs::-webkit-scrollbar { display: none; }
+.main-tab {
+  flex: 0 0 auto;
+  background: transparent;
+  border: none;
+  padding: 12px 20px;
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  position: relative;
+}
+.main-tab-icon {
+  font-size: 15px;
+  line-height: 1;
+  filter: grayscale(0.4);
+  transition: filter 0.2s;
+}
+.main-tab:hover { color: var(--ink); background: var(--bg-inset); }
+.main-tab:hover .main-tab-icon { filter: grayscale(0); }
+.main-tab.active {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+  background: var(--bg-card);
+}
+.main-tab.active .main-tab-icon { filter: grayscale(0); }
+.main-tab-badge {
+  background: var(--bad);
+  color: white;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 99px;
+  min-width: 16px;
+  text-align: center;
+  line-height: 1.4;
+}
+.main-tab-badge.live {
+  background: var(--warn);
+  animation: badgePulse 1.5s infinite;
+}
+.main-tab-badge:empty { display: none; }
+@keyframes badgePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+.main-tab-panel { display: none; animation: fadeIn 0.2s ease; }
+.main-tab-panel.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 700px) {
+  .main-tab { padding: 10px 12px; font-size: 12px; }
+  .main-tab span:not(.main-tab-icon):not(.main-tab-badge) { display: inline; }
+}
 
 /* Fixture ticker */
 .ticker { display: flex; gap: 0; overflow-x: auto; margin-bottom: 14px; background: var(--bg-card); border: 1px solid var(--line); }
@@ -740,12 +813,34 @@ tbody tr:hover { background: var(--bg-inset); }
   <div class="hero-cell"><div class="hero-label">Chips Left</div><div class="hero-value" id="stat-chips">—</div><div class="hero-sub" id="stat-chips-list">—</div></div>
 </div>
 
-<!-- Main columns -->
-<div class="cols">
+<!-- Main tabbed content -->
+<div class="main-tabs-wrap">
+  <div class="main-tabs">
+    <button class="main-tab active" data-tab="squad" onclick="switchTab('squad')">
+      <span class="main-tab-icon">⚽</span>
+      <span>Squad</span>
+    </button>
+    <button class="main-tab" data-tab="matches" onclick="switchTab('matches')">
+      <span class="main-tab-icon">🏟</span>
+      <span>Match View</span>
+      <span class="main-tab-badge" id="tab-badge-matches"></span>
+    </button>
+    <button class="main-tab" data-tab="league" onclick="switchTab('league')">
+      <span class="main-tab-icon">🏆</span>
+      <span>Mini-League</span>
+    </button>
+    <button class="main-tab" data-tab="prices" onclick="switchTab('prices')">
+      <span class="main-tab-icon">💷</span>
+      <span>Prices</span>
+    </button>
+    <button class="main-tab" data-tab="threats" onclick="switchTab('threats')">
+      <span class="main-tab-icon">❗</span>
+      <span>Threats</span>
+    </button>
+  </div>
 
-  <!-- LEFT COLUMN -->
-  <div>
-    <!-- Your squad -->
+  <!-- TAB: Squad -->
+  <div class="main-tab-panel active" id="tab-squad">
     <div class="section">
       <div class="section-head">
         <div class="section-title">Your Squad</div>
@@ -757,8 +852,21 @@ tbody tr:hover { background: var(--bg-inset); }
       <div id="squad-pitch" class="squad-view active"><div class="loading">Loading squad...</div></div>
       <div id="squad-table-wrap" class="squad-view" style="display:none"><table id="squad-table"><tbody><tr><td class="loading">Loading...</td></tr></tbody></table></div>
     </div>
+  </div>
 
-    <!-- Mini league -->
+  <!-- TAB: Match View -->
+  <div class="main-tab-panel" id="tab-matches">
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Match View</div>
+        <div class="section-kicker">Both teams · BPS · DC · bonus</div>
+      </div>
+      <div id="bonus-container"><div class="loading">Loading matches...</div></div>
+    </div>
+  </div>
+
+  <!-- TAB: Mini-League -->
+  <div class="main-tab-panel" id="tab-league">
     <div class="section">
       <div class="section-head">
         <div class="section-title">Mini-League</div>
@@ -768,18 +876,8 @@ tbody tr:hover { background: var(--bg-inset); }
     </div>
   </div>
 
-  <!-- RIGHT COLUMN -->
-  <div>
-    <!-- Bonus race -->
-    <div class="section">
-      <div class="section-head">
-        <div class="section-title">Match View</div>
-        <div class="section-kicker">Both teams · BPS · DC · bonus</div>
-      </div>
-      <div id="bonus-container"><div class="loading">Loading matches...</div></div>
-    </div>
-
-    <!-- Price changes -->
+  <!-- TAB: Prices -->
+  <div class="main-tab-panel" id="tab-prices">
     <div class="section">
       <div class="section-head">
         <div class="section-title">Price Change Forecast</div>
@@ -802,8 +900,10 @@ tbody tr:hover { background: var(--bg-inset); }
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Effective ownership -->
+  <!-- TAB: Threats -->
+  <div class="main-tab-panel" id="tab-threats">
     <div class="section">
       <div class="section-head">
         <div class="section-title">Threat Players</div>
@@ -1035,6 +1135,7 @@ async function refreshAll() {
     renderPriceChanges();
     renderMiniLeague();
     renderThreatList();
+    updateMatchBadge();
 
     const now = new Date();
     document.getElementById('last-updated').textContent = 'Updated ' + now.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'});
@@ -1317,6 +1418,40 @@ function bonusLabel(n) {
   if (n === 2) return '<span class="bonus-2">+2</span>';
   if (n === 1) return '<span class="bonus-1">+1</span>';
   return '<span class="mono">+' + n + '</span>';
+}
+
+// ============================================================
+// MAIN TAB NAVIGATION
+// ============================================================
+function switchTab(tabName) {
+  // Update tab buttons
+  document.querySelectorAll('.main-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-tab') === tabName);
+  });
+  // Update panels
+  document.querySelectorAll('.main-tab-panel').forEach(panel => {
+    panel.classList.toggle('active', panel.id === 'tab-' + tabName);
+  });
+  localStorage.setItem('fpl-active-tab', tabName);
+  // Scroll tabs bar so active tab is visible on mobile
+  const activeBtn = document.querySelector('.main-tab.active');
+  if (activeBtn && activeBtn.scrollIntoView) {
+    activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+}
+
+// Update live-game badge on Match View tab
+function updateMatchBadge() {
+  const badge = document.getElementById('tab-badge-matches');
+  if (!badge || !STATE.fixtures) return;
+  const live = STATE.fixtures.filter(f => f.started && !f.finished_provisional).length;
+  if (live > 0) {
+    badge.textContent = live;
+    badge.className = 'main-tab-badge live';
+  } else {
+    badge.textContent = '';
+    badge.className = 'main-tab-badge';
+  }
 }
 
 // ============================================================
@@ -1971,6 +2106,9 @@ loadConfig();
 // Restore saved squad view preference
 const savedView = localStorage.getItem('fpl-squad-view') || 'pitch';
 setSquadView(savedView);
+// Restore saved main tab (default: squad)
+const savedTab = localStorage.getItem('fpl-active-tab') || 'squad';
+switchTab(savedTab);
 refreshAll();
 
 // Auto-refresh every 90 seconds if fixtures are live
