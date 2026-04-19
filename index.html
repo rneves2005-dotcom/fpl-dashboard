@@ -312,7 +312,7 @@ tbody tr:hover { background: var(--bg-inset); }
   font-family: 'Inter Tight', sans-serif;
   border: 1.5px solid white;
 }
-.player-ret.goal { background: #2b6b3f; font-size: 10px; }
+.player-ret.goal { background: #2b6b3f; color: white; font-size: 10px; font-weight: 700; }
 .player-ret.assist { background: #1E4F80; }
 .player-ret.yc { background: #F5C518; color: #1A1815; font-size: 9px; }
 .player-ret.rc { background: #D92525; }
@@ -631,7 +631,8 @@ tbody tr:hover { background: var(--bg-inset); }
 
 /* Return icons — slightly bigger */
 .mr-icon { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; font-size: 12px; line-height: 1; }
-.mr-icon.mr-a { background: #E5DFD1; color: var(--ink); border-radius: 50%; font-size: 10px; font-weight: 700; font-family: 'Inter Tight', sans-serif; }
+.mr-icon.mr-goal { background: #2b6b3f; color: white; border-radius: 50%; font-size: 10px; font-weight: 700; font-family: 'Inter Tight', sans-serif; }
+.mr-icon.mr-a { background: #1E4F80; color: white; border-radius: 50%; font-size: 10px; font-weight: 700; font-family: 'Inter Tight', sans-serif; }
 .mr-icon.mr-og { background: var(--bad); color: white; border-radius: 2px; font-size: 9px; font-weight: 700; padding: 0 3px; width: auto; }
 .mr-icon.mr-yc { background: #F5C518; width: 11px; height: 14px; border-radius: 1px; font-size: 0; }
 .mr-icon.mr-rc { background: #D92525; width: 11px; height: 14px; border-radius: 1px; font-size: 0; }
@@ -1072,8 +1073,31 @@ tbody tr:hover { background: var(--bg-inset); }
   <div class="main-tab-panel" id="tab-prices">
     <div class="section">
       <div class="section-head">
+        <div class="section-title">Top Transfers This Gameweek</div>
+        <div class="section-kicker">Live · from FPL bootstrap-static</div>
+      </div>
+      <div class="price-cards">
+        <div class="price-col">
+          <div class="price-header">
+            <div class="price-title up">▲ Top Transfers In</div>
+            <div class="price-confidence">Gross IN</div>
+          </div>
+          <div id="top-in"><div class="loading">Loading...</div></div>
+        </div>
+        <div class="price-col">
+          <div class="price-header">
+            <div class="price-title down">▼ Top Transfers Out</div>
+            <div class="price-confidence">Gross OUT</div>
+          </div>
+          <div id="top-out"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
         <div class="section-title">Price Change Forecast</div>
-        <div class="section-kicker">Tonight at 01:30 UTC</div>
+        <div class="section-kicker">Tonight at 01:30 UTC · Transfer velocity model</div>
       </div>
       <div class="price-cards">
         <div class="price-col">
@@ -1778,7 +1802,7 @@ function renderPitch() {
     const ps = stats.penalties_saved || 0;
     const bonus = stats.bonus || 0;
 
-    if (goals > 0) returns.push(`<span class="player-ret goal" title="${goals} goal${goals>1?'s':''}">⚽${goals>1?goals:''}</span>`);
+    if (goals > 0) returns.push(`<span class="player-ret goal" title="${goals} goal${goals>1?'s':''}">${goals > 1 ? goals : 'G'}</span>`);
     if (assists > 0) returns.push(`<span class="player-ret assist" title="${assists} assist${assists>1?'s':''}">${assists>1?assists+'A':'A'}</span>`);
     if (ps > 0) returns.push(`<span class="player-ret pen-save" title="Penalty saved">PS</span>`);
     if (pm > 0) returns.push(`<span class="player-ret pen-miss" title="Penalty missed">PM</span>`);
@@ -2078,7 +2102,7 @@ function renderBonus() {
     const renderMatchRow = (p) => {
       // Returns icons (shown to left of points)
       const returns = [];
-      for (let i = 0; i < Math.min(p.goals, 3); i++) returns.push('<span class="mr-icon">⚽</span>');
+      for (let i = 0; i < Math.min(p.goals, 3); i++) returns.push('<span class="mr-icon mr-goal">G</span>');
       for (let i = 0; i < Math.min(p.assists, 2); i++) returns.push('<span class="mr-icon mr-a">A</span>');
       if (p.og > 0) returns.push('<span class="mr-icon mr-og">OG</span>');
       if (p.yc > 0) returns.push('<span class="mr-icon mr-yc">YC</span>');
@@ -2206,25 +2230,49 @@ function renderPriceChanges() {
     .map(e => {
       const net = e.transfers_in_event - e.transfers_out_event;
       const own = parseFloat(e.selected_by_percent);
-      const ownBase = Math.max(1000, (own / 100) * total); // floor to avoid div-by-zero noise
-      const velPct = (net / ownBase) * 100; // % of ownership base (signed)
-      // Absolute magnitude sanity filter — noise floor
+      const ownBase = Math.max(1000, (own / 100) * total);
+      const velPct = (net / ownBase) * 100;
       const significant = Math.abs(net) > 2000;
       return {
         id: e.id, name: e.web_name, team: STATE.teamMap[e.team].short,
+        pos: ['','GK','DEF','MID','FWD'][e.element_type],
         price: (e.now_cost/10).toFixed(1),
+        transfers_in: e.transfers_in_event,
+        transfers_out: e.transfers_out_event,
         net, velPct, own, significant,
         alreadyChanged: e.cost_change_event !== 0 || e.cost_change_event_fall !== 0,
+        costChange: e.cost_change_event,
         status: e.status
       };
-    })
-    .filter(p => p.significant && !p.alreadyChanged);
+    });
 
-  // Risers: positive velocity, sort by highest velPct
-  const risers = all.filter(p => p.net > 0 && p.velPct > 3)
+  // === TOP TRANSFERS IN (gross, not net) — mirrors official FPL homepage ===
+  const topIn = [...all].sort((a,b) => b.transfers_in - a.transfers_in).slice(0, 8);
+  const topOut = [...all].sort((a,b) => b.transfers_out - a.transfers_out).slice(0, 8);
+
+  document.getElementById('top-in').innerHTML = topIn.map(p => {
+    const owned = STATE.picks && STATE.picks.picks.some(pk => pk.element === p.id);
+    const changeLabel = p.costChange > 0 ? ` <span style="color:var(--bad);font-size:10px;font-weight:600">+£0.1</span>` : '';
+    return `<div class="price-row">
+      <div><span class="price-name">${p.name}${owned ? ' ⭐' : ''}</span><div class="pmeta">${p.team} · ${p.pos} · £${p.price}m${changeLabel}</div></div>
+      <div class="price-velocity">${(p.transfers_in/1000).toFixed(1)}k</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('top-out').innerHTML = topOut.map(p => {
+    const owned = STATE.picks && STATE.picks.picks.some(pk => pk.element === p.id);
+    const statusBadge = p.status !== 'a' ? ` <span style="color:var(--bad);font-size:10px;font-weight:600">${p.status.toUpperCase()}</span>` : '';
+    return `<div class="price-row">
+      <div><span class="price-name">${p.name}${owned ? ' ⭐' : ''}</span><div class="pmeta">${p.team} · ${p.pos} · £${p.price}m${statusBadge}</div></div>
+      <div class="price-velocity">${(p.transfers_out/1000).toFixed(1)}k</div>
+    </div>`;
+  }).join('');
+
+  // === PRICE CHANGE FORECAST (velocity model) ===
+  const filtered = all.filter(p => p.significant && !p.alreadyChanged);
+  const risers = filtered.filter(p => p.net > 0 && p.velPct > 3)
     .sort((a,b) => b.velPct - a.velPct).slice(0, 8);
-  // Fallers: negative velocity
-  const fallers = all.filter(p => p.net < 0 && p.velPct < -3)
+  const fallers = filtered.filter(p => p.net < 0 && p.velPct < -3)
     .sort((a,b) => a.velPct - b.velPct).slice(0, 8);
 
   const confidenceFor = velPct => {
