@@ -754,6 +754,165 @@ tbody tr:hover { background: var(--bg-inset); }
 .main-tab-panel.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
+/* ===== PL TABLE — Flashscore-style standings ===== */
+.pl-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  font-size: 13px;
+}
+.pl-table thead th {
+  background: var(--bg-inset);
+  padding: 9px 8px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--line-strong);
+  white-space: nowrap;
+}
+.pl-table thead th:nth-child(2) { text-align: left; padding-left: 14px; }
+.pl-table tbody tr { border-bottom: 0.5px solid var(--line); transition: background 0.1s; }
+.pl-table tbody tr:hover { background: var(--bg-inset); }
+.pl-table tbody tr.owned-team { background: var(--good-soft); }
+.pl-table tbody tr.owned-team:hover { background: #D4E8D8; }
+.pl-table tbody tr.has-live { background: #FFF9EC; }
+.pl-table tbody tr.has-live.owned-team { background: linear-gradient(90deg, var(--good-soft) 0%, #FFF9EC 100%); }
+.pl-table tbody tr:last-child { border-bottom: none; }
+.pl-table td { padding: 8px; vertical-align: middle; }
+
+.pl-rank { text-align: center; width: 36px; }
+.pl-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 4px;
+  background: var(--bg-inset);
+  border: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.pl-rank-badge.pos-ucl { background: #1A4A3A; color: white; border-color: #1A4A3A; }
+.pl-rank-badge.pos-uel { background: #2B6B3F; color: white; border-color: #2B6B3F; }
+.pl-rank-badge.pos-rel { background: var(--bad); color: white; border-color: var(--bad); }
+
+.pl-team {
+  padding-left: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 170px;
+}
+.pl-badge {
+  width: 18px; height: 18px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.pl-team-name {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+}
+.pl-owned {
+  font-size: 11px;
+  margin-left: 2px;
+}
+.pl-live-match {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  background: var(--warn);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.pl-live-match .live-dot { background: white; width: 5px; height: 5px; }
+
+.pl-num {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+  min-width: 34px;
+}
+.pl-goals { color: var(--ink-muted); font-size: 11px; }
+.pl-gd-pos { color: var(--good); font-weight: 600; }
+.pl-gd-neg { color: var(--bad); font-weight: 600; }
+.pl-pts {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  color: var(--ink);
+}
+.pl-pts strong { font-weight: 600; }
+
+.pl-form { text-align: center; white-space: nowrap; min-width: 110px; }
+.form-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  color: white;
+  margin-right: 2px;
+}
+.form-dot.form-w { background: var(--good); }
+.form-dot.form-d { background: var(--ink-faint); }
+.form-dot.form-l { background: var(--bad); }
+
+.pl-table-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--bg-inset);
+  border: 1px solid var(--line);
+  border-top: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  align-items: center;
+}
+.pl-table-legend > span { display: inline-flex; align-items: center; gap: 5px; }
+.legend-dot {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border-radius: 2px;
+}
+.legend-dot.pos-ucl { background: #1A4A3A; }
+.legend-dot.pos-uel { background: #2B6B3F; }
+.legend-dot.pos-rel { background: var(--bad); }
+
+/* Mobile: shrink less-critical columns */
+@media (max-width: 700px) {
+  .pl-table { font-size: 11px; }
+  .pl-table th, .pl-table td { padding: 6px 4px; }
+  .pl-team { padding-left: 6px; gap: 5px; min-width: 120px; }
+  .pl-team-name { font-size: 11px; }
+  .pl-badge { width: 15px; height: 15px; }
+  .pl-goals { display: none; } /* hide G column on mobile */
+  .pl-table thead th:nth-child(7) { display: none; }
+  .pl-table tbody td:nth-child(7) { display: none; }
+  .form-dot { width: 12px; height: 12px; font-size: 7px; }
+  .pl-live-match { font-size: 9px; padding: 1px 4px; }
+}
+
 /* ===== APP LAYOUT — main content + sticky right rail ===== */
 .app-layout {
   display: grid;
@@ -982,6 +1141,7 @@ tbody tr:hover { background: var(--bg-inset); }
   </div>
   <div class="masthead-title">The <em>Comeback</em> Kids</div>
   <div class="masthead-right">
+    <a href="./toolkit.html" style="color:var(--accent);text-decoration:none;font-weight:600;margin-right:6px;" title="Open decision framework">Toolkit →</a>
     <span id="last-updated">—</span>
     <button class="btn" onclick="refreshAll()" id="refresh-btn">Refresh</button>
   </div>
@@ -1021,6 +1181,10 @@ tbody tr:hover { background: var(--bg-inset); }
     <button class="main-tab" data-tab="league" onclick="switchTab('league')">
       <span class="main-tab-icon">🏆</span>
       <span>Mini-League</span>
+    </button>
+    <button class="main-tab" data-tab="pltable" onclick="switchTab('pltable')">
+      <span class="main-tab-icon">📊</span>
+      <span>PL Table</span>
     </button>
     <button class="main-tab" data-tab="prices" onclick="switchTab('prices')">
       <span class="main-tab-icon">💷</span>
@@ -1066,6 +1230,17 @@ tbody tr:hover { background: var(--bg-inset); }
         <div class="section-kicker">Live GW projection · top 10</div>
       </div>
       <div id="league-table"><div class="loading">Loading mini-league...</div></div>
+    </div>
+  </div>
+
+  <!-- TAB: PL Table -->
+  <div class="main-tab-panel" id="tab-pltable">
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Premier League Table</div>
+        <div class="section-kicker">Live · form · your owned teams highlighted</div>
+      </div>
+      <div id="pl-table-container"><div class="loading">Loading table...</div></div>
     </div>
   </div>
 
@@ -1354,15 +1529,17 @@ async function refreshAll() {
       fpl('/fixtures/?event=' + STATE.currentGW),
       fpl('/entry/' + STATE.entry + '/'),
       fpl('/entry/' + STATE.entry + '/event/' + STATE.currentGW + '/picks/').catch(() => null),
-      fpl('/entry/' + STATE.entry + '/history/')
+      fpl('/entry/' + STATE.entry + '/history/'),
+      fpl('/fixtures/') // all season fixtures for PL table computation
     ];
     if (STATE.league) {
       promises.push(fpl('/leagues-classic/' + STATE.league + '/standings/'));
     }
 
-    const [live, fixtures, entryData, picks, history, league] = await Promise.all(promises);
+    const [live, fixtures, entryData, picks, history, allFixtures, league] = await Promise.all(promises);
     STATE.live = live; STATE.fixtures = fixtures; STATE.entryData = entryData;
-    STATE.picks = picks; STATE.history = history; STATE.leagueStandings = league;
+    STATE.picks = picks; STATE.history = history; STATE.allFixtures = allFixtures;
+    STATE.leagueStandings = league;
 
     // Render everything
     renderHero();
@@ -1372,6 +1549,7 @@ async function refreshAll() {
     renderBonus();
     renderPriceChanges();
     renderMiniLeague();
+    renderPLTable();
     renderThreatList();
     updateMatchBadge();
 
@@ -2299,6 +2477,157 @@ function renderPriceChanges() {
       <div class="price-confidence">${confidenceFor(p.velPct)}</div>
     </div>`;
   }).join('') : '<div class="loading" style="padding:20px">No fallers predicted</div>';
+}
+
+// ============================================================
+// PREMIER LEAGUE TABLE
+// ============================================================
+// Computed from fixtures data (FPL API teams object has stats zeroed mid-season)
+function renderPLTable() {
+  if (!STATE.fixtures || !STATE.bootstrap) {
+    document.getElementById('pl-table-container').innerHTML = '<div class="loading">No fixtures data</div>';
+    return;
+  }
+
+  // Identify teams your owned players play for
+  const ownedTeamIds = new Set();
+  if (STATE.picks) {
+    STATE.picks.picks.forEach(pk => {
+      const el = STATE.elMap[pk.element];
+      if (el) ownedTeamIds.add(el.team);
+    });
+  }
+
+  // Need ALL season fixtures (not just this GW) — fetch via existing data
+  // STATE.fixtures only holds current GW fixtures, so we need the all-season fixture endpoint
+  // We cache it in STATE.allFixtures
+  const allFixtures = STATE.allFixtures || STATE.fixtures;
+
+  // Build stats per team
+  const stats = {};
+  STATE.bootstrap.teams.forEach(t => {
+    stats[t.id] = {
+      id: t.id,
+      short: t.short_name,
+      name: t.name,
+      code: t.code,
+      played: 0, W: 0, D: 0, L: 0, GF: 0, GA: 0,
+      form: [],
+      liveMatch: null // will hold { oppShort, score, minutes } if in play now
+    };
+  });
+
+  // Process all finished fixtures
+  allFixtures.filter(f => f.finished_provisional).forEach(f => {
+    const h = f.team_h, a = f.team_a;
+    const hs = f.team_h_score ?? 0;
+    const as = f.team_a_score ?? 0;
+    if (!stats[h] || !stats[a]) return;
+    stats[h].played++; stats[a].played++;
+    stats[h].GF += hs; stats[h].GA += as;
+    stats[a].GF += as; stats[a].GA += hs;
+    if (hs > as) { stats[h].W++; stats[a].L++; stats[h].form.push('W'); stats[a].form.push('L'); }
+    else if (hs < as) { stats[a].W++; stats[h].L++; stats[a].form.push('W'); stats[h].form.push('L'); }
+    else { stats[h].D++; stats[a].D++; stats[h].form.push('D'); stats[a].form.push('D'); }
+  });
+
+  // Mark teams with live in-progress matches
+  allFixtures.filter(f => f.started && !f.finished_provisional).forEach(f => {
+    const h = f.team_h, a = f.team_a;
+    const hs = f.team_h_score ?? 0;
+    const as = f.team_a_score ?? 0;
+    const mins = f.minutes || 0;
+    if (stats[h]) {
+      stats[h].liveMatch = {
+        oppShort: stats[a]?.short || '?',
+        myScore: hs, oppScore: as, minutes: mins, home: true
+      };
+    }
+    if (stats[a]) {
+      stats[a].liveMatch = {
+        oppShort: stats[h]?.short || '?',
+        myScore: as, oppScore: hs, minutes: mins, home: false
+      };
+    }
+  });
+
+  // Compute derived + rank
+  const table = Object.values(stats)
+    .map(s => ({
+      ...s,
+      points: s.W * 3 + s.D,
+      GD: s.GF - s.GA,
+      formLast5: s.form.slice(-5)
+    }))
+    .sort((a,b) => b.points - a.points || b.GD - a.GD || b.GF - a.GF);
+
+  // European / relegation line indicators
+  table.forEach((t, i) => t.rank = i + 1);
+
+  const formBadge = (r) => {
+    const cls = r === 'W' ? 'form-w' : r === 'D' ? 'form-d' : 'form-l';
+    return `<span class="form-dot ${cls}">${r}</span>`;
+  };
+
+  const positionClass = (rank) => {
+    if (rank <= 4) return 'pos-ucl';       // top 4 - Champions League
+    if (rank === 5) return 'pos-uel';      // 5th - Europa
+    if (rank >= 18) return 'pos-rel';      // bottom 3 - relegation
+    return '';
+  };
+
+  const rows = table.map(t => {
+    const isOwned = ownedTeamIds.has(t.id);
+    const live = t.liveMatch;
+    const liveHtml = live
+      ? `<span class="pl-live-match" title="Live: ${live.home ? t.short + ' vs ' + live.oppShort : live.oppShort + ' vs ' + t.short} (${live.minutes}')"><span class="live-dot"></span>${live.myScore}:${live.oppScore}</span>`
+      : '';
+    const badgeUrl = `https://resources.premierleague.com/premierleague/badges/25/t${t.code}.png`;
+    return `<tr class="${isOwned ? 'owned-team' : ''} ${live ? 'has-live' : ''}">
+      <td class="pl-rank"><span class="pl-rank-badge ${positionClass(t.rank)}">${t.rank}</span></td>
+      <td class="pl-team">
+        <img src="${badgeUrl}" class="pl-badge" onerror="this.style.display='none'" alt="">
+        <span class="pl-team-name">${t.name}</span>
+        ${isOwned ? '<span class="pl-owned" title="You own player(s) from this team">⭐</span>' : ''}
+        ${liveHtml}
+      </td>
+      <td class="pl-num">${t.played}</td>
+      <td class="pl-num">${t.W}</td>
+      <td class="pl-num">${t.D}</td>
+      <td class="pl-num">${t.L}</td>
+      <td class="pl-num pl-goals">${t.GF}:${t.GA}</td>
+      <td class="pl-num ${t.GD > 0 ? 'pl-gd-pos' : t.GD < 0 ? 'pl-gd-neg' : ''}">${t.GD > 0 ? '+' : ''}${t.GD}</td>
+      <td class="pl-form">${t.formLast5.map(formBadge).join('')}</td>
+      <td class="pl-num pl-pts"><strong>${t.points}</strong></td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('pl-table-container').innerHTML = `
+    <table class="pl-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Team</th>
+          <th title="Matches Played">MP</th>
+          <th title="Wins">W</th>
+          <th title="Draws">D</th>
+          <th title="Losses">L</th>
+          <th title="Goals For : Against">G</th>
+          <th title="Goal Difference">GD</th>
+          <th title="Form (last 5)">Form</th>
+          <th title="Points">PTS</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="pl-table-legend">
+      <span><span class="legend-dot pos-ucl"></span>UCL</span>
+      <span><span class="legend-dot pos-uel"></span>UEL</span>
+      <span><span class="legend-dot pos-rel"></span>Relegation</span>
+      <span>⭐ Your player's club</span>
+      <span><span class="live-dot"></span>Live match in progress</span>
+    </div>
+  `;
 }
 
 // ============================================================
