@@ -298,6 +298,31 @@ tbody tr:hover { background: var(--bg-inset); }
   gap: 3px;
   z-index: 4;
 }
+
+/* Auto-substitution indicators */
+.autosub-badge {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  z-index: 5;
+  line-height: 1;
+}
+.autosub-badge-in { background: var(--good); }
+.autosub-badge-out { background: var(--ink-muted); }
+.player-card.autosub-out { opacity: 0.55; }
+.player-card.autosub-out .shirt { filter: grayscale(0.6); }
 .player-ret {
   width: 18px; height: 18px;
   border-radius: 50%;
@@ -1700,10 +1725,103 @@ function chipLabel(c) {
   return { wildcard:'WC', freehit:'FH', bboost:'BB', '3xc':'TC', triplecaptain:'TC', manager:'MGR' }[c] || c;
 }
 
+// Compute which player IDs are in the effective XI after FPL auto-substitutions.
+// Returns { xiIds: Set, subs: [{outId, inId}] }
+// Rules: a starter who played 0 minutes AND all their GW fixtures have finished
+// is replaced by the first eligible bench player (GK↔GK, outfield in bench order,
+// preserving formation validity: min 3 DEF / 2 MID / 1 FWD).
+function computeAutoSubs() {
+  if (!STATE.picks || !STATE.fixtures) return { xiIds: new Set(), subs: [] };
+  const liveMap = {};
+  STATE.live.elements.forEach(e => liveMap[e.id] = e.stats);
+  // Build per-team fixtures finished-flag map
+  const teamFixFinished = {};
+  STATE.fixtures.forEach(f => {
+    if (!teamFixFinished[f.team_h]) teamFixFinished[f.team_h] = [];
+    if (!teamFixFinished[f.team_a]) teamFixFinished[f.team_a] = [];
+    teamFixFinished[f.team_h].push(f.finished_provisional);
+    teamFixFinished[f.team_a].push(f.finished_provisional);
+  });
+
+  const isBlank = (element) => {
+    const el = STATE.elMap[element];
+    if (!el) return false;
+    const stats = liveMap[element] || {};
+    if ((stats.minutes || 0) > 0) return false;
+    const fixes = teamFixFinished[el.team] || [];
+    if (fixes.length === 0) return false;
+    return fixes.every(done => done);
+  };
+
+  // Group current XI and bench
+  let xiByPos = { 1: [], 2: [], 3: [], 4: [] };
+  let bench = [];
+  STATE.picks.picks.forEach(p => {
+    const el = STATE.elMap[p.element];
+    if (!el) return;
+    if (p.position <= 11) xiByPos[el.element_type].push({ pick: p, el });
+    else bench.push({ pick: p, el });
+  });
+
+  const subs = [];
+  const benchUsed = new Set();
+
+  // GK sub
+  const starterGK = xiByPos[1][0];
+  const benchGK = bench.find(b => b.el.element_type === 1);
+  if (starterGK && isBlank(starterGK.pick.element) && benchGK && !isBlank(benchGK.pick.element)) {
+    subs.push({ outId: starterGK.pick.element, inId: benchGK.pick.element });
+    xiByPos[1] = [benchGK];
+    benchUsed.add(benchGK.pick.element);
+  }
+
+  // Outfield subs
+  const benchOutfield = bench
+    .filter(b => b.el.element_type !== 1)
+    .sort((a, b) => a.pick.position - b.pick.position);
+
+  const getCounts = () => ({
+    1: xiByPos[1].length, 2: xiByPos[2].length,
+    3: xiByPos[3].length, 4: xiByPos[4].length
+  });
+  const valid = c => c[1] === 1 && c[2] >= 3 && c[3] >= 2 && c[4] >= 1
+                   && c[2] <= 5 && c[3] <= 5 && c[4] <= 3;
+
+  // Find outfield blanks in XI
+  const outfieldBlanks = [];
+  [2, 3, 4].forEach(pos => {
+    xiByPos[pos].forEach(entry => {
+      if (isBlank(entry.pick.element)) outfieldBlanks.push({ entry, pos });
+    });
+  });
+
+  outfieldBlanks.forEach(blank => {
+    for (const cand of benchOutfield) {
+      if (benchUsed.has(cand.pick.element)) continue;
+      if (isBlank(cand.pick.element)) continue;
+      const counts = getCounts();
+      counts[blank.pos]--;
+      counts[cand.el.element_type]++;
+      if (valid(counts)) {
+        subs.push({ outId: blank.entry.pick.element, inId: cand.pick.element });
+        xiByPos[blank.pos] = xiByPos[blank.pos].filter(e => e.pick.element !== blank.entry.pick.element);
+        xiByPos[cand.el.element_type].push(cand);
+        benchUsed.add(cand.pick.element);
+        break;
+      }
+    }
+  });
+
+  const xiIds = new Set();
+  [1, 2, 3, 4].forEach(pos => xiByPos[pos].forEach(e => xiIds.add(e.pick.element)));
+  return { xiIds, subs };
+}
+
 function computeLivePoints(picks) {
   const liveMap = {};
   STATE.live.elements.forEach(e => liveMap[e.id] = e.stats.total_points || 0);
   const chip = picks.active_chip;
+  const { xiIds } = computeAutoSubs();
   let total = 0;
   picks.picks.forEach(p => {
     const pts = liveMap[p.element] || 0;
@@ -1711,7 +1829,10 @@ function computeLivePoints(picks) {
       // All 15 count, captain still doubled
       total += pts * (p.multiplier > 0 ? p.multiplier : 1);
     } else {
-      if (p.position <= 11) total += pts * (p.multiplier || 1);
+      // Use post-auto-sub XI
+      if (xiIds.has(p.element)) {
+        total += pts * (p.multiplier > 0 ? p.multiplier : 1);
+      }
     }
   });
   return total;
@@ -1958,14 +2079,60 @@ function renderPitch() {
     else bench.push(withPick);
   });
 
+  // ============================================================
+  // Apply FPL auto-substitutions (shared helper — see computeAutoSubs)
+  // Rebuilds xiByPos and bench to reflect the effective post-sub XI,
+  // and tags swapped players with _autoSubbedIn / _autoSubbedOut for UI badges.
+  // ============================================================
+  const { subs: autoSubs } = computeAutoSubs();
+  if (autoSubs.length > 0) {
+    // For each swap: remove outId from xiByPos, promote inId from bench
+    autoSubs.forEach(swap => {
+      const outEl = STATE.elMap[swap.outId];
+      const inEl = STATE.elMap[swap.inId];
+      if (!outEl || !inEl) return;
+
+      // Remove outgoing from its XI position row
+      xiByPos[outEl.element_type] = xiByPos[outEl.element_type]
+        .filter(p => p.element !== swap.outId);
+
+      // Find incoming in bench, promote to XI, tag as subbed-in
+      const benchIdx = bench.findIndex(b => b.element === swap.inId);
+      if (benchIdx >= 0) {
+        const incoming = { ...bench[benchIdx], _autoSubbedIn: true };
+        xiByPos[inEl.element_type].push(incoming);
+        // Replace bench slot with the outgoing player (so they still render on bench, but dimmed)
+        const outgoing = STATE.picks.picks.find(p => p.element === swap.outId);
+        const outgoingWithEl = {
+          ...outgoing,
+          el: outEl,
+          stats: liveMap[swap.outId] || {},
+          _autoSubbedOut: true
+        };
+        bench[benchIdx] = outgoingWithEl;
+      }
+    });
+  }
+  // ============================================================
+
   const formation = `${xiByPos[2].length}-${xiByPos[3].length}-${xiByPos[4].length}`;
 
-  // XI live total
+  // XI live total — use post-auto-sub roster to get correct total
+  // Build the set of IDs that are actually in the XI after auto-subs
+  const postSubXiIds = new Set();
+  [1, 2, 3, 4].forEach(pos => xiByPos[pos].forEach(p => postSubXiIds.add(p.element)));
+
   let xiTotal = 0;
   STATE.picks.picks.forEach(p => {
     const pts = (liveMap[p.element]?.total_points) || 0;
-    if (chip === 'bboost') xiTotal += pts * (p.multiplier > 0 ? p.multiplier : 1);
-    else if (p.position <= 11) xiTotal += pts * (p.multiplier || 1);
+    const mult = p.multiplier || 1;
+    if (chip === 'bboost') {
+      // BB: all 15 score, captain doubled
+      xiTotal += pts * (p.multiplier > 0 ? p.multiplier : 1);
+    } else if (postSubXiIds.has(p.element)) {
+      // In the post-sub XI: use captain multiplier if applicable, else 1x
+      xiTotal += pts * (mult > 0 ? mult : 1);
+    }
   });
 
   const cardFor = (pk) => {
@@ -2044,8 +2211,16 @@ function renderPitch() {
     // Returns appear stacked on the right (unless status is there too)
     const returnsHtml = returns.length > 0 && !rightMarker ? `<div class="player-returns">${returns.join('')}</div>` : '';
 
-    return `<div class="player-card">
-      ${leftMarker}${rightMarker}${liveDotHtml}${returnsHtml}
+    // Auto-sub indicator
+    const autoSubClass = pk._autoSubbedIn ? ' autosub-in' : pk._autoSubbedOut ? ' autosub-out' : '';
+    const autoSubBadge = pk._autoSubbedIn
+      ? '<div class="autosub-badge autosub-badge-in" title="Auto-subbed in — replaced a blank starter">↑</div>'
+      : pk._autoSubbedOut
+      ? '<div class="autosub-badge autosub-badge-out" title="Auto-subbed out — 0 mins, replaced by bench player">↓</div>'
+      : '';
+
+    return `<div class="player-card${autoSubClass}">
+      ${leftMarker}${rightMarker}${liveDotHtml}${returnsHtml}${autoSubBadge}
       <div class="shirt">
         <img src="${kitUrl}" alt="${team.short} kit" loading="lazy"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
