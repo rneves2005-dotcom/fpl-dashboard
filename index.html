@@ -607,13 +607,14 @@ tbody tr:hover { background: var(--bg-inset); }
   vertical-align: middle;
 }
 .mv-dgw-warning {
-  background: var(--warn-soft);
-  color: var(--warn);
+  background: var(--bg-inset);
+  color: var(--ink-muted);
   border-bottom: 1px solid var(--line);
-  padding: 6px 12px;
+  padding: 5px 12px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.04em;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   font-weight: 600;
   text-align: center;
 }
@@ -2185,7 +2186,7 @@ function shirtSvg({p, s}) {
 // ============================================================
 // MATCH VIEW — two teams side-by-side per fixture
 // ============================================================
-function renderBonus() {
+async function renderBonus() {
   const liveMap = {};
   STATE.live.elements.forEach(e => liveMap[e.id] = e.stats);
   const squadIds = new Set(STATE.picks ? STATE.picks.picks.map(p => p.element) : []);
@@ -2216,6 +2217,48 @@ function renderBonus() {
   });
   const isDGWTeam = (teamId) => (teamFixtureCount[teamId] || 0) > 1;
 
+  // For DGW teams, fetch per-fixture stats via /element-summary/{id}/
+  // This gives us proper per-match BPS, DC, saves, xG — not cumulative GW totals.
+  // Use STATE.elementSummaryCache to avoid re-fetching between auto-refreshes (refresh cache every render).
+  STATE.elementSummaryCache = {}; // fresh every render for live updates
+  const dgwTeamIds = new Set(
+    Object.keys(teamFixtureCount).filter(tid => teamFixtureCount[tid] > 1).map(Number)
+  );
+  const dgwPlayerIds = [];
+  Object.keys(liveMap).forEach(id => {
+    const el = STATE.elMap[id];
+    if (!el) return;
+    if (dgwTeamIds.has(el.team) && (liveMap[id].minutes || 0) > 0) {
+      dgwPlayerIds.push(+id);
+    }
+  });
+
+  if (dgwPlayerIds.length > 0) {
+    // Show a brief loading state while fetching
+    container.innerHTML = '<div class="loading">Loading per-fixture DGW stats (' + dgwPlayerIds.length + ' players)...</div>';
+    // Parallel fetch, but cap concurrency via batches of 15 to avoid throttling
+    const batchSize = 15;
+    for (let i = 0; i < dgwPlayerIds.length; i += batchSize) {
+      const batch = dgwPlayerIds.slice(i, i + batchSize);
+      await Promise.all(batch.map(async pid => {
+        try {
+          const summary = await fpl('/element-summary/' + pid + '/');
+          // Keep only GW33 rows (current GW)
+          STATE.elementSummaryCache[pid] = summary.history.filter(h => h.round === STATE.currentGW);
+        } catch (e) {
+          STATE.elementSummaryCache[pid] = null;
+        }
+      }));
+    }
+  }
+
+  // Helper: look up per-fixture row for a DGW player
+  const getFixtureStats = (playerId, fixtureId) => {
+    const entries = STATE.elementSummaryCache[playerId];
+    if (!entries) return null;
+    return entries.find(h => h.fixture === fixtureId) || null;
+  };
+
   const fixtureBoxes = started.map(f => {
     const home = STATE.teamMap[f.team_h].short;
     const away = STATE.teamMap[f.team_a].short;
@@ -2226,13 +2269,25 @@ function renderBonus() {
     const hasDGW = homeIsDGW || awayIsDGW;
 
     // Collect all players from BOTH teams
-    const buildTeamRoster = (teamId) => {
+    // For DGW teams, use per-fixture stats from element-summary instead of cumulative live stats
+    const buildTeamRoster = (teamId, teamIsDGW) => {
       const roster = [];
       Object.keys(liveMap).forEach(id => {
         const el = STATE.elMap[id];
         if (!el || el.team !== teamId) return;
-        const stats = liveMap[id];
-        if ((stats.minutes || 0) === 0) return; // only show players who played
+        const cumStats = liveMap[id];
+        if ((cumStats.minutes || 0) === 0) return; // only show players who played overall
+
+        // If DGW team, use per-fixture stats for THIS fixture only
+        let stats;
+        if (teamIsDGW) {
+          const fxStats = getFixtureStats(+id, f.id);
+          if (!fxStats || (fxStats.minutes || 0) === 0) return; // player didn't play in THIS fixture
+          stats = fxStats;
+        } else {
+          stats = cumStats;
+        }
+
         const pts = stats.total_points || 0;
         roster.push({
           id: +id,
@@ -2261,8 +2316,8 @@ function renderBonus() {
       return roster;
     };
 
-    const homeRoster = buildTeamRoster(f.team_h);
-    const awayRoster = buildTeamRoster(f.team_a);
+    const homeRoster = buildTeamRoster(f.team_h, homeIsDGW);
+    const awayRoster = buildTeamRoster(f.team_a, awayIsDGW);
 
     // Determine top BPS ranks across the whole fixture (for bonus highlighting)
     const allInFix = [...homeRoster, ...awayRoster].sort((a,b) => b.bps - a.bps);
@@ -2389,7 +2444,7 @@ function renderBonus() {
         <div class="fixture-status ${statusClass}">${statusHtml}</div>
       </div>
       ${summaryHtml ? `<div class="fixture-summary">${summaryHtml}</div>` : ''}
-      ${hasDGW ? `<div class="mv-dgw-warning">⚠ DGW · stats are cumulative across both fixtures for ${[homeIsDGW && home, awayIsDGW && away].filter(Boolean).join(' & ')}</div>` : ''}
+      ${hasDGW ? `<div class="mv-dgw-warning">DGW · showing per-fixture stats for ${[homeIsDGW && home, awayIsDGW && away].filter(Boolean).join(' & ')}</div>` : ''}
       <div class="fixture-body mv-body">
         ${renderTeamPanel(home, homeRoster, true, homeIsDGW)}
         ${renderTeamPanel(away, awayRoster, false, awayIsDGW)}
