@@ -385,6 +385,7 @@ code {
     <li><a href="#prompts">Prompt Templates</a></li>
     <li><a href="#lessons">Retrospectives</a></li>
     <li><a href="#ecf">Elite-Consistent Framework</a></li>
+    <li><a href="#scan">Weekly Scan Protocol</a></li>
   </ol>
 </div>
 
@@ -1015,10 +1016,253 @@ Verdict: PLAY / SAVE, with rationale.</div>
   </div>
 </section>
 
+<!-- SECTION 10 — WEEKLY SCAN PROTOCOL -->
+<section id="scan">
+  <div class="section-head">
+    <div class="section-title">10 · Weekly Scan Protocol</div>
+    <div class="section-kicker">Data-first decision support · run every Tuesday + pre-deadline</div>
+  </div>
+
+  <p>Born from the post-GW36 retrospective. Several decision-quality gaps emerged across the GW33–GW36 cycle: late discovery of trending players (Doku surfaced weeks after his form turned), confabulated motivation tables (claimed "team X is locked" without checking points/games-left), missed European/cup commitments (Arsenal CL final, Aston Villa UEL final, Crystal Palace Conf final, Chelsea–City FA Cup final), and over-reliance on season-aggregate form when home/away splits told a different story. This protocol enforces data-first analysis to prevent each failure mode.</p>
+
+  <div class="callout warn">
+    <strong>The core rule:</strong> data weight = 1, priors = 0. Every claim about standings, motivation, European status, or fixture difficulty must come from a fresh data pull. If data is unavailable, ASK. Never confabulate.
+  </div>
+
+  <h3 style="margin-top: 22px;">Cadence</h3>
+  <ul>
+    <li><strong>Tuesday morning</strong> (post-weekend GW): full scan — outcome retrospective + GW+1 prep + GW+2 forward look</li>
+    <li><strong>Friday pre-deadline</strong>: refresh scan — confirm captain, lock transfers, final commitment</li>
+    <li><strong>Mid-week</strong> (after midweek fixtures): quick check if cup/Euro matches changed rotation picture</li>
+  </ul>
+
+  <h3 style="margin-top: 22px;">What gaps this protocol closes</h3>
+  <ul>
+    <li><strong>Trending players surfaced LATE:</strong> Section 5 (Ranked Transfer Suggestions) forces proactive surfacing of YOUR best moves each week, not reactive responding to questions</li>
+    <li><strong>Confabulated context:</strong> mandatory data pulls mean league standings, European fixtures, motivation indices come from URLs, not memory</li>
+    <li><strong>Season-aggregate form misleading:</strong> mandatory home/away split pulls — applied to BOTH teams in every fixture analysis</li>
+    <li><strong>Captain oscillation:</strong> structured 9-point evaluation framework instead of vibes-based recommendations</li>
+    <li><strong>Loose terminology:</strong> precise glossary baked into prompt (DGW vs BGW vs DNP vs low return)</li>
+  </ul>
+
+  <h3 style="margin-top: 22px;">The trigger prompt</h3>
+  <p>Copy the full prompt below into a fresh Claude conversation every Tuesday morning (and again Friday before deadline). The protocol enforces all 9 mandatory data pulls before any analysis writing begins.</p>
+
+  <div class="prompt-box">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Run the weekly FPL scan per Section 10 protocol. Pull all mandatory data BEFORE any analysis. Confabulation = failure. Data weight = 1, priors = 0.
+
+═══════════════════════════════════════════════════════════════════
+MANDATORY DATA PULLS (execute all before writing analysis)
+═══════════════════════════════════════════════════════════════════
+
+1. FPL API
+   - /api/bootstrap-static/ (players, teams, GW info)
+   - /api/fixtures/ (all fixtures, used for FDR + form)
+   - /api/event/{currentGW}/live/ (live scores)
+   - /api/entry/2938711/event/{currentGW}/picks/ (my squad)
+   - /api/entry/2938711/history/ (my history + chips)
+   - /api/leagues-classic/595244/standings/ (my mini-league)
+   - /api/element-summary/{id}/ for top 60 trending players (last 6 GW data)
+
+2. PL Standings (Flashscore — required, do not infer)
+   - Overall: https://www.flashscoreusa.com/standings/KKay4EE8/OEEq9Yvp/#/OEEq9Yvp/standings/overall/
+   - HOME form L5: https://www.flashscoreusa.com/standings/KKay4EE8/OEEq9Yvp/#/OEEq9Yvp/form/home/5/
+   - AWAY form L5: https://www.flashscoreusa.com/standings/KKay4EE8/OEEq9Yvp/#/OEEq9Yvp/form/away/5/
+
+3. European Competition Status (do not infer)
+   - https://www.flashscoreusa.com/soccer/europe/champions-league/fixtures/
+   - https://www.flashscoreusa.com/soccer/europe/europa-league/fixtures/
+   - https://www.flashscoreusa.com/soccer/europe/conference-league/fixtures/
+
+4. Domestic Cup Status
+   - FA Cup final/semi-finals (search if not stated)
+   - EFL Cup if active
+   - Note: User may state these directly — use that
+
+═══════════════════════════════════════════════════════════════════
+DERIVED DATA REQUIRED (compute before analysis)
+═══════════════════════════════════════════════════════════════════
+
+5. League Math
+   - Title race: pts gap, games left, max possible pts each contender
+   - Top 4 / UCL fight: who's alive
+   - UEL spot: who's alive (factor cup-winner reroutes)
+   - Relegation: who's mathematically dead, who's alive (max possible pts vs 18th)
+
+6. Rotation Pressure Map
+   - For each PL team in next 14 days: list cup/Euro fixtures
+   - Flag PL games within 3 days of cup match → ROTATION RISK
+   - Differentiate position rotation: CBs less rotated than wide attackers/wingers/strikers
+
+7. Motivation Index per team
+   - Title contender / UCL fight / UEL fight / relegation fight: HIGH motivation
+   - Mid-table no European stake / safe: LOW-MID
+   - Relegated mathematically: LOW (may field youth)
+
+8. Player Trends (from element-summary)
+   - xGI/90 last 6 GWs vs season avg
+   - Minutes nailed % (% of last 6 with 80+ mins)
+   - BPS/90 last 6
+   - Form trend slope (improving/declining)
+
+9. Fixture-Adjusted EV
+   - Use HOME or AWAY split (whichever applies for the fixture)
+   - Apply rotation discount based on cup-proximity
+   - Multiply by motivation index
+
+═══════════════════════════════════════════════════════════════════
+DELIVERABLES (7-section digest)
+═══════════════════════════════════════════════════════════════════
+
+Section 1: GW{X-1} OUTCOME
+- Actual final scores per player (post-bonus)
+- What worked / what didn't
+- Rank movement vs my mini-league rivals
+- Key learnings
+
+Section 2: TRENDING UP (last 6 vs season)
+- Top 10 improvers in xGI/90
+- Filter to feasible price band
+- Flag minutes nailed (>= 80% L6 starts)
+- Cross-reference with motivation/rotation context
+
+Section 3: TRENDING DOWN
+- Top 10 decliners
+- Specifically flag any in MY squad (forced-fix candidates)
+- Specifically flag any in rival squads (differential opportunities)
+
+Section 4: MY SQUAD GW{X}/GW{X+1}
+- Per-player fixture quality table
+- HOME/AWAY split applied to BOTH teams in each fixture
+- Motivation index per team
+- Rotation risk per player
+- Bench analysis
+
+Section 5: GW{X} RANKED TRANSFER SUGGESTIONS (mandatory)
+Output up to 5 ranked transfer recommendations specific to MY squad:
+
+For each, compute:
+- Player out: name, price, why selling (form decline / injury / fixture)
+- Player in: name, price, why buying (form / fixture / role)
+- Cash math: ITB before, after, net change
+- EV math: incoming player EV next 3 GWs minus outgoing EV
+- FT/Hit cost: free / -4 / -8
+- Net EV: total minus hit cost
+- Risk flag: rotation / minutes / fixture
+- Verdict: FORCED FIX / STRONG GO / GO / WAIT / SKIP
+
+Ranking rules:
+1. FORCED FIXES first (injured/suspended/0-min full GW) regardless of EV
+2. Then by net EV descending
+3. Only show moves with positive net EV after hit cost
+4. Multi-transfer combos shown only if combined EV > combined hit cost
+5. ALWAYS include "HOLD FT — no positive EV move available" if all options are negative EV
+
+Section 6: GW{X} CAPTAIN EVALUATION (mandatory structured framework)
+
+For each candidate, score:
+1. Player team's HOME or AWAY form L5 (whichever applies)
+2. Opposition's INVERSE split form L5
+3. Goals scored / conceded ratio in relevant split
+4. Player team motivation
+5. Opposition motivation
+6. Player rotation risk (cup/Euro proximity)
+7. Realistic ceiling × multiplier
+8. Realistic floor × multiplier
+9. Differential value (template vs differential)
+
+Output: ranked list with reasoning.
+Higher fixture quality WINS unless rotation risk dominates.
+Recommend Captain + Vice. State by how many EV pts it's close.
+
+Section 7: GW{X+1} FORWARD PLAN
+- Preview of next week's transfer landscape
+- Captain shortlist for GW{X+1}
+- Any pending decisions (FT bank vs use, chip considerations)
+
+═══════════════════════════════════════════════════════════════════
+RULES OF ENGAGEMENT
+═══════════════════════════════════════════════════════════════════
+
+NEVER:
+- Confabulate league standings or claim a team is "locked" without showing math
+- Use season-aggregate form when home/away splits are available
+- Skip cup/Euro rotation analysis
+- Use "blank" loosely (means BGW or 0-min DNP, NOT a low return)
+- Forget that VC only triggers if captain plays 0 minutes
+- Suggest a transfer with negative net EV after hits
+
+ALWAYS:
+- Show the math when claiming title/UCL/UEL/relegation status
+- Pull fresh data; never reuse stale numbers
+- Ask if European/Cup info is unclear
+- Apply home/away splits to BOTH teams in every fixture analysis
+- Cross-reference motivation × rotation × form for every recommendation
+- Use precise FPL terminology (DGW/BGW/DNP/haul/return/blank)
+
+═══════════════════════════════════════════════════════════════════
+TERMINOLOGY GLOSSARY
+═══════════════════════════════════════════════════════════════════
+
+- "Blank GW" = no fixture for that team that GW
+- "DGW" = double gameweek (2 fixtures)
+- "DNP" / "0-min appearance" = bench all game, zero minutes (triggers VC)
+- "Low return" / "below average" = played but scored 0-2 pts (does NOT trigger VC)
+- "Haul" = scored 8+ pts in a single match
+- "Double-digit haul" = scored 10+ pts
+- "FDR" = Fixture Difficulty Rating (FPL's 1-5 scale)
+- "Form" = FPL's 30-day rolling pts/match</div>
+
+  <h3 style="margin-top: 24px;">Friday pre-deadline variant</h3>
+  <p>Use this shorter prompt before each Friday deadline to lock the final captain + transfer commitment. Assumes Tuesday's full scan already ran.</p>
+
+  <div class="prompt-box">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Friday pre-deadline lock per Section 10 protocol. Tuesday scan already ran — refresh the data, focus on commitment.
+
+PULL FRESH:
+- Latest team news / press conference rotation hints since Tuesday
+- Any new injuries on my squad or in trending players
+- Confirmed lineups if any midweek matches just happened
+- /api/bootstrap-static/ for any price changes
+
+DELIVER:
+1. CAPTAIN LOCK: Run the 9-point captain evaluation framework one more time. Has anything changed since Tuesday? Confirm or pivot.
+
+2. TRANSFER LOCK: Re-confirm my Section 5 transfer recommendation from Tuesday. Has anything changed (price, news, injury)? GO / PIVOT / HOLD.
+
+3. STARTING XI CHECK: Confirm my best XI given any rotation news. Verify all 11 starters are nailed for the GW.
+
+4. RIVAL WATCH: Quick look at my mini-league rivals (entry IDs available via /api/leagues-classic/595244/standings/). Any captain choices that suggest a differential opportunity?
+
+5. FINAL COMMITMENT: 3-bullet summary of what I should hit "Save Team" with.
+
+NEVER recommend a change vs Tuesday unless data has materially changed. Friday is for confirmation, not reanalysis.</div>
+
+  <h3 style="margin-top: 24px;">Live in-game variant</h3>
+  <p>For mid-game tracking — refines Section 07's older live check-in template with the structured BPS / DC / bonus projection framing.</p>
+
+  <div class="prompt-box">
+    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Live GW{X} check-in. Pull current state from FPL API + my dashboard.
+
+DELIVER:
+1. LIVE SCORE: my GW total + rank delta vs last GW
+2. PER-PLAYER STATUS: who's played, who's playing, who's still to come (mins / pts / BPS / bonus position)
+3. BONUS PROJECTION: for each live fixture, top-3 BPS positions and projected +3/+2/+1 bonus
+4. CAPTAIN STATUS: how is my captain doing vs alternatives I could have picked
+5. RIVAL WATCH: quick look at my mini-league top 12 — am I gaining or losing rank this GW?
+6. ANY ACTION NEEDED: usually no (in-GW changes impossible) — but flag if captain needs vice swap because of 0-min appearance
+
+Be concise. No transfer planning during live GW.</div>
+
+  <div class="callout good" style="margin-top: 24px;">
+    <strong>Why three variants:</strong> Tuesday is for thinking, Friday is for committing, and live is for tracking — not deciding. Mixing them up is how managers second-guess into bad transfers. Each variant has a clear purpose; stay in lane.
+  </div>
+</section>
+
 <!-- Footer -->
 <div class="foot">
   <div>FPL Toolkit · built with the <a href="./index.html">live dashboard</a> · Rui Neves · 2025/26</div>
-  <div>Last updated: 19 Apr 2026 · GW33 · ECF added</div>
+  <div>Last updated: 9 May 2026 · GW36 · Section 10 added</div>
 </div>
 
 <script>
