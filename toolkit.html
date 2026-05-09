@@ -1268,7 +1268,16 @@ Be concise. No transfer planning during live GW.</div>
 <script>
 function copyPrompt(btn) {
   const box = btn.parentElement;
-  const text = box.textContent.replace(/^Copy/, '').trim();
+  // Get all text content from the prompt-box (including the button label "Copy")
+  // Then strip the button text by removing it from the start, regardless of whitespace
+  let text = box.textContent;
+  // Remove the button's own text (the word "Copy" or "Copied") from the start
+  const btnLabel = btn.textContent;
+  const idx = text.indexOf(btnLabel);
+  if (idx !== -1) {
+    text = text.substring(0, idx) + text.substring(idx + btnLabel.length);
+  }
+  text = text.trim();
   navigator.clipboard.writeText(text).then(() => {
     btn.textContent = 'Copied';
     btn.classList.add('done');
