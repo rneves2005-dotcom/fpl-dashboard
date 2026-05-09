@@ -1041,12 +1041,15 @@ Verdict: PLAY / SAVE, with rationale.</div>
     <li><strong>Trending players surfaced LATE:</strong> Section 5 (Ranked Transfer Suggestions) forces proactive surfacing of YOUR best moves each week, not reactive responding to questions</li>
     <li><strong>Confabulated context:</strong> mandatory data pulls mean league standings, European fixtures, motivation indices come from URLs, not memory</li>
     <li><strong>Season-aggregate form misleading:</strong> mandatory home/away split pulls — applied to BOTH teams in every fixture analysis</li>
-    <li><strong>Captain oscillation:</strong> structured 9-point evaluation framework instead of vibes-based recommendations</li>
+    <li><strong>Captain oscillation:</strong> FFH predicted points are the primary input, with the 9-point framework as sanity check — no more vibes-based flips</li>
+    <li><strong>Rough EV estimates:</strong> FFH `/predictions` page provides the authoritative xPTS data, scraped per scan — eliminates the need for hand-rolled fixture-quality math</li>
+    <li><strong>Cross-position transfer noise:</strong> position-feasibility is now an explicit rule (MID→MID, DEF→DEF) — prevents suggesting Semenyo→Truffert-type swaps</li>
+    <li><strong>Marginal-move noise:</strong> +2.0 net EV minimum threshold — below that is variance, not signal</li>
     <li><strong>Loose terminology:</strong> precise glossary baked into prompt (DGW vs BGW vs DNP vs low return)</li>
   </ul>
 
   <h3 style="margin-top: 22px;">The trigger prompt</h3>
-  <p>Copy the full prompt below into a fresh Claude conversation every Tuesday morning (and again Friday before deadline). The protocol enforces all 9 mandatory data pulls before any analysis writing begins.</p>
+  <p>Copy the full prompt below into a fresh Claude conversation every Tuesday morning (and again Friday before deadline). The protocol enforces all mandatory data pulls (FPL API + Flashscore standings + Flashscore home/away splits + 3 European fixture pages + FFH predictions + cup status) before any analysis writing begins.</p>
 
   <div class="prompt-box">
     <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>Run the weekly FPL scan per Section 10 protocol. Pull all mandatory data BEFORE any analysis. Confabulation = failure. Data weight = 1, priors = 0.
@@ -1078,6 +1081,13 @@ MANDATORY DATA PULLS (execute all before writing analysis)
    - FA Cup final/semi-finals (search if not stated)
    - EFL Cup if active
    - Note: User may state these directly — use that
+
+5. FFH Predicted Points (PRIMARY EV INPUT)
+   - https://www.fantasyfootballhub.co.uk/predictions
+   - Click "Load more" 5-8 times to load 60+ players
+   - Extract per player: GW+1 pred pts, GW+2 pred pts, total pred, expected mins
+   - These predictions are the AUTHORITATIVE EV source for transfer + captain math
+   - If FFH unavailable: fall back to L6 PPG × fixture-quality estimate (less reliable)
 
 ═══════════════════════════════════════════════════════════════════
 DERIVED DATA REQUIRED (compute before analysis)
@@ -1145,22 +1155,26 @@ For each, compute:
 - Player out: name, price, why selling (form decline / injury / fixture)
 - Player in: name, price, why buying (form / fixture / role)
 - Cash math: ITB before, after, net change
-- EV math: incoming player EV next 3 GWs minus outgoing EV
+- EV math: USE FFH PREDICTIONS for incoming/outgoing EV next 2 GWs (sum of pred pts)
 - FT/Hit cost: free / -4 / -8
 - Net EV: total minus hit cost
 - Risk flag: rotation / minutes / fixture
 - Verdict: FORCED FIX / STRONG GO / GO / WAIT / SKIP
 
 Ranking rules:
-1. FORCED FIXES first (injured/suspended/0-min full GW) regardless of EV
-2. Then by net EV descending
-3. Only show moves with positive net EV after hit cost
-4. Multi-transfer combos shown only if combined EV > combined hit cost
-5. ALWAYS include "HOLD FT — no positive EV move available" if all options are negative EV
+1. POSITION FEASIBILITY: every swap MUST be same-position (MID→MID, DEF→DEF, FWD→FWD, GK→GK). Cross-position swaps are noise — never suggest them. The only exception is structural reshuffles where a 2-transfer combo restores legal squad shape; show those as a bundle only.
+2. FORCED FIXES first (injured/suspended/0-min full GW) regardless of EV
+3. Then by net EV descending
+4. Only show moves with net EV >= +2.0 after hit cost. Below +2.0 is noise — do not surface as "GO" suggestions.
+5. Multi-transfer combos shown only if combined net EV > combined hit cost AND combined > +3.0
+6. ALWAYS include "HOLD FT — no positive EV move available" if all options fail rule 4
+7. For Andersen-style bench-only suspensions: suggest swap only if the replacement DISPLACES a starter (rare). Pure bench-DEF swaps are noise — usually HOLD FT.
 
 Section 6: GW{X} CAPTAIN EVALUATION (mandatory structured framework)
 
-For each candidate, score:
+PRIMARY INPUT: FFH predicted points for each captain candidate × multiplier (×2). Rank by FFH GW+1 pred pts first.
+
+Then apply the 9-point framework as a SANITY CHECK on FFH's top candidates:
 1. Player team's HOME or AWAY form L5 (whichever applies)
 2. Opposition's INVERSE split form L5
 3. Goals scored / conceded ratio in relevant split
@@ -1171,9 +1185,10 @@ For each candidate, score:
 8. Realistic floor × multiplier
 9. Differential value (template vs differential)
 
-Output: ranked list with reasoning.
-Higher fixture quality WINS unless rotation risk dominates.
-Recommend Captain + Vice. State by how many EV pts it's close.
+Override FFH ONLY if the framework reveals something FFH didn't bake in (e.g., late team news, press-conference rotation hint). Document the override reasoning.
+
+Output: top 3 candidates ranked, FFH pred × 2 next to each, framework notes.
+Recommend Captain + Vice. State the EV gap between #1 and #2.
 
 Section 7: GW{X+1} FORWARD PLAN
 - Preview of next week's transfer landscape
@@ -1191,6 +1206,10 @@ NEVER:
 - Use "blank" loosely (means BGW or 0-min DNP, NOT a low return)
 - Forget that VC only triggers if captain plays 0 minutes
 - Suggest a transfer with negative net EV after hits
+- Suggest cross-position swaps (MID for DEF etc.) — position must match
+- Suggest swaps with net EV < +2.0 — that is noise, not signal
+- Use rough EV estimates if FFH predictions are available — FFH is the source of truth
+- Suggest bench-DEF swaps when starter DEFs are healthy and the swap doesn't displace one
 
 ALWAYS:
 - Show the math when claiming title/UCL/UEL/relegation status
@@ -1199,6 +1218,9 @@ ALWAYS:
 - Apply home/away splits to BOTH teams in every fixture analysis
 - Cross-reference motivation × rotation × form for every recommendation
 - Use precise FPL terminology (DGW/BGW/DNP/haul/return/blank)
+- Use FFH predictions as the primary EV input for transfer + captain math
+- Verify position match before suggesting any transfer
+- Default to "HOLD FT" when no swap clears the +2.0 net EV threshold
 
 ═══════════════════════════════════════════════════════════════════
 TERMINOLOGY GLOSSARY
@@ -1224,19 +1246,20 @@ PULL FRESH:
 - Any new injuries on my squad or in trending players
 - Confirmed lineups if any midweek matches just happened
 - /api/bootstrap-static/ for any price changes
+- FFH predictions refresh: https://www.fantasyfootballhub.co.uk/predictions (numbers may have updated post-midweek)
 
 DELIVER:
-1. CAPTAIN LOCK: Run the 9-point captain evaluation framework one more time. Has anything changed since Tuesday? Confirm or pivot.
+1. CAPTAIN LOCK: Compare Tuesday's FFH-ranked captain to today's FFH-ranked captain. Has the top spot changed? If yes, pivot. If no, lock.
 
-2. TRANSFER LOCK: Re-confirm my Section 5 transfer recommendation from Tuesday. Has anything changed (price, news, injury)? GO / PIVOT / HOLD.
+2. TRANSFER LOCK: Re-confirm my Section 5 transfer recommendation from Tuesday using fresh FFH numbers. Has anything changed (price, news, injury, FFH pred drop)? GO / PIVOT / HOLD.
 
-3. STARTING XI CHECK: Confirm my best XI given any rotation news. Verify all 11 starters are nailed for the GW.
+3. STARTING XI CHECK: Confirm my best XI given any rotation news. Verify all 11 starters are nailed for the GW (FFH expected mins ≥ 70').
 
 4. RIVAL WATCH: Quick look at my mini-league rivals (entry IDs available via /api/leagues-classic/595244/standings/). Any captain choices that suggest a differential opportunity?
 
 5. FINAL COMMITMENT: 3-bullet summary of what I should hit "Save Team" with.
 
-NEVER recommend a change vs Tuesday unless data has materially changed. Friday is for confirmation, not reanalysis.</div>
+NEVER recommend a change vs Tuesday unless data has materially changed. Friday is for confirmation, not reanalysis. Position-feasibility and +2.0 net EV minimum still apply.</div>
 
   <h3 style="margin-top: 24px;">Live in-game variant</h3>
   <p>For mid-game tracking — refines Section 07's older live check-in template with the structured BPS / DC / bonus projection framing.</p>
@@ -1262,7 +1285,7 @@ Be concise. No transfer planning during live GW.</div>
 <!-- Footer -->
 <div class="foot">
   <div>FPL Toolkit · built with the <a href="./index.html">live dashboard</a> · Rui Neves · 2025/26</div>
-  <div>Last updated: 9 May 2026 · GW36 · Section 10 added</div>
+  <div>Last updated: 9 May 2026 · GW36 · Section 10 v2 — FFH integration + position-feasibility + EV threshold</div>
 </div>
 
 <script>
