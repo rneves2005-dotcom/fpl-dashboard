@@ -100,6 +100,11 @@ Public Sub DoAutoSort()
         .Apply
     End With
 
+    ' Jump to A1 of the sorted sheet so the user sees the top of the table
+    On Error Resume Next
+    Application.Goto Reference:=tbl.Parent.Range("A1"), Scroll:=True
+    On Error GoTo Cleanup
+
     Application.StatusBar = "AutoSort: " & tbl.Name & " sorted at " & Format(Now, "hh:mm:ss") & _
                             "  ·  next at " & Format(Now + TimeSerial(0, SORT_INTERVAL_MINUTES, 0), "hh:mm")
 
