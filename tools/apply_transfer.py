@@ -148,15 +148,28 @@ def apply_transfer(player: str, to_club: str, to_div: str, dry_run: bool = False
 
 
 def regenerate_world_json():
-    """Re-export Squads_Data.xlsx → world_data.json (Players grouped by Division → Club)."""
+    """Re-export Squads_Data.xlsx → world_data.json.
+
+    Two source paths:
+    - Real divisions (Premier League, La Liga, ...): grouped by Division → Club
+    - Virtual divisions for clubs without a tracked Division: grouped as
+      "🌐 {Country}" → Club. Lets users pick e.g. "🌐 Saudi Arabia" to see
+      Al-Hilal / Al-Nassr / etc.
+    """
     wb = openpyxl.load_workbook(DB_PATH, read_only=True, data_only=True)
     ws = wb["Players"]
     data = defaultdict(lambda: defaultdict(list))
     for row in ws.iter_rows(min_row=2, values_only=True):
         _id, shirt, player, age, club, country, division, goals, games, intl, shirt_int, prev = row
-        if not division or not club:
+        if not club or not player:
             continue
-        data[division][club].append({
+        if division:
+            key = division
+        elif country:
+            key = f"🌐 {country}"
+        else:
+            continue  # neither a division nor a country — skip
+        data[key][club].append({
             "s": shirt, "n": player, "a": age, "c": country, "g": goals, "p": prev
         })
     for div in data:

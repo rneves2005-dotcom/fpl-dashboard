@@ -113,7 +113,7 @@ td.prev { color: var(--ink-3); font-size: 12px; font-style: italic; }
 
 <header>
   <h1>🌍 Worldwide Squads &amp; Transfers</h1>
-  <div class="sub">Player database across 28 divisions worldwide · independent of FPL</div>
+  <div class="sub">Player database across 28 leagues + 117 country groups · independent of FPL</div>
   <div class="meta">Source: <code>Squads_Data.xlsx</code> · Players sheet · Filter by division and club</div>
 </header>
 
@@ -215,6 +215,19 @@ async function loadData() {
     }
     if (og.children.length) divSel.appendChild(og);
   }
+  // Virtual divisions (countries without a tracked league)
+  const virtualDivs = Object.keys(DATA).filter(d => d.startsWith('🌐')).sort();
+  if (virtualDivs.length) {
+    const og = document.createElement('optgroup');
+    og.label = '🌐 Other countries (no tracked league)';
+    for (const d of virtualDivs) {
+      const opt = document.createElement('option');
+      opt.value = d;
+      opt.textContent = `${d}  (${Object.keys(DATA[d]).length} clubs · ${Object.values(DATA[d]).flat().length} players)`;
+      og.appendChild(opt);
+    }
+    divSel.appendChild(og);
+  }
 
   // wire events
   divSel.addEventListener('change', onDivChange);
@@ -274,7 +287,10 @@ function renderStats() {
   const club = document.getElementById('clubSel').value;
   const sr = document.getElementById('stats');
   if (!div) {
-    sr.innerHTML = `<span class="chip">28 divisions</span> <span class="chip">656 clubs</span> <span class="chip">10,255 players</span> <span class="chip">~9,200 transfer records</span>`;
+    const totalDivs = Object.keys(DATA).length;
+    const totalClubs = Object.values(DATA).reduce((a, d) => a + Object.keys(d).length, 0);
+    const totalPlayers = Object.values(DATA).reduce((a, d) => a + Object.values(d).reduce((b, c) => b + c.length, 0), 0);
+    sr.innerHTML = `<span class="chip">${totalDivs} divisions</span> <span class="chip">${totalClubs.toLocaleString()} clubs</span> <span class="chip">${totalPlayers.toLocaleString()} players</span> <span class="chip">28 real + 117 country groups</span>`;
     return;
   }
   if (club) {
