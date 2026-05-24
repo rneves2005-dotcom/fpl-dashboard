@@ -256,1175 +256,11 @@ td strong { color: var(--ink); font-weight: 600; }
   <button class="tab" id="tab-WC26" onclick="showTeam('WC26')" style="background:var(--accent); color:#fff; font-weight:600;">🏆 WC26</button>
 </div>
 
-<!-- ARSENAL -->
-<div class="team-panel" id="team-ARS">
-  <div class="team-header">
-    <h2>Arsenal</h2>
-    <div class="team-meta">Manager: Mikel Arteta (continuity) <span class="discount good">1.0×</span></div>
-  </div>
 
-  <h3>Transfers IN <span class="count">8</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Gyökeres</strong></td><td>Sporting</td><td>Premium FWD</td></tr>
-    <tr><td><strong>Eze</strong></td><td>Crystal Palace</td><td>From 25/26</td></tr>
-    <tr><td>Madueke</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td>Mosquera</td><td>Valencia</td><td>–</td></tr>
-    <tr><td>Hincapié</td><td>Bayer Leverkusen</td><td>–</td></tr>
-    <tr><td>Nørgaard</td><td>Brentford</td><td>–</td></tr>
-    <tr><td>Zubimendi</td><td>Real Sociedad</td><td>–</td></tr>
-    <tr><td>Merino</td><td>Real Sociedad</td><td>–</td></tr>
-  </tbody></table>
+<!-- Dynamic team panel container -->
+<div id="team-content"></div>
 
-  <h3>Transfers OUT <span class="count">3</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>E. Smith Rowe</td><td>Fulham</td><td>–</td></tr>
-    <tr><td>R. Nelson</td><td>Brentford</td><td>–</td></tr>
-    <tr><td>Heaven</td><td>Man Utd</td><td>Young</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">23</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Raya</strong></td><td>GK</td><td>Spain</td><td>Brentford</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td><strong>Saliba</strong></td><td>CB</td><td>France</td><td>Marseille</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Mosquera</td><td>CB</td><td>Spain</td><td>Valencia</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>B. White</td><td>DEF</td><td>England</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Hincapié</td><td>CB</td><td>Ecuador</td><td>Leverkusen</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td><strong>Gabriel</strong></td><td>CB</td><td>Brazil</td><td>Lille</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td><strong>Saka</strong></td><td>RW</td><td>England</td><td>–</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Ødegaard</td><td>CAM</td><td>Norway</td><td>Real Madrid</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td>G. Jesus</td><td>FWD</td><td>Brazil</td><td>Man City</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td><strong>Eze</strong></td><td>CAM</td><td>England</td><td>Crystal Palace</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>Martinelli</td><td>LW</td><td>Brazil</td><td>Ituano</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Timber</td><td>RB</td><td>NED</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">13</td><td>Kepa</td><td>GK</td><td>Spain</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td><strong>Gyökeres</strong></td><td>ST</td><td>Sweden</td><td>Sporting</td><td>–</td></tr>
-    <tr><td class="shirt">16</td><td>Nørgaard</td><td>CDM</td><td>Denmark</td><td>Brentford</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Trossard</td><td>LW</td><td>Belgium</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>Madueke</td><td>RW</td><td>England</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>Merino</td><td>CM</td><td>Spain</td><td>R. Sociedad</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td>Havertz</td><td>FWD</td><td>Germany</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">33</td><td>Calafiori</td><td>DEF</td><td>Italy</td><td>Bologna</td><td>–</td></tr>
-    <tr><td class="shirt">36</td><td>Zubimendi</td><td>CDM</td><td>Spain</td><td>R. Sociedad</td><td>–</td></tr>
-    <tr><td class="shirt">41</td><td><strong>Rice</strong></td><td>CM</td><td>England</td><td>West Ham</td><td>–</td></tr>
-    <tr><td class="shirt">49</td><td>Lewis-Skelly</td><td>DEF</td><td>England</td><td>Academy</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- ASTON VILLA -->
-<div class="team-panel" id="team-AVL">
-  <div class="team-header">
-    <h2>Aston Villa</h2>
-    <div class="team-meta">Manager: Unai Emery (UEL champion · continuity) <span class="discount good">1.0×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">5</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>H. Elliott</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td>Sancho</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td>Lindelöf</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td>Maatsen</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td>D. Luiz</td><td>Juventus</td><td>Return</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">3</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Iroegbunam</td><td>Everton</td><td>–</td></tr>
-    <tr><td>J. Ramsey</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td>Guessand</td><td>Crystal Palace</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">22</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">2</td><td>Cash</td><td>RB</td><td>Poland</td><td>Nottm Forest</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Lindelöf</td><td>CB</td><td>Sweden</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>Konsa</td><td>CB</td><td>England</td><td>Brentford</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Mings</td><td>CB</td><td>England</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>Barkley</td><td>MID</td><td>England</td><td>Luton</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>McGinn</td><td>CM</td><td>Scotland</td><td>Hibernian</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Tielemans</td><td>CM</td><td>Belgium</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td>H. Elliott</td><td>MID</td><td>England</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Buendía</td><td>CAM</td><td>Argentina</td><td>Leverkusen</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td><strong>Watkins</strong></td><td>ST</td><td>England</td><td>Brentford</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Digne</td><td>LB</td><td>France</td><td>Everton</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>P. Torres</td><td>CB</td><td>Spain</td><td>Villarreal</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>T. Abraham</td><td>ST</td><td>England</td><td>Beşiktaş</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Sancho</td><td>LW</td><td>England</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td>D. Luiz</td><td>CM</td><td>Brazil</td><td>Juventus</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Maatsen</td><td>LB</td><td>NED</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>E. Martínez</td><td>GK</td><td>Argentina</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td>Onana</td><td>CM</td><td>Belgium</td><td>Everton</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td><strong>Rogers</strong></td><td>CAM</td><td>England</td><td>Middlesbrough</td><td>–</td></tr>
-    <tr><td class="shirt">31</td><td>Bailey</td><td>RW</td><td>Jamaica</td><td>Roma</td><td>–</td></tr>
-    <tr><td class="shirt">40</td><td>Bizot</td><td>GK</td><td>NED</td><td>Brest</td><td>–</td></tr>
-    <tr><td class="shirt">44</td><td>Kamara</td><td>CDM</td><td>France</td><td>Marseille</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- BOURNEMOUTH -->
-<div class="team-panel" id="team-BOU">
-  <div class="team-header">
-    <h2>Bournemouth</h2>
-    <div class="team-meta">Manager: Marco Rose (NEW) <span class="discount bad">0.8×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">5</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Petrović</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td>Adli</td><td>Bayer Leverkusen</td><td>–</td></tr>
-    <tr><td>Soler</td><td>Lanús</td><td>–</td></tr>
-    <tr><td>Mandas</td><td>Lazio</td><td>–</td></tr>
-    <tr><td>Diakité</td><td>Lille</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">5</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Senesi</strong></td><td>TBD</td><td>Confirmed leaving</td></tr>
-    <tr><td>Ouattara</td><td>Brentford</td><td>–</td></tr>
-    <tr><td>Kerkez</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td>Solanke</td><td>Tottenham</td><td>25/26</td></tr>
-    <tr><td>Semenyo</td><td>Man City</td><td>25/26</td></tr>
-  </tbody></table>
-
-  <div class="callout">
-    <strong>Manager change:</strong> Iraola → Marco Rose. Tactical reset · apply 0.8× discount until pre-season friendlies confirm system.
-  </div>
-
-  <h3>26/27 Squad <span class="count">23</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td>Petrović</td><td>GK</td><td>Serbia</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Truffert</td><td>LB</td><td>France</td><td>Rennes</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>Cook</td><td>MID</td><td>England</td><td>Leeds</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>Soler</td><td>DEF</td><td>Argentina</td><td>Lanús</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>Brooks</td><td>MID</td><td>Wales</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Scott</td><td>MID</td><td>England</td><td>Bristol City</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td>Evanilson</td><td>ST</td><td>Brazil</td><td>Porto</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Christie</td><td>MID</td><td>Scotland</td><td>Celtic</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>Gannon Doak</td><td>WING</td><td>Scotland</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>T. Adams</td><td>CDM</td><td>USA</td><td>Leeds</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>A. Smith</td><td>DEF</td><td>England</td><td>Tottenham</td><td>–</td></tr>
-    <tr><td class="shirt">16</td><td>Tavernier</td><td>MID</td><td>England</td><td>Middlesbrough</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td>Forster</td><td>GK</td><td>England</td><td>Tottenham</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>Diakité</td><td>DEF</td><td>France</td><td>Lille</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Kluivert</td><td>WING</td><td>NED</td><td>Roma</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>Á. Jiménez</td><td>DEF</td><td>Spain</td><td>Milan</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td>Adli</td><td>MID</td><td>Algeria</td><td>Leverkusen</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td><strong>Kroupi Jr</strong></td><td>FWD</td><td>France</td><td>Lorient</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>Hill</td><td>DEF</td><td>England</td><td>Blackburn</td><td>–</td></tr>
-    <tr><td class="shirt">26</td><td>E. Ünal</td><td>ST</td><td>Turkey</td><td>Getafe</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td>Tóth</td><td>MID</td><td>Hungary</td><td>Ferencvaros</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td>Mandas</td><td>GK</td><td>Greece</td><td>Lazio</td><td>–</td></tr>
-    <tr><td class="shirt">37</td><td>Rayan Vitor</td><td>–</td><td>Brazil</td><td>Vasco</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- BRENTFORD -->
-<div class="team-panel" id="team-BRE">
-  <div class="team-header">
-    <h2>Brentford</h2>
-    <div class="team-meta">Manager: assumed continuity <span class="discount good">0.95×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">5</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Kelleher</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td><strong>J. Henderson</strong></td><td>Ajax</td><td>Surprise</td></tr>
-    <tr><td>Ouattara</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td>Carvalho</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td>R. Nelson</td><td>Arsenal</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">6</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Mbeumo</td><td>Man Utd</td><td>Major</td></tr>
-    <tr><td>Wissa</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td>Konsa</td><td>Aston Villa</td><td>25/26</td></tr>
-    <tr><td>Watkins</td><td>Aston Villa</td><td>25/26</td></tr>
-    <tr><td>Raya</td><td>Arsenal</td><td>25/26</td></tr>
-    <tr><td>Nørgaard</td><td>Arsenal</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">20</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Kelleher</strong></td><td>GK</td><td>Ireland</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td>Hickey</td><td>RB</td><td>Scotland</td><td>Bologna</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>R. Henry</td><td>LB</td><td>England</td><td>Walsall</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>v.d. Berg</td><td>CB</td><td>NED</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Pinnock</td><td>CB</td><td>Jamaica</td><td>Barnsley</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td><strong>J. Henderson</strong></td><td>CM</td><td>England</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>Schade</td><td>ATT</td><td>Germany</td><td>Freiburg</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Jensen</td><td>CM</td><td>Denmark</td><td>Celta Vigo</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td>Thiago</td><td>ST</td><td>Brazil</td><td>Club Brugge</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>R. Nelson</td><td>WING</td><td>England</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Carvalho</td><td>MID</td><td>Portugal</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td>Milambo</td><td>MID</td><td>NED</td><td>Feyenoord</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>Yarmolyuk</td><td>MID</td><td>Ukraine</td><td>Dnipro</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td><strong>Ouattara</strong></td><td>FWD</td><td>Burkina Faso</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>Ajer</td><td>CB</td><td>Norway</td><td>Celtic</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td><strong>Collins</strong></td><td>CB</td><td>Ireland</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>Lewis-Potter</td><td>DEF</td><td>England</td><td>Hull</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td><strong>Damsgaard</strong></td><td>CAM</td><td>Denmark</td><td>Sampdoria</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td>Janelt</td><td>CDM</td><td>Germany</td><td>Bochum</td><td>–</td></tr>
-    <tr><td class="shirt">33</td><td>Kayode</td><td>RB</td><td>Italy</td><td>Fiorentina</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- BRIGHTON -->
-<div class="team-panel" id="team-BHA">
-  <div class="team-header">
-    <h2>Brighton</h2>
-    <div class="team-meta">Manager: continuity <span class="discount good">1.0×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">8</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Kostoulas</td><td>Olympiacos</td><td>–</td></tr>
-    <tr><td>Wieffer</td><td>Feyenoord</td><td>–</td></tr>
-    <tr><td>O'Riley</td><td>Marseille (ex-Celtic)</td><td>–</td></tr>
-    <tr><td>D. Gómez</td><td>Inter Miami</td><td>–</td></tr>
-    <tr><td>De Cuyper</td><td>Club Brugge</td><td>–</td></tr>
-    <tr><td>Kadıoğlu</td><td>Fenerbahçe</td><td>–</td></tr>
-    <tr><td>Tzimas</td><td>Nürnberg</td><td>–</td></tr>
-    <tr><td>Rutter</td><td>Leeds</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">1</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Buonanotte</td><td>Leeds</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">25</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Verbruggen</strong></td><td>GK</td><td>NED</td><td>Anderlecht</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Igor Julio</td><td>CB</td><td>Brazil</td><td>West Ham</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>Webster</td><td>CB</td><td>England</td><td>Bristol City</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td><strong>Dunk</strong></td><td>CB</td><td>England</td><td>Bristol City</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td><strong>v. Hecke</strong></td><td>CB</td><td>NED</td><td>Blackburn</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>March</td><td>WING</td><td>England</td><td>Lewes</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td>Tzimas</td><td>ST</td><td>Greece</td><td>Nürnberg</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Rutter</td><td>FWD</td><td>France</td><td>Leeds</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>Minteh</td><td>WING</td><td>Gambia</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td class="shirt">13</td><td>Hinshelwood</td><td>DEF</td><td>England</td><td>Academy</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td><strong>Baleba</strong></td><td>CDM</td><td>Cameroon</td><td>Lille</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td><strong>Welbeck</strong></td><td>ST</td><td>England</td><td>Watford</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Kostoulas</td><td>ST</td><td>Greece</td><td>Olympiacos</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>Milner</td><td>MID</td><td>England</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td>Boscagli</td><td>DEF</td><td>France</td><td>PSV</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Mitoma</td><td>LW</td><td>Japan</td><td>Union SG</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>Steele</td><td>GK</td><td>England</td><td>Sunderland</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td><strong>Kadıoğlu</strong></td><td>LB</td><td>Turkey</td><td>Fenerbahçe</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td>D. Gómez</td><td>MID</td><td>Paraguay</td><td>Inter Miami</td><td>–</td></tr>
-    <tr><td class="shirt">26</td><td>Ayari</td><td>MID</td><td>Sweden</td><td>Blackburn</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td>Wieffer</td><td>MID</td><td>NED</td><td>Feyenoord</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td>De Cuyper</td><td>LB</td><td>Belgium</td><td>Club Brugge</td><td>–</td></tr>
-    <tr><td class="shirt">30</td><td><strong>Groß</strong></td><td>CAM</td><td>Germany</td><td>Dortmund</td><td>–</td></tr>
-    <tr><td class="shirt">33</td><td>O'Riley</td><td>MID</td><td>Denmark</td><td>Marseille</td><td>–</td></tr>
-    <tr><td class="shirt">34</td><td>Veltman</td><td>RB</td><td>NED</td><td>Ajax</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- CHELSEA -->
-<div class="team-panel" id="team-CHE">
-  <div class="team-header">
-    <h2>Chelsea</h2>
-    <div class="team-meta">Manager: Xabi Alonso (NEW) <span class="discount bad">0.8×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">8</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Quenda</strong></td><td>Sporting CP</td><td>26/27 incoming</td></tr>
-    <tr><td>Garnacho</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td>Delap</td><td>Ipswich</td><td>Promoted-team transfer-up</td></tr>
-    <tr><td>Gittens</td><td>Borussia Dortmund</td><td>–</td></tr>
-    <tr><td>Hato</td><td>Ajax</td><td>–</td></tr>
-    <tr><td>Estêvão</td><td>Palmeiras</td><td>Brazilian young</td></tr>
-    <tr><td>J. Pedro</td><td>Brighton</td><td>–</td></tr>
-    <tr><td>Disasi</td><td>(loan return from WHU)</td><td>Return</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">12</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Madueke</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td>Dewsbury-Hall</td><td>Everton</td><td>–</td></tr>
-    <tr><td>T. George</td><td>Everton</td><td>–</td></tr>
-    <tr><td>Mount</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td>Hall</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td>Maatsen</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td>Petrović</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td>Hudson-Odoi</td><td>Nottm Forest</td><td>–</td></tr>
-    <tr><td>Chalobah</td><td>Crystal Palace</td><td>–</td></tr>
-    <tr><td>Guiu</td><td>(was at Sunderland on loan)</td><td>–</td></tr>
-    <tr><td><strong>Jackson</strong></td><td>Bayern Munich (loan)</td><td>Return TBC 26/27</td></tr>
-    <tr><td><strong>R. Veiga</strong></td><td>Villarreal</td><td>Sold — confirmed</td></tr>
-  </tbody></table>
-
-  <div class="callout">
-    <strong>Manager change:</strong> Maresca → Xabi Alonso (rumored to Man City). New possession-system. Apply 0.8× discount.
-  </div>
-
-  <h3>26/27 Squad <span class="count">27</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Sánchez</strong></td><td>GK</td><td>Spain</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td><strong>Cucurella</strong></td><td>LB</td><td>Spain</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>Adarabioyo</td><td>CB</td><td>England</td><td>Fulham</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Badiashile</td><td>CB</td><td>France</td><td>Monaco</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td><strong>Colwill</strong></td><td>CB</td><td>England</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td><strong>Neto</strong></td><td>RW</td><td>Portugal</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Enzo</td><td>CM</td><td>Argentina</td><td>Benfica</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Delap</strong></td><td>ST</td><td>England</td><td>Ipswich</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td><strong>Palmer</strong></td><td>CAM</td><td>England</td><td>Man City</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>Gittens</td><td>LW</td><td>England</td><td>Dortmund</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Jörgensen</td><td>GK</td><td>Denmark</td><td>Villarreal</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Essugo</td><td>CM</td><td>Portugal</td><td>Sporting</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td>A. Santos</td><td>CM</td><td>Brazil</td><td>Strasbourg</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>M. Sarr</td><td>CB</td><td>France</td><td>Strasbourg</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td><strong>J. Pedro</strong></td><td>ST</td><td>Brazil</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td>Hato</td><td>CB/LB</td><td>NED</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>Chalobah</td><td>CB</td><td>England</td><td>Crystal Palace</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td><strong>James</strong></td><td>RB</td><td>England</td><td>Wigan</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td><strong>Caicedo</strong></td><td>CDM</td><td>Ecuador</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td>Gusto</td><td>RB</td><td>France</td><td>Lyon</td><td>–</td></tr>
-    <tr><td class="shirt">28</td><td>Sharman-Lowe</td><td>GK</td><td>England</td><td>Bolton</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td>Fofana</td><td>CB</td><td>France</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">34</td><td>Acheampong</td><td>CB</td><td>England</td><td>Academy</td><td>–</td></tr>
-    <tr><td class="shirt">38</td><td>Guiu</td><td>ST</td><td>Spain</td><td>Sunderland</td><td>–</td></tr>
-    <tr><td class="shirt">41</td><td><strong>Estêvão</strong></td><td>LW</td><td>Brazil</td><td>Palmeiras</td><td>–</td></tr>
-    <tr><td class="shirt">45</td><td>Lavia</td><td>CDM</td><td>Belgium</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">49</td><td><strong>Garnacho</strong></td><td>LW</td><td>Argentina</td><td>Man Utd</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- COVENTRY -->
-<div class="team-panel" id="team-COV">
-  <div class="team-header">
-    <h2>Coventry (Promoted)</h2>
-    <div class="team-meta">Manager: Frank Lampard (95-pt Championship winner) <span class="discount good">1.0×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">9</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Yang Min-hyeok</td><td>Tottenham</td><td>From PL</td></tr>
-    <tr><td>Sakamoto</td><td>Oostende</td><td>Japanese</td></tr>
-    <tr><td>Mason-Clark</td><td>Peterborough</td><td>–</td></tr>
-    <tr><td>H. Wright</td><td>Antalyaspor</td><td>USA</td></tr>
-    <tr><td>Onyeka</td><td>Brentford</td><td>From PL</td></tr>
-    <tr><td>Torp</td><td>Sarpsborg</td><td>Danish</td></tr>
-    <tr><td>van Ewijk</td><td>Heerenveen</td><td>–</td></tr>
-    <tr><td>Bobby Thomas</td><td>Burnley</td><td>–</td></tr>
-    <tr><td>Markelo</td><td>Zurich</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">24</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">3</td><td><strong>Dasilva</strong></td><td>LB</td><td>England</td><td>Bristol City</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td><strong>Bobby Thomas</strong></td><td>CB</td><td>England</td><td>Burnley</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td><strong>Rudoni</strong></td><td>CAM</td><td>England</td><td>Huddersfield</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td><strong>Grimes</strong></td><td>CDM</td><td>England</td><td>Swansea</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td><strong>Sakamoto</strong></td><td>WING</td><td>Japan</td><td>Oostende</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Allen</td><td>MID</td><td>England</td><td>Burton Albion</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Simms</strong></td><td>ST</td><td>England</td><td>Everton</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td><strong>Mason-Clark</strong></td><td>ATT</td><td>England</td><td>Peterborough</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td><strong>H. Wright</strong></td><td>ST</td><td>USA</td><td>Antalyaspor</td><td>–</td></tr>
-    <tr><td class="shirt">13</td><td>B. Wilson</td><td>GK</td><td>England</td><td>Bradford</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Esse</td><td>MID</td><td>England</td><td>Crystal Palace</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td><strong>Kitching</strong></td><td>CB</td><td>England</td><td>Barnsley</td><td>–</td></tr>
-    <tr><td class="shirt">16</td><td>Onyeka</td><td>MID</td><td>Nigeria</td><td>Brentford</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>Yang Min-hyeok</td><td>–</td><td>Korea</td><td>Tottenham</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td><strong>Rushworth</strong></td><td>GK</td><td>England</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>Kesler Hayden</td><td>DEF</td><td>England</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td>Bidwell</td><td>DEF</td><td>England</td><td>Swansea</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Latibeaudiere</td><td>CB</td><td>Jamaica</td><td>Swansea</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td><strong>T.-Asante</strong></td><td>ST</td><td>Ghana</td><td>West Brom</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td>Markelo</td><td>–</td><td>Suriname</td><td>Zurich</td><td>–</td></tr>
-    <tr><td class="shirt">26</td><td>Woolfenden</td><td>CB</td><td>England</td><td>Ipswich</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td><strong>van Ewijk</strong></td><td>RB</td><td>NED</td><td>Heerenveen</td><td>–</td></tr>
-    <tr><td class="shirt">28</td><td>Eccles</td><td>MID</td><td>England</td><td>Gillingham</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td><strong>Torp</strong></td><td>CAM</td><td>Denmark</td><td>Sarpsborg</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- CRYSTAL PALACE -->
-<div class="team-panel" id="team-CRY">
-  <div class="team-header">
-    <h2>Crystal Palace</h2>
-    <div class="team-meta">Manager: TBD (Glasner leaving) · UECL final May 27 pending <span class="discount warn">0.85×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">8</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>B. Johnson</td><td>Tottenham</td><td>–</td></tr>
-    <tr><td>Y. Pino</td><td>Villarreal</td><td>–</td></tr>
-    <tr><td>Strand Larsen</td><td>Wolves</td><td>–</td></tr>
-    <tr><td>Guessand</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td>Kamada</td><td>Lazio</td><td>–</td></tr>
-    <tr><td>Richards</td><td>Bayern Munich</td><td>–</td></tr>
-    <tr><td>Riad</td><td>Barcelona</td><td>–</td></tr>
-    <tr><td>Chalobah</td><td>Chelsea</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">2</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Eze</td><td>Arsenal</td><td>From 25/26</td></tr>
-    <tr><td>Guéhi</td><td>Man City</td><td>–</td></tr>
-  </tbody></table>
-
-  <div class="callout">
-    <strong>Manager change:</strong> Glasner leaving · UECL final May 27 still pending. Apply 0.85× discount.
-  </div>
-
-  <h3>26/27 Squad <span class="count">22</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td>Henderson</td><td>GK</td><td>England</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td><strong>Muñoz</strong></td><td>RB</td><td>Colombia</td><td>Genk</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Mitchell</td><td>LB</td><td>England</td><td>Academy</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Lacroix</td><td>CB</td><td>France</td><td>Wolfsburg</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td><strong>Sarr</strong></td><td>WING</td><td>Senegal</td><td>Marseille</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Lerma</td><td>CDM</td><td>Colombia</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td>Nketiah</td><td>ST</td><td>England</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Y. Pino</td><td>WING</td><td>Spain</td><td>Villarreal</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td><strong>B. Johnson</strong></td><td>RW</td><td>Wales</td><td>Tottenham</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Uche</td><td>MID</td><td>Nigeria</td><td>Getafe</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Mateta</td><td>ST</td><td>France</td><td>Mainz</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td>Clyne</td><td>RB</td><td>England</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>Kamada</td><td>MID</td><td>Japan</td><td>Lazio</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Hughes</td><td>MID</td><td>England</td><td>Watford</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td><strong>Wharton</strong></td><td>CM</td><td>England</td><td>Blackburn</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Strand Larsen</td><td>ST</td><td>Norway</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>Canvot</td><td>DEF</td><td>France</td><td>Toulouse</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td>Sosa</td><td>DEF</td><td>Croatia</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">26</td><td>Richards</td><td>CB</td><td>USA</td><td>Bayern</td><td>–</td></tr>
-    <tr><td class="shirt">28</td><td>Doucouré</td><td>MID</td><td>Mali</td><td>Lens</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td><strong>Guessand</strong></td><td>FWD</td><td>Ivory Coast</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td class="shirt">34</td><td>Riad</td><td>DEF</td><td>Morocco</td><td>Barcelona</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- EVERTON -->
-<div class="team-panel" id="team-EVE">
-  <div class="team-header">
-    <h2>Everton</h2>
-    <div class="team-meta">Manager: Moyes (continuity) <span class="discount good">1.0×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">9</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Dewsbury-Hall</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td>T. Barry</td><td>Villarreal</td><td>–</td></tr>
-    <tr><td>C. Alcaraz</td><td>Flamengo</td><td>–</td></tr>
-    <tr><td>Grealish</td><td>Man City (loan)</td><td>TBC for 26/27</td></tr>
-    <tr><td>T. George</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td>Aznou</td><td>Bayern Munich</td><td>–</td></tr>
-    <tr><td>Garner</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td>Iroegbunam</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td>Röhl</td><td>Freiburg</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">3</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Calvert-Lewin</td><td>Leeds</td><td>–</td></tr>
-    <tr><td>I. Ndiaye</td><td>(at EVE from Marseille 25/26)</td><td>(joined)</td></tr>
-    <tr><td><strong>Seamus Coleman</strong></td><td>leaving (37yo captain)</td><td>End of 25/26</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">22</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Pickford</strong></td><td>GK</td><td>England</td><td>Sunderland</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td>Patterson</td><td>RB</td><td>Scotland</td><td>Rangers</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Keane</td><td>CB</td><td>England</td><td>Burnley</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td><strong>Tarkowski</strong></td><td>CB</td><td>England</td><td>Burnley</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>McNeil</td><td>WING</td><td>England</td><td>Burnley</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td>Beto</td><td>ST</td><td>Guinea-Bissau</td><td>Udinese</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>I. Ndiaye</td><td>ATT</td><td>Senegal</td><td>Marseille</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>T. Barry</td><td>FWD</td><td>France</td><td>Villarreal</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Travers</td><td>GK</td><td>Ireland</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>J. O'Brien</td><td>DEF</td><td>Ireland</td><td>Lyon</td><td>–</td></tr>
-    <tr><td class="shirt">16</td><td>Mykolenko</td><td>LB</td><td>Ukraine</td><td>Dynamo Kyiv</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td><strong>Grealish</strong></td><td>WING</td><td>England</td><td>Man City (loan)</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>T. George</td><td>–</td><td>England</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>Dibling</td><td>–</td><td>England</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td><strong>Dewsbury-Hall</strong></td><td>CAM</td><td>England</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td>C. Alcaraz</td><td>MID</td><td>Argentina</td><td>Flamengo</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td>Gana Gueye</td><td>MID</td><td>Senegal</td><td>PSG</td><td>–</td></tr>
-    <tr><td class="shirt">32</td><td>Branthwaite</td><td>CB</td><td>England</td><td>PSV</td><td>–</td></tr>
-    <tr><td class="shirt">34</td><td>Röhl</td><td>MID</td><td>Germany</td><td>Freiburg</td><td>–</td></tr>
-    <tr><td class="shirt">37</td><td>Garner</td><td>CM</td><td>England</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td class="shirt">39</td><td>Aznou</td><td>DEF</td><td>Morocco</td><td>Bayern</td><td>–</td></tr>
-    <tr><td class="shirt">42</td><td>Iroegbunam</td><td>MID</td><td>England</td><td>Aston Villa</td><td>–</td></tr>
-  </tbody></table>
-  <p class="note"><em>Note: Coleman (#23) removed from squad table — confirmed leaving end of 25/26.</em></p>
-</div>
-
-<!-- FULHAM -->
-<div class="team-panel" id="team-FUL">
-  <div class="team-header">
-    <h2>Fulham</h2>
-    <div class="team-meta">Manager: Marco Silva (TBC — rumored to Benfica) <span class="discount warn">0.85×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">4</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Bobb</td><td>Man City</td><td>–</td></tr>
-    <tr><td>Chukwueze</td><td>Milan</td><td>–</td></tr>
-    <tr><td>E. Smith Rowe</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td>Sessegnon</td><td>Tottenham</td><td>Return</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">3</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Andersen</td><td>Crystal Palace (his prev)</td><td>Susp. end of 25/26</td></tr>
-    <tr><td>Adarabioyo</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td>Palhinha</td><td>Bayern → TOT loan</td><td>Loan chain</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">21</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Leno</strong></td><td>GK</td><td>Germany</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td>Tete</td><td>RB</td><td>NED</td><td>Lyon</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Bassey</td><td>CB</td><td>Nigeria</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>Reed</td><td>MID</td><td>England</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>R. Jiménez</td><td>ST</td><td>Mexico</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>H. Wilson</td><td>MID</td><td>Wales</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Muniz</strong></td><td>ST</td><td>Brazil</td><td>Middlesbrough</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Cairney</td><td>CM</td><td>Scotland</td><td>Blackburn</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Bobb</td><td>WING</td><td>Norway</td><td>Man City</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>Cuenca</td><td>CB</td><td>Spain</td><td>Villarreal</td><td>–</td></tr>
-    <tr><td class="shirt">16</td><td>Berge</td><td>CDM</td><td>Norway</td><td>Burnley</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td><strong>Iwobi</strong></td><td>MID</td><td>Nigeria</td><td>Everton</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>Kusi-Asare</td><td>–</td><td>Sweden</td><td>Bayern</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Chukwueze</td><td>RW</td><td>Nigeria</td><td>Milan</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>Lukić</td><td>CM</td><td>Serbia</td><td>Fiorentina</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td>Castagne</td><td>RB</td><td>Belgium</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Macedo</td><td>–</td><td>Brazil</td><td>Shakhtar</td><td>–</td></tr>
-    <tr><td class="shirt">30</td><td>Sessegnon</td><td>DEF</td><td>England</td><td>Tottenham</td><td>–</td></tr>
-    <tr><td class="shirt">31</td><td>Diop</td><td>CB</td><td>France</td><td>West Ham</td><td>–</td></tr>
-    <tr><td class="shirt">32</td><td>E. Smith Rowe</td><td>CAM</td><td>England</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td class="shirt">33</td><td><strong>A. Robinson</strong></td><td>LB</td><td>USA</td><td>Wigan</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- HULL -->
-<div class="team-panel" id="team-HUL">
-  <div class="team-header">
-    <h2>Hull City (Promoted)</h2>
-    <div class="team-meta">Manager: Jakirovic? (uncertain) <span class="discount bad">0.8×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">10</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>McBurnie</td><td>Las Palmas</td><td>Return to UK</td></tr>
-    <tr><td>Gelhardt</td><td>Leeds</td><td>–</td></tr>
-    <tr><td>Giles</td><td>Luton</td><td>–</td></tr>
-    <tr><td>Drameh</td><td>Leeds</td><td>–</td></tr>
-    <tr><td>Lundstram</td><td>Trabzonspor</td><td>–</td></tr>
-    <tr><td>Egan</td><td>Burnley</td><td>PL-experienced</td></tr>
-    <tr><td>Crooks</td><td>Real Salt Lake</td><td>–</td></tr>
-    <tr><td>Collyer</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td>Belloumi</td><td>Farense</td><td>–</td></tr>
-    <tr><td>Pandur</td><td>Fortuna Sittard</td><td>–</td></tr>
-  </tbody></table>
-
-  <div class="callout">
-    <strong>Note:</strong> Heavy rotation tax — Jakirovic rotated Hughes, Giles, Slater between matches in Championship. Avoid as starters in opening 26/27 squad.
-  </div>
-
-  <h3>26/27 Squad <span class="count">22</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Pandur</strong></td><td>GK</td><td>Croatia</td><td>Fortuna Sittard</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td>Coyle</td><td>RB</td><td>England</td><td>Fleetwood</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td><strong>Giles</strong></td><td>LB</td><td>England</td><td>Luton</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td><strong>Hughes</strong></td><td>CB</td><td>England</td><td>Wigan</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Lundstram</td><td>MID</td><td>England</td><td>Trabzonspor</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>Ajayi</td><td>DEF</td><td>Nigeria</td><td>West Brom</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>Millar</td><td>WING</td><td>Canada</td><td>Basel</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Matazo</td><td>MID</td><td>Belgium</td><td>Monaco</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>McBurnie</strong></td><td>ST</td><td>Scotland</td><td>Las Palmas</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Belloumi</td><td>WING</td><td>Algeria</td><td>Farense</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Phillips</td><td>GK</td><td>England</td><td>Rotherham</td><td>–</td></tr>
-    <tr><td class="shirt">13</td><td>Hirakawa</td><td>–</td><td>Japan</td><td>Bristol City</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td><strong>Egan</strong></td><td>CB</td><td>Ireland</td><td>Burnley</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td><strong>Drameh</strong></td><td>LB</td><td>England</td><td>Leeds</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>Hadžiahmetović</td><td>DEF</td><td>Bosnia</td><td>Beşiktaş</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td><strong>Gelhardt</strong></td><td>ST</td><td>England</td><td>Leeds</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td><strong>Joseph</strong></td><td>ST</td><td>Scotland</td><td>Blackpool</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td><strong>Crooks</strong></td><td>MID</td><td>England</td><td>Real Salt Lake</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td>Slater</td><td>CDM</td><td>England</td><td>Sheffield Utd</td><td>–</td></tr>
-    <tr><td class="shirt">33</td><td>Collyer</td><td>MID</td><td>England</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td class="shirt">36</td><td>Koumas</td><td>–</td><td>Wales</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">37</td><td>McNair</td><td>DEF</td><td>NIR</td><td>San Diego FC</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- IPSWICH -->
-<div class="team-panel" id="team-IPS">
-  <div class="team-header">
-    <h2>Ipswich (Promoted)</h2>
-    <div class="team-meta">Manager: Kieran McKenna (continuity · PL-experienced) <span class="discount good">1.0×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">13</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Hirst</td><td>Leicester</td><td>PL-experienced</td></tr>
-    <tr><td>Clarke</td><td>Sunderland</td><td>–</td></tr>
-    <tr><td>Philogene</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td>Matusiwa</td><td>Rennes</td><td>DC engine</td></tr>
-    <tr><td>Cajuste</td><td>Napoli</td><td>–</td></tr>
-    <tr><td>O'Shea</td><td>Burnley</td><td>PL-experienced</td></tr>
-    <tr><td>Davis</td><td>Leeds</td><td>–</td></tr>
-    <tr><td>Kipré</td><td>Reims</td><td>–</td></tr>
-    <tr><td>Furlong</td><td>West Brom</td><td>–</td></tr>
-    <tr><td>Townsend</td><td>West Brom</td><td>–</td></tr>
-    <tr><td>Akpom</td><td>Ajax</td><td>–</td></tr>
-    <tr><td>McAteer</td><td>Leicester</td><td>–</td></tr>
-    <tr><td>A. Young</td><td>Everton</td><td>40yo veteran</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">1</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Delap</td><td>Chelsea</td><td>Top-half club</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">25</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td>Palmer</td><td>GK</td><td>England</td><td>West Brom</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td><strong>L. Davis</strong></td><td>LB</td><td>England</td><td>Leeds</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td><strong>Kipré</strong></td><td>CB</td><td>DR Congo</td><td>Stade Reims</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td><strong>Matusiwa</strong></td><td>CDM</td><td>NED</td><td>Rennes</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>D. Neil</td><td>MID</td><td>England</td><td>Sunderland</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>Burns</td><td>WING</td><td>Wales</td><td>Fleetwood</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Egeli</td><td>FWD</td><td>Norway</td><td>Nordsjaelland</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Hirst</strong></td><td>ST</td><td>England</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td><strong>Philogene</strong></td><td>WING</td><td>England</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Cajuste</td><td>MID</td><td>Sweden</td><td>Napoli</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>J. Taylor</td><td>MID</td><td>Ireland</td><td>Peterborough</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>A. Young</td><td>DEF</td><td>England</td><td>Everton</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>B. Johnson</td><td>DEF</td><td>England</td><td>West Ham</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td><strong>Furlong</strong></td><td>RB</td><td>England</td><td>West Brom</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>McAteer</td><td>WING</td><td>Ireland</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Townsend</td><td>LB</td><td>England</td><td>West Brom</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td>Greaves</td><td>CB</td><td>England</td><td>Hull</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td>Baggott</td><td>DEF</td><td>Indonesia</td><td>Blackpool</td><td>–</td></tr>
-    <tr><td class="shirt">26</td><td><strong>O'Shea</strong></td><td>CB</td><td>Ireland</td><td>Burnley</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td>Button</td><td>GK</td><td>England</td><td>Reading</td><td>–</td></tr>
-    <tr><td class="shirt">28</td><td><strong>Walton</strong></td><td>GK</td><td>England</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td>Akpom</td><td>ST</td><td>England</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">31</td><td>Azón</td><td>ST</td><td>Spain</td><td>Como</td><td>–</td></tr>
-    <tr><td class="shirt">33</td><td>Mehmeti</td><td>ATT</td><td>Albania</td><td>Bristol City</td><td>–</td></tr>
-    <tr><td class="shirt">47</td><td><strong>Clarke</strong></td><td>WING</td><td>England</td><td>Sunderland</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- LEEDS -->
-<div class="team-panel" id="team-LEE">
-  <div class="team-header">
-    <h2>Leeds</h2>
-    <div class="team-meta">Manager: continuity <span class="discount good">1.0×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">12</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Calvert-Lewin</td><td>Everton</td><td>Major</td></tr>
-    <tr><td>Aaronson</td><td>Union Berlin</td><td>–</td></tr>
-    <tr><td>Darlow</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td>Okafor</td><td>Milan</td><td>–</td></tr>
-    <tr><td>Tanaka</td><td>F. Düsseldorf</td><td>–</td></tr>
-    <tr><td>Buonanotte</td><td>Brighton</td><td>–</td></tr>
-    <tr><td>Piroe</td><td>Swansea</td><td>–</td></tr>
-    <tr><td>Nmecha</td><td>Wolfsburg</td><td>–</td></tr>
-    <tr><td>Stach</td><td>Hoffenheim</td><td>–</td></tr>
-    <tr><td>Bornauw</td><td>Wolfsburg</td><td>–</td></tr>
-    <tr><td>Bijol</td><td>Udinese</td><td>–</td></tr>
-    <tr><td>Justin</td><td>Leicester</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">3</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Gelhardt</td><td>Hull</td><td>–</td></tr>
-    <tr><td>Drameh</td><td>Hull</td><td>–</td></tr>
-    <tr><td>L. Davis</td><td>Ipswich</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">22</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td>Perri</td><td>GK</td><td>Brazil</td><td>Lyon</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td>Bogle</td><td>RB</td><td>England</td><td>Sheffield Utd</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Gudmundsson</td><td>LB</td><td>Sweden</td><td>Lille</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td><strong>Ampadu</strong></td><td>CDM</td><td>Wales</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Struijk</td><td>CB</td><td>NED</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>Rodon</td><td>CB</td><td>Wales</td><td>Tottenham</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>D. James</td><td>WING</td><td>Wales</td><td>Fulham</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Longstaff</td><td>MID</td><td>England</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Calvert-Lewin</strong></td><td>ST</td><td>England</td><td>Everton</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Piroe</td><td>FWD</td><td>NED</td><td>Swansea</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>Aaronson</td><td>MID</td><td>USA</td><td>Union Berlin</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Nmecha</td><td>FWD</td><td>Germany</td><td>Wolfsburg</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>Bijol</td><td>CB</td><td>Slovenia</td><td>Udinese</td><td>–</td></tr>
-    <tr><td class="shirt">16</td><td>Meslier</td><td>GK</td><td>France</td><td>Lorient</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>Stach</td><td>MID</td><td>Germany</td><td>Hoffenheim</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Okafor</td><td>WING</td><td>Switzerland</td><td>Milan</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Tanaka</td><td>MID</td><td>Japan</td><td>F. Düsseldorf</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>Bornauw</td><td>CB</td><td>Belgium</td><td>Wolfsburg</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td>Justin</td><td>RB</td><td>England</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">26</td><td><strong>Darlow</strong></td><td>GK</td><td>England</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td>Gnonto</td><td>WING</td><td>Italy</td><td>Zurich</td><td>–</td></tr>
-    <tr><td class="shirt">40</td><td>Buonanotte</td><td>MID</td><td>Argentina</td><td>Brighton</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- LIVERPOOL -->
-<div class="team-panel" id="team-LIV">
-  <div class="team-header">
-    <h2>Liverpool</h2>
-    <div class="team-meta">Manager: Arne Slot (TBC) · Salah/Robbo/TAA all gone <span class="discount warn">0.9×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">7</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Isak</strong></td><td>Newcastle</td><td>Major</td></tr>
-    <tr><td><strong>Wirtz</strong></td><td>Bayer Leverkusen</td><td>Major</td></tr>
-    <tr><td>Ekitike</td><td>Frankfurt</td><td>–</td></tr>
-    <tr><td>Kerkez</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td>Frimpong</td><td>Bayer Leverkusen</td><td>RB replacement</td></tr>
-    <tr><td>Mamardashvili</td><td>Valencia</td><td>–</td></tr>
-    <tr><td>Chiesa</td><td>Juventus</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">8</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Salah</strong></td><td>TBD</td><td>LEAVING</td></tr>
-    <tr><td><strong>Robertson</strong></td><td>TBD</td><td>LEAVING</td></tr>
-    <tr><td>TAA</td><td>Real Madrid</td><td>24/25 gone</td></tr>
-    <tr><td>Quansah</td><td>Bayer Leverkusen</td><td>ENG WC26 selection</td></tr>
-    <tr><td>H. Elliott</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td>Kelleher</td><td>Brentford</td><td>–</td></tr>
-    <tr><td>Carvalho</td><td>Brentford</td><td>–</td></tr>
-    <tr><td>v.d. Berg</td><td>Brentford</td><td>–</td></tr>
-  </tbody></table>
-
-  <div class="callout bad">
-    <strong>3 LIV gold-pick departures in 12 months:</strong> TAA (24/25), Salah + Robbo (25/26 end). FPL ownership target reduces from "must own 2-3 LIV" era to "selective only" (Van Dijk + maybe Wirtz).
-  </div>
-
-  <h3>26/27 Squad <span class="count">20</span></h3>
-  <p class="note"><em>Salah (#11), Robertson (#26) — confirmed leaving, removed from squad table.</em></p>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td>Alisson</td><td>GK</td><td>Brazil</td><td>Roma</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td>J. Gomez</td><td>DEF</td><td>England</td><td>Charlton</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Endo</td><td>MID</td><td>Japan</td><td>Stuttgart</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td><strong>Van Dijk</strong></td><td>CB</td><td>NED</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td><strong>Konaté</strong></td><td>CB</td><td>France</td><td>RB Leipzig</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td><strong>Kerkez</strong></td><td>LB</td><td>Hungary</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td><strong>Wirtz</strong></td><td>CAM</td><td>Germany</td><td>Leverkusen</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Szoboszlai</td><td>CM</td><td>Hungary</td><td>RB Leipzig</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Isak</strong></td><td>ST</td><td>Sweden</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Mac Allister</td><td>CM</td><td>Argentina</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Bradley</td><td>RB</td><td>NIR</td><td>Bolton</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Chiesa</td><td>WING</td><td>Italy</td><td>Juventus</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>Leoni</td><td>DEF</td><td>Italy</td><td>Parma</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td>C. Jones</td><td>MID</td><td>England</td><td>Academy</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>Gakpo</td><td>WING</td><td>NED</td><td>PSV</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td><strong>Ekitike</strong></td><td>ST</td><td>France</td><td>Frankfurt</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td><strong>Mamardashvili</strong></td><td>GK</td><td>Georgia</td><td>Valencia</td><td>–</td></tr>
-    <tr><td class="shirt">28</td><td>Woodman</td><td>GK</td><td>England</td><td>Preston</td><td>–</td></tr>
-    <tr><td class="shirt">30</td><td><strong>Frimpong</strong></td><td>RB</td><td>NED</td><td>Leverkusen</td><td>–</td></tr>
-    <tr><td class="shirt">38</td><td>Gravenberch</td><td>CM</td><td>NED</td><td>Bayern</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- MAN CITY -->
-<div class="team-panel" id="team-MCI">
-  <div class="team-header">
-    <h2>Man City</h2>
-    <div class="team-meta">Manager: Maresca strong option (Pep gone) · Multiple departures <span class="discount bad">0.8×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">9</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Donnarumma</strong></td><td>PSG</td><td>Major</td></tr>
-    <tr><td><strong>Reijnders</strong></td><td>Milan</td><td>Major</td></tr>
-    <tr><td><strong>Marmoush</strong></td><td>Frankfurt</td><td>Major</td></tr>
-    <tr><td>Trafford</td><td>Burnley</td><td>–</td></tr>
-    <tr><td>Aït-Nouri</td><td>Wolves</td><td>–</td></tr>
-    <tr><td>Cherki</td><td>Lyon</td><td>25/26</td></tr>
-    <tr><td>Guéhi</td><td>Crystal Palace</td><td>–</td></tr>
-    <tr><td>Semenyo</td><td>Bournemouth</td><td>25/26</td></tr>
-    <tr><td>N. González</td><td>Porto</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">11</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Pep Guardiola</strong></td><td>leaving</td><td>Manager</td></tr>
-    <tr><td><strong>Bernardo Silva</strong></td><td>Atlético (rumored)</td><td>End of 25/26</td></tr>
-    <tr><td><strong>Stones</strong></td><td>TBD</td><td>End of 25/26</td></tr>
-    <tr><td><strong>Ederson</strong></td><td>Fenerbahçe</td><td>25/26 (Donnarumma replacement)</td></tr>
-    <tr><td>Akanji</td><td>Inter Milan (loan)</td><td>26/27 return TBC</td></tr>
-    <tr><td>De Bruyne</td><td>Napoli</td><td>24/25 gone</td></tr>
-    <tr><td>Walker</td><td>Burnley → Championship</td><td>Already gone</td></tr>
-    <tr><td>Grealish</td><td>Everton (loan, TBC)</td><td>Loan return TBD</td></tr>
-    <tr><td>Bobb</td><td>Fulham</td><td>–</td></tr>
-    <tr><td>McAtee</td><td>Nottm Forest</td><td>–</td></tr>
-    <tr><td>G. Jesus</td><td>Arsenal</td><td>historical</td></tr>
-  </tbody></table>
-
-  <div class="callout bad">
-    <strong>Major rebuild:</strong> Pep + Bernardo + Stones + KDB + Walker + Grealish all gone or going. Apply 0.8× discount. Haaland's "auto-default captain" status broken.
-  </div>
-
-  <h3>26/27 Squad <span class="count">23</span></h3>
-  <p class="note"><em>Bernardo Silva (#20), Stones (#5) — confirmed leaving, removed from squad table.</em></p>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Trafford</strong></td><td>GK</td><td>England</td><td>Burnley</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>R. Dias</td><td>CB</td><td>Portugal</td><td>Benfica</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td><strong>Reijnders</strong></td><td>CM</td><td>NED</td><td>Milan</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>Aké</td><td>CB</td><td>NED</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td><strong>Marmoush</strong></td><td>FWD</td><td>Egypt</td><td>Frankfurt</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Kovačić</td><td>CM</td><td>Croatia</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Haaland</strong></td><td>ST</td><td>Norway</td><td>Dortmund</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td><strong>Cherki</strong></td><td>CAM</td><td>France</td><td>Lyon</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td><strong>Doku</strong></td><td>LW</td><td>Belgium</td><td>Rennes</td><td>–</td></tr>
-    <tr><td class="shirt">13</td><td>Bettinelli</td><td>GK</td><td>England</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>N. González</td><td>MID</td><td>Spain</td><td>Porto</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td><strong>Guéhi</strong></td><td>CB</td><td>England</td><td>Crystal Palace</td><td>–</td></tr>
-    <tr><td class="shirt">16</td><td><strong>Rodri</strong></td><td>CDM</td><td>Spain</td><td>Atlético</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td><strong>Aït-Nouri</strong></td><td>LB</td><td>Algeria</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td><strong>Gvardiol</strong></td><td>CB</td><td>Croatia</td><td>RB Leipzig</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td><strong>Donnarumma</strong></td><td>GK</td><td>Italy</td><td>PSG</td><td>–</td></tr>
-    <tr><td class="shirt">26</td><td>Savinho</td><td>WING</td><td>Brazil</td><td>Troyes</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td>M. Nunes</td><td>MID</td><td>Portugal</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">33</td><td>O'Reilly</td><td>LB</td><td>England</td><td>Academy</td><td>–</td></tr>
-    <tr><td class="shirt">42</td><td><strong>Semenyo</strong></td><td>WING</td><td>Ghana</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td class="shirt">45</td><td>Khusanov</td><td>CB</td><td>Uzbekistan</td><td>Lens</td><td>–</td></tr>
-    <tr><td class="shirt">47</td><td><strong>Foden</strong></td><td>CAM</td><td>England</td><td>Academy</td><td>–</td></tr>
-    <tr><td class="shirt">82</td><td>Rico Lewis</td><td>DEF</td><td>England</td><td>Academy</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- MAN UTD -->
-<div class="team-panel" id="team-MUN">
-  <div class="team-header">
-    <h2>Man Utd</h2>
-    <div class="team-meta">Manager: Michael Carrick (permanent) · Casemiro→MLS <span class="discount good">1.0×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">9</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Sesko</strong></td><td>RB Leipzig</td><td>Major · primary ST</td></tr>
-    <tr><td><strong>Mbeumo</strong></td><td>Brentford</td><td>–</td></tr>
-    <tr><td>Cunha</td><td>Wolves</td><td>–</td></tr>
-    <tr><td>Mount</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td>Yoro</td><td>Lille</td><td>–</td></tr>
-    <tr><td>Ugarte</td><td>PSG</td><td>Casemiro replacement</td></tr>
-    <tr><td>Lammens</td><td>Royal Antwerp</td><td>GK</td></tr>
-    <tr><td>Diallo</td><td>Sunderland (perm)</td><td>–</td></tr>
-    <tr><td>Heaven</td><td>Arsenal</td><td>Young</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">6</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Casemiro</strong></td><td>Inter Miami (MLS)</td><td>Confirmed</td></tr>
-    <tr><td>Rashford</td><td>Barcelona (loan)</td><td>Return TBC</td></tr>
-    <tr><td>Sancho</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td>Lindelöf</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td>Garner</td><td>Everton</td><td>–</td></tr>
-    <tr><td>Garnacho</td><td>Chelsea</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">24</span></h3>
-  <p class="note"><em>Casemiro (#18) — confirmed to Inter Miami, removed from squad table.</em></p>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td>Bayındır</td><td>GK</td><td>Turkey</td><td>Fenerbahçe</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td>Dalot</td><td>RB</td><td>Portugal</td><td>Milan</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Mazraoui</td><td>RB</td><td>Morocco</td><td>Bayern</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>de Ligt</td><td>CB</td><td>NED</td><td>Bayern</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Maguire</td><td>CB</td><td>England</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>L. Martínez</td><td>CB</td><td>Argentina</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>Mount</td><td>MID</td><td>England</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td><strong>B.Fernandes</strong></td><td>CAM</td><td>Portugal</td><td>Sporting</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td><strong>Cunha</strong></td><td>LW</td><td>Brazil</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>Zirkzee</td><td>FWD</td><td>NED</td><td>Bologna</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Malacia</td><td>LB</td><td>NED</td><td>PSV</td><td>–</td></tr>
-    <tr><td class="shirt">13</td><td>Dorgu</td><td>LB</td><td>Denmark</td><td>Lecce</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>Yoro</td><td>CB</td><td>France</td><td>Lille</td><td>–</td></tr>
-    <tr><td class="shirt">16</td><td><strong>Diallo</strong></td><td>RW</td><td>Ivory Coast</td><td>Sunderland</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td><strong>Mbeumo</strong></td><td>RW</td><td>Cameroon</td><td>Brentford</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Heaton</td><td>GK</td><td>England</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td><strong>Shaw</strong></td><td>LB</td><td>England</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td><strong>Ugarte</strong></td><td>CDM</td><td>Uruguay</td><td>PSG</td><td>–</td></tr>
-    <tr><td class="shirt">26</td><td>Heaven</td><td>DEF</td><td>England</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td class="shirt">30</td><td><strong>Šeško</strong></td><td>ST</td><td>Slovenia</td><td>RB Leipzig</td><td>–</td></tr>
-    <tr><td class="shirt">31</td><td><strong>Lammens</strong></td><td>GK</td><td>Belgium</td><td>Royal Antwerp</td><td>–</td></tr>
-    <tr><td class="shirt">32</td><td>Obi-Martin</td><td>–</td><td>England</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td class="shirt">35</td><td>León</td><td>DEF</td><td>Paraguay</td><td>Cerro Porteño</td><td>–</td></tr>
-    <tr><td class="shirt">37</td><td>Mainoo</td><td>CDM</td><td>England</td><td>Academy</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- NEWCASTLE -->
-<div class="team-panel" id="team-NEW">
-  <div class="team-header">
-    <h2>Newcastle</h2>
-    <div class="team-meta">Manager: Eddie Howe (continuity) · Gordon may leave <span class="discount warn">0.9×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">7</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Wissa</strong></td><td>Brentford</td><td>Major</td></tr>
-    <tr><td>Osula</td><td>Sheffield Utd</td><td>Breakout (8.7 + 2G)</td></tr>
-    <tr><td>Woltemade</td><td>Stuttgart</td><td>–</td></tr>
-    <tr><td>Elanga</td><td>Nottm Forest</td><td>–</td></tr>
-    <tr><td>Thiaw</td><td>Milan</td><td>25/26</td></tr>
-    <tr><td>J. Ramsey</td><td>Aston Villa</td><td>–</td></tr>
-    <tr><td>Hall</td><td>Chelsea</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">6</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td><strong>Isak</strong></td><td>Liverpool</td><td>Major</td></tr>
-    <tr><td>Gordon</td><td>TBD (rumored)</td><td>Pending</td></tr>
-    <tr><td>Darlow</td><td>Leeds</td><td>–</td></tr>
-    <tr><td>C. Wilson</td><td>West Ham</td><td>–</td></tr>
-    <tr><td>Anderson</td><td>Nottm Forest</td><td>–</td></tr>
-    <tr><td>Longstaff</td><td>Leeds</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">22</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Pope</strong></td><td>GK</td><td>England</td><td>Burnley</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td>Trippier</td><td>RB</td><td>England</td><td>Atlético</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Hall</td><td>LB</td><td>England</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>Botman</td><td>CB</td><td>NED</td><td>Lille</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Schär</td><td>CB</td><td>Switzerland</td><td>Dep. La Coruña</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>Joelinton</td><td>CM</td><td>Brazil</td><td>Hoffenheim</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Tonali</td><td>CM</td><td>Italy</td><td>Milan</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Wissa</strong></td><td>ST</td><td>DR Congo</td><td>Brentford</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td><strong>Gordon</strong></td><td>LW</td><td>England</td><td>Everton</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td><strong>Barnes</strong></td><td>WING</td><td>England</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Thiaw</td><td>CB</td><td>Germany</td><td>Milan</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td>Krafth</td><td>DEF</td><td>Sweden</td><td>Bologna</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td><strong>Osula</strong></td><td>ST</td><td>Denmark</td><td>Sheffield Utd</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td><strong>Elanga</strong></td><td>WING</td><td>Sweden</td><td>Nottm Forest</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td>Livramento</td><td>DEF</td><td>England</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>Murphy</td><td>WING</td><td>England</td><td>Sheffield Wed</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td><strong>Woltemade</strong></td><td>ST</td><td>Germany</td><td>Stuttgart</td><td>–</td></tr>
-    <tr><td class="shirt">28</td><td>Willock</td><td>MID</td><td>England</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td class="shirt">32</td><td>Ramsdale</td><td>GK</td><td>England</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">33</td><td>Burn</td><td>DEF</td><td>England</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">39</td><td><strong>Bruno G.</strong></td><td>CM</td><td>Brazil</td><td>Lyon</td><td>–</td></tr>
-    <tr><td class="shirt">41</td><td>J. Ramsey</td><td>MID</td><td>England</td><td>Aston Villa</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- NOTT'M FOREST -->
-<div class="team-panel" id="team-NFO">
-  <div class="team-header">
-    <h2>Nott'm Forest</h2>
-    <div class="team-meta">Manager: continuity <span class="discount good">1.0×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">7</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Lucca</td><td>Napoli</td><td>–</td></tr>
-    <tr><td>McAtee</td><td>Man City</td><td>–</td></tr>
-    <tr><td>Ndoye</td><td>Bologna</td><td>–</td></tr>
-    <tr><td>Anderson</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td>Hudson-Odoi</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td>Igor Jesus</td><td>Botafogo</td><td>–</td></tr>
-    <tr><td>Sels</td><td>Strasbourg</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">2</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Elanga</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td>Cash</td><td>Aston Villa</td><td>historical</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">23</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">3</td><td>N. Williams</td><td>LB</td><td>Wales</td><td>Liverpool</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>Morato</td><td>CB</td><td>Brazil</td><td>Benfica</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Murillo</td><td>CB</td><td>Brazil</td><td>Corinthians</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>Sangaré</td><td>CDM</td><td>Ivory Coast</td><td>PSV</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>Hudson-Odoi</td><td>WING</td><td>England</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td><strong>Anderson</strong></td><td>CM</td><td>England</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td>Awoniyi</td><td>ST</td><td>Nigeria</td><td>Union Berlin</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td><strong>Gibbs-White</strong></td><td>CAM</td><td>England</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>Wood</td><td>ST</td><td>New Zealand</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td class="shirt">13</td><td>J. Victor</td><td>GK</td><td>Brazil</td><td>Botafogo</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Ndoye</td><td>WING</td><td>Switzerland</td><td>Bologna</td><td>–</td></tr>
-    <tr><td class="shirt">16</td><td>Domínguez</td><td>MID</td><td>Argentina</td><td>Bologna</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>Gunn</td><td>GK</td><td>Scotland</td><td>Norwich</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Igor Jesus</td><td>ST</td><td>Brazil</td><td>Botafogo</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td><strong>Lucca</strong></td><td>ST</td><td>Italy</td><td>Napoli</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td>Hutchinson</td><td>MID</td><td>England</td><td>Ipswich</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Yates</td><td>MID</td><td>England</td><td>Scunthorpe</td><td>–</td></tr>
-    <tr><td class="shirt">24</td><td><strong>McAtee</strong></td><td>MID</td><td>England</td><td>Man City</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td>Netz</td><td>LB</td><td>Germany</td><td>Mönchengladbach</td><td>–</td></tr>
-    <tr><td class="shirt">26</td><td><strong>Sels</strong></td><td>GK</td><td>Belgium</td><td>Strasbourg</td><td>–</td></tr>
-    <tr><td class="shirt">30</td><td>Boly</td><td>CB</td><td>Ivory Coast</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">31</td><td>Milenković</td><td>CB</td><td>Serbia</td><td>Fiorentina</td><td>–</td></tr>
-    <tr><td class="shirt">34</td><td>Aina</td><td>DEF</td><td>Nigeria</td><td>Torino</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- SUNDERLAND -->
-<div class="team-panel" id="team-SUN">
-  <div class="team-header">
-    <h2>Sunderland</h2>
-    <div class="team-meta">Manager: continuity <span class="discount good">1.0×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">7</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Brobbey</td><td>Ajax</td><td>–</td></tr>
-    <tr><td>Xhaka</td><td>Leverkusen</td><td>–</td></tr>
-    <tr><td>Mukiele</td><td>PSG</td><td>–</td></tr>
-    <tr><td>Le Fée</td><td>Roma</td><td>Differential watch</td></tr>
-    <tr><td>Geertruida</td><td>RB Leipzig</td><td>–</td></tr>
-    <tr><td>Isidor</td><td>Zenit</td><td>–</td></tr>
-    <tr><td>B. Traoré</td><td>Ajax</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">2</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Diallo</td><td>Man Utd</td><td>–</td></tr>
-    <tr><td>Guiu</td><td>Chelsea</td><td>(was loanee)</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">19</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">3</td><td>Cirkin</td><td>DEF</td><td>England</td><td>Tottenham</td><td>–</td></tr>
-    <tr><td class="shirt">5</td><td>Ballard</td><td>CB</td><td>NIR</td><td>Arsenal</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>Geertruida</td><td>DEF</td><td>NED</td><td>RB Leipzig</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>Talbi</td><td>–</td><td>Belgium</td><td>Club Brugge</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Brobbey</strong></td><td>ST</td><td>NED</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Angulo</td><td>WING</td><td>Ecuador</td><td>Anderlecht</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>C. Rigg</td><td>–</td><td>England</td><td>Academy</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Mayenda</td><td>–</td><td>Spain</td><td>Hibernian</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Mundle</td><td>WING</td><td>England</td><td>Standard Liège</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>Alderete</td><td>CB</td><td>Paraguay</td><td>Getafe</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td>Mandava</td><td>LB</td><td>Mozambique</td><td>Atlético</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>Isidor</td><td>ST</td><td>France</td><td>Zenit</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Diarra</td><td>MID</td><td>Senegal</td><td>Strasbourg</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td><strong>Mukiele</strong></td><td>DEF</td><td>France</td><td>PSG</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Roefs</td><td>GK</td><td>NED</td><td>Nijmegen</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td>B. Traoré</td><td>WING</td><td>Burkina Faso</td><td>Ajax</td><td>–</td></tr>
-    <tr><td class="shirt">28</td><td><strong>Le Fée</strong></td><td>CAM</td><td>France</td><td>Roma</td><td>–</td></tr>
-    <tr><td class="shirt">32</td><td>Hume</td><td>DEF</td><td>NIR</td><td>Linfield</td><td>–</td></tr>
-    <tr><td class="shirt">34</td><td><strong>Xhaka</strong></td><td>CDM</td><td>Switzerland</td><td>Leverkusen</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- TOTTENHAM -->
-<div class="team-panel" id="team-TOT">
-  <div class="team-header">
-    <h2>Tottenham</h2>
-    <div class="team-meta">Manager: Roberto De Zerbi (3-4 games in) · IF SURVIVES <span class="discount warn">0.9×</span></div>
-  </div>
-
-  <h3>Transfers IN <span class="count">7</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Palhinha</td><td>Bayern (loan)</td><td>TBC 26/27</td></tr>
-    <tr><td>Tel</td><td>Bayern (loan?)</td><td>TBC</td></tr>
-    <tr><td>K. Muani</td><td>PSG (loan?)</td><td>TBC</td></tr>
-    <tr><td>Gallagher</td><td>Atlético</td><td>–</td></tr>
-    <tr><td>X. Simons</td><td>RB Leipzig</td><td>–</td></tr>
-    <tr><td>Solanke</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td>Kudus</td><td>West Ham</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">3</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>B. Johnson</td><td>Crystal Palace</td><td>–</td></tr>
-    <tr><td>Sessegnon</td><td>Fulham</td><td>Return</td></tr>
-    <tr><td>Yang Min-hyeok</td><td>Coventry</td><td>–</td></tr>
-  </tbody></table>
-
-  <div class="callout">
-    <strong>Multiple loan-status TBC for 26/27:</strong> Palhinha (Bayern, Sporting linked), Tel (Bayern?), Kolo Muani (PSG?). Cross-reference at late-June squad reveal.
-  </div>
-
-  <h3>26/27 Squad <span class="count">22</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td>Vicario</td><td>GK</td><td>Italy</td><td>Empoli</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Drăgușin</td><td>CB</td><td>Romania</td><td>Genoa</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>Danso</td><td>CB</td><td>Austria</td><td>Lens</td><td>–</td></tr>
-    <tr><td class="shirt">6</td><td>Palhinha (loan)</td><td>CDM</td><td>Portugal</td><td>Bayern</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>X. Simons</td><td>CAM</td><td>NED</td><td>RB Leipzig</td><td>–</td></tr>
-    <tr><td class="shirt">8</td><td>Bissouma</td><td>MID</td><td>Mali</td><td>Brighton</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td><strong>Richarlison</strong></td><td>ST</td><td>Brazil</td><td>Everton</td><td>–</td></tr>
-    <tr><td class="shirt">10</td><td>Maddison</td><td>CAM</td><td>England</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td>Tel (loan)</td><td>LW</td><td>France</td><td>Bayern</td><td>–</td></tr>
-    <tr><td class="shirt">13</td><td>Udogie</td><td>LB</td><td>Italy</td><td>Udinese</td><td>–</td></tr>
-    <tr><td class="shirt">14</td><td>Gray</td><td>–</td><td>England</td><td>Leeds</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>Bergvall</td><td>–</td><td>Sweden</td><td>Djurgården</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td>Romero</td><td>CB</td><td>Argentina</td><td>Atalanta</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>Solanke</td><td>ST</td><td>England</td><td>Bournemouth</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td>Kudus</td><td>ATT</td><td>Ghana</td><td>West Ham</td><td>–</td></tr>
-    <tr><td class="shirt">21</td><td>Kulusevski</td><td>ATT</td><td>Sweden</td><td>Juventus</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Gallagher</td><td>CM</td><td>England</td><td>Atlético</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td><strong>Porro</strong></td><td>RB</td><td>Spain</td><td>Sporting</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td>P.M. Sarr</td><td>MID</td><td>Senegal</td><td>Metz</td><td>–</td></tr>
-    <tr><td class="shirt">30</td><td>Bentancur</td><td>CM</td><td>Uruguay</td><td>Juventus</td><td>–</td></tr>
-    <tr><td class="shirt">31</td><td>Kinsky</td><td>GK</td><td>Czech Republic</td><td>Slavia Prague</td><td>–</td></tr>
-    <tr><td class="shirt">37</td><td><strong>v.d. Ven</strong></td><td>CB</td><td>NED</td><td>Wolfsburg</td><td>–</td></tr>
-    <tr><td class="shirt">39</td><td>K. Muani (loan)</td><td>FWD</td><td>France</td><td>PSG</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
-<!-- WEST HAM -->
-<div class="team-panel" id="team-WHU">
-  <div class="team-header">
-    <h2>West Ham 🔻</h2>
-    <div class="team-meta">RELEGATED to Championship for 26/27 · transfer fire-sale incoming <span class="discount bad">N/A</span></div>
-  </div>
-
-  <div class="callout bad" style="margin-bottom:14px;">
-    <strong>26/27 status:</strong> West Ham confirmed relegated end of 25/26 season. Players with PL clauses (Bowen most likely, plus Castellanos, Summerville, Kilman, Walker-Peters) will be aggressively pursued by other PL clubs. The IN/OUT records below were the 25/26 transfer history; the 26/27 squad shape will not exist as a PL roster. WHU drops off the FPL toolkit's WC-load cross-reference (was tagged "zero WC load" — now irrelevant for PL planning).
-  </div>
-
-  <h3>Transfers IN <span class="count">9</span></h3>
-  <table><thead><tr><th>Player</th><th>From</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Castellanos</td><td>Lazio</td><td>–</td></tr>
-    <tr><td>Hermansen</td><td>Leicester</td><td>–</td></tr>
-    <tr><td>Summerville</td><td>Leeds</td><td>–</td></tr>
-    <tr><td>C. Wilson</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td>Walker-Peters</td><td>Southampton</td><td>–</td></tr>
-    <tr><td>Kilman</td><td>Wolves</td><td>–</td></tr>
-    <tr><td>Disasi</td><td>Chelsea (loan, returns to CHE)</td><td>Loan</td></tr>
-    <tr><td>A. Traoré</td><td>Fulham</td><td>–</td></tr>
-    <tr><td>Wan-Bissaka</td><td>Man Utd</td><td>–</td></tr>
-  </tbody></table>
-
-  <h3>Transfers OUT <span class="count">4</span></h3>
-  <table><thead><tr><th>Player</th><th>To</th><th>Notes</th></tr></thead><tbody>
-    <tr><td>Kudus</td><td>Tottenham</td><td>–</td></tr>
-    <tr><td>Rice</td><td>Arsenal</td><td>historical</td></tr>
-    <tr><td><strong>Paquetá</strong></td><td>Flamengo</td><td>Confirmed</td></tr>
-    <tr><td>Bowen</td><td>(relegation could trigger move)</td><td>If WHU down</td></tr>
-  </tbody></table>
-
-  <h3>26/27 Squad <span class="count">19</span></h3>
-  <table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Country</th><th>Prev Club</th><th>PL G</th></tr></thead><tbody>
-    <tr><td class="shirt">1</td><td><strong>Hermansen</strong></td><td>GK</td><td>Denmark</td><td>Leicester</td><td>–</td></tr>
-    <tr><td class="shirt">2</td><td>Walker-Peters</td><td>RB</td><td>England</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">3</td><td>Kilman</td><td>CB</td><td>England</td><td>Wolves</td><td>–</td></tr>
-    <tr><td class="shirt">4</td><td>Disasi (loan)</td><td>CB</td><td>France</td><td>Chelsea</td><td>–</td></tr>
-    <tr><td class="shirt">7</td><td>Summerville</td><td>WING</td><td>NED</td><td>Leeds</td><td>–</td></tr>
-    <tr><td class="shirt">9</td><td>C. Wilson</td><td>ST</td><td>England</td><td>Newcastle</td><td>–</td></tr>
-    <tr><td class="shirt">11</td><td><strong>Castellanos</strong></td><td>ST</td><td>Argentina</td><td>Lazio</td><td>–</td></tr>
-    <tr><td class="shirt">12</td><td>Diouf</td><td>LB</td><td>Senegal</td><td>Slavia Prague</td><td>–</td></tr>
-    <tr><td class="shirt">15</td><td>Mavropanos</td><td>CB</td><td>Greece</td><td>Stuttgart</td><td>–</td></tr>
-    <tr><td class="shirt">17</td><td>A. Traoré</td><td>WING</td><td>Spain</td><td>Fulham</td><td>–</td></tr>
-    <tr><td class="shirt">18</td><td>M. Fernandes</td><td>MID</td><td>Portugal</td><td>Southampton</td><td>–</td></tr>
-    <tr><td class="shirt">19</td><td>P. Felipe</td><td>–</td><td>Brazil</td><td>Gil Vicente</td><td>–</td></tr>
-    <tr><td class="shirt">20</td><td><strong>Bowen</strong></td><td>RW</td><td>England</td><td>Hull</td><td>–</td></tr>
-    <tr><td class="shirt">22</td><td>Fabiański</td><td>GK</td><td>Poland</td><td>Swansea</td><td>–</td></tr>
-    <tr><td class="shirt">23</td><td>Areola</td><td>GK</td><td>France</td><td>PSG</td><td>–</td></tr>
-    <tr><td class="shirt">25</td><td>Todibo</td><td>CB</td><td>France</td><td>Nice</td><td>–</td></tr>
-    <tr><td class="shirt">27</td><td>Magassa</td><td>MID</td><td>France</td><td>Monaco</td><td>–</td></tr>
-    <tr><td class="shirt">28</td><td>Souček</td><td>CDM</td><td>Czech Republic</td><td>Slavia Prague</td><td>–</td></tr>
-    <tr><td class="shirt">29</td><td>Wan-Bissaka</td><td>RB</td><td>DR Congo</td><td>Man Utd</td><td>–</td></tr>
-  </tbody></table>
-</div>
-
+<!-- WC26 panel (kept manually-curated) -->
 <!-- ENGLAND WC 2026 SQUAD -->
 <div class="team-panel" id="team-WC26">
   <div class="team-header" style="background:linear-gradient(135deg, var(--accent-soft), var(--good-soft));">
@@ -1834,22 +670,116 @@ td strong { color: var(--ink); font-weight: 600; }
   </div>
 </div>
 
+
+
 <div class="foot">
-  <div>FPL Squads & Transfers · 26/27 · Rui Neves · last updated 24 May 2026</div>
+  <div>FPL Squads & Transfers · 26/27 · Rui Neves · live from Squads_2026.xlsm</div>
   <div><a href="./toolkit.html">Toolkit</a> · <a href="./world.html">🌍 Worldwide DB</a> · <a href="./stats.html">📊 Stats</a> · <a href="./index.html">Dashboard</a></div>
 </div>
 
 <script>
+let META = null, WORLD = null, TIN = null, TOUT = null;
+
+async function loadData() {
+  // Cache-bust hourly
+  const v = '?v=' + Math.floor(Date.now() / 3600000);
+  const [r1, r2, r3, r4] = await Promise.all([
+    fetch('./team_meta.json' + v),
+    fetch('./world_data.json' + v),
+    fetch('./transfers_in.json' + v),
+    fetch('./transfers_out.json' + v)
+  ]);
+  META = await r1.json();
+  WORLD = await r2.json();
+  TIN = await r3.json();
+  TOUT = await r4.json();
+}
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderTeamPanel(code) {
+  const c = document.getElementById('team-content');
+  if (!META || !WORLD) { c.innerHTML = '<div class="empty">Loading…</div>'; return; }
+  const m = META[code];
+  if (!m) { c.innerHTML = `<div class="empty">No team meta for ${escapeHtml(code)}</div>`; return; }
+
+  const division = m.division || 'Premier League';
+  const dbClub = m.db_club;
+  const squad = (WORLD[division] && WORLD[division][dbClub]) || [];
+  const ins = (TIN[division] && TIN[division][dbClub]) || [];
+  const outs = (TOUT[division] && TOUT[division][dbClub]) || [];
+
+  let html = `<div class="team-header">
+    <h2>${escapeHtml(m.name)}</h2>
+    <div class="team-meta">Manager: ${escapeHtml(m.manager)}${m.discount ? ' <span class="discount">' + escapeHtml(m.discount) + '</span>' : ''}</div>
+  </div>`;
+
+  if (m.note) {
+    html += `<div class="callout"><strong>Note:</strong> ${escapeHtml(m.note)}</div>`;
+  }
+
+  if (division === 'Championship') {
+    html += `<div class="callout bad"><strong>🔻 RELEGATED — now in Championship for 26/27.</strong> Players with PL clauses likely to be poached this summer.</div>`;
+  }
+
+  // Transfers IN
+  html += `<h3>Transfers IN <span class="count">${ins.length}</span></h3>`;
+  if (ins.length) {
+    html += '<table><thead><tr><th>Player</th><th>From</th><th>Country</th><th>Notes</th></tr></thead><tbody>';
+    for (const t of ins) {
+      html += `<tr><td><strong>${escapeHtml(t.n)}</strong></td><td>${escapeHtml(t.from || '')}</td><td>${escapeHtml(t.c || '')}</td><td>${escapeHtml(t.note || '')}</td></tr>`;
+    }
+    html += '</tbody></table>';
+  } else {
+    html += '<div class="empty">No confirmed 26/27 arrivals yet.</div>';
+  }
+
+  // Transfers OUT
+  html += `<h3>Transfers OUT <span class="count">${outs.length}</span></h3>`;
+  if (outs.length) {
+    html += '<table><thead><tr><th>Player</th><th>To</th><th>Country</th><th>Notes</th></tr></thead><tbody>';
+    for (const t of outs) {
+      html += `<tr><td><strong>${escapeHtml(t.n)}</strong></td><td>${escapeHtml(t.to || '')}</td><td>${escapeHtml(t.c || '')}</td><td>${escapeHtml(t.note || '')}</td></tr>`;
+    }
+    html += '</tbody></table>';
+  } else {
+    html += '<div class="empty">No confirmed 26/27 departures yet.</div>';
+  }
+
+  // Squad (live from DB)
+  html += `<h3>26/27 Squad <span class="count">${squad.length}</span> <span style="font-size:11px; color:var(--ink-3); font-weight:400;">live from Squads_2026.xlsm</span></h3>`;
+  if (squad.length) {
+    html += '<table><thead><tr><th>#</th><th>Player</th><th>Country</th><th>Age</th><th>Prev Club</th><th>Goals</th></tr></thead><tbody>';
+    for (const p of squad) {
+      const shirt = p.s ?? '–';
+      html += `<tr><td class="shirt">${shirt}</td><td><strong>${escapeHtml(p.n)}</strong></td><td>${escapeHtml(p.c || '')}</td><td>${p.a ?? '–'}</td><td style="font-size:11px; color:var(--ink-3);">${escapeHtml(p.p || '')}</td><td>${p.g ?? '–'}</td></tr>`;
+    }
+    html += '</tbody></table>';
+  } else {
+    html += '<div class="empty">No squad data found for this club in DB.</div>';
+  }
+
+  c.innerHTML = html;
+}
+
 function showTeam(code) {
+  // Hide WC26 panel; show team-content for normal teams
   document.querySelectorAll('.team-panel').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-  const panel = document.getElementById('team-' + code);
   const tab = document.getElementById('tab-' + code);
-  if (panel) panel.classList.add('active');
   if (tab) tab.classList.add('active');
+  if (code === 'WC26') {
+    document.getElementById('team-content').innerHTML = '';
+    const panel = document.getElementById('team-WC26');
+    if (panel) panel.classList.add('active');
+    showNation('ENG');
+  } else {
+    renderTeamPanel(code);
+  }
   window.location.hash = code;
-  // Default to ENG nation when WC26 is opened
-  if (code === 'WC26') showNation('ENG');
 }
 
 function showNation(code) {
@@ -1861,17 +791,17 @@ function showNation(code) {
   if (tab) tab.classList.add('active');
 }
 
-// Auto-open team from URL hash or default to ARS
-window.addEventListener('load', () => {
+const VALID_CODES = ['ARS','AVL','BOU','BRE','BHA','CHE','COV','CRY','EVE','FUL','HUL','IPS','LEE','LIV','MCI','MUN','NEW','NFO','SUN','TOT','WHU','WC26'];
+
+window.addEventListener('load', async () => {
+  await loadData();
   const hash = window.location.hash.replace('#', '').toUpperCase();
-  const validCodes = ['ARS','AVL','BOU','BRE','BHA','CHE','COV','CRY','EVE','FUL','HUL','IPS','LEE','LIV','MCI','MUN','NEW','NFO','SUN','TOT','WHU','WC26'];
-  showTeam(validCodes.includes(hash) ? hash : 'ARS');
+  showTeam(VALID_CODES.includes(hash) ? hash : 'ARS');
 });
 
-// Listen to hash changes (back/forward nav)
 window.addEventListener('hashchange', () => {
   const hash = window.location.hash.replace('#', '').toUpperCase();
-  if (hash) showTeam(hash);
+  if (VALID_CODES.includes(hash)) showTeam(hash);
 });
 </script>
 
