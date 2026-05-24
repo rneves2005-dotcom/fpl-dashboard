@@ -58,14 +58,6 @@
         "c": "Portugal"
       }
     ],
-    "West Ham United F.C.": [
-      {
-        "n": "Lucas Paquetá",
-        "to": "Flamengo",
-        "note": "Confirmed — Brazil WC squad",
-        "c": "Brazil"
-      }
-    ],
     "Crystal Palace F.C": [
       {
         "n": "Eberechi Eze",
@@ -100,6 +92,12 @@
         "to": "TBD (leaving rumor)",
         "note": "Watch",
         "c": "England"
+      },
+      {
+        "n": "Emil Krafth",
+        "to": "Free Agent (released)",
+        "note": "Confirmed released end of 25/26",
+        "c": "Sweden"
       }
     ]
   },
@@ -176,6 +174,16 @@
         "to": "Brentford",
         "note": "Confirmed 26/27",
         "c": "Germany"
+      }
+    ]
+  },
+  "Championship": {
+    "West Ham United F.C.": [
+      {
+        "n": "Lucas Paquetá",
+        "to": "Flamengo",
+        "note": "Confirmed — Brazil WC squad",
+        "c": "Brazil"
       }
     ]
   }

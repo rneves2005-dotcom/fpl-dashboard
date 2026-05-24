@@ -35,10 +35,10 @@ warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 # internal sync cache (below) is fully readable. Auto-prefer .xlsm (after Rui
 # enables VBA auto-sort) over .xlsx.
 _DB_DIR = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB")
-# Priority: new consolidated Squads.xlsm → fallback to Squads_Data.xlsm → fallback .xlsx
+# Priority order: Squads_2026.xlsm (canonical, post-consolidation) → fallbacks if user hasn't yet migrated
 DB_PATH = next(
-    (p for p in [_DB_DIR / "Squads.xlsm", _DB_DIR / "Squads_Data.xlsm", _DB_DIR / "Squads_Data.xlsx"] if p.exists()),
-    _DB_DIR / "Squads.xlsm"
+    (p for p in [_DB_DIR / "Squads_2026.xlsm", _DB_DIR / "Squads.xlsm", _DB_DIR / "Squads_Data.xlsm", _DB_DIR / "Squads_Data.xlsx"] if p.exists()),
+    _DB_DIR / "Squads_2026.xlsm"
 )
 JSON_OUT = Path("/Users/ruimiguelneves/Code/fpl-dashboard/world_data.json")
 # OneDrive mirror — using the internal sync cache path (same TCC reason as DB_PATH above)
