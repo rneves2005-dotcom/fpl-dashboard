@@ -2,141 +2,611 @@
   "_meta": "Confirmed transfers IN from May 2026 onwards (26/27 season). Mirrors squads.html team-panel IN tables.",
   "Premier League": {
     "Arsenal": [
-      {"n": "Noni Madueke", "from": "Chelsea", "note": "26/27", "c": "England"},
-      {"n": "Eberechi Eze", "from": "Crystal Palace", "note": "From 25/26 (carryover)", "c": "England"}
+      {
+        "n": "Noni Madueke",
+        "from": "Chelsea",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Eberechi Eze",
+        "from": "Crystal Palace",
+        "note": "From 25/26 (carryover)",
+        "c": "England"
+      }
     ],
     "Aston Villa": [
-      {"n": "Ian Maatsen", "from": "Chelsea", "note": "26/27", "c": "Netherlands"},
-      {"n": "H. Elliott", "from": "Liverpool", "note": "26/27", "c": "England"},
-      {"n": "Sancho", "from": "Manchester United", "note": "26/27", "c": "England"},
-      {"n": "Lindelöf", "from": "Manchester United", "note": "26/27", "c": "Sweden"},
-      {"n": "Guessand", "from": "Aston Villa academy → Crystal Palace", "note": "Loan / move TBC", "c": "Ivory Coast"}
+      {
+        "n": "Ian Maatsen",
+        "from": "Chelsea",
+        "note": "26/27",
+        "c": "Netherlands"
+      },
+      {
+        "n": "H. Elliott",
+        "from": "Liverpool",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Sancho",
+        "from": "Manchester United",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Lindelöf",
+        "from": "Manchester United",
+        "note": "26/27",
+        "c": "Sweden"
+      },
+      {
+        "n": "Guessand",
+        "from": "Aston Villa academy → Crystal Palace",
+        "note": "Loan / move TBC",
+        "c": "Ivory Coast"
+      }
     ],
     "Bournemouth": [
-      {"n": "Marco Rose (manager)", "from": "—", "note": "Replaces Iraola", "c": "Germany"},
-      {"n": "Petrović", "from": "Chelsea", "note": "26/27", "c": "Serbia"}
+      {
+        "n": "Marco Rose (manager)",
+        "from": "—",
+        "note": "Replaces Iraola",
+        "c": "Germany"
+      },
+      {
+        "n": "Petrović",
+        "from": "Chelsea",
+        "note": "26/27",
+        "c": "Serbia"
+      }
     ],
     "Brentford": [
-      {"n": "Caoimhín Kelleher", "from": "Liverpool", "note": "26/27", "c": "Ireland"},
-      {"n": "Jordan Henderson", "from": "Ajax", "note": "Surprise — ENG WC squad", "c": "England"},
-      {"n": "Ouattara", "from": "Bournemouth", "note": "26/27", "c": "Burkina Faso"},
-      {"n": "Carvalho", "from": "Liverpool", "note": "26/27", "c": "Portugal"},
-      {"n": "Reiss Nelson", "from": "Arsenal", "note": "26/27", "c": "England"}
+      {
+        "n": "Caoimhín Kelleher",
+        "from": "Liverpool",
+        "note": "26/27",
+        "c": "Ireland"
+      },
+      {
+        "n": "Jordan Henderson",
+        "from": "Ajax",
+        "note": "Surprise — ENG WC squad",
+        "c": "England"
+      },
+      {
+        "n": "Ouattara",
+        "from": "Bournemouth",
+        "note": "26/27",
+        "c": "Burkina Faso"
+      },
+      {
+        "n": "Carvalho",
+        "from": "Liverpool",
+        "note": "26/27",
+        "c": "Portugal"
+      },
+      {
+        "n": "Reiss Nelson",
+        "from": "Arsenal",
+        "note": "26/27",
+        "c": "England"
+      }
     ],
     "Brighton & Hove Albion F.C.": [],
     "Chelsea": [
-      {"n": "Geovany Quenda", "from": "Sporting CP", "note": "26/27 incoming — confirmed", "c": "Portugal"},
-      {"n": "Alejandro Garnacho", "from": "Manchester United", "note": "26/27", "c": "Argentina"},
-      {"n": "Liam Delap", "from": "Ipswich", "note": "Promoted-team move", "c": "England"},
-      {"n": "Jamie Gittens", "from": "Borussia Dortmund", "note": "26/27", "c": "England"},
-      {"n": "Jorrel Hato", "from": "Ajax", "note": "26/27 — NED WC squad", "c": "Netherlands"},
-      {"n": "Estêvão", "from": "Palmeiras", "note": "Brazilian young", "c": "Brazil"},
-      {"n": "João Pedro", "from": "Brighton", "note": "26/27", "c": "Brazil"}
+      {
+        "n": "Geovany Quenda",
+        "from": "Sporting CP",
+        "note": "26/27 incoming — confirmed",
+        "c": "Portugal"
+      },
+      {
+        "n": "Alejandro Garnacho",
+        "from": "Manchester United",
+        "note": "26/27",
+        "c": "Argentina"
+      },
+      {
+        "n": "Liam Delap",
+        "from": "Ipswich",
+        "note": "Promoted-team move",
+        "c": "England"
+      },
+      {
+        "n": "Jamie Gittens",
+        "from": "Borussia Dortmund",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Jorrel Hato",
+        "from": "Ajax",
+        "note": "26/27 — NED WC squad",
+        "c": "Netherlands"
+      },
+      {
+        "n": "Estêvão",
+        "from": "Palmeiras",
+        "note": "Brazilian young",
+        "c": "Brazil"
+      },
+      {
+        "n": "João Pedro",
+        "from": "Brighton",
+        "note": "26/27",
+        "c": "Brazil"
+      }
     ],
     "Coventry City": [
-      {"n": "Yang Min-hyeok", "from": "Tottenham", "note": "From PL", "c": "South Korea"}
+      {
+        "n": "Yang Min-hyeok",
+        "from": "Tottenham",
+        "note": "From PL",
+        "c": "South Korea"
+      }
     ],
     "Crystal Palace F.C": [
-      {"n": "Brennan Johnson", "from": "Tottenham", "note": "26/27", "c": "Wales"},
-      {"n": "Yeremy Pino", "from": "Villarreal", "note": "26/27", "c": "Spain"},
-      {"n": "Jørgen Strand Larsen", "from": "Wolves", "note": "26/27 — NOR WC squad", "c": "Norway"},
-      {"n": "Christantus Uche / Guessand", "from": "various", "note": "26/27", "c": "Ivory Coast"},
-      {"n": "Daichi Kamada", "from": "Lazio", "note": "26/27", "c": "Japan"},
-      {"n": "Chris Richards", "from": "Bayern Munich", "note": "Already at CRY", "c": "USA"},
-      {"n": "Riad", "from": "Barcelona", "note": "26/27", "c": "Morocco"},
-      {"n": "Trevoh Chalobah", "from": "Chelsea", "note": "26/27", "c": "England"}
+      {
+        "n": "Brennan Johnson",
+        "from": "Tottenham",
+        "note": "26/27",
+        "c": "Wales"
+      },
+      {
+        "n": "Yeremy Pino",
+        "from": "Villarreal",
+        "note": "26/27",
+        "c": "Spain"
+      },
+      {
+        "n": "Jørgen Strand Larsen",
+        "from": "Wolves",
+        "note": "26/27 — NOR WC squad",
+        "c": "Norway"
+      },
+      {
+        "n": "Christantus Uche / Guessand",
+        "from": "various",
+        "note": "26/27",
+        "c": "Ivory Coast"
+      },
+      {
+        "n": "Daichi Kamada",
+        "from": "Lazio",
+        "note": "26/27",
+        "c": "Japan"
+      },
+      {
+        "n": "Chris Richards",
+        "from": "Bayern Munich",
+        "note": "Already at CRY",
+        "c": "USA"
+      },
+      {
+        "n": "Riad",
+        "from": "Barcelona",
+        "note": "26/27",
+        "c": "Morocco"
+      },
+      {
+        "n": "Trevoh Chalobah",
+        "from": "Chelsea",
+        "note": "26/27",
+        "c": "England"
+      }
     ],
     "Everton": [
-      {"n": "Kiernan Dewsbury-Hall", "from": "Chelsea", "note": "26/27", "c": "England"},
-      {"n": "Thierno Barry", "from": "Villarreal", "note": "26/27", "c": "France"},
-      {"n": "Carlos Alcaraz", "from": "Flamengo", "note": "26/27", "c": "Argentina"},
-      {"n": "Jack Grealish", "from": "Manchester City (loan)", "note": "Loan, return TBC 26/27", "c": "England"},
-      {"n": "Tyrique George", "from": "Chelsea", "note": "26/27", "c": "England"},
-      {"n": "Adam Aznou", "from": "Bayern Munich", "note": "26/27", "c": "Morocco"},
-      {"n": "James Garner", "from": "Manchester United", "note": "26/27", "c": "England"},
-      {"n": "Tim Iroegbunam", "from": "Aston Villa", "note": "26/27", "c": "England"},
-      {"n": "Röhl", "from": "Freiburg", "note": "26/27", "c": "Germany"}
+      {
+        "n": "Kiernan Dewsbury-Hall",
+        "from": "Chelsea",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Thierno Barry",
+        "from": "Villarreal",
+        "note": "26/27",
+        "c": "France"
+      },
+      {
+        "n": "Carlos Alcaraz",
+        "from": "Flamengo",
+        "note": "26/27",
+        "c": "Argentina"
+      },
+      {
+        "n": "Jack Grealish",
+        "from": "Manchester City (loan)",
+        "note": "Loan, return TBC 26/27",
+        "c": "England"
+      },
+      {
+        "n": "Tyrique George",
+        "from": "Chelsea",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Adam Aznou",
+        "from": "Bayern Munich",
+        "note": "26/27",
+        "c": "Morocco"
+      },
+      {
+        "n": "James Garner",
+        "from": "Manchester United",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Tim Iroegbunam",
+        "from": "Aston Villa",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Röhl",
+        "from": "Freiburg",
+        "note": "26/27",
+        "c": "Germany"
+      }
     ],
     "Fulham": [
-      {"n": "Oscar Bobb", "from": "Manchester City", "note": "26/27 — NOR WC squad", "c": "Norway"},
-      {"n": "Samuel Chukwueze", "from": "Milan", "note": "26/27", "c": "Nigeria"},
-      {"n": "Emile Smith Rowe", "from": "Arsenal", "note": "26/27", "c": "England"},
-      {"n": "Ryan Sessegnon", "from": "Tottenham", "note": "Return — confirmed", "c": "England"}
+      {
+        "n": "Oscar Bobb",
+        "from": "Manchester City",
+        "note": "26/27 — NOR WC squad",
+        "c": "Norway"
+      },
+      {
+        "n": "Samuel Chukwueze",
+        "from": "Milan",
+        "note": "26/27",
+        "c": "Nigeria"
+      },
+      {
+        "n": "Emile Smith Rowe",
+        "from": "Arsenal",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Ryan Sessegnon",
+        "from": "Tottenham",
+        "note": "Return — confirmed",
+        "c": "England"
+      }
     ],
     "Hull City A.F.C.": [],
     "Ipswich Town": [],
     "Leeds United": [
-      {"n": "Dominic Calvert-Lewin", "from": "Everton", "note": "26/27", "c": "England"}
+      {
+        "n": "Dominic Calvert-Lewin",
+        "from": "Everton",
+        "note": "26/27",
+        "c": "England"
+      }
     ],
     "Liverpool": [
-      {"n": "Alexander Isak", "from": "Newcastle", "note": "Major — 26/27", "c": "Sweden"},
-      {"n": "Florian Wirtz", "from": "Bayer Leverkusen", "note": "Major — 26/27 — GER WC", "c": "Germany"},
-      {"n": "Hugo Ekitike", "from": "Frankfurt", "note": "26/27", "c": "France"},
-      {"n": "Milos Kerkez", "from": "Bournemouth", "note": "26/27", "c": "Hungary"},
-      {"n": "Jeremie Frimpong", "from": "Bayer Leverkusen", "note": "26/27 — NED WC squad", "c": "Netherlands"},
-      {"n": "Giorgi Mamardashvili", "from": "Valencia", "note": "26/27", "c": "Georgia"},
-      {"n": "Federico Chiesa", "from": "Juventus", "note": "26/27", "c": "Italy"}
+      {
+        "n": "Alexander Isak",
+        "from": "Newcastle",
+        "note": "Major — 26/27",
+        "c": "Sweden"
+      },
+      {
+        "n": "Florian Wirtz",
+        "from": "Bayer Leverkusen",
+        "note": "Major — 26/27 — GER WC",
+        "c": "Germany"
+      },
+      {
+        "n": "Hugo Ekitike",
+        "from": "Frankfurt",
+        "note": "26/27",
+        "c": "France"
+      },
+      {
+        "n": "Milos Kerkez",
+        "from": "Bournemouth",
+        "note": "26/27",
+        "c": "Hungary"
+      },
+      {
+        "n": "Jeremie Frimpong",
+        "from": "Bayer Leverkusen",
+        "note": "26/27 — NED WC squad",
+        "c": "Netherlands"
+      },
+      {
+        "n": "Giorgi Mamardashvili",
+        "from": "Valencia",
+        "note": "26/27",
+        "c": "Georgia"
+      },
+      {
+        "n": "Federico Chiesa",
+        "from": "Juventus",
+        "note": "26/27",
+        "c": "Italy"
+      }
     ],
     "Manchester City": [
-      {"n": "Gianluigi Donnarumma", "from": "PSG", "note": "Major — #1 GK", "c": "Italy"},
-      {"n": "Tijjani Reijnders", "from": "Milan", "note": "Major — 26/27 — NED WC", "c": "Netherlands"},
-      {"n": "Omar Marmoush", "from": "Frankfurt", "note": "Major — EGY WC squad", "c": "Egypt"},
-      {"n": "James Trafford", "from": "Burnley", "note": "26/27 — ENG WC squad", "c": "England"},
-      {"n": "Rayan Aït-Nouri", "from": "Wolves", "note": "26/27", "c": "Algeria"},
-      {"n": "Rayan Cherki", "from": "Lyon", "note": "Already at MCI (25/26)", "c": "France"},
-      {"n": "Marc Guéhi", "from": "Crystal Palace", "note": "26/27 — ENG WC squad", "c": "England"},
-      {"n": "Antoine Semenyo", "from": "Bournemouth", "note": "Already at MCI (25/26)", "c": "Ghana"},
-      {"n": "Nico González", "from": "Porto", "note": "26/27", "c": "Spain"}
+      {
+        "n": "Gianluigi Donnarumma",
+        "from": "PSG",
+        "note": "Major — #1 GK",
+        "c": "Italy"
+      },
+      {
+        "n": "Tijjani Reijnders",
+        "from": "Milan",
+        "note": "Major — 26/27 — NED WC",
+        "c": "Netherlands"
+      },
+      {
+        "n": "Omar Marmoush",
+        "from": "Frankfurt",
+        "note": "Major — EGY WC squad",
+        "c": "Egypt"
+      },
+      {
+        "n": "James Trafford",
+        "from": "Burnley",
+        "note": "26/27 — ENG WC squad",
+        "c": "England"
+      },
+      {
+        "n": "Rayan Aït-Nouri",
+        "from": "Wolves",
+        "note": "26/27",
+        "c": "Algeria"
+      },
+      {
+        "n": "Rayan Cherki",
+        "from": "Lyon",
+        "note": "Already at MCI (25/26)",
+        "c": "France"
+      },
+      {
+        "n": "Marc Guéhi",
+        "from": "Crystal Palace",
+        "note": "26/27 — ENG WC squad",
+        "c": "England"
+      },
+      {
+        "n": "Antoine Semenyo",
+        "from": "Bournemouth",
+        "note": "Already at MCI (25/26)",
+        "c": "Ghana"
+      },
+      {
+        "n": "Nico González",
+        "from": "Porto",
+        "note": "26/27",
+        "c": "Spain"
+      }
     ],
     "Manchester United": [
-      {"n": "Benjamin Šeško", "from": "RB Leipzig", "note": "Major — primary ST", "c": "Slovenia"},
-      {"n": "Bryan Mbeumo", "from": "Brentford", "note": "26/27", "c": "Cameroon"},
-      {"n": "Matheus Cunha", "from": "Wolves", "note": "26/27 — BRA WC squad", "c": "Brazil"},
-      {"n": "Mason Mount", "from": "Chelsea", "note": "26/27", "c": "England"},
-      {"n": "Leny Yoro", "from": "Lille", "note": "26/27", "c": "France"},
-      {"n": "Manuel Ugarte", "from": "PSG", "note": "Casemiro replacement", "c": "Uruguay"},
-      {"n": "Senne Lammens", "from": "Royal Antwerp", "note": "GK 26/27", "c": "Belgium"},
-      {"n": "Amad Diallo", "from": "Sunderland (perm)", "note": "26/27", "c": "Ivory Coast"},
-      {"n": "Heaven", "from": "Arsenal", "note": "Young — 26/27", "c": "England"}
+      {
+        "n": "Benjamin Šeško",
+        "from": "RB Leipzig",
+        "note": "Major — primary ST",
+        "c": "Slovenia"
+      },
+      {
+        "n": "Bryan Mbeumo",
+        "from": "Brentford",
+        "note": "26/27",
+        "c": "Cameroon"
+      },
+      {
+        "n": "Matheus Cunha",
+        "from": "Wolves",
+        "note": "26/27 — BRA WC squad",
+        "c": "Brazil"
+      },
+      {
+        "n": "Mason Mount",
+        "from": "Chelsea",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Leny Yoro",
+        "from": "Lille",
+        "note": "26/27",
+        "c": "France"
+      },
+      {
+        "n": "Manuel Ugarte",
+        "from": "PSG",
+        "note": "Casemiro replacement",
+        "c": "Uruguay"
+      },
+      {
+        "n": "Senne Lammens",
+        "from": "Royal Antwerp",
+        "note": "GK 26/27",
+        "c": "Belgium"
+      },
+      {
+        "n": "Amad Diallo",
+        "from": "Sunderland (perm)",
+        "note": "26/27",
+        "c": "Ivory Coast"
+      },
+      {
+        "n": "Heaven",
+        "from": "Arsenal",
+        "note": "Young — 26/27",
+        "c": "England"
+      }
     ],
     "Newcastle United": [
-      {"n": "Malick Thiaw", "from": "Milan", "note": "26/27 — GER WC squad", "c": "Germany"},
-      {"n": "Nick Woltemade", "from": "Stuttgart", "note": "26/27 — GER WC squad", "c": "Germany"},
-      {"n": "Levi Colwill", "from": "—", "note": "Various 26/27 moves", "c": "England"}
+      {
+        "n": "Malick Thiaw",
+        "from": "Milan",
+        "note": "26/27 — GER WC squad",
+        "c": "Germany"
+      },
+      {
+        "n": "Nick Woltemade",
+        "from": "Stuttgart",
+        "note": "26/27 — GER WC squad",
+        "c": "Germany"
+      },
+      {
+        "n": "Levi Colwill",
+        "from": "—",
+        "note": "Various 26/27 moves",
+        "c": "England"
+      }
     ],
     "Nottingham Forest": [
-      {"n": "Lucca", "from": "Napoli", "note": "26/27", "c": "Italy"},
-      {"n": "James McAtee", "from": "Manchester City", "note": "26/27", "c": "England"},
-      {"n": "Dan Ndoye", "from": "Bologna", "note": "26/27 — SUI WC squad", "c": "Switzerland"},
-      {"n": "Elliot Anderson", "from": "Newcastle", "note": "26/27 — ENG WC squad", "c": "England"},
-      {"n": "Callum Hudson-Odoi", "from": "Chelsea", "note": "26/27", "c": "England"},
-      {"n": "Igor Jesus", "from": "Botafogo", "note": "26/27", "c": "Brazil"},
-      {"n": "Matz Sels", "from": "Strasbourg", "note": "26/27", "c": "Belgium"}
+      {
+        "n": "Lucca",
+        "from": "Napoli",
+        "note": "26/27",
+        "c": "Italy"
+      },
+      {
+        "n": "James McAtee",
+        "from": "Manchester City",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Dan Ndoye",
+        "from": "Bologna",
+        "note": "26/27 — SUI WC squad",
+        "c": "Switzerland"
+      },
+      {
+        "n": "Elliot Anderson",
+        "from": "Newcastle",
+        "note": "26/27 — ENG WC squad",
+        "c": "England"
+      },
+      {
+        "n": "Callum Hudson-Odoi",
+        "from": "Chelsea",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Igor Jesus",
+        "from": "Botafogo",
+        "note": "26/27",
+        "c": "Brazil"
+      },
+      {
+        "n": "Matz Sels",
+        "from": "Strasbourg",
+        "note": "26/27",
+        "c": "Belgium"
+      }
     ],
     "Sunderland A.F.C.": [
-      {"n": "Granit Xhaka", "from": "Bayer Leverkusen", "note": "26/27 — SUI WC squad", "c": "Switzerland"},
-      {"n": "Brian Brobbey", "from": "Ajax", "note": "26/27 — NED WC squad", "c": "Netherlands"},
-      {"n": "Habib Diarra", "from": "Strasbourg", "note": "26/27 — SEN WC squad", "c": "Senegal"}
+      {
+        "n": "Granit Xhaka",
+        "from": "Bayer Leverkusen",
+        "note": "26/27 — SUI WC squad",
+        "c": "Switzerland"
+      },
+      {
+        "n": "Brian Brobbey",
+        "from": "Ajax",
+        "note": "26/27 — NED WC squad",
+        "c": "Netherlands"
+      },
+      {
+        "n": "Habib Diarra",
+        "from": "Strasbourg",
+        "note": "26/27 — SEN WC squad",
+        "c": "Senegal"
+      }
     ],
     "Tottenham Hotspur": [
-      {"n": "Mohammed Kudus", "from": "West Ham", "note": "26/27", "c": "Ghana"},
-      {"n": "João Palhinha", "from": "Bayern Munich (loan)", "note": "Loan, return TBC", "c": "Portugal"},
-      {"n": "Roberto De Zerbi (manager)", "from": "Marseille", "note": "Mid-season (3-4 games in)", "c": "Italy"}
+      {
+        "n": "Mohammed Kudus",
+        "from": "West Ham",
+        "note": "26/27",
+        "c": "Ghana"
+      },
+      {
+        "n": "João Palhinha",
+        "from": "Bayern Munich (loan)",
+        "note": "Loan, return TBC",
+        "c": "Portugal"
+      },
+      {
+        "n": "Roberto De Zerbi (manager)",
+        "from": "Marseille",
+        "note": "Mid-season (3-4 games in)",
+        "c": "Italy"
+      }
     ],
     "West Ham United F.C.": [
-      {"n": "Valentín Castellanos", "from": "Lazio", "note": "26/27", "c": "Argentina"},
-      {"n": "Mads Hermansen", "from": "Leicester", "note": "26/27", "c": "Denmark"},
-      {"n": "Crysencio Summerville", "from": "Leeds", "note": "26/27", "c": "Netherlands"},
-      {"n": "Callum Wilson", "from": "Newcastle", "note": "26/27", "c": "England"},
-      {"n": "Kyle Walker-Peters", "from": "Southampton", "note": "26/27", "c": "England"},
-      {"n": "Max Kilman", "from": "Wolves", "note": "26/27", "c": "England"},
-      {"n": "Axel Disasi", "from": "Chelsea (loan)", "note": "Loan, returns to CHE", "c": "France"},
-      {"n": "Adama Traoré", "from": "Fulham", "note": "26/27", "c": "Spain"},
-      {"n": "Aaron Wan-Bissaka", "from": "Manchester United", "note": "26/27", "c": "DR Congo"}
+      {
+        "n": "Valentín Castellanos",
+        "from": "Lazio",
+        "note": "26/27",
+        "c": "Argentina"
+      },
+      {
+        "n": "Mads Hermansen",
+        "from": "Leicester",
+        "note": "26/27",
+        "c": "Denmark"
+      },
+      {
+        "n": "Crysencio Summerville",
+        "from": "Leeds",
+        "note": "26/27",
+        "c": "Netherlands"
+      },
+      {
+        "n": "Callum Wilson",
+        "from": "Newcastle",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Kyle Walker-Peters",
+        "from": "Southampton",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Max Kilman",
+        "from": "Wolves",
+        "note": "26/27",
+        "c": "England"
+      },
+      {
+        "n": "Axel Disasi",
+        "from": "Chelsea (loan)",
+        "note": "Loan, returns to CHE",
+        "c": "France"
+      },
+      {
+        "n": "Adama Traoré",
+        "from": "Fulham",
+        "note": "26/27",
+        "c": "Spain"
+      },
+      {
+        "n": "Aaron Wan-Bissaka",
+        "from": "Manchester United",
+        "note": "26/27",
+        "c": "DR Congo"
+      }
     ]
   },
   "Liga Betclic": {
-    "Sporting CP": [],
-    "Benfica": []
+    "Benfica": [],
+    "Sporting": []
   }
 }

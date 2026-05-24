@@ -1,50 +1,140 @@
 {
   "Premier League": {
     "Everton": [
-      {"n": "Seamus Coleman", "to": "leaving (37yo captain)", "note": "End of 25/26", "c": "Ireland"}
+      {
+        "n": "Seamus Coleman",
+        "to": "leaving (37yo captain)",
+        "note": "End of 25/26",
+        "c": "Ireland"
+      }
     ],
     "Liverpool": [
-      {"n": "Mohamed Salah", "to": "TBD (Saudi rumor)", "note": "End of 25/26 — Egypt WC squad", "c": "Egypt"},
-      {"n": "Andy Robertson", "to": "TBD", "note": "End of 25/26", "c": "Scotland"}
+      {
+        "n": "Mohamed Salah",
+        "to": "TBD (Saudi rumor)",
+        "note": "End of 25/26 — Egypt WC squad",
+        "c": "Egypt"
+      },
+      {
+        "n": "Andy Robertson",
+        "to": "TBD",
+        "note": "End of 25/26",
+        "c": "Scotland"
+      }
     ],
     "Manchester City": [
-      {"n": "John Stones", "to": "TBD", "note": "End of 25/26", "c": "England"},
-      {"n": "Bernardo Silva", "to": "Atlético Madrid (rumored)", "note": "End of 25/26", "c": "Portugal"}
+      {
+        "n": "John Stones",
+        "to": "TBD",
+        "note": "End of 25/26",
+        "c": "England"
+      },
+      {
+        "n": "Bernardo Silva",
+        "to": "Atlético Madrid (rumored)",
+        "note": "End of 25/26",
+        "c": "Portugal"
+      }
     ],
     "Manchester United": [
-      {"n": "Casemiro", "to": "Inter Miami (MLS)", "note": "Confirmed", "c": "Brazil"}
+      {
+        "n": "Casemiro",
+        "to": "Inter Miami (MLS)",
+        "note": "Confirmed",
+        "c": "Brazil"
+      }
     ],
     "Chelsea": [
-      {"n": "Nicolas Jackson", "to": "Bayern Munich (loan)", "note": "Return TBC 26/27", "c": "Senegal"},
-      {"n": "Renato Veiga", "to": "Villarreal", "note": "Sold — confirmed", "c": "Portugal"}
+      {
+        "n": "Nicolas Jackson",
+        "to": "Bayern Munich (loan)",
+        "note": "Return TBC 26/27",
+        "c": "Senegal"
+      },
+      {
+        "n": "Renato Veiga",
+        "to": "Villarreal",
+        "note": "Sold — confirmed",
+        "c": "Portugal"
+      }
     ],
     "West Ham United F.C.": [
-      {"n": "Lucas Paquetá", "to": "Flamengo", "note": "Confirmed — Brazil WC squad", "c": "Brazil"}
+      {
+        "n": "Lucas Paquetá",
+        "to": "Flamengo",
+        "note": "Confirmed — Brazil WC squad",
+        "c": "Brazil"
+      }
     ],
     "Crystal Palace F.C": [
-      {"n": "Eberechi Eze", "to": "Arsenal", "note": "From 25/26", "c": "England"},
-      {"n": "Marc Guéhi", "to": "Manchester City", "note": "Confirmed 26/27", "c": "England"}
+      {
+        "n": "Eberechi Eze",
+        "to": "Arsenal",
+        "note": "From 25/26",
+        "c": "England"
+      },
+      {
+        "n": "Marc Guéhi",
+        "to": "Manchester City",
+        "note": "Confirmed 26/27",
+        "c": "England"
+      }
     ],
     "Bournemouth": [
-      {"n": "Andoni Iraola", "to": "leaving (manager)", "note": "Replaced by Marco Rose", "c": "Spain"},
-      {"n": "Marcos Senesi", "to": "leaving", "note": "End of 25/26", "c": "Argentina"}
+      {
+        "n": "Andoni Iraola",
+        "to": "leaving (manager)",
+        "note": "Replaced by Marco Rose",
+        "c": "Spain"
+      },
+      {
+        "n": "Marcos Senesi",
+        "to": "leaving",
+        "note": "End of 25/26",
+        "c": "Argentina"
+      }
     ],
     "Newcastle United": [
-      {"n": "Anthony Gordon", "to": "TBD (leaving rumor)", "note": "Watch", "c": "England"}
+      {
+        "n": "Anthony Gordon",
+        "to": "TBD (leaving rumor)",
+        "note": "Watch",
+        "c": "England"
+      }
     ]
   },
   "Liga Betclic": {
-    "Sporting CP": [
-      {"n": "Hidemasa Morita", "to": "TBD", "note": "Leaving Sporting", "c": "Japan"},
-      {"n": "Geovany Quenda", "to": "Chelsea", "note": "From 26/27", "c": "Portugal"}
-    ],
     "Benfica": [
-      {"n": "Nicolás Otamendi", "to": "TBD", "note": "Leaving Benfica end of 25/26", "c": "Argentina"}
+      {
+        "n": "Nicolás Otamendi",
+        "to": "TBD",
+        "note": "Leaving Benfica end of 25/26",
+        "c": "Argentina"
+      }
+    ],
+    "Sporting": [
+      {
+        "n": "Hidemasa Morita",
+        "to": "TBD",
+        "note": "Leaving Sporting",
+        "c": "Japan"
+      },
+      {
+        "n": "Geovany Quenda",
+        "to": "Chelsea",
+        "note": "From 26/27",
+        "c": "Portugal"
+      }
     ]
   },
   "Bundesliga": {
     "Bayern Munich": [
-      {"n": "João Palhinha", "to": "Tottenham (loan)", "note": "Loan, return TBC", "c": "Portugal"}
+      {
+        "n": "João Palhinha",
+        "to": "Tottenham (loan)",
+        "note": "Loan, return TBC",
+        "c": "Portugal"
+      }
     ]
   }
 }
