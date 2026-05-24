@@ -607,6 +607,13 @@
   },
   "Liga Betclic": {
     "Benfica": [],
-    "Sporting": []
+    "Sporting": [
+      {
+        "n": "Rodrigo Zalazar",
+        "from": "Sporting Braga",
+        "note": "Confirmed 26/27",
+        "c": "Uruguay"
+      }
+    ]
   }
 }
