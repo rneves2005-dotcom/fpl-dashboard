@@ -363,6 +363,20 @@ code {
 </head>
 <body>
 
+<div class="topbar" style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; padding:10px 0; margin-bottom:8px; border-bottom:1px solid var(--line); font-size:12px;">
+  <span style="color:var(--accent); font-weight:700;">🚀 Portal</span>
+  <span style="color:var(--ink-3);">·</span>
+  <span style="color:var(--accent); font-weight:600;">🧠 Toolkit</span>
+  <span style="color:var(--ink-3);">·</span>
+  <a href="./squads.html" style="color:var(--ink-2); text-decoration:none;">🏟️ FPL Squads</a>
+  <span style="color:var(--ink-3);">·</span>
+  <a href="./world.html" style="color:var(--ink-2); text-decoration:none;">🌍 Worldwide DB</a>
+  <span style="color:var(--ink-3);">·</span>
+  <a href="./stats.html" style="color:var(--ink-2); text-decoration:none;">📊 Stats</a>
+  <span style="color:var(--ink-3);">·</span>
+  <a href="./index.html" style="color:var(--ink-2); text-decoration:none;">📡 Live Dashboard</a>
+</div>
+
 <div class="masthead">
   <div>FPL TOOLKIT · RUI NEVES · ENTRY 2938711</div>
   <div class="masthead-title">The <em>Comeback</em> Kids</div>
@@ -372,9 +386,54 @@ code {
 <h1>The <em>Dollimore</em> Toolkit</h1>
 <p class="tagline">A decision framework for making consistently good FPL calls — distilled from Dollimore's process work, OPTA-backed position-specific metrics, and the hard lessons from our own recent weeks (Tavernier vs Scott, GW33 Free Hit, Ekitiké's injury). Reference this before every deadline.</p>
 
+<!-- PORTAL: entry points to all sub-tools -->
+<style>
+.portal { margin: 24px 0 28px; padding: 18px 18px 20px; background: linear-gradient(135deg, var(--good-soft), var(--accent-soft)); border: 1px solid var(--line); border-radius: 12px; }
+.portal-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 700; margin-bottom: 14px; color: var(--ink); display: flex; align-items: baseline; justify-content: space-between; }
+.portal-title small { font-size: 11px; font-weight: 500; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.5px; }
+.portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.portal-card { display: block; padding: 14px; background: rgba(255,255,255,0.7); border: 1px solid var(--line); border-radius: 8px; text-decoration: none; color: var(--ink); transition: all 0.15s; }
+.portal-card:hover { background: #fff; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(193, 65, 12, 0.1); }
+.portal-card .pc-icon { font-size: 24px; line-height: 1; margin-bottom: 6px; }
+.portal-card .pc-name { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.portal-card .pc-desc { font-size: 12px; color: var(--ink-2); line-height: 1.4; }
+.portal-card .pc-this { font-size: 11px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 8px; }
+</style>
+<div class="portal">
+  <div class="portal-title">🚀 Entry Portal <small>all my tools · one place</small></div>
+  <div class="portal-grid">
+    <div class="portal-card" style="cursor: default; opacity: 0.85;">
+      <div class="pc-icon">🧠</div>
+      <div class="pc-name">FPL Toolkit</div>
+      <div class="pc-desc">Decision framework, weekly scan protocol, pre-season planning, transfer logs. (This page.)</div>
+      <div class="pc-this">You are here</div>
+    </div>
+    <a class="portal-card" href="./squads.html">
+      <div class="pc-icon">🏟️</div>
+      <div class="pc-name">FPL Squads &amp; Transfers</div>
+      <div class="pc-desc">Per-club tab navigation across all 21 26/27 PL clubs. IN/OUT transfers + current squads. WC26 nation tracker.</div>
+    </a>
+    <a class="portal-card" href="./world.html">
+      <div class="pc-icon">🌍</div>
+      <div class="pc-name">Worldwide DB</div>
+      <div class="pc-desc">28 divisions · 656 clubs · 10,255 players. Squad explorer, transfer tabs (IN/OUT/Both), worldwide player search.</div>
+    </a>
+    <a class="portal-card" href="./stats.html">
+      <div class="pc-icon">📊</div>
+      <div class="pc-name">Stats Dashboard</div>
+      <div class="pc-desc">Pivot-style comparison — two clubs side-by-side from any divisions, shirt # slicers, KPIs, top scorers leaderboard.</div>
+    </a>
+    <a class="portal-card" href="./index.html">
+      <div class="pc-icon">📡</div>
+      <div class="pc-name">Live Dashboard</div>
+      <div class="pc-desc">Real-time GW state, live picks, mini-league standings.</div>
+    </a>
+  </div>
+</div>
+
 <!-- TOC -->
 <div class="toc">
-  <div class="toc-title">Contents</div>
+  <div class="toc-title">Toolkit Contents</div>
   <ol>
     <li><a href="#process">Decision Process</a></li>
     <li><a href="#position-metrics">Position Metrics</a></li>
@@ -388,9 +447,6 @@ code {
     <li><a href="#scan">Weekly Scan Protocol</a></li>
     <li><a href="#preseason">Pre-Season Protocol</a></li>
     <li><a href="#squads">26/27 Squad Database + Transfer Log</a></li>
-    <li><a href="squads.html" style="font-weight:600;">→ Interactive Squads &amp; Transfers (per-team filter)</a></li>
-    <li><a href="world.html" style="font-weight:600;">→ 🌍 Worldwide Squads &amp; Transfers (28 leagues, independent of FPL)</a></li>
-    <li><a href="stats.html" style="font-weight:600;">→ 📊 Stats Dashboard (compare clubs, top scorers, shirt slicers)</a></li>
   </ol>
 </div>
 
