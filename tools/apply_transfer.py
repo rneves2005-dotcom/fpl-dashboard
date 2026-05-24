@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Apply a transfer to Squads_Data.xlsx and regenerate world_data.json.
+"""DEPRECATED — DO NOT USE FOR NORMAL TRANSFERS.
+
+Rui owns all edits to Squads_Data.xlsx. Claude should never mutate the DB.
+Use tools/sync.py to refresh world_data.json after Rui edits in Excel.
+This script remains only as an emergency / reference tool.
+
+------- Original docstring follows -------
+Apply a transfer to Squads_Data.xlsx and regenerate world_data.json.
 
 Usage:
     python3 apply_transfer.py --player "Geovany Quenda" --to-club "Chelsea" --to-div "Premier League"

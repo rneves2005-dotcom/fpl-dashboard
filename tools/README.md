@@ -44,44 +44,37 @@ The `Players` sheet has 12 columns (do not reorder):
 
 ## Workflows
 
-### Rui edits xlsx directly in Excel
+### Rule: Claude never modifies `Squads_Data.xlsx`
 
-1. Open `Squads_Data.xlsx`, make changes, save & close.
-2. Tell Claude "I updated the file" (or run yourself):
+Rui is the sole owner of DB edits. Claude only:
+- READS the xlsx to regenerate `world_data.json` when informed of changes
+- Maintains `transfers_in.json` / `transfers_out.json` overlays (annotation layer
+  on top of the DB — manager moves, "from"/"to" notes, WC squad badges, etc.)
+
+### Standard flow: Rui edits xlsx, Claude refreshes
+
+1. Rui edits `Squads_Data.xlsx` in Excel (move player, fix shirt, edit club, etc.), saves & closes
+2. Rui tells Claude what changed (or just "I updated the file")
+3. Claude runs:
    ```bash
-   python3 tools/sync.py                 # regenerate world_data.json
-   python3 tools/validate_overlays.py    # confirm overlay clubs still match
+   python3 tools/sync.py                 # regenerate world_data.json from latest xlsx
+   python3 tools/validate_overlays.py    # confirm overlay clubs still match the DB
+   python3 tools/diff_db.py              # (optional) show what changed since last sync
    ```
-3. Optionally inspect the diff:
+4. Claude updates `transfers_in.json` / `transfers_out.json` overlays to log the move
+   (annotation only — "to" destination, "from" source, "Confirmed 26/27" note, etc.)
+5. Commit + push:
    ```bash
-   python3 tools/diff_db.py              # compare against most recent .bak
-   ```
-4. Commit + push:
-   ```bash
-   git add world_data.json && git commit -m "Sync from xlsx" && git push
+   git add world_data.json transfers_in.json transfers_out.json
+   git commit -m "Sync: <player> <from> → <to>"
+   git push
    ```
 
-### Claude applies a transfer (via chat)
+### Deprecated: apply_transfer.py
 
-```bash
-# Standard move
-python3 tools/apply_transfer.py --player "Geovany Quenda" --to-club "Chelsea" --to-div "Premier League"
-
-# Departure without known destination
-python3 tools/apply_transfer.py --player "Luuk de Jong" --leaving
-
-# Disambiguate when two players share a name
-python3 tools/apply_transfer.py --player "Thiago Silva" --current-club "FC Porto" --leaving
-```
-
-The script automatically:
-1. Creates a `.bak_before_<player>_<timestamp>` snapshot of the xlsx
-2. Mutates Clubs / Division / Country (derived from new Division's host country) / Shirt (cleared) / Previous Club (← old club)
-3. Regenerates `world_data.json` in both repo + OneDrive
-4. Prints a one-line summary
-
-Claude then edits `transfers_in.json` and `transfers_out.json` overlays to annotate the transfer
-(destination, "from", note like "Confirmed 26/27"), runs the validator, commits + pushes.
+`apply_transfer.py` still exists but should not be invoked for normal transfers.
+Reason: it mutates the xlsx, which violates the rule above. Kept around only as
+a reference / emergency tool. Use `sync.py` instead.
 
 ### Hard rules
 
