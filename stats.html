@@ -128,6 +128,10 @@ header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
     <label for="gLbDiv2">Top Scorers · Division 2</label>
     <select id="gLbDiv2"><option value="">— none —</option></select>
   </div>
+  <div class="gf-item">
+    <label for="gPlayerSearch">Find player (accent-insensitive)</label>
+    <input id="gPlayerSearch" type="text" placeholder="e.g. Gross, Odegaard, Muñoz…" autocomplete="off" style="width:100%; padding:7px 10px; font-size:13px; font-family:inherit; background:var(--bg); border:1px solid var(--line); border-radius:5px; color:var(--ink);">
+  </div>
 </div>
 
 <!-- Comparison + leaderboard -->
@@ -183,6 +187,8 @@ let DATA = null;
 let state = {
   // Global player filters — apply everywhere
   gCountry: '',
+  // Player-name search (normalize-aware, applied to all panels + leaderboard)
+  q: '',
   // Per-panel scope (Division + Club) — independent
   divA: '', clubA: '',
   divB: '', clubB: '',
@@ -194,6 +200,19 @@ let state = {
   lbDiv1: '', lbDiv2: '',
   lbMetric: 'g'
 };
+
+// Normalize accents/special chars so "Gross" matches "Groß", "Odegaard" matches "Ødegaard", etc.
+function normalize(s) {
+  if (!s) return '';
+  return s
+    .toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/ß/g, 'ss')
+    .replace(/ø/g, 'o')
+    .replace(/æ/g, 'ae')
+    .replace(/ł/g, 'l')
+    .replace(/đ/g, 'd');
+}
 
 async function loadData() {
   const v = '?v=' + Math.floor(Date.now() / 3600000);
@@ -231,6 +250,7 @@ async function loadData() {
   document.getElementById('gCountry').addEventListener('change', e => { state.gCountry = e.target.value; refreshClubLists(); renderAll(); });
   document.getElementById('gLbDiv1').addEventListener('change', e => { state.lbDiv1 = e.target.value; renderLeaderboard(); });
   document.getElementById('gLbDiv2').addEventListener('change', e => { state.lbDiv2 = e.target.value; renderLeaderboard(); });
+  document.getElementById('gPlayerSearch').addEventListener('input', e => { state.q = normalize(e.target.value.trim()); renderAll(); });
 
   // Per-panel Division change → reload Club list for THAT panel only
   document.getElementById('divA').addEventListener('change', e => {
@@ -260,6 +280,7 @@ async function loadData() {
 
 function filterPlayer(p) {
   if (state.gCountry && p.c !== state.gCountry) return false;
+  if (state.q && (!p.n || !normalize(p.n).includes(state.q))) return false;
   return true;
 }
 
