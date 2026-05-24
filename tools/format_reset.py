@@ -21,7 +21,8 @@ from openpyxl.styles import Font
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
-DB_PATH = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB/Squads_Data.xlsx")
+_DB_DIR = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB")
+DB_PATH = _DB_DIR / "Squads_Data.xlsm" if (_DB_DIR / "Squads_Data.xlsm").exists() else _DB_DIR / "Squads_Data.xlsx"
 REAL_MAX_ROW = 17274  # last row with player data per latest verification
 
 

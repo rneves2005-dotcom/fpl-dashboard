@@ -17,7 +17,8 @@ import openpyxl
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
-DB_PATH = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB/Squads_Data.xlsx")
+_DB_DIR = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB")
+DB_PATH = _DB_DIR / "Squads_Data.xlsm" if (_DB_DIR / "Squads_Data.xlsm").exists() else _DB_DIR / "Squads_Data.xlsx"
 REPO = Path("/Users/ruimiguelneves/Code/fpl-dashboard")
 
 

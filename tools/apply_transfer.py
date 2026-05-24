@@ -30,10 +30,12 @@ import openpyxl
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
-# Squads_Data.xlsx canonical location is OneDrive/Claude/DB/. macOS TCC blocks
-# shell access via the user-facing ~/Library/CloudStorage/… path, but OneDrive's
-# internal sync cache (below) is fully readable.
-DB_PATH = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB/Squads_Data.xlsx")
+# Squads_Data canonical location is OneDrive/Claude/DB/. macOS TCC blocks shell
+# access via the user-facing ~/Library/CloudStorage/… path, but OneDrive's
+# internal sync cache (below) is fully readable. Auto-prefer .xlsm (after Rui
+# enables VBA auto-sort) over .xlsx.
+_DB_DIR = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB")
+DB_PATH = _DB_DIR / "Squads_Data.xlsm" if (_DB_DIR / "Squads_Data.xlsm").exists() else _DB_DIR / "Squads_Data.xlsx"
 JSON_OUT = Path("/Users/ruimiguelneves/Code/fpl-dashboard/world_data.json")
 # OneDrive mirror — using the internal sync cache path (same TCC reason as DB_PATH above)
 JSON_OUT_ONEDRIVE = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/FPL/world_data.json")

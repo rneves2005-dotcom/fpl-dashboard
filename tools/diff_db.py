@@ -18,7 +18,7 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
 DB_DIR = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB")
-DB_PATH = DB_DIR / "Squads_Data.xlsx"
+DB_PATH = DB_DIR / "Squads_Data.xlsm" if (DB_DIR / "Squads_Data.xlsm").exists() else DB_DIR / "Squads_Data.xlsx"
 
 COLS = ["ID", "Shirt", "Player", "Age", "Clubs", "Country", "Division", "Goals", "Games", "International", "Shirt Int", "Previous Club"]
 
