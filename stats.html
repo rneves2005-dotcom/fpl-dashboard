@@ -121,16 +121,12 @@ header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
     <select id="gCountry"><option value="">— all countries —</option></select>
   </div>
   <div class="gf-item">
-    <label for="gMinAge">Min Age</label>
-    <select id="gMinAge"><option value="">no min</option><option>16</option><option>18</option><option>20</option><option>23</option><option>25</option><option>28</option><option>30</option><option>33</option></select>
+    <label for="gLbDiv1">Top Scorers · Division 1</label>
+    <select id="gLbDiv1"><option value="">— all divisions —</option></select>
   </div>
   <div class="gf-item">
-    <label for="gMaxAge">Max Age</label>
-    <select id="gMaxAge"><option value="">no max</option><option>20</option><option>23</option><option>25</option><option>28</option><option>30</option><option>33</option><option>36</option><option>40</option></select>
-  </div>
-  <div class="gf-item">
-    <label for="gLbDiv">Leaderboard scope (Division)</label>
-    <select id="gLbDiv"><option value="">— all divisions —</option></select>
+    <label for="gLbDiv2">Top Scorers · Division 2</label>
+    <select id="gLbDiv2"><option value="">— none —</option></select>
   </div>
 </div>
 
@@ -185,8 +181,8 @@ header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
 <script>
 let DATA = null;
 let state = {
-  // Global player filters (Country, Age) — apply everywhere
-  gCountry: '', minAge: null, maxAge: null,
+  // Global player filters — apply everywhere
+  gCountry: '',
   // Per-panel scope (Division + Club) — independent
   divA: '', clubA: '',
   divB: '', clubB: '',
@@ -194,8 +190,8 @@ let state = {
   shirtA: new Set(), shirtB: new Set(),
   sortA: { col: 's', dir: 1 },
   sortB: { col: 's', dir: 1 },
-  // Leaderboard scope (Division) — independent of panels
-  lbDiv: '',
+  // Leaderboard scope — supports up to 2 divisions
+  lbDiv1: '', lbDiv2: '',
   lbMetric: 'g'
 };
 
@@ -206,8 +202,8 @@ async function loadData() {
 
   const divs = Object.keys(DATA).sort();
 
-  // Populate the three Division dropdowns (Panel A, Panel B, Leaderboard)
-  for (const id of ['divA', 'divB', 'gLbDiv']) {
+  // Populate the four Division dropdowns (Panel A, Panel B, Leaderboard 1, Leaderboard 2)
+  for (const id of ['divA', 'divB', 'gLbDiv1', 'gLbDiv2']) {
     const el = document.getElementById(id);
     for (const d of divs) {
       const opt = document.createElement('option');
@@ -233,9 +229,8 @@ async function loadData() {
 
   // Global filters
   document.getElementById('gCountry').addEventListener('change', e => { state.gCountry = e.target.value; refreshClubLists(); renderAll(); });
-  document.getElementById('gMinAge').addEventListener('change', e => { state.minAge = +e.target.value || null; refreshClubLists(); renderAll(); });
-  document.getElementById('gMaxAge').addEventListener('change', e => { state.maxAge = +e.target.value || null; refreshClubLists(); renderAll(); });
-  document.getElementById('gLbDiv').addEventListener('change', e => { state.lbDiv = e.target.value; renderLeaderboard(); });
+  document.getElementById('gLbDiv1').addEventListener('change', e => { state.lbDiv1 = e.target.value; renderLeaderboard(); });
+  document.getElementById('gLbDiv2').addEventListener('change', e => { state.lbDiv2 = e.target.value; renderLeaderboard(); });
 
   // Per-panel Division change → reload Club list for THAT panel only
   document.getElementById('divA').addEventListener('change', e => {
@@ -265,8 +260,6 @@ async function loadData() {
 
 function filterPlayer(p) {
   if (state.gCountry && p.c !== state.gCountry) return false;
-  if (state.minAge != null && (p.a == null || p.a < state.minAge)) return false;
-  if (state.maxAge != null && (p.a == null || p.a > state.maxAge)) return false;
   return true;
 }
 
@@ -409,8 +402,9 @@ function renderPanel(target) {
 function renderLeaderboard() {
   const lbBadge = document.getElementById('lbBadge');
   let players = [];
-  // Scope: lbDiv if set, else all divisions. Global Country/Age filters apply.
-  const divs = state.lbDiv ? [state.lbDiv] : Object.keys(DATA);
+  // Scope: union of lbDiv1 + lbDiv2 if set, else all divisions.
+  const selected = [state.lbDiv1, state.lbDiv2].filter(Boolean);
+  const divs = selected.length ? selected : Object.keys(DATA);
   for (const div of divs) {
     if (!DATA[div]) continue;
     for (const club of Object.keys(DATA[div])) {
@@ -419,7 +413,10 @@ function renderLeaderboard() {
       }
     }
   }
-  let scopeNote = state.lbDiv ? `${state.lbDiv} · ${players.length} players` : `global · ${players.length} players`;
+  let scopeNote;
+  if (selected.length === 0) scopeNote = `global · ${players.length} players`;
+  else if (selected.length === 1) scopeNote = `${selected[0]} · ${players.length} players`;
+  else scopeNote = `${selected[0]} + ${selected[1]} · ${players.length} players`;
   if (state.gCountry) scopeNote += ` · ${state.gCountry}`;
   lbBadge.textContent = scopeNote;
 
@@ -432,9 +429,10 @@ function renderLeaderboard() {
   const top = players.slice(0, 100);
   const metricCol = (m === 'a' || m === 'ayoung') ? 'a' : (m === 'games' ? 'games' : 'g');
   const metricLabel = (m === 'a' || m === 'ayoung') ? 'Age' : (m === 'games' ? 'Games' : 'Goals');
-  let html = `<thead><tr><th class="num">${metricLabel}</th><th>Player</th><th>Club</th><th class="num dim">Age</th></tr></thead><tbody>`;
+  const showDiv = selected.length === 2;  // mixing 2 leagues — show Division column for clarity
+  let html = `<thead><tr><th class="num">${metricLabel}</th><th>Player</th><th>Club</th>${showDiv ? '<th>Div</th>' : ''}<th class="num dim">Age</th></tr></thead><tbody>`;
   for (const p of top) {
-    html += `<tr><td class="num">${p[metricCol] ?? '–'}</td><td class="player">${p.n}</td><td class="dim">${p.club}</td><td class="num dim">${p.a ?? '–'}</td></tr>`;
+    html += `<tr><td class="num">${p[metricCol] ?? '–'}</td><td class="player">${p.n}</td><td class="dim">${p.club}</td>${showDiv ? `<td class="dim" style="font-size:11px;">${p.div}</td>` : ''}<td class="num dim">${p.a ?? '–'}</td></tr>`;
   }
   html += '</tbody>';
   document.getElementById('tableLB').innerHTML = html;
