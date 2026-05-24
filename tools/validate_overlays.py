@@ -18,7 +18,10 @@ import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
 _DB_DIR = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB")
-DB_PATH = _DB_DIR / "Squads_Data.xlsm" if (_DB_DIR / "Squads_Data.xlsm").exists() else _DB_DIR / "Squads_Data.xlsx"
+DB_PATH = next(
+    (p for p in [_DB_DIR / "Squads.xlsm", _DB_DIR / "Squads_Data.xlsm", _DB_DIR / "Squads_Data.xlsx"] if p.exists()),
+    _DB_DIR / "Squads.xlsm"
+)
 REPO = Path("/Users/ruimiguelneves/Code/fpl-dashboard")
 
 
