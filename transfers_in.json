@@ -615,5 +615,15 @@
         "c": "Uruguay"
       }
     ]
+  },
+  "Major League Soccer": {
+    "Inter Miami": [
+      {
+        "n": "Casemiro",
+        "from": "Manchester United",
+        "note": "Confirmed 26/27",
+        "c": "Brazil"
+      }
+    ]
   }
 }
