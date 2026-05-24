@@ -30,12 +30,10 @@ import openpyxl
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
-# NOTE on this path: Rui moved Squads_Data.xlsx to OneDrive's Documents folder.
-# macOS TCC restricts shell access to the user-facing CloudStorage path under
-# ~/Library/CloudStorage/OneDrive-Personal/Documents/. The OneDrive sync client
-# keeps an authoritative local cache at the path below — reading and writing
-# there propagates back through OneDrive to the user-facing file.
-DB_PATH = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Documents/Squads_Data.xlsx")
+# Squads_Data.xlsx canonical location is OneDrive/Claude/DB/. macOS TCC blocks
+# shell access via the user-facing ~/Library/CloudStorage/… path, but OneDrive's
+# internal sync cache (below) is fully readable.
+DB_PATH = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/DB/Squads_Data.xlsx")
 JSON_OUT = Path("/Users/ruimiguelneves/Code/fpl-dashboard/world_data.json")
 # OneDrive mirror — using the internal sync cache path (same TCC reason as DB_PATH above)
 JSON_OUT_ONEDRIVE = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/FPL/world_data.json")
