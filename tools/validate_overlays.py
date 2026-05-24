@@ -26,12 +26,21 @@ REPO = Path("/Users/ruimiguelneves/Code/fpl-dashboard")
 
 
 def load_db_clubs():
+    """Load real divisions AND synthetic '🌐 {Country}' virtual divisions (no-division rows grouped by country)."""
     wb = openpyxl.load_workbook(DB_PATH, read_only=True, data_only=True)
     ws = wb["Players"]
     db = defaultdict(set)
     for row in ws.iter_rows(min_row=2, values_only=True):
-        if row[6] and row[4]:
-            db[row[6]].add(row[4])
+        club = row[4]
+        country = row[5]
+        division = row[6]
+        if not club:
+            continue
+        if division:
+            db[division].add(club)
+        elif country:
+            # Virtual division key — matches what world_data.json uses
+            db[f"🌐 {country}"].add(club)
     return db
 
 

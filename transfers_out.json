@@ -158,5 +158,15 @@
         "c": "Portugal"
       }
     ]
+  },
+  "🌐 Austria": {
+    "Red Bull Salzburg": [
+      {
+        "n": "Jannik Schuster",
+        "to": "Brentford",
+        "note": "Confirmed 26/27",
+        "c": "Germany"
+      }
+    ]
   }
 }
