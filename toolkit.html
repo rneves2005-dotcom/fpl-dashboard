@@ -1493,6 +1493,9 @@ Be concise. No transfer planning during live GW.</div>
     <strong>Championship-to-PL drop-off warning:</strong> historically only 20-30% of Championship 15+ goal scorers translate to 8+ PL goals in their first season. Don't over-anchor on Championship stats. Pre-season friendly form + FPL pricing + manager continuity weighted heavier than raw goals.
   </div>
 
+  <h3 style="margin-top:18px;">📚 Player-Club Source of Truth</h3>
+  <p style="font-size:12px;">Authoritative reference: <code>/Users/ruimiguelneves/Library/CloudStorage/OneDrive-Personal/Claude/DB/Squads_Data.xlsx</code> · <strong>Players</strong> sheet (~565 PL entries with Shirt/Country/Club/PrevClub). When in doubt about a player's 26/27 club, query this DB first before citing prior knowledge.</p>
+
   <h3 style="margin-top:18px;">26/27 Club Squad Format (standardized)</h3>
   <p>Per-club squad tables sorted by shirt #. Columns: <code>#</code> | <code>Player</code> | <code>Pos</code> | <code>Country</code> | <code>Prev Club</code> | <code>PL G 26/27</code>.</p>
   <ul>
@@ -1933,7 +1936,7 @@ Be concise. No transfer planning during live GW.</div>
       <tr><td>MID</td><td>Morgan Rogers</td><td>AVL</td><td>0.80× (top FPL relevance — discount carefully)</td></tr>
       <tr><td>MID</td><td>Eberechi Eze</td><td>ARS</td><td>0.80×</td></tr>
       <tr><td>FWD</td><td>Bukayo Saka</td><td>ARS</td><td>0.80× (FPL premium — heavy discount)</td></tr>
-      <tr><td>FWD</td><td>Noni Madueke</td><td>CHE</td><td>0.85×</td></tr>
+      <tr><td>FWD</td><td>Noni Madueke</td><td><strong>ARS</strong> (NEW from CHE)</td><td>0.85×</td></tr>
       <tr><td>FWD</td><td>Marcus Rashford</td><td>MUN return TBC (loan Barca 25/26)</td><td>0.85× if MUN</td></tr>
       <tr><td>FWD</td><td>Anthony Gordon</td><td>NEW (rumored leaving)</td><td>club TBD</td></tr>
       <tr><td>FWD</td><td>Ivan Toney</td><td>Al-Ahli (non-PL)</td><td>n/a</td></tr>
@@ -2019,7 +2022,7 @@ Be concise. No transfer planning during live GW.</div>
     <tbody>
       <tr><td>Manuel Akanji</td><td>on loan to Inter Milan — MCI return TBC</td><td>club pending</td><td>re-assess</td></tr>
       <tr style="background:var(--good-soft);"><td><strong>Dan Ndoye</strong></td><td>NFO</td><td>mid wide attacker</td><td>0.85×</td></tr>
-      <tr><td>Granit Xhaka</td><td>Leverkusen (SUN rumor)</td><td>club pending</td><td>re-assess</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>Granit Xhaka</strong></td><td><strong>SUN</strong> (NEW from Leverkusen)</td><td>mid CDM anchor</td><td>0.85×</td></tr>
     </tbody>
   </table>
 
@@ -2055,25 +2058,25 @@ Be concise. No transfer planning during live GW.</div>
     </tbody>
   </table>
 
-  <h4 style="margin-top:14px;">⚠️ Compounding WC-overload clubs (ENG+NOR+SEN+GER+EGY+SUI+POR+BRA)</h4>
+  <h4 style="margin-top:14px;">⚠️ Compounding WC-overload (verified vs Squads_Data.xlsx · ENG+NOR+SEN+GER+EGY+SUI+POR+BRA)</h4>
   <table style="font-size:11px;">
     <thead><tr><th>Club</th><th>WC reps</th><th>Action</th></tr></thead>
     <tbody>
-      <tr style="background:var(--bad-soft);"><td><strong>MCI</strong></td><td>Haaland, Guehi, O'Reilly, Trafford, Marmoush, <strong>Dias, M.Nunes</strong> (7)</td><td>🔴🔴 HEAVIEST. Cap at 1-2. Haaland-only premium. Dias premium CB but discount-heavy. Akanji on Inter loan (TBC); Ederson left to Fenerbahçe</td></tr>
-      <tr style="background:var(--bad-soft);"><td><strong>ARS</strong></td><td>Saka, Rice, Eze, Ødegaard, Havertz, <strong>Gabriel, Martinelli</strong> (7)</td><td>🔴🔴 SECOND HEAVIEST. Cap at 1-2. Gabriel essential CB still attractive at 0.80×</td></tr>
-      <tr style="background:var(--bad-soft);"><td><strong>NEW</strong></td><td>Livramento, Burn, <strong>Thiaw, Woltemade, Bruno G.</strong> (5)</td><td>🔴 mod-heavy. Bruno G. premium MID still attractive at 0.80×</td></tr>
-      <tr style="background:var(--bad-soft);"><td><strong>MUN</strong></td><td>Mainoo, <strong>Bruno F., Dalot, Cunha</strong> (4)</td><td>🔴 mod-heavy. Bruno F. + Cunha both premium — compound with Carrick rebuild</td></tr>
+      <tr style="background:var(--bad-soft);"><td><strong>ARS</strong></td><td>Saka, Rice, Eze, <strong>Madueke</strong>, Ødegaard, Havertz, Gabriel, Martinelli (8)</td><td>🔴🔴 HEAVIEST. Cap at 1-2 opening 3 GWs. Madueke (NEW) confirmed at ARS, not CHE</td></tr>
+      <tr style="background:var(--bad-soft);"><td><strong>MCI</strong></td><td>Haaland, Guehi, O'Reilly, Trafford, Marmoush, Dias, M.Nunes (7)</td><td>🔴🔴 SECOND. Cap at 1-2. Haaland-only premium. Akanji on Inter loan TBC; Ederson → Fenerbahçe</td></tr>
+      <tr style="background:var(--bad-soft);"><td><strong>NEW</strong></td><td>Livramento, Burn, Thiaw, Woltemade, Bruno G. (5)</td><td>🔴 Bruno G. premium MID still attractive at 0.80×</td></tr>
+      <tr style="background:var(--bad-soft);"><td><strong>MUN</strong></td><td>Mainoo, Bruno F., Dalot, Cunha (4)</td><td>🔴 Bruno F. + Cunha both premium — Carrick rebuild compound</td></tr>
       <tr><td>AVL</td><td>Konsa, Rogers, Watkins (3)</td><td>🟡 system stable but load</td></tr>
       <tr><td>EVE</td><td>Pickford, Gueye, I.Ndiaye (3)</td><td>🟡 SEN R16 ceiling</td></tr>
-      <tr><td>NFO</td><td>E.Anderson, Ndoye (2)</td><td>🟡 mod (D.Santos → Botafogo)</td></tr>
-      <tr><td>CHE</td><td>R.James, Madueke, <strong>P.Neto</strong> (3)</td><td>🟡 mod (Jackson loan adds if returns)</td></tr>
-      <tr><td>BRE</td><td>Ajer, J.Henderson, <strong>I.Thiago</strong> (3)</td><td>🟡 mod</td></tr>
+      <tr><td>BRE</td><td>Ajer, J.Henderson, I.Thiago (3)</td><td>🟡 mod</td></tr>
+      <tr><td>NFO</td><td>E.Anderson, Ndoye (2)</td><td>🟡 mod</td></tr>
+      <tr><td>CHE</td><td>R.James, P.Neto (2)</td><td>🟡 mod (Madueke confirmed gone; Jackson loan)</td></tr>
       <tr><td>FUL</td><td>Berge, Bobb (2)</td><td>🟡 mod</td></tr>
       <tr><td>CRY</td><td>D.Henderson, I.Sarr (2)</td><td>🟡 mod</td></tr>
       <tr><td>TOT</td><td>Spence, P.M.Sarr (2)</td><td>🟡 mod</td></tr>
-      <tr style="background:var(--good-soft);"><td><strong>LIV</strong></td><td>Wirtz, <strong>Alisson</strong> (2)</td><td>🟢 light — STILL CLEANEST big club. Premium picks (Wirtz, Alisson) both worth 0.80×</td></tr>
-      <tr><td>SUN</td><td>Diarra (1)</td><td>🟢 light</td></tr>
-      <tr style="background:var(--good-soft);"><td><strong>WHU</strong></td><td>0 (Paquetá → Flamengo)</td><td>🟢 zero WC load</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>LIV</strong></td><td>Wirtz, Alisson (2)</td><td>🟢 light — STILL CLEANEST big club</td></tr>
+      <tr><td>SUN</td><td>Diarra, <strong>Xhaka</strong> (2)</td><td>🟡 Xhaka confirmed at SUN per DB</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>WHU</strong></td><td>0</td><td>🟢 zero WC load (if survives)</td></tr>
     </tbody>
   </table>
 
