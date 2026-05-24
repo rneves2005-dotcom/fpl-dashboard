@@ -152,6 +152,7 @@ td.prev { color: var(--ink-3); font-size: 12px; font-style: italic; }
 
 <script>
 let DATA = null;
+let TRANSFERS_IN = {};
 let TRANSFERS_OUT = {};
 let currentSort = { col: 's', dir: 1 };
 let transferView = 'in';  // 'in' | 'out' | 'both'
@@ -163,11 +164,15 @@ function setTransferView(v) {
 }
 
 async function loadData() {
-  const [res, resOut] = await Promise.all([
+  const [res, resIn, resOut] = await Promise.all([
     fetch('./world_data.json'),
+    fetch('./transfers_in.json').catch(() => null),
     fetch('./transfers_out.json').catch(() => null)
   ]);
   DATA = await res.json();
+  if (resIn) {
+    try { TRANSFERS_IN = await resIn.json(); } catch (e) { TRANSFERS_IN = {}; }
+  }
   if (resOut) {
     try { TRANSFERS_OUT = await resOut.json(); } catch (e) { TRANSFERS_OUT = {}; }
   }
@@ -258,8 +263,9 @@ function renderStats() {
   }
   if (club) {
     const players = DATA[div][club];
-    const withPrev = players.filter(p => p.p).length;
-    sr.innerHTML = `<span class="chip"><strong>${div}</strong></span> <span class="chip">${club}</span> <span class="chip">${players.length} players</span> <span class="chip">${withPrev} with prev club</span>`;
+    const ins = (TRANSFERS_IN[div] && TRANSFERS_IN[div][club]) ? TRANSFERS_IN[div][club].length : 0;
+    const outs = (TRANSFERS_OUT[div] && TRANSFERS_OUT[div][club]) ? TRANSFERS_OUT[div][club].length : 0;
+    sr.innerHTML = `<span class="chip"><strong>${div}</strong></span> <span class="chip">${club}</span> <span class="chip">${players.length} players</span> <span class="chip">${ins} new IN</span> <span class="chip">${outs} new OUT</span>`;
   } else {
     const clubs = Object.keys(DATA[div]).length;
     const players = Object.values(DATA[div]).flat().length;
@@ -328,11 +334,16 @@ function renderSquads() {
 }
 
 function getTransfersIn(div, club) {
+  // Uses transfers_in.json overlay — confirmed May+ 2026 transfers ONLY.
+  // Does NOT fall back to DB prev_club (which is historical, not new).
   const out = [];
-  const scope = club ? [club] : Object.keys(DATA[div]);
+  const divMap = TRANSFERS_IN[div];
+  if (!divMap) return out;
+  const scope = club ? [club] : Object.keys(divMap);
   for (const cb of scope) {
-    for (const p of DATA[div][cb]) {
-      if (p.p) out.push({...p, club: cb, _dir: 'IN'});
+    const arr = divMap[cb] || [];
+    for (const t of arr) {
+      out.push({s: null, n: t.n, c: t.c, a: null, g: null, p: t.from, note: t.note, club: cb, _dir: 'IN'});
     }
   }
   return out;
@@ -395,14 +406,14 @@ function renderTransfers() {
   const outs = getTransfersOut(div, club);
   const scope = club || div;
 
+  const subtitle = '<div style="font-size:11px; color:var(--ink-3); margin-top:-4px;">Only confirmed transfers from May 2026 onwards · DB previous-club not used</div>';
   if (transferView === 'in') {
-    c.innerHTML = `<div class="club-header"><h2>${scope} — Transfers IN</h2><div class="count">${ins.length} new arrivals (with previous club)</div></div>${transferTable(ins, 'in')}`;
+    c.innerHTML = `<div class="club-header"><h2>${scope} — Transfers IN</h2><div class="count">${ins.length} new arrivals</div></div>${subtitle}${ins.length ? transferTable(ins, 'in') : '<div class="empty">No confirmed IN transfers logged for this scope yet.</div>'}`;
   } else if (transferView === 'out') {
-    const note = !TRANSFERS_OUT[div] ? '<div class="empty" style="margin-bottom:12px;">Note: OUT transfers are tracked via overlay (<code>transfers_out.json</code>). Add entries there for confirmed departures.</div>' : '';
-    c.innerHTML = `${note}<div class="club-header"><h2>${scope} — Transfers OUT</h2><div class="count">${outs.length} confirmed departures</div></div>${outs.length ? transferTable(outs, 'out') : '<div class="empty">No confirmed OUT transfers logged for this scope yet.</div>'}`;
+    c.innerHTML = `<div class="club-header"><h2>${scope} — Transfers OUT</h2><div class="count">${outs.length} confirmed departures</div></div>${subtitle}${outs.length ? transferTable(outs, 'out') : '<div class="empty">No confirmed OUT transfers logged for this scope yet.</div>'}`;
   } else {
     const all = [...ins, ...outs];
-    c.innerHTML = `<div class="club-header"><h2>${scope} — All New Transfers</h2><div class="count">${ins.length} IN · ${outs.length} OUT · ${all.length} total</div></div>${transferTable(all, 'both')}`;
+    c.innerHTML = `<div class="club-header"><h2>${scope} — All New Transfers</h2><div class="count">${ins.length} IN · ${outs.length} OUT · ${all.length} total</div></div>${subtitle}${all.length ? transferTable(all, 'both') : '<div class="empty">No confirmed transfers logged for this scope yet.</div>'}`;
   }
   wireSort(c);
 }
