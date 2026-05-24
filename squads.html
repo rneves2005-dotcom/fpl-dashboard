@@ -1412,12 +1412,13 @@ td strong { color: var(--ink); font-weight: 600; }
   <div class="nation-tabs">
     <button class="nation-tab" id="ntab-ENG" onclick="showNation('ENG')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</button>
     <button class="nation-tab" id="ntab-NOR" onclick="showNation('NOR')">🇳🇴 Norway</button>
+    <button class="nation-tab" id="ntab-SEN" onclick="showNation('SEN')">🇸🇳 Senegal</button>
     <button class="nation-tab" id="ntab-FRA" onclick="showNation('FRA')" disabled style="opacity:0.4;">🇫🇷 France (tbd)</button>
     <button class="nation-tab" id="ntab-ESP" onclick="showNation('ESP')" disabled style="opacity:0.4;">🇪🇸 Spain (tbd)</button>
     <button class="nation-tab" id="ntab-BRA" onclick="showNation('BRA')" disabled style="opacity:0.4;">🇧🇷 Brazil (tbd)</button>
     <button class="nation-tab" id="ntab-ARG" onclick="showNation('ARG')" disabled style="opacity:0.4;">🇦🇷 Argentina (tbd)</button>
     <button class="nation-tab" id="ntab-POR" onclick="showNation('POR')" disabled style="opacity:0.4;">🇵🇹 Portugal (tbd)</button>
-    <button class="nation-tab" id="ntab-GER" onclick="showNation('GER')" disabled style="opacity:0.4;">🇩🇪 Germany (tbd)</button>
+    <button class="nation-tab" id="ntab-GER" onclick="showNation('GER')">🇩🇪 Germany</button>
     <button class="nation-tab" id="ntab-NED" onclick="showNation('NED')" disabled style="opacity:0.4;">🇳🇱 Netherlands (tbd)</button>
     <button class="nation-tab" id="ntab-ITA" onclick="showNation('ITA')" disabled style="opacity:0.4;">🇮🇹 Italy (tbd)</button>
   </div>
@@ -1535,23 +1536,93 @@ td strong { color: var(--ink); font-weight: 600; }
   </table>
   </div>
 
+  <!-- SENEGAL -->
+  <div class="nation-panel" id="nation-SEN">
+  <h3>🇸🇳 Senegal · Pape Thiaw · confirmed May 2026</h3>
+
+  <div class="callout" style="border-left:4px solid var(--accent); background:var(--good-soft); padding:12px; margin-bottom:16px;">
+    <strong>⚡ Key FPL signals:</strong> 6 PL-relevant picks. Most impactful: <strong>Ismaïla Sarr (CRY)</strong> + <strong>Idrissa Gueye (EVE)</strong> + <strong>Nicolas Jackson (CHE)</strong>. Senegal historically reaches R16 ceiling — moderate fatigue scenario.
+  </div>
+
+  <h4>✅ PL-relevant selections</h4>
+  <table>
+    <thead><tr><th>Pos</th><th>Player</th><th>Club 26/27</th><th>FPL relevance</th><th>Discount</th></tr></thead>
+    <tbody>
+      <tr><td>GK</td><td>Édouard Mendy</td><td>Al-Ahli (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr><td colspan="5" style="background:var(--bg-soft); font-size:11px; font-style:italic;">Other GK + most DEFs play outside PL · skipped for brevity</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>MID</strong></td><td><strong>Idrissa Gana Gueye</strong></td><td>EVE</td><td><strong>high (DC nailed starter)</strong></td><td>0.85×</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>MID</strong></td><td><strong>Pape Matar Sarr</strong></td><td>TOT</td><td>mid (De Zerbi system fit)</td><td>0.85×</td></tr>
+      <tr><td>MID</td><td>Habib Diarra</td><td>SUN</td><td>budget MID watchlist</td><td>0.90×</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>FWD</strong></td><td><strong>Ismaïla Sarr</strong></td><td>CRY</td><td><strong>high (premium wide attacker)</strong></td><td>0.80×</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>FWD</strong></td><td><strong>Iliman Ndiaye</strong></td><td>EVE</td><td>mid-high (creative MID/FWD)</td><td>0.85×</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>FWD</strong></td><td><strong>Nicolas Jackson</strong></td><td>CHE</td><td>mid (Alonso striker battle)</td><td>0.85×</td></tr>
+      <tr><td>FWD</td><td>Sadio Mané</td><td>Al-Nassr (non-PL)</td><td>n/a</td><td>–</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top:24px;">📌 Cross-reference — PL clubs with Senegal players</h4>
+  <table>
+    <thead><tr><th>Club</th><th>Players</th><th>Net impact</th></tr></thead>
+    <tbody>
+      <tr><td><strong>EVE</strong></td><td>Gueye, I.Ndiaye</td><td>🟡 2 reps — DC anchor + creative outlet both at risk</td></tr>
+      <tr><td><strong>CHE</strong></td><td>Jackson (+ ENG R.James, Madueke)</td><td>🟡 3 reps now — Alonso transition + Jackson WC overlay = avoid CHE strikers opening GWs</td></tr>
+      <tr><td>CRY</td><td>I.Sarr</td><td>🟡 premium wide attacker — discount 0.80×</td></tr>
+      <tr><td>TOT</td><td>P.M.Sarr</td><td>🟡 mid MID</td></tr>
+      <tr><td>SUN</td><td>Diarra</td><td>🟢 budget MID — light fatigue risk</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- GERMANY -->
+  <div class="nation-panel" id="nation-GER">
+  <h3>🇩🇪 Germany · Julian Nagelsmann · confirmed May 2026</h3>
+
+  <div class="callout" style="border-left:4px solid var(--accent); background:var(--bad-soft); padding:12px; margin-bottom:16px;">
+    <strong>⚡ MAJOR FPL impact:</strong> Only 2 PL players selected (<strong>Havertz ARS</strong>, <strong>Wirtz LIV</strong>) but both are FPL-critical premiums. <strong>ARS climbs to 5 WC reps</strong> (heaviest of any PL club). <strong>LIV loses zero-load advantage</strong> with Wirtz, but still only 1 player — net advantage retained. Germany typically reaches QF+ → apply 0.80× (heavy).
+  </div>
+
+  <h4>✅ PL-relevant selections</h4>
+  <table>
+    <thead><tr><th>Pos</th><th>Player</th><th>Club 26/27</th><th>FPL relevance</th><th>Discount</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--good-soft);"><td><strong>FWD</strong></td><td><strong>Kai Havertz</strong></td><td>ARS</td><td><strong>premium FWD (returning from injury)</strong></td><td>0.75× (injury history + WC load — DOUBLE discount)</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>MID</strong></td><td><strong>Florian Wirtz</strong></td><td>LIV (NEW from Leverkusen)</td><td><strong>premium MID (£10+ launch price expected)</strong></td><td>0.80× (likely deep run with GER)</td></tr>
+      <tr><td colspan="5" style="background:var(--bg-soft); font-size:11px; font-style:italic;">All other selections play in Bundesliga (Bayern, Dortmund, Leipzig, Stuttgart, Frankfurt, Mainz, Hoffenheim) or Real Madrid (Rüdiger) / Galatasaray (Sané) — non-PL</td></tr>
+      <tr><td>?</td><td>Malick Thiaw</td><td>Milan or NEW link (TBC)</td><td>watch transfer window</td><td>re-assess</td></tr>
+      <tr><td>?</td><td>Nick Woltemade</td><td>Stuttgart or NEW link (TBC)</td><td>watch transfer window</td><td>re-assess</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top:24px;">📌 Cross-reference — PL clubs with Germany players</h4>
+  <table>
+    <thead><tr><th>Club</th><th>Players</th><th>Net impact</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--bad-soft);"><td><strong>ARS</strong></td><td>Havertz (+ ENG Saka/Rice/Eze + NOR Ødegaard)</td><td>🔴 <strong>NOW 5 WC REPS — HEAVIEST LOAD in PL</strong>. Cap ARS exposure at 1-2 in opening 3 GWs. Havertz injury history + WC = AVOID opening squad</td></tr>
+      <tr><td><strong>LIV</strong></td><td>Wirtz</td><td>🟡 1 rep — still light overall. Wirtz launch price likely £10+; discount to 0.80× for opening GWs but premium creative talent</td></tr>
+    </tbody>
+  </table>
+  </div>
+
   <div class="callout" style="margin-top:16px; font-size:12px;">
     <strong>Discount logic:</strong> 0.80× = expected deep tournament run + heavy minutes. 0.85× = squad starter, group + R16 likely. 0.90-0.95× = rotation/depth player, low fatigue. Reassess after group stage (Jun 26) and again after tournament concludes (Jul 19) based on actual minutes played. Group-stage exit → revise all to 0.95× for opening 2-3 GWs only.
     <br><br>
-    <strong>Master cross-reference (running tally of WC-overload PL clubs):</strong>
+    <strong>Master cross-reference (running tally — ENG + NOR + SEN + GER):</strong>
     <ul style="margin:6px 0 0 18px;">
-      <li><strong>MCI</strong>: O'Reilly, Trafford, <strong>Guehi</strong> (ENG) + Haaland (NOR) = 4 — 🔴 HEAVY</li>
-      <li><strong>ARS</strong>: Saka, Rice, Eze (ENG) + Ødegaard (NOR) = 4 — 🔴 HEAVY</li>
+      <li><strong>ARS</strong>: Saka, Rice, Eze (ENG) + Ødegaard (NOR) + <strong>Havertz (GER)</strong> = <strong>5</strong> — 🔴 HEAVIEST LOAD IN PL</li>
+      <li><strong>MCI</strong>: O'Reilly, Trafford, Guehi (ENG) + Haaland (NOR) = 4 — 🔴 HEAVY</li>
+      <li><strong>CHE</strong>: R.James, Madueke (ENG) + <strong>Jackson (SEN)</strong> = 3 — 🟡 mod+ (Alonso transition overlay)</li>
       <li><strong>AVL</strong>: Konsa, Rogers, Watkins (ENG) = 3 — 🟡 mod</li>
-      <li><strong>BRE</strong>: Ajer (NOR) + <strong>Jordan Henderson</strong> (ENG) = 2 — 🟡 mod</li>
-      <li><strong>FUL</strong>: Berge + <strong>Bobb</strong> (NOR) = 2 — 🟡 mod</li>
+      <li><strong>EVE</strong>: Pickford (ENG) + <strong>Gueye, I.Ndiaye (SEN)</strong> = 3 — 🟡 mod (Senegal R16 ceiling = lighter risk)</li>
+      <li><strong>BRE</strong>: Ajer (NOR) + Jordan Henderson (ENG) = 2 — 🟡 mod</li>
+      <li><strong>FUL</strong>: Berge + Bobb (NOR) = 2 — 🟡 mod</li>
       <li><strong>NEW</strong>: Livramento, Burn (ENG) = 2 — 🟡 mod</li>
-      <li><strong>CHE</strong>: R.James, Madueke (ENG) = 2 — 🟡 mod</li>
-      <li><strong>CRY</strong>: D.Henderson (ENG) = 1 — 🟢 light (Guehi → MCI removes load)</li>
-      <li><strong>LIV</strong>: 0 — 🟢 ZERO WC load (Quansah → Leverkusen removed)</li>
-      <li>EVE (Pickford)/MUN (Mainoo)/NFO (E.Anderson)/TOT (Spence): 1 each — 🟢 light</li>
+      <li><strong>CRY</strong>: D.Henderson (ENG) + <strong>I.Sarr (SEN)</strong> = 2 — 🟡 mod (I.Sarr now key WC-overload pick)</li>
+      <li><strong>TOT</strong>: Spence (ENG) + <strong>P.M.Sarr (SEN)</strong> = 2 — 🟡 mod</li>
+      <li><strong>LIV</strong>: <strong>Wirtz (GER)</strong> = 1 — 🟢 light (lost zero-load advantage; Wirtz launch premium still attractive)</li>
+      <li><strong>SUN</strong>: <strong>Diarra (SEN)</strong> = 1 — 🟢 light</li>
+      <li>MUN (Mainoo)/NFO (E.Anderson): 1 each — 🟢 light</li>
     </ul>
-    <strong>TODO:</strong> add FRA, ESP, BRA, ARG, POR, GER, NED, ITA panels as squads announce.
+    <strong>TODO:</strong> add FRA, ESP, BRA, ARG, POR, NED, ITA panels as squads announce.
   </div>
 </div>
 
