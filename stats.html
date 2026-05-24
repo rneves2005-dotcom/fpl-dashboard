@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 Stats Dashboard · Rui Neves</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf7;
+  --bg-card: #ffffff;
+  --bg-soft: #f4f3ee;
+  --ink: #1a1816;
+  --ink-2: #56524d;
+  --ink-3: #8a847c;
+  --line: #e6e3dc;
+  --accent: #c1410c;
+  --accent-soft: #fde6d4;
+  --good: #4d8154;
+  --good-soft: #e3eee5;
+  --warn: #b8801a;
+  --bad: #a8332e;
+  --bad-soft: #f3dad8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--ink); font-family: 'Inter Tight', -apple-system, sans-serif; line-height: 1.5; font-size: 14px; }
+.container { max-width: 1600px; margin: 0 auto; padding: 24px 18px; }
+
+header { border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 22px; }
+header h1 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
+header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
+
+/* Global filters */
+.global-filters { background: var(--bg-card); border: 1px solid var(--line); border-radius: 10px; padding: 14px; margin-bottom: 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.gf-item label { display: block; font-size: 10px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.gf-item select { width: 100%; padding: 7px 10px; font-size: 13px; font-family: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 5px; color: var(--ink); }
+.gf-item select:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+/* Comparison grid */
+.compare { display: grid; grid-template-columns: 1fr 1fr 420px; gap: 14px; margin-bottom: 18px; }
+@media (max-width: 1280px) { .compare { grid-template-columns: 1fr 1fr; } .leaderboard { grid-column: 1 / -1; } }
+@media (max-width: 768px) { .compare { grid-template-columns: 1fr; } }
+
+.panel { background: var(--bg-card); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.panel-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.panel-head h3 { font-family: 'Fraunces', serif; font-size: 18px; }
+.panel-head .badge { font-size: 11px; color: var(--ink-3); }
+
+.panel-club-pick { display: flex; gap: 8px; margin-bottom: 10px; }
+.panel-club-pick select { flex: 1; padding: 6px 10px; font-size: 13px; font-family: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 5px; }
+
+.kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
+.kpi { background: var(--bg-soft); padding: 8px 10px; border-radius: 6px; text-align: center; }
+.kpi .v { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: var(--accent); }
+.kpi .l { font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+/* Shirt slicer */
+.slicer { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 6px; margin-bottom: 10px; }
+.slicer .label { width: 100%; font-size: 10px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px; }
+.shirt-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 30px; height: 24px; padding: 0 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; background: #fff; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; color: var(--ink-2); }
+.shirt-btn:hover { background: var(--accent-soft); color: var(--ink); }
+.shirt-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.slicer-clear { font-size: 10px; color: var(--ink-3); cursor: pointer; padding: 2px 6px; text-decoration: underline; align-self: center; }
+.slicer-clear:hover { color: var(--accent); }
+
+/* Player tables */
+.ptable { width: 100%; border-collapse: collapse; font-size: 12px; }
+.ptable th { text-align: left; padding: 6px 8px; font-size: 10px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--line); background: var(--bg-soft); cursor: pointer; }
+.ptable th:hover { color: var(--ink); }
+.ptable th.sort-asc::after { content: ' ↑'; color: var(--accent); }
+.ptable th.sort-desc::after { content: ' ↓'; color: var(--accent); }
+.ptable td { padding: 5px 8px; border-bottom: 1px solid var(--line); }
+.ptable td.shirt { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--accent); text-align: right; width: 30px; }
+.ptable td.player { font-weight: 600; }
+.ptable td.num { font-family: 'JetBrains Mono', monospace; text-align: right; }
+.ptable td.dim { color: var(--ink-3); }
+.ptable tr:hover { background: var(--bg-soft); }
+
+.player-scroll { max-height: 520px; overflow-y: auto; border: 1px solid var(--line); border-radius: 6px; }
+.lb-scroll { max-height: 720px; overflow-y: auto; border: 1px solid var(--line); border-radius: 6px; }
+
+/* Leaderboard distinctness */
+.leaderboard .ptable td.player { padding-right: 14px; }
+.leaderboard .ptable td.num { color: var(--accent); font-weight: 700; }
+.lb-controls { display: flex; gap: 8px; margin-bottom: 8px; }
+.lb-controls button { padding: 5px 10px; font-size: 11px; font-weight: 600; background: transparent; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; color: var(--ink-2); font-family: inherit; }
+.lb-controls button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.lb-controls button:hover:not(.active) { background: var(--bg-soft); color: var(--ink); }
+
+.foot { margin-top: 30px; padding-top: 14px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; color: var(--ink-3); font-size: 12px; }
+.foot a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.foot a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>📊 Stats Dashboard</h1>
+  <div class="sub">Multi-panel comparison · Top scorers · Shirt # slicers · Powered by Squads_Data.xlsx</div>
+</header>
+
+<!-- Global filters -->
+<div class="global-filters">
+  <div class="gf-item">
+    <label for="gDiv">Division (global)</label>
+    <select id="gDiv"><option value="">— all divisions —</option></select>
+  </div>
+  <div class="gf-item">
+    <label for="gCountry">Country (global)</label>
+    <select id="gCountry"><option value="">— all countries —</option></select>
+  </div>
+  <div class="gf-item">
+    <label for="gMinAge">Min Age</label>
+    <select id="gMinAge"><option value="">no min</option><option>16</option><option>18</option><option>20</option><option>23</option><option>25</option><option>28</option><option>30</option><option>33</option></select>
+  </div>
+  <div class="gf-item">
+    <label for="gMaxAge">Max Age</label>
+    <select id="gMaxAge"><option value="">no max</option><option>20</option><option>23</option><option>25</option><option>28</option><option>30</option><option>33</option><option>36</option><option>40</option></select>
+  </div>
+</div>
+
+<!-- Comparison + leaderboard -->
+<div class="compare">
+
+  <!-- Panel A -->
+  <div class="panel" id="panel-A">
+    <div class="panel-head"><h3>Panel A</h3><div class="badge">pick a club</div></div>
+    <div class="panel-club-pick">
+      <select id="clubA"><option value="">— select club —</option></select>
+    </div>
+    <div class="kpi-row" id="kpiA"></div>
+    <div class="slicer" id="slicerA"><div class="label">Shirt # filter</div></div>
+    <div class="player-scroll"><table class="ptable" id="tableA"></table></div>
+  </div>
+
+  <!-- Panel B -->
+  <div class="panel" id="panel-B">
+    <div class="panel-head"><h3>Panel B</h3><div class="badge">pick a club</div></div>
+    <div class="panel-club-pick">
+      <select id="clubB"><option value="">— select club —</option></select>
+    </div>
+    <div class="kpi-row" id="kpiB"></div>
+    <div class="slicer" id="slicerB"><div class="label">Shirt # filter</div></div>
+    <div class="player-scroll"><table class="ptable" id="tableB"></table></div>
+  </div>
+
+  <!-- Leaderboard -->
+  <div class="panel leaderboard">
+    <div class="panel-head"><h3>Top Scorers</h3><div class="badge" id="lbBadge">global scope</div></div>
+    <div class="lb-controls">
+      <button data-metric="g" class="active">Goals</button>
+      <button data-metric="games">Games</button>
+      <button data-metric="a">Age (oldest)</button>
+      <button data-metric="ayoung">Age (youngest)</button>
+    </div>
+    <div class="lb-scroll"><table class="ptable" id="tableLB"></table></div>
+  </div>
+
+</div>
+
+<div class="foot">
+  <div>Stats Dashboard · Rui Neves · live from Squads_Data.xlsx</div>
+  <div><a href="./world.html">🌍 World DB</a> · <a href="./squads.html">FPL Squads</a> · <a href="./toolkit.html">Toolkit</a> · <a href="./index.html">Dashboard</a></div>
+</div>
+
+</div>
+
+<script>
+let DATA = null;
+let state = {
+  gDiv: '', gCountry: '', minAge: null, maxAge: null,
+  clubA: '', clubB: '',
+  shirtA: new Set(), shirtB: new Set(),
+  sortA: { col: 's', dir: 1 },
+  sortB: { col: 's', dir: 1 },
+  lbMetric: 'g'
+};
+
+async function loadData() {
+  const v = '?v=' + Math.floor(Date.now() / 3600000);
+  const res = await fetch('./world_data.json' + v);
+  DATA = await res.json();
+
+  // Populate global filter dropdowns
+  const divs = Object.keys(DATA).sort();
+  const divSel = document.getElementById('gDiv');
+  for (const d of divs) {
+    const opt = document.createElement('option');
+    opt.value = d; opt.textContent = d;
+    divSel.appendChild(opt);
+  }
+
+  // Build country list (from league host countries)
+  const countries = new Set();
+  for (const div of divs) {
+    for (const club of Object.values(DATA[div])) {
+      for (const p of club) if (p.c) countries.add(p.c);
+    }
+  }
+  const ctSel = document.getElementById('gCountry');
+  [...countries].sort().forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    ctSel.appendChild(opt);
+  });
+
+  // Wire events
+  ['gDiv','gCountry','gMinAge','gMaxAge'].forEach(id => {
+    document.getElementById(id).addEventListener('change', () => {
+      if (id === 'gDiv') state.gDiv = document.getElementById(id).value;
+      else if (id === 'gCountry') state.gCountry = document.getElementById(id).value;
+      else if (id === 'gMinAge') state.minAge = +document.getElementById(id).value || null;
+      else if (id === 'gMaxAge') state.maxAge = +document.getElementById(id).value || null;
+      refreshClubLists();
+      renderAll();
+    });
+  });
+  document.getElementById('clubA').addEventListener('change', e => { state.clubA = e.target.value; state.shirtA = new Set(); renderPanel('A'); renderLeaderboard(); });
+  document.getElementById('clubB').addEventListener('change', e => { state.clubB = e.target.value; state.shirtB = new Set(); renderPanel('B'); renderLeaderboard(); });
+
+  document.querySelectorAll('.lb-controls button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.lb-controls button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      state.lbMetric = b.dataset.metric;
+      renderLeaderboard();
+    });
+  });
+
+  refreshClubLists();
+  renderAll();
+}
+
+function clubsInScope() {
+  // returns [{div, club, players}]
+  const out = [];
+  const divs = state.gDiv ? [state.gDiv] : Object.keys(DATA);
+  for (const div of divs) {
+    if (!DATA[div]) continue;
+    for (const club of Object.keys(DATA[div])) {
+      const players = DATA[div][club].filter(p => filterPlayer(p));
+      if (players.length) out.push({div, club, players});
+    }
+  }
+  return out;
+}
+
+function filterPlayer(p) {
+  if (state.gCountry && p.c !== state.gCountry) return false;
+  if (state.minAge != null && (p.a == null || p.a < state.minAge)) return false;
+  if (state.maxAge != null && (p.a == null || p.a > state.maxAge)) return false;
+  return true;
+}
+
+function refreshClubLists() {
+  const clubsList = clubsInScope().sort((a, b) => a.club.localeCompare(b.club));
+  for (const [sel, st] of [['clubA','clubA'],['clubB','clubB']]) {
+    const el = document.getElementById(sel);
+    const prior = el.value;
+    el.innerHTML = '<option value="">— select club —</option>';
+    for (const {div, club, players} of clubsList) {
+      const opt = document.createElement('option');
+      opt.value = `${div}||${club}`;
+      opt.textContent = `${club}  ·  ${div}  (${players.length})`;
+      el.appendChild(opt);
+    }
+    // restore prior if still valid
+    if (prior && [...el.options].some(o => o.value === prior)) {
+      el.value = prior;
+    } else {
+      state[sel] = '';
+    }
+  }
+}
+
+function clubPlayers(picker) {
+  if (!picker) return null;
+  const [div, club] = picker.split('||');
+  if (!DATA[div] || !DATA[div][club]) return null;
+  return { div, club, players: DATA[div][club].filter(filterPlayer) };
+}
+
+function fmt(v, dp) { return (v == null || isNaN(v)) ? '–' : (dp != null ? v.toFixed(dp) : String(v)); }
+
+function renderKPIs(target, players) {
+  const total = players.length;
+  const ages = players.map(p => p.a).filter(x => x != null);
+  const avgAge = ages.length ? ages.reduce((a,b) => a+b, 0) / ages.length : null;
+  const goals = players.map(p => p.g).filter(x => x != null).reduce((a,b) => a+b, 0);
+  document.getElementById('kpi' + target).innerHTML = `
+    <div class="kpi"><div class="v">${total}</div><div class="l">Players</div></div>
+    <div class="kpi"><div class="v">${fmt(avgAge, 1)}</div><div class="l">Avg Age</div></div>
+    <div class="kpi"><div class="v">${goals}</div><div class="l">Σ Goals</div></div>
+  `;
+}
+
+function renderSlicer(target, players) {
+  const shirts = [...new Set(players.map(p => p.s).filter(s => s != null))].sort((a,b) => a-b);
+  const selected = state['shirt' + target];
+  const slEl = document.getElementById('slicer' + target);
+  let html = '<div class="label">Shirt # filter <span class="slicer-clear" data-target="' + target + '">clear</span></div>';
+  for (const s of shirts) {
+    html += `<span class="shirt-btn${selected.has(s) ? ' active' : ''}" data-target="${target}" data-shirt="${s}">${s}</span>`;
+  }
+  slEl.innerHTML = html;
+  slEl.querySelectorAll('.shirt-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      const sh = +b.dataset.shirt;
+      if (selected.has(sh)) selected.delete(sh); else selected.add(sh);
+      renderPanel(target);
+    });
+  });
+  slEl.querySelector('.slicer-clear').addEventListener('click', () => {
+    state['shirt' + target] = new Set();
+    renderPanel(target);
+  });
+}
+
+function renderPanelTable(target, players) {
+  const sortKey = state['sort' + target];
+  const cols = [
+    { k: 's', label: '#', cls: 'shirt' },
+    { k: 'n', label: 'Player', cls: 'player' },
+    { k: 'a', label: 'Age', cls: 'num dim' },
+    { k: 'g', label: 'Goals', cls: 'num' }
+  ];
+  const sorted = [...players].sort((a, b) => {
+    const k = sortKey.col;
+    const av = a[k]; const bv = b[k];
+    if (av == null && bv == null) return 0;
+    if (av == null) return 1;
+    if (bv == null) return -1;
+    if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * sortKey.dir;
+    return String(av).localeCompare(String(bv)) * sortKey.dir;
+  });
+  let html = '<thead><tr>';
+  for (const c of cols) {
+    const cls = (sortKey.col === c.k) ? (sortKey.dir === 1 ? 'sort-asc' : 'sort-desc') : '';
+    html += `<th class="${cls}" data-sort="${c.k}">${c.label}</th>`;
+  }
+  html += '</tr></thead><tbody>';
+  for (const p of sorted) {
+    html += '<tr>';
+    for (const c of cols) {
+      const val = p[c.k] == null ? '–' : p[c.k];
+      html += `<td class="${c.cls}">${val}</td>`;
+    }
+    html += '</tr>';
+  }
+  html += '</tbody>';
+  const tEl = document.getElementById('table' + target);
+  tEl.innerHTML = html;
+  tEl.querySelectorAll('th[data-sort]').forEach(th => {
+    th.addEventListener('click', () => {
+      const k = th.dataset.sort;
+      if (sortKey.col === k) sortKey.dir = -sortKey.dir;
+      else { sortKey.col = k; sortKey.dir = 1; }
+      renderPanel(target);
+    });
+  });
+}
+
+function renderPanel(target) {
+  const picker = target === 'A' ? state.clubA : state.clubB;
+  const cp = clubPlayers(picker);
+  const headBadge = document.querySelector(`#panel-${target} .badge`);
+  if (!cp) {
+    document.getElementById('kpi' + target).innerHTML = '';
+    document.getElementById('slicer' + target).innerHTML = '<div class="label">Shirt # filter</div>';
+    document.getElementById('table' + target).innerHTML = '<tbody><tr><td style="padding:20px; color:var(--ink-3); font-style:italic;">Pick a club above.</td></tr></tbody>';
+    if (headBadge) headBadge.textContent = 'pick a club';
+    return;
+  }
+  if (headBadge) headBadge.textContent = `${cp.club} · ${cp.div}`;
+  renderKPIs(target, cp.players);
+  renderSlicer(target, cp.players);
+  const filteredShirts = state['shirt' + target];
+  const visible = filteredShirts.size ? cp.players.filter(p => filteredShirts.has(p.s)) : cp.players;
+  renderPanelTable(target, visible);
+}
+
+function renderLeaderboard() {
+  const lbBadge = document.getElementById('lbBadge');
+  let players = [];
+  // collect all players in scope (respecting global filters)
+  for (const {div, club, players: pl} of clubsInScope()) {
+    for (const p of pl) {
+      players.push({...p, club, div});
+    }
+  }
+  let scopeNote = `global · ${players.length} players`;
+  if (state.gDiv) scopeNote = `${state.gDiv} · ${players.length} players`;
+  if (state.gCountry) scopeNote += ` · ${state.gCountry}`;
+  lbBadge.textContent = scopeNote;
+
+  const m = state.lbMetric;
+  if (m === 'g') players.sort((a, b) => (b.g ?? -1) - (a.g ?? -1));
+  else if (m === 'games') players.sort((a, b) => (b.games ?? -1) - (a.games ?? -1));
+  else if (m === 'a') players.sort((a, b) => (b.a ?? -1) - (a.a ?? -1));
+  else if (m === 'ayoung') players.sort((a, b) => (a.a ?? 999) - (b.a ?? 999));
+
+  const top = players.slice(0, 100);
+  const metricCol = (m === 'a' || m === 'ayoung') ? 'a' : (m === 'games' ? 'games' : 'g');
+  const metricLabel = (m === 'a' || m === 'ayoung') ? 'Age' : (m === 'games' ? 'Games' : 'Goals');
+  let html = `<thead><tr><th class="num">${metricLabel}</th><th>Player</th><th>Club</th><th class="num dim">Age</th></tr></thead><tbody>`;
+  for (const p of top) {
+    html += `<tr><td class="num">${p[metricCol] ?? '–'}</td><td class="player">${p.n}</td><td class="dim">${p.club}</td><td class="num dim">${p.a ?? '–'}</td></tr>`;
+  }
+  html += '</tbody>';
+  document.getElementById('tableLB').innerHTML = html;
+}
+
+function renderAll() {
+  renderPanel('A');
+  renderPanel('B');
+  renderLeaderboard();
+}
+
+loadData();
+</script>
+</body>
+</html>
