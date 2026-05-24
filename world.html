@@ -450,15 +450,29 @@ function renderTransfers() {
   wireSort(c);
 }
 
+// Normalize accents/special chars so "Gross" matches "Groß", "Odegaard" matches "Ødegaard", etc.
+function normalize(s) {
+  if (!s) return '';
+  return s
+    .toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')  // strip diacritics (é→e, ñ→n, ö→o, etc.)
+    .replace(/ß/g, 'ss')
+    .replace(/ø/g, 'o')
+    .replace(/æ/g, 'ae')
+    .replace(/ł/g, 'l')
+    .replace(/đ/g, 'd');
+}
+
 function renderSearch() {
-  const q = (document.getElementById('searchInp').value || '').toLowerCase().trim();
+  const raw = (document.getElementById('searchInp').value || '').trim();
+  const q = normalize(raw);
   const c = document.getElementById('search-content');
   if (!q || q.length < 2) { c.innerHTML = '<div class="empty">Type at least 2 characters to search.</div>'; return; }
   const hits = [];
   for (const div of Object.keys(DATA)) {
     for (const club of Object.keys(DATA[div])) {
       for (const p of DATA[div][club]) {
-        if (p.n && p.n.toLowerCase().includes(q)) {
+        if (p.n && normalize(p.n).includes(q)) {
           hits.push({...p, club, div});
         }
       }
