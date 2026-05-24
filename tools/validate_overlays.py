@@ -17,7 +17,7 @@ import openpyxl
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="openpyxl")
 
-DB_PATH = Path("/Users/ruimiguelneves/Library/CloudStorage/OneDrive-Personal/Claude/DB/Squads_Data.xlsx")
+DB_PATH = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Documents/Squads_Data.xlsx")
 REPO = Path("/Users/ruimiguelneves/Code/fpl-dashboard")
 
 
