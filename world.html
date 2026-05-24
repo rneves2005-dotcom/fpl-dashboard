@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌍 Worldwide Squads & Transfers · Rui Neves</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf7;
+  --bg-card: #ffffff;
+  --bg-soft: #f4f3ee;
+  --ink: #1a1816;
+  --ink-2: #56524d;
+  --ink-3: #8a847c;
+  --line: #e6e3dc;
+  --accent: #c1410c;
+  --accent-soft: #fde6d4;
+  --good: #4d8154;
+  --good-soft: #e3eee5;
+  --warn: #b8801a;
+  --bad: #a8332e;
+  --bad-soft: #f3dad8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--ink); font-family: 'Inter Tight', -apple-system, sans-serif; line-height: 1.5; font-size: 14px; }
+.container { max-width: 1400px; margin: 0 auto; padding: 32px 24px; }
+
+header { border-bottom: 2px solid var(--ink); padding-bottom: 18px; margin-bottom: 28px; }
+header h1 { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
+header .meta { color: var(--ink-3); font-size: 12px; margin-top: 8px; }
+
+/* View toggle */
+.toggle-bar { display: flex; gap: 6px; margin-bottom: 18px; padding: 6px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; max-width: max-content; }
+.toggle-btn { padding: 8px 18px; font-size: 13px; font-weight: 600; background: transparent; border: 0; border-radius: 6px; cursor: pointer; color: var(--ink-2); font-family: inherit; }
+.toggle-btn:hover { background: var(--bg-soft); color: var(--ink); }
+.toggle-btn.active { background: var(--accent); color: #fff; }
+
+/* Filter panel */
+.filter-panel { background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+.filter-panel label { display: block; font-size: 11px; font-weight: 600; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.filter-panel select, .filter-panel input {
+  width: 100%; padding: 8px 12px; font-size: 14px; font-family: inherit;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 6px; color: var(--ink);
+}
+.filter-panel select:focus, .filter-panel input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+/* Stat chips */
+.stats-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; font-size: 12px; }
+.chip { padding: 4px 10px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; color: var(--ink-2); }
+.chip strong { color: var(--ink); font-weight: 700; }
+
+/* Content area */
+.view { display: none; }
+.view.active { display: block; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 13px; }
+thead { background: var(--bg-soft); }
+th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 700; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--line); cursor: pointer; user-select: none; }
+th:hover { color: var(--ink); background: var(--line); }
+th.sort-asc::after { content: ' ↑'; color: var(--accent); }
+th.sort-desc::after { content: ' ↓'; color: var(--accent); }
+td { padding: 8px 12px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+tr:hover { background: var(--bg-soft); }
+td.shirt { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--accent); width: 50px; }
+td.player { font-weight: 600; }
+td.country, td.age { color: var(--ink-2); font-size: 12px; }
+td.prev { color: var(--ink-3); font-size: 12px; font-style: italic; }
+
+.club-header { display: flex; justify-content: space-between; align-items: baseline; margin: 24px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.club-header h2 { font-family: 'Fraunces', serif; font-size: 22px; }
+.club-header .count { color: var(--ink-3); font-size: 12px; }
+
+.empty { padding: 40px; text-align: center; color: var(--ink-3); font-style: italic; background: var(--bg-card); border: 1px dashed var(--line); border-radius: 8px; }
+
+/* Division list mode */
+.division-clubs { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 14px; }
+.club-tile { background: var(--bg-card); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; cursor: pointer; font-weight: 500; transition: all 0.1s; }
+.club-tile:hover { background: var(--accent-soft); border-color: var(--accent); transform: translateY(-1px); }
+.club-tile .ct-name { font-weight: 600; font-size: 13px; }
+.club-tile .ct-meta { color: var(--ink-3); font-size: 11px; margin-top: 2px; }
+
+.foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; color: var(--ink-3); font-size: 12px; }
+.foot a { color: var(--accent); text-decoration: none; font-weight: 500; }
+.foot a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+  .container { padding: 18px 12px; }
+  header h1 { font-size: 22px; }
+  td, th { padding: 6px 8px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>🌍 Worldwide Squads &amp; Transfers</h1>
+  <div class="sub">Player database across 28 divisions worldwide · independent of FPL</div>
+  <div class="meta">Source: <code>Squads_Data.xlsx</code> · Players sheet · Filter by division and club</div>
+</header>
+
+<div class="toggle-bar" role="tablist">
+  <button class="toggle-btn active" data-view="squads">Squads</button>
+  <button class="toggle-btn" data-view="transfers">Transfers</button>
+  <button class="toggle-btn" data-view="search">Player Search</button>
+</div>
+
+<div class="filter-panel">
+  <div>
+    <label for="divSel">Division</label>
+    <select id="divSel"><option value="">— select division —</option></select>
+  </div>
+  <div id="clubSelWrap">
+    <label for="clubSel">Club</label>
+    <select id="clubSel"><option value="">— all clubs in division —</option></select>
+  </div>
+  <div id="searchWrap" style="display:none;">
+    <label for="searchInp">Player name (worldwide)</label>
+    <input id="searchInp" type="text" placeholder="Type any name…" autocomplete="off">
+  </div>
+</div>
+
+<div class="stats-row" id="stats"></div>
+
+<div id="view-squads" class="view active">
+  <div id="squads-content"></div>
+</div>
+
+<div id="view-transfers" class="view">
+  <div id="transfers-content"></div>
+</div>
+
+<div id="view-search" class="view">
+  <div id="search-content"></div>
+</div>
+
+<div class="foot">
+  <div>Worldwide Football DB · Rui Neves · sourced from local Squads_Data.xlsx</div>
+  <div><a href="./toolkit.html">FPL Toolkit</a> · <a href="./squads.html">FPL Squads</a> · <a href="./index.html">Dashboard</a></div>
+</div>
+
+</div>
+
+<script>
+let DATA = null;
+let currentSort = { col: 's', dir: 1 };
+
+async function loadData() {
+  const res = await fetch('./world_data.json');
+  DATA = await res.json();
+
+  // populate division dropdown — group by category
+  const divSel = document.getElementById('divSel');
+  const groups = {
+    'Europe — Top 5': ['Premier League', 'La Liga', 'Bundesliga', 'Serie A', 'Ligue 1'],
+    'Europe — Second tier': ['Championship', 'Liga Betclic', 'Eredivisie League', 'Jupiler League', 'Super Lig', 'Scotland Premiership', 'Greece Superliga', 'Russia Premier League'],
+    'Europe — Lower': ['Segunda Liga', 'Liga 3', 'Campeonato Portugal', 'League One', 'League Two', 'Premier League 2', 'Liga Revelação U23'],
+    'Americas': ['Major League Soccer', 'Liga MX', 'USL', 'Brasileirao', 'Brasil B', 'Argentina Superliga'],
+    'Asia': ['J-League', 'China Superleague']
+  };
+  for (const [grp, divs] of Object.entries(groups)) {
+    const og = document.createElement('optgroup');
+    og.label = grp;
+    for (const d of divs) {
+      if (DATA[d]) {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.textContent = `${d}  (${Object.keys(DATA[d]).length} clubs · ${Object.values(DATA[d]).flat().length} players)`;
+        og.appendChild(opt);
+      }
+    }
+    if (og.children.length) divSel.appendChild(og);
+  }
+
+  // wire events
+  divSel.addEventListener('change', onDivChange);
+  document.getElementById('clubSel').addEventListener('change', renderCurrent);
+  document.getElementById('searchInp').addEventListener('input', renderSearch);
+
+  document.querySelectorAll('.toggle-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.toggle-btn').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      const v = b.dataset.view;
+      document.getElementById('view-' + v).classList.add('active');
+      document.getElementById('clubSelWrap').style.display = (v === 'search') ? 'none' : 'block';
+      document.getElementById('searchWrap').style.display = (v === 'search') ? 'block' : 'none';
+      document.getElementById('divSel').parentElement.style.display = (v === 'search') ? 'none' : 'block';
+      renderCurrent();
+    });
+  });
+
+  // restore from hash
+  const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+  if (hash && DATA[hash]) {
+    divSel.value = hash;
+    onDivChange();
+  }
+  renderStats();
+}
+
+function onDivChange() {
+  const div = document.getElementById('divSel').value;
+  const clubSel = document.getElementById('clubSel');
+  clubSel.innerHTML = '<option value="">— all clubs in division —</option>';
+  if (div && DATA[div]) {
+    const clubs = Object.keys(DATA[div]).sort();
+    for (const c of clubs) {
+      const opt = document.createElement('option');
+      opt.value = c;
+      opt.textContent = `${c}  (${DATA[div][c].length})`;
+      clubSel.appendChild(opt);
+    }
+    window.location.hash = div;
+  }
+  renderCurrent();
+}
+
+function renderCurrent() {
+  const v = document.querySelector('.toggle-btn.active').dataset.view;
+  if (v === 'squads') renderSquads();
+  else if (v === 'transfers') renderTransfers();
+  else renderSearch();
+  renderStats();
+}
+
+function renderStats() {
+  const div = document.getElementById('divSel').value;
+  const club = document.getElementById('clubSel').value;
+  const sr = document.getElementById('stats');
+  if (!div) {
+    sr.innerHTML = `<span class="chip">28 divisions</span> <span class="chip">656 clubs</span> <span class="chip">10,255 players</span> <span class="chip">~9,200 transfer records</span>`;
+    return;
+  }
+  if (club) {
+    const players = DATA[div][club];
+    const withPrev = players.filter(p => p.p).length;
+    sr.innerHTML = `<span class="chip"><strong>${div}</strong></span> <span class="chip">${club}</span> <span class="chip">${players.length} players</span> <span class="chip">${withPrev} with prev club</span>`;
+  } else {
+    const clubs = Object.keys(DATA[div]).length;
+    const players = Object.values(DATA[div]).flat().length;
+    sr.innerHTML = `<span class="chip"><strong>${div}</strong></span> <span class="chip">${clubs} clubs</span> <span class="chip">${players} players</span>`;
+  }
+}
+
+function squadTable(players, showClub) {
+  const cols = showClub ? ['s','n','c','a','g','p','club'] : ['s','n','c','a','g','p'];
+  const headers = { s: '#', n: 'Player', c: 'Country', a: 'Age', g: 'Goals', p: 'Previous Club', club: 'Club' };
+  let html = '<table><thead><tr>';
+  for (const k of cols) html += `<th data-sort="${k}">${headers[k]}</th>`;
+  html += '</tr></thead><tbody>';
+  // sort
+  const sorted = [...players].sort((a, b) => {
+    const k = currentSort.col;
+    const av = a[k]; const bv = b[k];
+    if (av == null) return 1;
+    if (bv == null) return -1;
+    if (typeof av === 'number' && typeof bv === 'number') return (av - bv) * currentSort.dir;
+    return String(av).localeCompare(String(bv)) * currentSort.dir;
+  });
+  for (const p of sorted) {
+    html += '<tr>';
+    html += `<td class="shirt">${p.s ?? '–'}</td>`;
+    html += `<td class="player">${p.n}</td>`;
+    html += `<td class="country">${p.c ?? '–'}</td>`;
+    html += `<td class="age">${p.a ?? '–'}</td>`;
+    html += `<td>${p.g ?? '–'}</td>`;
+    html += `<td class="prev">${p.p ?? '–'}</td>`;
+    if (showClub) html += `<td>${p.club}</td>`;
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  return html;
+}
+
+function renderSquads() {
+  const div = document.getElementById('divSel').value;
+  const club = document.getElementById('clubSel').value;
+  const c = document.getElementById('squads-content');
+  if (!div) { c.innerHTML = '<div class="empty">Pick a division to start.</div>'; return; }
+  if (club) {
+    const players = DATA[div][club];
+    c.innerHTML = `<div class="club-header"><h2>${club}</h2><div class="count">${div} · ${players.length} players</div></div>${squadTable(players, false)}`;
+    wireSort(c);
+  } else {
+    // show clubs grid
+    const clubs = Object.keys(DATA[div]).sort();
+    let html = `<div class="club-header"><h2>${div}</h2><div class="count">${clubs.length} clubs</div></div>`;
+    html += '<div class="division-clubs">';
+    for (const cb of clubs) {
+      const np = DATA[div][cb].length;
+      const prev = DATA[div][cb].filter(p => p.p).length;
+      html += `<div class="club-tile" data-club="${cb.replace(/"/g, '&quot;')}"><div class="ct-name">${cb}</div><div class="ct-meta">${np} players · ${prev} transfers</div></div>`;
+    }
+    html += '</div>';
+    c.innerHTML = html;
+    c.querySelectorAll('.club-tile').forEach(t => {
+      t.addEventListener('click', () => {
+        document.getElementById('clubSel').value = t.dataset.club;
+        renderCurrent();
+      });
+    });
+  }
+}
+
+function renderTransfers() {
+  const div = document.getElementById('divSel').value;
+  const club = document.getElementById('clubSel').value;
+  const c = document.getElementById('transfers-content');
+  if (!div) { c.innerHTML = '<div class="empty">Pick a division to see transfer movements.</div>'; return; }
+  let players;
+  if (club) {
+    players = DATA[div][club].filter(p => p.p).map(p => ({...p, club}));
+  } else {
+    players = [];
+    for (const cb of Object.keys(DATA[div])) {
+      for (const p of DATA[div][cb]) {
+        if (p.p) players.push({...p, club: cb});
+      }
+    }
+  }
+  c.innerHTML = `<div class="club-header"><h2>${club || div} — Transfers IN</h2><div class="count">${players.length} players with previous club</div></div>${squadTable(players, true)}`;
+  wireSort(c);
+}
+
+function renderSearch() {
+  const q = (document.getElementById('searchInp').value || '').toLowerCase().trim();
+  const c = document.getElementById('search-content');
+  if (!q || q.length < 2) { c.innerHTML = '<div class="empty">Type at least 2 characters to search.</div>'; return; }
+  const hits = [];
+  for (const div of Object.keys(DATA)) {
+    for (const club of Object.keys(DATA[div])) {
+      for (const p of DATA[div][club]) {
+        if (p.n && p.n.toLowerCase().includes(q)) {
+          hits.push({...p, club, div});
+        }
+      }
+    }
+  }
+  if (!hits.length) { c.innerHTML = '<div class="empty">No matches.</div>'; return; }
+  let html = `<div class="club-header"><h2>Search results</h2><div class="count">${hits.length} match${hits.length === 1 ? '' : 'es'}</div></div>`;
+  html += '<table><thead><tr><th>#</th><th>Player</th><th>Country</th><th>Age</th><th>Goals</th><th>Previous Club</th><th>Club</th><th>Division</th></tr></thead><tbody>';
+  for (const p of hits.slice(0, 200)) {
+    html += `<tr><td class="shirt">${p.s ?? '–'}</td><td class="player">${p.n}</td><td class="country">${p.c ?? '–'}</td><td class="age">${p.a ?? '–'}</td><td>${p.g ?? '–'}</td><td class="prev">${p.p ?? '–'}</td><td>${p.club}</td><td style="color:var(--ink-3);font-size:12px;">${p.div}</td></tr>`;
+  }
+  html += '</tbody></table>';
+  if (hits.length > 200) html += `<div class="empty" style="margin-top:12px;">Showing first 200 of ${hits.length} — refine search.</div>`;
+  c.innerHTML = html;
+}
+
+function wireSort(container) {
+  container.querySelectorAll('th[data-sort]').forEach(th => {
+    th.addEventListener('click', () => {
+      const k = th.dataset.sort;
+      if (currentSort.col === k) currentSort.dir = -currentSort.dir;
+      else { currentSort.col = k; currentSort.dir = 1; }
+      renderCurrent();
+      container.querySelectorAll('th').forEach(x => x.classList.remove('sort-asc', 'sort-desc'));
+      th.classList.add(currentSort.dir === 1 ? 'sort-asc' : 'sort-desc');
+    });
+  });
+}
+
+window.addEventListener('hashchange', () => {
+  const hash = decodeURIComponent(window.location.hash.replace('#', ''));
+  if (hash && DATA && DATA[hash]) {
+    document.getElementById('divSel').value = hash;
+    onDivChange();
+  }
+});
+
+loadData();
+</script>
+</body>
+</html>
