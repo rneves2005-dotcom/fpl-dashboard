@@ -252,7 +252,7 @@ td strong { color: var(--ink); font-weight: 600; }
   <button class="tab stable" id="tab-NFO" onclick="showTeam('NFO')">NFO</button>
   <button class="tab stable" id="tab-SUN" onclick="showTeam('SUN')">SUN</button>
   <button class="tab transition" id="tab-TOT" onclick="showTeam('TOT')">TOT</button>
-  <button class="tab" id="tab-WHU" onclick="showTeam('WHU')">WHU</button>
+  <button class="tab transition" id="tab-WHU" onclick="showTeam('WHU')" style="opacity:0.7; text-decoration:line-through;" title="Relegated to Championship for 26/27">WHU (R)</button>
   <button class="tab" id="tab-WC26" onclick="showTeam('WC26')" style="background:var(--accent); color:#fff; font-weight:600;">🏆 WC26</button>
 </div>
 
@@ -1372,8 +1372,12 @@ td strong { color: var(--ink); font-weight: 600; }
 <!-- WEST HAM -->
 <div class="team-panel" id="team-WHU">
   <div class="team-header">
-    <h2>West Ham</h2>
-    <div class="team-meta">Relegation TBD GW38 <span class="discount">TBD</span></div>
+    <h2>West Ham 🔻</h2>
+    <div class="team-meta">RELEGATED to Championship for 26/27 · transfer fire-sale incoming <span class="discount bad">N/A</span></div>
+  </div>
+
+  <div class="callout bad" style="margin-bottom:14px;">
+    <strong>26/27 status:</strong> West Ham confirmed relegated end of 25/26 season. Players with PL clauses (Bowen most likely, plus Castellanos, Summerville, Kilman, Walker-Peters) will be aggressively pursued by other PL clubs. The IN/OUT records below were the 25/26 transfer history; the 26/27 squad shape will not exist as a PL roster. WHU drops off the FPL toolkit's WC-load cross-reference (was tagged "zero WC load" — now irrelevant for PL planning).
   </div>
 
   <h3>Transfers IN <span class="count">9</span></h3>
@@ -1755,7 +1759,7 @@ td strong { color: var(--ink); font-weight: 600; }
       <tr><td>LIV</td><td>Alisson (+ GER Wirtz)</td><td>🟡 2 reps now — still lightest of big clubs</td></tr>
       <tr><td>NFO</td><td>E.Anderson (ENG) + Ndoye (SUI)</td><td>🟡 NFO at 2 — D.Santos club TBC</td></tr>
       <tr><td>BRE</td><td>Igor Thiago (+ NOR Ajer + ENG J.Henderson)</td><td>🟡 BRE to 3</td></tr>
-      <tr><td>WHU</td><td>none (Paquetá → Flamengo)</td><td>🟢 zero BRA load</td></tr>
+      <tr><td>WHU 🔻</td><td>(relegated — no longer in 26/27 PL)</td><td>n/a</td></tr>
     </tbody>
   </table>
   </div>
@@ -1824,7 +1828,7 @@ td strong { color: var(--ink); font-weight: 600; }
       <li><strong>FUL</strong>: Berge, Bobb (NOR) = 2 — 🟡 mod</li>
       <li><strong>CRY</strong>: D.Henderson (ENG) + I.Sarr (SEN) = 2 — 🟡 mod</li>
       <li><strong>BHA</strong>: <strong>Verbruggen, van Hecke (NED)</strong> = 2 — 🟡 mod (was 0 — first WC reps)</li>
-      <li><strong>WHU</strong>: 0 — 🟢 zero WC load (if survives)</li>
+      <li><strong>WHU</strong>: 🔻 RELEGATED — removed from 26/27 PL load tracker</li>
     </ul>
     <strong>TODO:</strong> add FRA, ESP, ARG, CRO panels (Italy did NOT qualify for WC26). Remaining TBC destinations: Jackson (loan Bayern), Salah (Saudi rumor), Akanji (Inter loan), Stones (leaving MCI).
   </div>
