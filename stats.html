@@ -103,10 +103,6 @@ header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
 <!-- Global filters -->
 <div class="global-filters">
   <div class="gf-item">
-    <label for="gDiv">Division (global)</label>
-    <select id="gDiv"><option value="">— all divisions —</option></select>
-  </div>
-  <div class="gf-item">
     <label for="gCountry">Country (global)</label>
     <select id="gCountry"><option value="">— all countries —</option></select>
   </div>
@@ -118,6 +114,10 @@ header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
     <label for="gMaxAge">Max Age</label>
     <select id="gMaxAge"><option value="">no max</option><option>20</option><option>23</option><option>25</option><option>28</option><option>30</option><option>33</option><option>36</option><option>40</option></select>
   </div>
+  <div class="gf-item">
+    <label for="gLbDiv">Leaderboard scope (Division)</label>
+    <select id="gLbDiv"><option value="">— all divisions —</option></select>
+  </div>
 </div>
 
 <!-- Comparison + leaderboard -->
@@ -127,7 +127,8 @@ header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
   <div class="panel" id="panel-A">
     <div class="panel-head"><h3>Panel A</h3><div class="badge">pick a club</div></div>
     <div class="panel-club-pick">
-      <select id="clubA"><option value="">— select club —</option></select>
+      <select id="divA"><option value="">— Division —</option></select>
+      <select id="clubA"><option value="">— Club —</option></select>
     </div>
     <div class="kpi-row" id="kpiA"></div>
     <div class="slicer" id="slicerA"><div class="label">Shirt # filter</div></div>
@@ -138,7 +139,8 @@ header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
   <div class="panel" id="panel-B">
     <div class="panel-head"><h3>Panel B</h3><div class="badge">pick a club</div></div>
     <div class="panel-club-pick">
-      <select id="clubB"><option value="">— select club —</option></select>
+      <select id="divB"><option value="">— Division —</option></select>
+      <select id="clubB"><option value="">— Club —</option></select>
     </div>
     <div class="kpi-row" id="kpiB"></div>
     <div class="slicer" id="slicerB"><div class="label">Shirt # filter</div></div>
@@ -169,11 +171,17 @@ header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
 <script>
 let DATA = null;
 let state = {
-  gDiv: '', gCountry: '', minAge: null, maxAge: null,
-  clubA: '', clubB: '',
+  // Global player filters (Country, Age) — apply everywhere
+  gCountry: '', minAge: null, maxAge: null,
+  // Per-panel scope (Division + Club) — independent
+  divA: '', clubA: '',
+  divB: '', clubB: '',
+  // Slicer state per panel
   shirtA: new Set(), shirtB: new Set(),
   sortA: { col: 's', dir: 1 },
   sortB: { col: 's', dir: 1 },
+  // Leaderboard scope (Division) — independent of panels
+  lbDiv: '',
   lbMetric: 'g'
 };
 
@@ -182,16 +190,20 @@ async function loadData() {
   const res = await fetch('./world_data.json' + v);
   DATA = await res.json();
 
-  // Populate global filter dropdowns
   const divs = Object.keys(DATA).sort();
-  const divSel = document.getElementById('gDiv');
-  for (const d of divs) {
-    const opt = document.createElement('option');
-    opt.value = d; opt.textContent = d;
-    divSel.appendChild(opt);
+
+  // Populate the three Division dropdowns (Panel A, Panel B, Leaderboard)
+  for (const id of ['divA', 'divB', 'gLbDiv']) {
+    const el = document.getElementById(id);
+    for (const d of divs) {
+      const opt = document.createElement('option');
+      opt.value = d;
+      opt.textContent = `${d}  (${Object.keys(DATA[d]).length} clubs)`;
+      el.appendChild(opt);
+    }
   }
 
-  // Build country list (from league host countries)
+  // Country list (from league host countries)
   const countries = new Set();
   for (const div of divs) {
     for (const club of Object.values(DATA[div])) {
@@ -205,20 +217,25 @@ async function loadData() {
     ctSel.appendChild(opt);
   });
 
-  // Wire events
-  ['gDiv','gCountry','gMinAge','gMaxAge'].forEach(id => {
-    document.getElementById(id).addEventListener('change', () => {
-      if (id === 'gDiv') state.gDiv = document.getElementById(id).value;
-      else if (id === 'gCountry') state.gCountry = document.getElementById(id).value;
-      else if (id === 'gMinAge') state.minAge = +document.getElementById(id).value || null;
-      else if (id === 'gMaxAge') state.maxAge = +document.getElementById(id).value || null;
-      refreshClubLists();
-      renderAll();
-    });
-  });
-  document.getElementById('clubA').addEventListener('change', e => { state.clubA = e.target.value; state.shirtA = new Set(); renderPanel('A'); renderLeaderboard(); });
-  document.getElementById('clubB').addEventListener('change', e => { state.clubB = e.target.value; state.shirtB = new Set(); renderPanel('B'); renderLeaderboard(); });
+  // Global filters
+  document.getElementById('gCountry').addEventListener('change', e => { state.gCountry = e.target.value; refreshClubLists(); renderAll(); });
+  document.getElementById('gMinAge').addEventListener('change', e => { state.minAge = +e.target.value || null; refreshClubLists(); renderAll(); });
+  document.getElementById('gMaxAge').addEventListener('change', e => { state.maxAge = +e.target.value || null; refreshClubLists(); renderAll(); });
+  document.getElementById('gLbDiv').addEventListener('change', e => { state.lbDiv = e.target.value; renderLeaderboard(); });
 
+  // Per-panel Division change → reload Club list for THAT panel only
+  document.getElementById('divA').addEventListener('change', e => {
+    state.divA = e.target.value; state.clubA = ''; state.shirtA = new Set();
+    refreshClubList('A'); renderPanel('A');
+  });
+  document.getElementById('divB').addEventListener('change', e => {
+    state.divB = e.target.value; state.clubB = ''; state.shirtB = new Set();
+    refreshClubList('B'); renderPanel('B');
+  });
+  document.getElementById('clubA').addEventListener('change', e => { state.clubA = e.target.value; state.shirtA = new Set(); renderPanel('A'); });
+  document.getElementById('clubB').addEventListener('change', e => { state.clubB = e.target.value; state.shirtB = new Set(); renderPanel('B'); });
+
+  // Leaderboard metric toggles
   document.querySelectorAll('.lb-controls button').forEach(b => {
     b.addEventListener('click', () => {
       document.querySelectorAll('.lb-controls button').forEach(x => x.classList.remove('active'));
@@ -232,20 +249,6 @@ async function loadData() {
   renderAll();
 }
 
-function clubsInScope() {
-  // returns [{div, club, players}]
-  const out = [];
-  const divs = state.gDiv ? [state.gDiv] : Object.keys(DATA);
-  for (const div of divs) {
-    if (!DATA[div]) continue;
-    for (const club of Object.keys(DATA[div])) {
-      const players = DATA[div][club].filter(p => filterPlayer(p));
-      if (players.length) out.push({div, club, players});
-    }
-  }
-  return out;
-}
-
 function filterPlayer(p) {
   if (state.gCountry && p.c !== state.gCountry) return false;
   if (state.minAge != null && (p.a == null || p.a < state.minAge)) return false;
@@ -253,31 +256,41 @@ function filterPlayer(p) {
   return true;
 }
 
-function refreshClubLists() {
-  const clubsList = clubsInScope().sort((a, b) => a.club.localeCompare(b.club));
-  for (const [sel, st] of [['clubA','clubA'],['clubB','clubB']]) {
-    const el = document.getElementById(sel);
-    const prior = el.value;
-    el.innerHTML = '<option value="">— select club —</option>';
-    for (const {div, club, players} of clubsList) {
-      const opt = document.createElement('option');
-      opt.value = `${div}||${club}`;
-      opt.textContent = `${club}  ·  ${div}  (${players.length})`;
-      el.appendChild(opt);
-    }
-    // restore prior if still valid
-    if (prior && [...el.options].some(o => o.value === prior)) {
-      el.value = prior;
-    } else {
-      state[sel] = '';
-    }
+function refreshClubList(target) {
+  // target = 'A' or 'B' — populates that panel's Club dropdown based on its own Division.
+  const div = state['div' + target];
+  const sel = document.getElementById('club' + target);
+  const prior = sel.value;
+  sel.innerHTML = '<option value="">— Club —</option>';
+  if (!div || !DATA[div]) {
+    state['club' + target] = '';
+    return;
+  }
+  const clubs = Object.keys(DATA[div]).sort();
+  for (const club of clubs) {
+    const players = DATA[div][club].filter(filterPlayer);
+    if (!players.length) continue;
+    const opt = document.createElement('option');
+    opt.value = club;
+    opt.textContent = `${club}  (${players.length})`;
+    sel.appendChild(opt);
+  }
+  if (prior && [...sel.options].some(o => o.value === prior)) {
+    sel.value = prior;
+  } else {
+    state['club' + target] = '';
   }
 }
 
-function clubPlayers(picker) {
-  if (!picker) return null;
-  const [div, club] = picker.split('||');
-  if (!DATA[div] || !DATA[div][club]) return null;
+function refreshClubLists() {
+  refreshClubList('A');
+  refreshClubList('B');
+}
+
+function clubPlayers(target) {
+  const div = state['div' + target];
+  const club = state['club' + target];
+  if (!div || !club || !DATA[div] || !DATA[div][club]) return null;
   return { div, club, players: DATA[div][club].filter(filterPlayer) };
 }
 
@@ -362,14 +375,13 @@ function renderPanelTable(target, players) {
 }
 
 function renderPanel(target) {
-  const picker = target === 'A' ? state.clubA : state.clubB;
-  const cp = clubPlayers(picker);
+  const cp = clubPlayers(target);
   const headBadge = document.querySelector(`#panel-${target} .badge`);
   if (!cp) {
     document.getElementById('kpi' + target).innerHTML = '';
     document.getElementById('slicer' + target).innerHTML = '<div class="label">Shirt # filter</div>';
-    document.getElementById('table' + target).innerHTML = '<tbody><tr><td style="padding:20px; color:var(--ink-3); font-style:italic;">Pick a club above.</td></tr></tbody>';
-    if (headBadge) headBadge.textContent = 'pick a club';
+    document.getElementById('table' + target).innerHTML = '<tbody><tr><td style="padding:20px; color:var(--ink-3); font-style:italic;">Pick a division and club above.</td></tr></tbody>';
+    if (headBadge) headBadge.textContent = state['div' + target] ? 'pick a club' : 'pick a division';
     return;
   }
   if (headBadge) headBadge.textContent = `${cp.club} · ${cp.div}`;
@@ -383,14 +395,17 @@ function renderPanel(target) {
 function renderLeaderboard() {
   const lbBadge = document.getElementById('lbBadge');
   let players = [];
-  // collect all players in scope (respecting global filters)
-  for (const {div, club, players: pl} of clubsInScope()) {
-    for (const p of pl) {
-      players.push({...p, club, div});
+  // Scope: lbDiv if set, else all divisions. Global Country/Age filters apply.
+  const divs = state.lbDiv ? [state.lbDiv] : Object.keys(DATA);
+  for (const div of divs) {
+    if (!DATA[div]) continue;
+    for (const club of Object.keys(DATA[div])) {
+      for (const p of DATA[div][club]) {
+        if (filterPlayer(p)) players.push({...p, club, div});
+      }
     }
   }
-  let scopeNote = `global · ${players.length} players`;
-  if (state.gDiv) scopeNote = `${state.gDiv} · ${players.length} players`;
+  let scopeNote = state.lbDiv ? `${state.lbDiv} · ${players.length} players` : `global · ${players.length} players`;
   if (state.gCountry) scopeNote += ` · ${state.gCountry}`;
   lbBadge.textContent = scopeNote;
 
