@@ -27,6 +27,40 @@ DB_PATH = Path("/Users/ruimiguelneves/Library/CloudStorage/OneDrive-Personal/Cla
 JSON_OUT = Path("/Users/ruimiguelneves/Code/fpl-dashboard/world_data.json")
 JSON_OUT_ONEDRIVE = Path("/Users/ruimiguelneves/Library/CloudStorage/OneDrive-Personal/Claude/FPL/world_data.json")
 
+# Maps each Division to the host country (Country column = country of the LEAGUE, not player nationality).
+# Player nationality lives in the International column and never changes on transfer.
+DIVISION_TO_COUNTRY = {
+    "Premier League": "England",
+    "Championship": "England",
+    "League One": "England",
+    "League Two": "England",
+    "League Three": "England",
+    "Premier League 2": "England",
+    "La Liga": "Spain",
+    "Bundesliga": "Germany",
+    "Serie A": "Italy",
+    "Ligue 1": "France",
+    "Liga Betclic": "Portugal",
+    "Segunda Liga": "Portugal",
+    "Liga 3": "Portugal",
+    "Liga Revelação U23": "Portugal",
+    "Campeonato Portugal": "Portugal",
+    "Eredivisie League": "Netherlands",
+    "Jupiler League": "Belgium",
+    "Super Lig": "Turkey",
+    "Scotland Premiership": "Scotland",
+    "Greece Superliga": "Greece",
+    "Russia Premier League": "Russia",
+    "Brasileirao": "Brazil",
+    "Brasil B": "Brazil",
+    "Argentina Superliga": "Argentina",
+    "Major League Soccer": "USA",
+    "USL": "USA",
+    "Liga MX": "Mexico",
+    "J-League": "Japan",
+    "China Superleague": "China",
+}
+
 
 def slug(s: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", s.lower()).strip("_")
@@ -64,14 +98,21 @@ def apply_transfer(player: str, to_club: str, to_div: str, dry_run: bool = False
         return 3
 
     row_idx, row = hits[0]
+    old_shirt = row[1].value
     old_club = row[4].value
+    old_country = row[5].value
     old_div = row[6].value
     old_prev = row[11].value
     full_name = row[2].value
 
+    # Country column = country of the LEAGUE (not player nationality). Derive from new division.
+    new_country = DIVISION_TO_COUNTRY.get(to_div, old_country) if to_div else None
+    if to_div and to_div not in DIVISION_TO_COUNTRY:
+        print(f"WARNING: Division '{to_div}' not in DIVISION_TO_COUNTRY map — keeping existing country {old_country!r}", file=sys.stderr)
+
     print(f"Found  row {row_idx}: {full_name}")
-    print(f"  current : club={old_club!r}  div={old_div!r}  prev={old_prev!r}")
-    print(f"  target  : club={to_club!r}  div={to_div!r}  prev={old_club!r}")
+    print(f"  current : shirt={old_shirt!r} club={old_club!r} country={old_country!r} div={old_div!r} prev={old_prev!r}")
+    print(f"  target  : shirt=None (clear)  club={to_club!r}  country={new_country!r}  div={to_div!r}  prev={old_club!r}")
 
     if old_club == to_club and old_div == to_div:
         print("No change needed — already there.")
@@ -88,7 +129,9 @@ def apply_transfer(player: str, to_club: str, to_div: str, dry_run: bool = False
     shutil.copy2(DB_PATH, bak_path)
 
     # Mutate cells in place
+    row[1].value = None              # Shirt — clear on transfer (unknown until announced)
     row[4].value = to_club           # Clubs
+    row[5].value = new_country       # Country (league host)
     row[6].value = to_div or None    # Division
     row[11].value = old_club         # Previous Club ← old current
 
