@@ -131,6 +131,11 @@ td.prev { color: var(--ink-3); font-size: 12px; font-style: italic; }
 </div>
 
 <div id="view-transfers" class="view">
+  <div class="toggle-bar" style="margin-bottom:14px;">
+    <button class="toggle-btn active" data-tview="in" onclick="setTransferView('in')">↘ Transfers IN</button>
+    <button class="toggle-btn" data-tview="out" onclick="setTransferView('out')">↗ Transfers OUT</button>
+    <button class="toggle-btn" data-tview="both" onclick="setTransferView('both')">⇄ Both (combined)</button>
+  </div>
   <div id="transfers-content"></div>
 </div>
 
@@ -147,11 +152,25 @@ td.prev { color: var(--ink-3); font-size: 12px; font-style: italic; }
 
 <script>
 let DATA = null;
+let TRANSFERS_OUT = {};
 let currentSort = { col: 's', dir: 1 };
+let transferView = 'in';  // 'in' | 'out' | 'both'
+
+function setTransferView(v) {
+  transferView = v;
+  document.querySelectorAll('[data-tview]').forEach(b => b.classList.toggle('active', b.dataset.tview === v));
+  renderCurrent();
+}
 
 async function loadData() {
-  const res = await fetch('./world_data.json');
+  const [res, resOut] = await Promise.all([
+    fetch('./world_data.json'),
+    fetch('./transfers_out.json').catch(() => null)
+  ]);
   DATA = await res.json();
+  if (resOut) {
+    try { TRANSFERS_OUT = await resOut.json(); } catch (e) { TRANSFERS_OUT = {}; }
+  }
 
   // populate division dropdown — group by category
   const divSel = document.getElementById('divSel');
@@ -308,23 +327,83 @@ function renderSquads() {
   }
 }
 
+function getTransfersIn(div, club) {
+  const out = [];
+  const scope = club ? [club] : Object.keys(DATA[div]);
+  for (const cb of scope) {
+    for (const p of DATA[div][cb]) {
+      if (p.p) out.push({...p, club: cb, _dir: 'IN'});
+    }
+  }
+  return out;
+}
+
+function getTransfersOut(div, club) {
+  const out = [];
+  const divMap = TRANSFERS_OUT[div];
+  if (!divMap) return out;
+  const scope = club ? [club] : Object.keys(divMap);
+  for (const cb of scope) {
+    const arr = divMap[cb] || [];
+    for (const t of arr) {
+      out.push({s: null, n: t.n, c: t.c, a: null, g: null, p: t.to, note: t.note, club: cb, _dir: 'OUT'});
+    }
+  }
+  return out;
+}
+
+function transferTable(rows, mode) {
+  // mode: 'in' | 'out' | 'both'
+  const showDir = mode === 'both';
+  const fromOrTo = mode === 'out' ? 'To' : (mode === 'in' ? 'From (Previous)' : 'From/To');
+  let html = '<table><thead><tr>';
+  if (showDir) html += '<th data-sort="_dir">Direction</th>';
+  html += '<th data-sort="n">Player</th><th data-sort="c">Country</th>';
+  html += `<th data-sort="p">${fromOrTo}</th>`;
+  html += '<th data-sort="club">Club</th>';
+  if (mode === 'out' || mode === 'both') html += '<th>Note</th>';
+  html += '</tr></thead><tbody>';
+  const sorted = [...rows].sort((a, b) => {
+    const k = currentSort.col;
+    const av = a[k] ?? ''; const bv = b[k] ?? '';
+    return String(av).localeCompare(String(bv)) * currentSort.dir;
+  });
+  for (const r of sorted) {
+    const dirBadge = r._dir === 'OUT'
+      ? '<span style="color:var(--bad); font-weight:600;">OUT ↗</span>'
+      : '<span style="color:var(--good); font-weight:600;">IN ↘</span>';
+    html += '<tr>';
+    if (showDir) html += `<td>${dirBadge}</td>`;
+    html += `<td class="player">${r.n}</td>`;
+    html += `<td class="country">${r.c ?? '–'}</td>`;
+    html += `<td class="prev">${r.p ?? '–'}</td>`;
+    html += `<td>${r.club}</td>`;
+    if (mode === 'out' || mode === 'both') html += `<td class="prev">${r.note ?? '–'}</td>`;
+    html += '</tr>';
+  }
+  html += '</tbody></table>';
+  return html;
+}
+
 function renderTransfers() {
   const div = document.getElementById('divSel').value;
   const club = document.getElementById('clubSel').value;
   const c = document.getElementById('transfers-content');
-  if (!div) { c.innerHTML = '<div class="empty">Pick a division to see transfer movements.</div>'; return; }
-  let players;
-  if (club) {
-    players = DATA[div][club].filter(p => p.p).map(p => ({...p, club}));
+  if (!div) { c.innerHTML = '<div class="empty">Pick a division to see new transfers (IN &amp; OUT).</div>'; return; }
+
+  const ins = getTransfersIn(div, club);
+  const outs = getTransfersOut(div, club);
+  const scope = club || div;
+
+  if (transferView === 'in') {
+    c.innerHTML = `<div class="club-header"><h2>${scope} — Transfers IN</h2><div class="count">${ins.length} new arrivals (with previous club)</div></div>${transferTable(ins, 'in')}`;
+  } else if (transferView === 'out') {
+    const note = !TRANSFERS_OUT[div] ? '<div class="empty" style="margin-bottom:12px;">Note: OUT transfers are tracked via overlay (<code>transfers_out.json</code>). Add entries there for confirmed departures.</div>' : '';
+    c.innerHTML = `${note}<div class="club-header"><h2>${scope} — Transfers OUT</h2><div class="count">${outs.length} confirmed departures</div></div>${outs.length ? transferTable(outs, 'out') : '<div class="empty">No confirmed OUT transfers logged for this scope yet.</div>'}`;
   } else {
-    players = [];
-    for (const cb of Object.keys(DATA[div])) {
-      for (const p of DATA[div][cb]) {
-        if (p.p) players.push({...p, club: cb});
-      }
-    }
+    const all = [...ins, ...outs];
+    c.innerHTML = `<div class="club-header"><h2>${scope} — All New Transfers</h2><div class="count">${ins.length} IN · ${outs.length} OUT · ${all.length} total</div></div>${transferTable(all, 'both')}`;
   }
-  c.innerHTML = `<div class="club-header"><h2>${club || div} — Transfers IN</h2><div class="count">${players.length} players with previous club</div></div>${squadTable(players, true)}`;
   wireSort(c);
 }
 
