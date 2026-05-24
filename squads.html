@@ -92,6 +92,14 @@ h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
 .team-panel { display: none; }
 .team-panel.active { display: block; }
 
+/* Nation sub-tabs inside WC26 */
+.nation-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 18px; padding: 8px; background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; }
+.nation-tab { padding: 6px 12px; font-size: 12px; font-weight: 600; background: transparent; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; color: var(--ink-2); }
+.nation-tab:hover { background: var(--bg-soft); color: var(--ink); }
+.nation-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.nation-panel { display: none; }
+.nation-panel.active { display: block; }
+
 .team-header {
   background: var(--bg-card);
   border: 1px solid var(--line);
@@ -1396,15 +1404,32 @@ td strong { color: var(--ink); font-weight: 600; }
 <!-- ENGLAND WC 2026 SQUAD -->
 <div class="team-panel" id="team-WC26">
   <div class="team-header" style="background:linear-gradient(135deg, var(--accent-soft), var(--good-soft));">
-    <h2>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England — World Cup 2026 Squad</h2>
-    <div class="manager-line">Thomas Tuchel · confirmed May 22, 2026 · 26-man squad</div>
+    <h2>🏆 World Cup 2026 — National Squads Tracker</h2>
+    <div class="manager-line">FIFA WC USA/Canada/Mexico · Jun 11 – Jul 19, 2026 · cross-reference with PL clubs for opening-GW xMins discount</div>
   </div>
+
+  <div class="nation-tabs">
+    <button class="nation-tab" id="ntab-ENG" onclick="showNation('ENG')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</button>
+    <button class="nation-tab" id="ntab-NOR" onclick="showNation('NOR')">🇳🇴 Norway</button>
+    <button class="nation-tab" id="ntab-FRA" onclick="showNation('FRA')" disabled style="opacity:0.4;">🇫🇷 France (tbd)</button>
+    <button class="nation-tab" id="ntab-ESP" onclick="showNation('ESP')" disabled style="opacity:0.4;">🇪🇸 Spain (tbd)</button>
+    <button class="nation-tab" id="ntab-BRA" onclick="showNation('BRA')" disabled style="opacity:0.4;">🇧🇷 Brazil (tbd)</button>
+    <button class="nation-tab" id="ntab-ARG" onclick="showNation('ARG')" disabled style="opacity:0.4;">🇦🇷 Argentina (tbd)</button>
+    <button class="nation-tab" id="ntab-POR" onclick="showNation('POR')" disabled style="opacity:0.4;">🇵🇹 Portugal (tbd)</button>
+    <button class="nation-tab" id="ntab-GER" onclick="showNation('GER')" disabled style="opacity:0.4;">🇩🇪 Germany (tbd)</button>
+    <button class="nation-tab" id="ntab-NED" onclick="showNation('NED')" disabled style="opacity:0.4;">🇳🇱 Netherlands (tbd)</button>
+    <button class="nation-tab" id="ntab-ITA" onclick="showNation('ITA')" disabled style="opacity:0.4;">🇮🇹 Italy (tbd)</button>
+  </div>
+
+  <!-- ENGLAND -->
+  <div class="nation-panel active" id="nation-ENG">
+  <h3>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England · Thomas Tuchel · confirmed May 22, 2026</h3>
 
   <div class="callout" style="border-left:4px solid var(--accent); background:var(--good-soft); padding:12px; margin-bottom:16px;">
     <strong>⚡ Key FPL signal:</strong> <strong>Cole Palmer SNUBBED</strong>. Zero WC fatigue + full pre-season under Xabi Alonso = top opening-GW captain candidate for 26/27. Same logic for Foden, Bowen, Gibbs-White, Wharton.
   </div>
 
-  <h3>✅ Selected — apply WC discount to opening 4-6 GWs of 26/27</h3>
+  <h4>✅ Selected — apply WC discount to opening 4-6 GWs of 26/27</h4>
   <table>
     <thead><tr><th>Pos</th><th>Player</th><th>Club 26/27</th><th>FPL relevance</th><th>Opening-GW discount</th></tr></thead>
     <tbody>
@@ -1437,7 +1462,7 @@ td strong { color: var(--ink); font-weight: 600; }
     </tbody>
   </table>
 
-  <h3 style="margin-top:24px;">❌ Notable snubs — NO WC discount · FULL pre-season ✅</h3>
+  <h4 style="margin-top:24px;">❌ Notable snubs — NO WC discount · FULL pre-season ✅</h4>
   <table>
     <thead><tr><th>Player</th><th>Club 26/27</th><th>FPL implication</th></tr></thead>
     <tbody>
@@ -1454,11 +1479,75 @@ td strong { color: var(--ink); font-weight: 600; }
       <tr><td>Fikayo Tomori</td><td>Milan</td><td>not PL</td></tr>
     </tbody>
   </table>
+  </div>
+
+  <!-- NORWAY -->
+  <div class="nation-panel" id="nation-NOR">
+  <h3>🇳🇴 Norway · Ståle Solbakken · confirmed May 21, 2026</h3>
+
+  <div class="callout" style="border-left:4px solid var(--accent); background:var(--good-soft); padding:12px; margin-bottom:16px;">
+    <strong>⚡ Key FPL signal:</strong> <strong>Haaland (MCI) + Ødegaard (ARS) both confirmed</strong> — apply 0.80-0.85× discount to opening 4-6 GWs. Norway's first WC since 1998 → group-stage exit very plausible (light discount scenario). If Norway upsets and goes deep → tighten to 0.75×.
+  </div>
+
+  <h4>✅ Selected — PL-relevant players highlighted</h4>
+  <table>
+    <thead><tr><th>Pos</th><th>Player</th><th>Club 26/27</th><th>FPL relevance</th><th>Opening-GW discount</th></tr></thead>
+    <tbody>
+      <tr><td>GK</td><td>Ørjan Nyland</td><td>Sevilla (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr><td>GK</td><td>Egil Selvik</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td>GK</td><td>Sander Tangvik</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td><strong>DEF</strong></td><td>Kristoffer Ajer</td><td>BRE</td><td>mid (DC budget DEF)</td><td>0.85×</td></tr>
+      <tr><td>DEF</td><td>Fredrik Bjørkan</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td>DEF</td><td>Henrik Falchener</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td>DEF</td><td>Sondre Langås</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td>DEF</td><td>Torbjørn Heggem</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td>DEF</td><td>Marcus Holmgren Pedersen</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td>DEF</td><td>Julian Ryerson</td><td>Dortmund (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr><td>DEF</td><td>David Møller Wolfe</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td>DEF</td><td>Leo Østigård</td><td>Rennes (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr><td>MID</td><td>Thelonious Aasgaard</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td>MID</td><td>Fredrik Aursnes</td><td>Benfica (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr><td>MID</td><td>Patrick Berg</td><td>Lazio (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr><td><strong>MID</strong></td><td>Sander Berge</td><td>FUL</td><td>mid</td><td>0.85×</td></tr>
+      <tr><td><strong>MID</strong></td><td>Oscar Bobb</td><td>MCI</td><td>mid (upside under Maresca)</td><td>0.85×</td></tr>
+      <tr><td>MID</td><td>Jens Petter Hauge</td><td>non-PL</td><td>n/a</td><td>–</td></tr>
+      <tr><td>MID</td><td>Antonio Nusa</td><td>Leipzig (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr><td>MID</td><td>Andreas Schjelderup</td><td>Benfica (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr><td>MID</td><td>Morten Thorsby</td><td>Genoa (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr><td>MID</td><td>Kristian Thorstvedt</td><td>Sassuolo (non-PL)</td><td>n/a</td><td>–</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>MID</strong></td><td><strong>Martin Ødegaard</strong></td><td>ARS</td><td><strong>premium</strong></td><td>0.80× (heavy — talisman likely deep mins)</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>FWD</strong></td><td><strong>Erling Haaland</strong></td><td>MCI</td><td><strong>premium (#1 FWD candidate 26/27)</strong></td><td>0.80× (heavy — Maresca system risk compounds)</td></tr>
+      <tr><td>FWD</td><td>Jørgen Strand Larsen</td><td>TBD (Wolves relegated)</td><td>club pending</td><td>re-assess</td></tr>
+      <tr><td>FWD</td><td>Alexander Sørloth</td><td>Atletico (non-PL)</td><td>n/a</td><td>–</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top:24px;">📌 Cross-reference — PL clubs with Norway players in 26/27</h4>
+  <table>
+    <thead><tr><th>Club</th><th>Players</th><th>Net FPL impact</th></tr></thead>
+    <tbody>
+      <tr><td><strong>MCI</strong></td><td>Haaland, Bobb</td><td>🔴 <strong>Haaland captaincy in opening GWs = risk</strong>. Discount EV by 0.80×.</td></tr>
+      <tr><td><strong>ARS</strong></td><td>Ødegaard (also Saka/Rice/Eze from ENG)</td><td>🔴 <strong>Heavy ARS load</strong> — 4 WC-overload picks. Avoid >2 ARS players in opening 3 GWs.</td></tr>
+      <tr><td>BRE</td><td>Ajer</td><td>🟡 mild — Ajer rotation candidate, light fatigue</td></tr>
+      <tr><td>FUL</td><td>Berge</td><td>🟡 mild — depends on Marco Silva continuity</td></tr>
+    </tbody>
+  </table>
+  </div>
 
   <div class="callout" style="margin-top:16px; font-size:12px;">
-    <strong>Discount logic:</strong> 0.80× = expected deep tournament run + heavy minutes. 0.85× = squad starter, group + R16 likely. 0.90-0.95× = rotation/depth player, low fatigue. Reassess after group stage (Jun 26) and again after tournament concludes (Jul 19) based on actual minutes played. England group-stage exit → revise all to 0.95× for opening 2-3 GWs only.
+    <strong>Discount logic:</strong> 0.80× = expected deep tournament run + heavy minutes. 0.85× = squad starter, group + R16 likely. 0.90-0.95× = rotation/depth player, low fatigue. Reassess after group stage (Jun 26) and again after tournament concludes (Jul 19) based on actual minutes played. Group-stage exit → revise all to 0.95× for opening 2-3 GWs only.
     <br><br>
-    <strong>TODO:</strong> add similar panels for FRA, ESP, BRA, ARG, POR, GER, NED, ITA WC squads as they're announced. Cross-reference each with PL roster to flag every WC-overload player.
+    <strong>Master cross-reference (running tally of WC-overload PL clubs):</strong>
+    <ul style="margin:6px 0 0 18px;">
+      <li><strong>ARS</strong>: Saka, Rice, Eze (ENG) + Ødegaard (NOR) = 4 — 🔴 HEAVY</li>
+      <li><strong>MCI</strong>: O'Reilly, Trafford (ENG) + Haaland, Bobb (NOR) = 4 — 🔴 HEAVY</li>
+      <li><strong>NEW</strong>: Livramento, Burn (ENG) = 2 — 🟡 mod</li>
+      <li><strong>CRY</strong>: Guehi, D.Henderson (ENG) = 2 — 🟡 mod</li>
+      <li><strong>CHE</strong>: R.James, Madueke (ENG) = 2 — 🟡 mod</li>
+      <li><strong>AVL</strong>: Konsa, Rogers, Watkins (ENG) = 3 — 🟡 mod (rebuilding system?)</li>
+      <li>BRE/FUL/EVE/MUN/NFO/TOT/LIV: 1 each — 🟢 light</li>
+    </ul>
+    <strong>TODO:</strong> add FRA, ESP, BRA, ARG, POR, GER, NED, ITA panels as squads announce.
   </div>
 </div>
 
@@ -1476,6 +1565,17 @@ function showTeam(code) {
   if (panel) panel.classList.add('active');
   if (tab) tab.classList.add('active');
   window.location.hash = code;
+  // Default to ENG nation when WC26 is opened
+  if (code === 'WC26') showNation('ENG');
+}
+
+function showNation(code) {
+  document.querySelectorAll('.nation-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nation-tab').forEach(el => el.classList.remove('active'));
+  const panel = document.getElementById('nation-' + code);
+  const tab = document.getElementById('ntab-' + code);
+  if (panel) panel.classList.add('active');
+  if (tab) tab.classList.add('active');
 }
 
 // Auto-open team from URL hash or default to ARS
