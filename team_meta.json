@@ -57,9 +57,9 @@
   },
   "CRY": {
     "name": "Crystal Palace",
-    "manager": "TBD (Glasner leaving) · UECL final May 27 pending",
+    "manager": "TBD (Glasner moving to another club · destination TBC)",
     "discount": "0.85×",
-    "note": "Manager change: Glasner leaving · UECL final May 27 still pending. Apply 0.85× discount.",
+    "note": "Manager change: Glasner confirmed leaving Palace for another club. Replacement TBD. Apply 0.85× discount until new manager + system confirmed.",
     "db_club": "Crystal Palace F.C",
     "division": "Premier League"
   },
