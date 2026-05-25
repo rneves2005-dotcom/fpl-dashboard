@@ -278,7 +278,7 @@ td strong { color: var(--ink); font-weight: 600; }
     <button class="nation-tab" id="ntab-BRA" onclick="showNation('BRA')">🇧🇷 Brazil</button>
     <button class="nation-tab" id="ntab-NED" onclick="showNation('NED')">🇳🇱 Netherlands</button>
     <button class="nation-tab" id="ntab-FRA" onclick="showNation('FRA')" disabled style="opacity:0.4;">🇫🇷 France (tbd)</button>
-    <button class="nation-tab" id="ntab-ESP" onclick="showNation('ESP')" disabled style="opacity:0.4;">🇪🇸 Spain (tbd)</button>
+    <button class="nation-tab" id="ntab-ESP" onclick="showNation('ESP')">🇪🇸 Spain</button>
     <button class="nation-tab" id="ntab-ARG" onclick="showNation('ARG')" disabled style="opacity:0.4;">🇦🇷 Argentina (tbd)</button>
     <button class="nation-tab" id="ntab-CRO" onclick="showNation('CRO')" disabled style="opacity:0.4;">🇭🇷 Croatia (tbd)</button>
   </div>
@@ -600,6 +600,41 @@ td strong { color: var(--ink); font-weight: 600; }
   </table>
   </div>
 
+  <!-- SPAIN -->
+  <div class="nation-panel" id="nation-ESP">
+  <h3>🇪🇸 Spain · Luis de la Fuente · confirmed May 2026</h3>
+
+  <div class="callout" style="border-left:4px solid var(--accent); background:var(--bad-soft); padding:12px; margin-bottom:16px;"></div>
+  <p><strong>⚡ Major impact:</strong> Spain are clear favourites alongside France/Brazil. QF+ baseline, likely SF/Final run. <strong>7 PL picks — all top form players</strong>. <strong>ARS adds 3 more</strong> (Raya, Zubimendi, Merino → ARS now at 12 WC reps), MCI adds Rodri (10 reps), CHE/TOT/CRY each +1. Apply 0.80× heavy discount — Spain rarely make early exits.</p>
+
+  <h4>✅ PL-relevant selections</h4>
+  <table>
+    <thead><tr><th>Pos</th><th>Player</th><th>Club 26/27</th><th>FPL relevance</th><th>Discount</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--bad-soft);"><td><strong>GK</strong></td><td><strong>David Raya</strong></td><td>ARS</td><td>premium GK</td><td>0.80× (talisman, deep run)</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>DEF</strong></td><td><strong>Marc Cucurella</strong></td><td>CHE</td><td>nailed attacking LB</td><td>0.80×</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>DEF</strong></td><td><strong>Pedro Porro</strong></td><td>TOT</td><td>attacking RB (De Zerbi system fit)</td><td>0.80×</td></tr>
+      <tr style="background:var(--bad-soft);"><td><strong>MID</strong></td><td><strong>Rodri</strong></td><td>MCI</td><td>premium MID (Ballon d'Or)</td><td>0.80× (deep run + Maresca transition)</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>MID</strong></td><td><strong>Martín Zubimendi</strong></td><td>ARS</td><td>nailed CDM</td><td>0.80×</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>MID</strong></td><td><strong>Mikel Merino</strong></td><td>ARS</td><td>mid (Arteta system)</td><td>0.80×</td></tr>
+      <tr style="background:var(--good-soft);"><td><strong>FWD</strong></td><td><strong>Yeremy Pino</strong></td><td>CRY (NEW from Villarreal)</td><td>mid wide attacker</td><td>0.80×</td></tr>
+      <tr><td colspan="5" style="background:var(--bg-soft); font-size:11px; font-style:italic;">Non-PL: Pedri/Cubarsí/Eric García/Gavi/Olmo/Ferran/Yamal (Barcelona), Fabián (PSG), Laporte (Al-Nassr), Llorente (Atlético), Yamal Williams Nico (Athletic Bilbao), Pubill (Almería), Oyarzabal (Real Sociedad), Álex Baena (Atlético/Villarreal), Simón (Athletic Bilbao), J.García (Espanyol), Grimaldo (Leverkusen), Borja Iglesias / V.Muñoz (Spain)</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top:24px;">📌 Cross-reference — PL clubs with Spain players</h4>
+  <table>
+    <thead><tr><th>Club</th><th>Players</th><th>Net impact</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--bad-soft);"><td><strong>ARS</strong></td><td><strong>Raya, Zubimendi, Merino</strong></td><td>🔴🔴 +3 → ARS now at <strong>12 WC reps</strong> (was 9). DEFINITIVE most exposed PL club.</td></tr>
+      <tr style="background:var(--bad-soft);"><td><strong>MCI</strong></td><td><strong>Rodri</strong></td><td>🔴 +1 → MCI to 10 reps. Rodri premium MID with deep-run risk + Maresca transition</td></tr>
+      <tr><td>CHE</td><td>Cucurella</td><td>🟡 +1 → CHE to 3</td></tr>
+      <tr><td>TOT</td><td>Porro</td><td>🟡 +1 → TOT to 4</td></tr>
+      <tr><td>CRY</td><td>Pino</td><td>🟡 +1 → CRY to 3 (combined with I.Sarr, D.Henderson)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
   <!-- NETHERLANDS -->
   <div class="nation-panel" id="nation-NED">
   <h3>🇳🇱 Netherlands · Ronald Koeman · confirmed May 2026</h3>
@@ -647,26 +682,26 @@ td strong { color: var(--ink); font-weight: 600; }
   <div class="callout" style="margin-top:16px; font-size:12px;">
     <strong>Discount logic:</strong> 0.80× = expected deep tournament run + heavy minutes. 0.85× = squad starter, group + R16 likely. 0.90-0.95× = rotation/depth player, low fatigue. Reassess after group stage (Jun 26) and again after tournament concludes (Jul 19) based on actual minutes played. Group-stage exit → revise all to 0.95× for opening 2-3 GWs only.
     <br><br>
-    <strong>Master cross-reference (verified against Squads_Data.xlsx DB — ENG+NOR+SEN+GER+EGY+SUI+POR+BRA+NED):</strong>
+    <strong>Master cross-reference (verified · ENG+NOR+SEN+GER+EGY+SUI+POR+BRA+NED+ESP):</strong>
     <ul style="margin:6px 0 0 18px;">
-      <li><strong>ARS</strong>: Saka, Rice, Eze, Madueke (ENG) + Ødegaard (NOR) + Havertz (GER) + Gabriel, Martinelli (BRA) + <strong>J.Timber (NED)</strong> = <strong>9</strong> — 🔴🔴 HEAVIEST (tied)</li>
-      <li><strong>MCI</strong>: O'Reilly, Trafford, Guehi (ENG) + Haaland (NOR) + Marmoush (EGY) + Dias, M.Nunes (POR) + <strong>Reijnders, Aké (NED)</strong> = <strong>9</strong> — 🔴🔴 HEAVIEST (tied)</li>
-      <li><strong>LIV</strong>: Wirtz (GER) + Alisson (BRA) + <strong>van Dijk, Frimpong, Gravenberch (NED)</strong> = <strong>5</strong> — 🔴 HEAVY (no longer cleanest)</li>
+      <li><strong>ARS</strong>: Saka, Rice, Eze, Madueke (ENG) + Ødegaard (NOR) + Havertz (GER) + Gabriel, Martinelli (BRA) + J.Timber (NED) + <strong>Raya, Zubimendi, Merino (ESP)</strong> = <strong>12</strong> — 🔴🔴🔴 DEFINITIVE HEAVIEST</li>
+      <li><strong>MCI</strong>: O'Reilly, Trafford, Guehi (ENG) + Haaland (NOR) + Marmoush (EGY) + Dias, M.Nunes (POR) + Reijnders, Aké (NED) + <strong>Rodri (ESP)</strong> = <strong>10</strong> — 🔴🔴 second heaviest</li>
+      <li><strong>LIV</strong>: Wirtz (GER) + Alisson (BRA) + van Dijk, Frimpong, Gravenberch (NED) = 5 — 🔴 HEAVY (no longer cleanest)</li>
       <li><strong>NEW</strong>: Livramento, Burn (ENG) + Thiaw, Woltemade (GER) + Bruno G. (BRA) = 5 — 🔴 HEAVY</li>
       <li><strong>MUN</strong>: Mainoo (ENG) + Bruno F., Dalot (POR) + Cunha (BRA) = 4 — 🔴 HEAVY (Carrick rebuild)</li>
-      <li><strong>AVL</strong>: Konsa, Rogers, Watkins (ENG) + <strong>Maatsen (NED)</strong> = 4 — 🔴 HEAVY</li>
+      <li><strong>AVL</strong>: Konsa, Rogers, Watkins (ENG) + Maatsen (NED) = 4 — 🔴 HEAVY</li>
+      <li><strong>TOT</strong>: Spence (ENG) + P.M.Sarr (SEN) + van de Ven (NED) + <strong>Porro (ESP)</strong> = 4 — 🔴 HEAVY</li>
       <li><strong>EVE</strong>: Pickford (ENG) + Gueye, I.Ndiaye (SEN) = 3 — 🟡 mod</li>
       <li><strong>BRE</strong>: Ajer (NOR) + J.Henderson (ENG) + I.Thiago (BRA) = 3 — 🟡 mod</li>
-      <li><strong>CHE</strong>: R.James (ENG) + P.Neto (POR) + <strong>Hato (NED)</strong> = 3 — 🟡 mod</li>
-      <li><strong>TOT</strong>: Spence (ENG) + P.M.Sarr (SEN) + <strong>van de Ven (NED)</strong> = 3 — 🟡 mod</li>
-      <li><strong>SUN</strong>: Diarra (SEN) + Xhaka (SUI) + <strong>Brobbey (NED)</strong> = 3 — 🟡 mod</li>
+      <li><strong>CHE</strong>: R.James (ENG) + P.Neto (POR) + Hato (NED) + <strong>Cucurella (ESP)</strong> = 3 — 🟡 mod (Pedro Neto + Cucurella both ESP-relevant; Hato NED-relevant; R.James ENG)</li>
+      <li><strong>SUN</strong>: Diarra (SEN) + Xhaka (SUI) + Brobbey (NED) = 3 — 🟡 mod</li>
+      <li><strong>CRY</strong>: D.Henderson (ENG) + I.Sarr (SEN) + <strong>Pino (ESP)</strong> = 3 — 🟡 mod</li>
       <li><strong>NFO</strong>: E.Anderson (ENG) + Ndoye (SUI) = 2 — 🟡 mod</li>
       <li><strong>FUL</strong>: Berge, Bobb (NOR) = 2 — 🟡 mod</li>
-      <li><strong>CRY</strong>: D.Henderson (ENG) + I.Sarr (SEN) = 2 — 🟡 mod</li>
-      <li><strong>BHA</strong>: <strong>Verbruggen, van Hecke (NED)</strong> = 2 — 🟡 mod (was 0 — first WC reps)</li>
+      <li><strong>BHA</strong>: Verbruggen, van Hecke (NED) = 2 — 🟡 mod</li>
       <li><strong>WHU</strong>: 🔻 RELEGATED — removed from 26/27 PL load tracker</li>
     </ul>
-    <strong>TODO:</strong> add FRA, ESP, ARG, CRO panels (Italy did NOT qualify for WC26). Remaining TBC destinations: Jackson (loan Bayern), Salah (Saudi rumor), Akanji (Inter loan), Stones (leaving MCI).
+    <strong>TODO:</strong> add FRA, ARG, CRO panels (Italy did NOT qualify for WC26). Remaining TBC destinations: Jackson (loan Bayern), Salah (Saudi rumor), Akanji (Inter loan), Stones (leaving MCI).
   </div>
 </div>
 
