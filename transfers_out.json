@@ -140,48 +140,12 @@
     ]
   },
   "Liga Betclic": {
-    "Benfica": [
-      {
-        "n": "Nicolás Otamendi",
-        "to": "TBD",
-        "note": "Leaving Benfica end of 25/26",
-        "c": "Argentina"
-      }
-    ],
     "Sporting": [
-      {
-        "n": "Hidemasa Morita",
-        "to": "TBD",
-        "note": "Leaving Sporting",
-        "c": "Japan"
-      },
       {
         "n": "Geovany Quenda",
         "to": "Chelsea",
         "note": "From 26/27",
         "c": "Portugal"
-      }
-    ],
-    "FC Porto": [
-      {
-        "n": "Luuk de Jong",
-        "to": "TBD",
-        "note": "Leaving FC Porto",
-        "c": "Netherlands"
-      },
-      {
-        "n": "Thiago Silva",
-        "to": "TBD",
-        "note": "Leaving FC Porto (was on loan from Chelsea history)",
-        "c": "Brazil"
-      }
-    ],
-    "Sporting Braga": [
-      {
-        "n": "Rodrigo Zalazar",
-        "to": "Sporting",
-        "note": "Confirmed 26/27",
-        "c": "Uruguay"
       }
     ]
   },
@@ -212,16 +176,6 @@
         "to": "Brentford",
         "note": "Confirmed 26/27",
         "c": "Germany"
-      }
-    ]
-  },
-  "Championship": {
-    "West Ham United F.C.": [
-      {
-        "n": "Lucas Paquetá",
-        "to": "Flamengo",
-        "note": "Confirmed — Brazil WC squad",
-        "c": "Brazil"
       }
     ]
   }
