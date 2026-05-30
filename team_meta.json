@@ -105,9 +105,9 @@
   },
   "LIV": {
     "name": "Liverpool",
-    "manager": "Arne Slot (TBC) · Salah/Robbo/TAA all gone",
-    "discount": "0.9×",
-    "note": "3 LIV gold-pick departures in 12 months: TAA (24/25), Salah + Robbo (25/26 end). FPL ownership target reduces from \"must own 2-3 LIV\" era to \"selective only\" (Van Dijk + maybe Wirtz).",
+    "manager": "🔄 TBD (Slot departed · successor process underway)",
+    "discount": "0.8×",
+    "note": "MAJOR REGIME CHANGE: Arne Slot departed despite winning 25/26 PL title. New manager TBD. Combined with the 25/26 churn (TAA → Real Madrid, Salah + Robbo leaving) and 5 confirmed WC reps (Wirtz, Alisson, Van Dijk, Frimpong, Gravenberch), Liverpool is now a HIGH-VARIANCE transition club. Apply 0.8× until new manager + system bedded in 3-4 GWs. Avoid premium LIV picks in opening squad — wait for evidence.",
     "db_club": "Liverpool",
     "division": "Premier League"
   },
