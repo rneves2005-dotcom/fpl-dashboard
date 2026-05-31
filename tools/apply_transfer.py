@@ -195,13 +195,12 @@ def regenerate_world_json():
             key = f"🌐 {country}"
         else:
             continue  # neither a division nor a country — skip
-        # NOTE: `c` exposes player nationality (International column), not the
-        # league host country — that's what the UI labels "Country" in the squad
-        # table (Alisson=Brazil, Endo=Japan, van Dijk=Netherlands, etc.).
-        # `lc` keeps the league country (England, Spain, …) for any
-        # league-level grouping or filters that still need it.
+        # `c` = country of the CLUB (England, Spain, Portugal, …) as stored in
+        # the DB. world.html/stats.html group/filter by this. The squads.html
+        # 26/27 squad table doesn't display country at all (Rui's design: the
+        # club already implies its country, so showing it per row is redundant).
         data[key][club].append({
-            "s": shirt, "n": player, "a": age, "c": intl, "lc": country, "g": goals, "p": prev
+            "s": shirt, "n": player, "a": age, "c": country, "g": goals, "p": prev
         })
     for div in data:
         for club in data[div]:

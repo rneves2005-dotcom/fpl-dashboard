@@ -1104,13 +1104,13 @@ function renderTeamPanel(code) {
   const activeCount = squad.filter(p => !leavingByName.has((p.n || '').trim().toLowerCase())).length;
   html += `<h3>26/27 Squad <span class="count">${activeCount}</span><span style="font-size:11px; color:var(--ink-3); font-weight:400;"> active${leavingByName.size ? ` · ${leavingByName.size} leaving (overlay)` : ''} · live from Squads_2026.xlsm</span></h3>`;
   if (squad.length) {
-    html += '<table><thead><tr><th>#</th><th>Player</th><th>Country</th><th>Age</th><th>Prev Club</th><th>Goals</th></tr></thead><tbody>';
+    html += '<table><thead><tr><th>#</th><th>Player</th><th>Age</th><th>Prev Club</th></tr></thead><tbody>';
     for (const p of squad) {
       const shirt = p.s ?? '–';
       const leaving = leavingByName.get((p.n || '').trim().toLowerCase());
       const rowStyle = leaving ? ' style="opacity:0.45; text-decoration:line-through;"' : '';
       const badge = leaving ? ` <span style="background:var(--bad); color:#fff; padding:1px 5px; border-radius:3px; font-size:9px; font-weight:600; text-decoration:none; vertical-align:middle;">🔻 LEAVING</span>` : '';
-      html += `<tr${rowStyle}><td class="shirt">${shirt}</td><td><strong>${escapeHtml(p.n)}</strong>${badge}</td><td>${escapeHtml(p.c || '')}</td><td>${p.a ?? '–'}</td><td style="font-size:11px; color:var(--ink-3);">${escapeHtml(p.p || '')}</td><td>${p.g ?? '–'}</td></tr>`;
+      html += `<tr${rowStyle}><td class="shirt">${shirt}</td><td><strong>${escapeHtml(p.n)}</strong>${badge}</td><td>${p.a ?? '–'}</td><td style="font-size:11px; color:var(--ink-3);">${escapeHtml(p.p || '')}</td></tr>`;
     }
     html += '</tbody></table>';
   } else {
