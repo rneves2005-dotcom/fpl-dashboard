@@ -295,6 +295,7 @@ td strong { color: var(--ink); font-weight: 600; }
     <button class="nation-tab" id="ntab-PAR" onclick="showNation('PAR')">🇵🇾 Paraguay</button>
     <button class="nation-tab" id="ntab-SUN-multi" onclick="showNation('SUN-multi')">🇸🇳🇲🇦🇪🇨🇭🇹🇨🇩 SUN multi-nation</button>
     <button class="nation-tab" id="ntab-JPN" onclick="showNation('JPN')">🇯🇵 Japan</button>
+    <button class="nation-tab" id="ntab-USA" onclick="showNation('USA')">🇺🇸 USA</button>
   </div>
   <p style="font-size:11px; color:var(--ink-3); margin-top:8px;"><em>Note: 🇮🇹 Italy did not qualify for WC 2026 — Serie A PL-relevant players (Casemiro/Bremer types) only via other national teams.</em></p>
 
@@ -1274,6 +1275,40 @@ td strong { color: var(--ink); font-weight: 600; }
   </table>
   </div>
 
+  <!-- USA -->
+  <div class="nation-panel" id="nation-USA">
+  <h3>🇺🇸 USA · Mauricio Pochettino · WC26 co-host squad confirmed Jun 2026</h3>
+
+  <div class="callout" style="border-left:4px solid var(--accent); background:var(--bad-soft); padding:12px; margin-bottom:16px;">
+    <strong>⚡ USA host nation · R16-QF realistic with home advantage · MODERATE PL impact (5 picks).</strong> Apply 0.80× for nailed picks (deep run as hosts, max minutes). PL impact: <strong>5 PL clubs each +1</strong>: BOU, COV, CRY, FUL, LEE. CRY jumps to 10 reps · sole 4th-heaviest. COV gets 2nd WC rep.
+  </div>
+
+  <h4>✅ PL-relevant selections (via DB)</h4>
+  <table>
+    <thead><tr><th>Pos</th><th>Player</th><th>Club 26/27</th><th>FPL relevance</th><th>Discount</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--bad-soft);"><td>MID</td><td><strong>Tyler Adams</strong></td><td>BOU (#12)</td><td>nailed CDM · BOU heat-map +1 → 4</td><td>0.80× (host deep run)</td></tr>
+      <tr style="background:var(--good-soft);"><td>FWD</td><td><strong>Haji Wright</strong></td><td>COV (#11)</td><td>striker · <strong>COV's 2nd WC rep</strong></td><td>0.85× (group exit possible despite host edge)</td></tr>
+      <tr style="background:var(--bad-soft);"><td>DEF</td><td><strong>Chris Richards</strong></td><td>CRY (#26)</td><td>CB · CRY heat-map +1 → 10 sole 4th-heaviest</td><td>0.80×</td></tr>
+      <tr style="background:var(--bad-soft);"><td>DEF</td><td><strong>Antonee Robinson</strong></td><td>FUL (#33)</td><td>nailed LB · FUL heat-map +1 → 5</td><td>0.80× (premium LB · FUL transition stacks)</td></tr>
+      <tr style="background:var(--good-soft);"><td>MID</td><td><strong>Brenden Aaronson</strong></td><td>LEE (#11)</td><td>creative MID · LEE heat-map +1 → 3</td><td>0.85×</td></tr>
+      <tr><td colspan="5" style="background:var(--bg-soft); font-size:11px; font-style:italic;"><strong>Non-PL via DB:</strong> Pulisic (Milan), Balogun (Monaco), McKennie (Juventus), Weah (Juventus), Dest (PSV), Tillman (Leverkusen), Pepi (Groningen), Reyna, Berhalter (Vancouver), Roldan (Seattle), Turner (New England · MLS, left NFO), Ream (Charlotte), Trusty (Celtic), McKenzie (Genk), Brady (Chicago Fire), Freese (NYCFC), Freeman (Orlando), M.Robinson (Atlanta United), Zendejas (Club América), Wright already counted as PL.</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top:24px;">📌 Cross-reference — PL clubs with USA players</h4>
+  <table>
+    <thead><tr><th>Club</th><th>Players</th><th>Net impact</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--bad-soft);"><td><strong>CRY</strong></td><td>Richards</td><td>🔴🔴🔴 +1 → CRY from 9 → <strong>10 reps · SOLE 4th-heaviest</strong> (overtakes SUN/CHE/AVL at 9). Compound risk maxed.</td></tr>
+      <tr><td><strong>FUL</strong></td><td>Robinson</td><td>🟡 +1 → FUL from 4 → <strong>5 reps</strong> (Robinson premium LB adds to Silva-departure stack)</td></tr>
+      <tr><td><strong>BOU</strong></td><td>Adams</td><td>🟡 +1 → BOU from 3 → 4 (Adams CDM joins Christie/Doak/Kluivert)</td></tr>
+      <tr><td><strong>LEE</strong></td><td>Aaronson</td><td>🟡 +1 → LEE from 2 → 3 (Gudmundsson + Tanaka + Aaronson all MID/wide)</td></tr>
+      <tr><td><strong>COV</strong> 🆕</td><td>Wright</td><td>🟢 +1 → COV from 1 → 2 (Thomas-Asante GHA + Wright USA)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
   <!-- NETHERLANDS -->
   <div class="nation-panel" id="nation-NED">
   <h3>🇳🇱 Netherlands · Ronald Koeman · REVISED squad (May 2026)</h3>
@@ -1325,12 +1360,12 @@ td strong { color: var(--ink); font-weight: 600; }
   <div class="callout" style="margin-top:16px; font-size:12px;">
     <strong>Discount logic:</strong> 0.80× = expected deep tournament run + heavy minutes. 0.85× = squad starter, group + R16 likely. 0.90-0.95× = rotation/depth player, low fatigue. Reassess after group stage (Jun 26) and again after tournament concludes (Jul 19) based on actual minutes played. Group-stage exit → revise all to 0.95× for opening 2-3 GWs only.
     <br><br>
-    <strong>FINAL Master cross-reference (30 WC nations announced · ENG+NOR+SEN+GER+EGY+SUI+POR+BRA+NED·rev+ESP+ARG+FRA+CRO+MAR+ECU+COL+SWE+BEL+ALG+URU+GHA+UZB+TUR+CIV+SCO+PAR+HAI+COD+JPN):</strong>
+    <strong>FINAL Master cross-reference (31 WC nations announced · ENG+NOR+SEN+GER+EGY+SUI+POR+BRA+NED·rev+ESP+ARG+FRA+CRO+MAR+ECU+COL+SWE+BEL+ALG+URU+GHA+UZB+TUR+CIV+SCO+PAR+HAI+COD+JPN+USA):</strong>
     <ul style="margin:6px 0 0 18px;">
       <li><strong>ARS</strong>: Saka, Rice, Eze, Madueke (ENG) + Ødegaard (NOR) + Havertz (GER) + Gabriel, Martinelli (BRA) + J.Timber (NED) + Raya, Zubimendi, Merino (ESP) + Saliba (FRA) + Hincapié (ECU) + Gyökeres (SWE) + <strong>Trossard (BEL)</strong> = <strong>16</strong> — 🔴🔴🔴🔴 <strong>TIED HEAVIEST with MCI</strong> · <strong>LOST CL Final to PSG 3-4 on penalties</strong> · 120min legs + emotional fatigue + WC compound. Apply <strong>0.75×</strong> to all ARS premiums for opening 3 GWs.</li>
       <li><strong>MCI</strong>: O'Reilly, Trafford, Guehi (ENG) + Haaland (NOR) + Marmoush (EGY) + Dias, M.Nunes (POR) + Reijnders, Aké (NED) + Rodri (ESP) + Cherki (FRA) + Gvardiol, Kovačić (CRO) + Aït-Nouri (ALG) + Semenyo (GHA) + <strong>Khusanov (UZB)</strong> = <strong>16</strong> — 🔴🔴🔴🔴 <strong>TIES ARS for HEAVIEST</strong>. Stones CONFIRMED leaving MCI (destination TBD). Doku (BEL) OMITTED — lone rested premium.</li>
       <li><strong>LIV</strong> 🔄: Wirtz (GER) + Alisson (BRA) + van Dijk, Gravenberch, Gakpo (NED·rev) + Mac Allister (ARG) + Isak (SWE) + <strong>Endō (JPN)</strong> = <strong>8</strong> — 🔴🔴 + Slot out + Iraola rumored + Konaté CONFIRMED LEAVING + Robertson CONFIRMED LEAVING. Endō (JPN) +1 brings LIV to 8 · ties CRY/AVL/CHE/SUN tier.</li>
-      <li><strong>CRY</strong>: D.Henderson (ENG) + I.Sarr (SEN) + Pino (ESP) + Lacroix, Mateta (FRA) + Riad (MAR) + Muñoz, Lerma (COL) + <strong>Kamada (JPN)</strong> = <strong>9</strong> — 🔴🔴🔴 ties SUN/CHE/AVL 4th-heaviest. Essentially entire CRY first XI in WC service + Glasner exit. Avoid all CRY picks opening 3 GWs.</li>
+      <li><strong>CRY</strong>: D.Henderson (ENG) + I.Sarr (SEN) + Pino (ESP) + Lacroix, Mateta (FRA) + Riad (MAR) + Muñoz, Lerma (COL) + Kamada (JPN) + <strong>Richards (USA)</strong> = <strong>10</strong> — 🔴🔴🔴 <strong>SOLE 4th-heaviest</strong>. Entire CRY first XI in WC service + Glasner exit. Avoid all CRY picks opening 3 GWs.</li>
       <li><strong>CHE</strong>: R.James (ENG) + P.Neto (POR) + Hato (NED) + Cucurella (ESP) + Enzo F. (ARG) + Gusto (FRA) + Lavia (BEL) + <strong>Caicedo (ECU) + M.Sarr (SEN)</strong> = <strong>9</strong> — 🔴🔴🔴 SOLE 3rd-heaviest. Alonso transition + Caicedo IN squad (FIFA May 31 confirmed · prior "omitted" call reversed). Páez/Penders/Jackson are CHE-owned but on loan → not counted.</li>
       <li><strong>MUN</strong>: Mainoo, Rashford (ENG · return from Barcelona) + Bruno F., Dalot (POR) + Cunha (BRA) + L.Martínez (ARG) + Mazraoui (MAR) + Lammens (BEL) + Ugarte (URU) + Bayindir (TUR) + Amad (CIV) + <strong>Tyler Fletcher (SCO · replacing injured Gilmour)</strong> = <strong>12</strong> — 🔴🔴🔴 HEAVY · <strong>sole 3rd-heaviest</strong>. Carrick rebuild + Rashford return. Casemiro CONFIRMED leaving.</li>
       <li><strong>NEW</strong>: Livramento, Burn (ENG) + Thiaw, Woltemade (GER) + Bruno G. (BRA) + <strong>Elanga (SWE)</strong> = 6 — 🔴🔴 HEAVY</li>
@@ -1341,15 +1376,15 @@ td strong { color: var(--ink); font-weight: 600; }
       <li><strong>EVE</strong>: Pickford (ENG) + Gueye, I.Ndiaye (SEN) + <strong>N.Patterson (SCO)</strong> = 4 — 🟡 mod</li>
       <li><strong>BRE</strong>: Ajer (NOR) + J.Henderson (ENG) + I.Thiago (BRA) + <strong>Hickey (SCO)</strong> = 4 — 🟡 mod</li>
       <li><strong>NFO</strong>: E.Anderson (ENG) + Ndoye (SUI) + Sels (BEL) + <strong>Gunn (SCO)</strong> = 4 — 🟡 mod (Sels nailed #1 GK · Gunn backup)</li>
-      <li><strong>FUL</strong>: Berge, Bobb (NOR) + Diop (MAR) + <strong>Castagne (BEL)</strong> = 4 — 🟡 mod</li>
-      <li><strong>BOU</strong>: Kluivert (NED·rev) + <strong>Christie, Gannon-Doak (SCO)</strong> = 3 — 🟡 mod (jumped from 1 to 3 via Scotland adds)</li>
+      <li><strong>FUL</strong>: Berge, Bobb (NOR) + Diop (MAR) + Castagne (BEL) + <strong>Robinson (USA)</strong> = 5 — 🟡 mod-heavy (Silva → Benfica transition stacks)</li>
+      <li><strong>BOU</strong>: Kluivert (NED·rev) + Christie, Gannon-Doak (SCO) + <strong>Adams (USA)</strong> = 4 — 🟡 mod</li>
       <li><strong>HUL</strong> 🆕: <strong>Pandur (CRO)</strong> = 1 — 🟢 light (first WC exposure for promoted HUL)</li>
-      <li><strong>LEE</strong>: Gudmundsson (SWE) + <strong>Tanaka Ao (JPN)</strong> = 2 — 🟢 light (CDM + LB)</li>
-      <li><strong>COV</strong> 🆕: <strong>Thomas-Asante (GHA)</strong> = 1 — 🟢 light (first WC exposure for promoted COV)</li>
-      <li><strong>IPS</strong>: 0 — 🟢 cleanest 26/27 PL club (other than relegated WHU)</li>
+      <li><strong>LEE</strong>: Gudmundsson (SWE) + Tanaka Ao (JPN) + <strong>Aaronson (USA)</strong> = 3 — 🟡 mod (climbing fast)</li>
+      <li><strong>COV</strong>: Thomas-Asante (GHA) + <strong>H.Wright (USA)</strong> = 2 — 🟢 light (was 1, +1 USA)</li>
+      <li><strong>IPS</strong>: 0 — 🟢 <strong>sole cleanest 26/27 PL club</strong></li>
       <li><strong>WHU</strong>: 🔻 RELEGATED — removed from 26/27 PL load tracker</li>
     </ul>
-    <strong>🎯 30 WC nations announced.</strong> Heat-map rank: <strong>ARS 16 tied MCI 16</strong> → <strong>MUN 12</strong> → <strong>SUN/CHE/AVL/CRY 9 each</strong> (CRY +1 Kamada · ties top of mid-tier) → <strong>LIV 8 (+1 Endō)</strong> → TOT 7 → BHA 6 → NEW 6 → EVE/BRE/NFO/FUL 4 each → BOU 3 → <strong>LEE 2 (+1 Tanaka)</strong> → COV/HUL 1 each → IPS 0. <strong>Rested premium TRIO: Doku (MCI) + Kudus (TOT) + Mitoma (BHA · 🆕 JPN omitted)</strong>. 🏆 CL Final: PSG 4-3 ARS pens → ARS 0.75×. Konaté+Robertson LEAVING LIV. Stones LEAVING MCI. Casemiro LEAVING MUN. Rashford RETURNING to MUN.
+    <strong>🎯 31 WC nations announced.</strong> Heat-map rank: <strong>ARS 16 tied MCI 16</strong> → <strong>MUN 12</strong> → <strong>CRY 10 (sole 4th · +1 Richards)</strong> → SUN/CHE/AVL 9 each → LIV 8 → TOT 7 → BHA/NEW 6 each → <strong>FUL 5 (+1 Robinson)</strong> → EVE/BRE/NFO/<strong>BOU 4 each</strong> (BOU +1 Adams) → <strong>LEE 3 (+1 Aaronson)</strong> → <strong>COV 2 (+1 Wright)</strong> → HUL 1 → IPS 0. <strong>Rested premium TRIO: Doku/Kudus/Mitoma</strong>. 🏆 CL Final: PSG 4-3 ARS pens. Konaté+Robertson LEAVING LIV. Stones LEAVING MCI. Casemiro LEAVING MUN. Rashford RETURNING to MUN.
   </div>
 </div>
 
