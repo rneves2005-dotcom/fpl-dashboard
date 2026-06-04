@@ -146,8 +146,8 @@
   "SUN": {
     "name": "Sunderland",
     "manager": "continuity",
-    "discount": "1.0×",
-    "note": "",
+    "discount": "0.9×",
+    "note": "SUN was in PL 25/26 (not promoted · clarified Jun 2026). Per official club news Jun 2026: 9 WC reps across 4 continents (Diarra SEN, Xhaka SUI captain, Brobbey + Roefs NED, Alderete PAR, Talbi MAR, Isidor HAI, Angulo ECU, Sadiki COD). Loanees Masuaku (Lens) + Adingra (Monaco) NOT counted unless return. 4th-heaviest tied with CHE/AVL. Apply 0.9× — no longer a 'clean continuity' target.",
     "db_club": "Sunderland A.F.C.",
     "division": "Premier League"
   },
