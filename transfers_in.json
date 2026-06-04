@@ -50,7 +50,14 @@
         "c": "France"
       }
     ],
-    "Manchester City": [],
+    "Manchester City": [
+      {
+        "n": "Antoine Semenyo",
+        "from": "Bournemouth",
+        "note": "Confirmed 26/27 · per DB · Ghana WC squad",
+        "c": "Ghana"
+      }
+    ],
     "Manchester United": [],
     "Newcastle United": [],
     "Nottingham Forest": [],
