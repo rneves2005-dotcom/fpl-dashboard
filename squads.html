@@ -291,6 +291,7 @@ td strong { color: var(--ink); font-weight: 600; }
     <button class="nation-tab" id="ntab-GHA" onclick="showNation('GHA')">🇬🇭 Ghana</button>
     <button class="nation-tab" id="ntab-UZB" onclick="showNation('UZB')">🇺🇿 Uzbekistan</button>
     <button class="nation-tab" id="ntab-MUN-others" onclick="showNation('MUN-others')">🇹🇷🇨🇮 MUN-other WC</button>
+    <button class="nation-tab" id="ntab-SCO" onclick="showNation('SCO')">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland</button>
   </div>
   <p style="font-size:11px; color:var(--ink-3); margin-top:8px;"><em>Note: 🇮🇹 Italy did not qualify for WC 2026 — Serie A PL-relevant players (Casemiro/Bremer types) only via other national teams.</em></p>
 
@@ -1107,7 +1108,46 @@ td strong { color: var(--ink); font-weight: 600; }
   <table>
     <thead><tr><th>Confirmed adds</th><th>Pending</th><th>New MUN total</th></tr></thead>
     <tbody>
-      <tr><td>+3 (Bayindir TUR + Amad CIV + Rashford ENG)</td><td>Fletcher Scotland TBC only</td><td>MUN: 8 → <strong>11 reps · sole 3rd-heaviest</strong></td></tr>
+      <tr><td>+3 (Bayindir TUR + Amad CIV + Rashford ENG) + Fletcher SCO ✅ now confirmed</td><td>None</td><td>MUN: 8 → <strong>12 reps · sole 3rd-heaviest</strong> (Fletcher Scotland senior confirmed replacing injured Gilmour)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- SCOTLAND -->
+  <div class="nation-panel" id="nation-SCO">
+  <h3>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland · Steve Clarke · confirmed June 2026 (incl. Fletcher replacing injured Gilmour)</h3>
+
+  <div class="callout" style="border-left:4px solid var(--accent); background:var(--bad-soft); padding:12px; margin-bottom:16px;">
+    <strong>⚡ Scotland qualified for WC26 (first time since 1998) · group-stage exit likely · MODERATE PL impact (7 PL players).</strong> Apply 0.90× baseline (group-stage exit baked in, lower fatigue ceiling). 5 PL clubs each get +1. <strong>Robertson (LIV) is in Scotland squad but CONFIRMED leaving LIV — not counted for LIV heat-map.</strong>
+  </div>
+
+  <h4>✅ PL-relevant selections (all verified via DB)</h4>
+  <table>
+    <thead><tr><th>Pos</th><th>Player</th><th>Club 26/27</th><th>FPL relevance</th><th>Discount</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--good-soft);"><td>GK</td><td><strong>Angus Gunn</strong></td><td>NFO (#18)</td><td>backup GK behind Sels — rotation</td><td>0.95×</td></tr>
+      <tr style="background:var(--bad-soft);"><td>DEF</td><td><strong>Andrew Robertson</strong></td><td>LIV (#26) 🔻</td><td><strong>CONFIRMED leaving LIV end of 25/26</strong> · Scotland LB · NOT counted for LIV heat-map (same logic as Konaté)</td><td>n/a</td></tr>
+      <tr style="background:var(--good-soft);"><td>DEF</td><td><strong>Aaron Hickey</strong></td><td>BRE (#2)</td><td>versatile RB/LB · BRE heat-map +1</td><td>0.90×</td></tr>
+      <tr style="background:var(--good-soft);"><td>DEF</td><td><strong>Nathan Patterson</strong></td><td>EVE (#2)</td><td>nailed RB · EVE heat-map +1</td><td>0.90×</td></tr>
+      <tr style="background:var(--bad-soft);"><td>MID</td><td><strong>John McGinn</strong></td><td>AVL (#7)</td><td>nailed CM/wide attacker · AVL heat-map +1</td><td>0.85×</td></tr>
+      <tr style="background:var(--bad-soft);"><td>MID</td><td><strong>Tyler Fletcher</strong> 🆕</td><td>MUN (#39)</td><td>young CM · <strong>called up replacing injured Gilmour</strong> · MUN heat-map +1</td><td>0.95× (likely group-stage minutes only)</td></tr>
+      <tr style="background:var(--good-soft);"><td>FWD</td><td><strong>Ryan Christie</strong></td><td>BOU (#10)</td><td>creative MID/FWD · BOU heat-map +1</td><td>0.90×</td></tr>
+      <tr style="background:var(--good-soft);"><td>FWD</td><td><strong>Ben Gannon-Doak</strong></td><td>BOU (#11)</td><td>wide attacker · BOU heat-map +1</td><td>0.90×</td></tr>
+      <tr><td colspan="5" style="background:var(--bg-soft); font-size:11px; font-style:italic;"><strong>Non-PL via DB:</strong> Gordon (Hearts), Bain (?), Hanley (Hibernian), Souttar (Rangers), McKenna (Dinamo Zagreb), Hendry (Al-Ettifaq Saudi), Milne/Halkett/Shankland (Hearts), Tierney (Celtic), McTominay/<strong>Gilmour (Napoli · INJURED)</strong>, McLean (Norwich Championship), Adams (Torino), Ferguson (Bologna), Dykes (Charlton Championship), Conway (Middlesbrough Championship), Miller, Bowie.</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top:24px;">📌 Cross-reference — PL clubs with Scotland players</h4>
+  <table>
+    <thead><tr><th>Club</th><th>Players</th><th>Net impact</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--bad-soft);"><td><strong>MUN</strong></td><td>Tyler Fletcher 🆕</td><td>🔴🔴🔴 +1 → MUN to <strong>12 reps</strong> (was 11). Fletcher senior call-up replacing Gilmour confirmed.</td></tr>
+      <tr style="background:var(--bad-soft);"><td><strong>AVL</strong></td><td>McGinn</td><td>🔴🔴🔴 +1 → AVL to <strong>9 reps</strong> (was 8). Joins MUN tier.</td></tr>
+      <tr style="background:var(--bad-soft);"><td><strong>BOU</strong> 🚀</td><td>Christie + Gannon-Doak</td><td>🟡 +2 → BOU from 1 → <strong>3 reps</strong>. Biggest single-jump from one squad reveal.</td></tr>
+      <tr><td><strong>EVE</strong></td><td>Patterson</td><td>🟡 +1 → EVE from 3 → 4</td></tr>
+      <tr><td><strong>BRE</strong></td><td>Hickey</td><td>🟡 +1 → BRE from 3 → 4</td></tr>
+      <tr><td><strong>NFO</strong></td><td>Gunn</td><td>🟡 +1 → NFO from 3 → 4 (Sels still #1 GK)</td></tr>
+      <tr style="background:var(--good-soft);"><td>LIV</td><td>Robertson 🔻 leaving</td><td>🟢 0 — Robertson confirmed leaving (same as Konaté · Stones convention). LIV stays at 7.</td></tr>
     </tbody>
   </table>
   </div>
@@ -1163,31 +1203,31 @@ td strong { color: var(--ink); font-weight: 600; }
   <div class="callout" style="margin-top:16px; font-size:12px;">
     <strong>Discount logic:</strong> 0.80× = expected deep tournament run + heavy minutes. 0.85× = squad starter, group + R16 likely. 0.90-0.95× = rotation/depth player, low fatigue. Reassess after group stage (Jun 26) and again after tournament concludes (Jul 19) based on actual minutes played. Group-stage exit → revise all to 0.95× for opening 2-3 GWs only.
     <br><br>
-    <strong>FINAL Master cross-reference (25 WC nations announced · 23 full + TUR+CIV partial via MUN club news · ENG+NOR+SEN+GER+EGY+SUI+POR+BRA+NED·rev+ESP+ARG+FRA+CRO+MAR+ECU+COL+SWE+BEL+ALG+URU+GHA+UZB+TUR+CIV):</strong>
+    <strong>FINAL Master cross-reference (26 WC nations announced · ENG+NOR+SEN+GER+EGY+SUI+POR+BRA+NED·rev+ESP+ARG+FRA+CRO+MAR+ECU+COL+SWE+BEL+ALG+URU+GHA+UZB+TUR+CIV+SCO):</strong>
     <ul style="margin:6px 0 0 18px;">
       <li><strong>ARS</strong>: Saka, Rice, Eze, Madueke (ENG) + Ødegaard (NOR) + Havertz (GER) + Gabriel, Martinelli (BRA) + J.Timber (NED) + Raya, Zubimendi, Merino (ESP) + Saliba (FRA) + Hincapié (ECU) + Gyökeres (SWE) + <strong>Trossard (BEL)</strong> = <strong>16</strong> — 🔴🔴🔴🔴 <strong>TIED HEAVIEST with MCI</strong> · <strong>LOST CL Final to PSG 3-4 on penalties</strong> · 120min legs + emotional fatigue + WC compound. Apply <strong>0.75×</strong> to all ARS premiums for opening 3 GWs.</li>
       <li><strong>MCI</strong>: O'Reilly, Trafford, Guehi (ENG) + Haaland (NOR) + Marmoush (EGY) + Dias, M.Nunes (POR) + Reijnders, Aké (NED) + Rodri (ESP) + Cherki (FRA) + Gvardiol, Kovačić (CRO) + Aït-Nouri (ALG) + Semenyo (GHA) + <strong>Khusanov (UZB)</strong> = <strong>16</strong> — 🔴🔴🔴🔴 <strong>TIES ARS for HEAVIEST</strong>. Stones CONFIRMED leaving MCI (destination TBD). Doku (BEL) OMITTED — lone rested premium.</li>
       <li><strong>LIV</strong> 🔄: Wirtz (GER) + Alisson (BRA) + van Dijk, Gravenberch, Gakpo (NED·rev) + Mac Allister (ARG) + <strong>Isak (SWE)</strong> = <strong>7</strong> — 🔴🔴 + Slot out + Iraola rumored. <strong>Konaté CONFIRMED LEAVING May 30 (official LFC)</strong> — drops LIV from 8 to 7. France WC squad pick but no longer at LIV.</li>
       <li><strong>CRY</strong>: D.Henderson (ENG) + I.Sarr (SEN) + Pino (ESP) + Lacroix, Mateta (FRA) + Riad (MAR) + <strong>Muñoz, Lerma (COL)</strong> = <strong>8</strong> — 🔴🔴🔴 sole 3rd-heaviest · essentially the entire CRY first XI in WC service + Glasner exit. Avoid all CRY picks opening 3 GWs.</li>
       <li><strong>CHE</strong>: R.James (ENG) + P.Neto (POR) + Hato (NED) + Cucurella (ESP) + Enzo F. (ARG) + Gusto (FRA) + Lavia (BEL) + <strong>Caicedo (ECU) + M.Sarr (SEN)</strong> = <strong>9</strong> — 🔴🔴🔴 SOLE 3rd-heaviest. Alonso transition + Caicedo IN squad (FIFA May 31 confirmed · prior "omitted" call reversed). Páez/Penders/Jackson are CHE-owned but on loan → not counted.</li>
-      <li><strong>MUN</strong>: Mainoo, <strong>Rashford</strong> (ENG · return from Barcelona loan) + Bruno F., Dalot (POR) + Cunha (BRA) + L.Martínez (ARG) + Mazraoui (MAR) + Lammens (BEL) + Ugarte (URU) + Bayindir (TUR) + Amad (CIV) = <strong>11</strong> — 🔴🔴🔴 HEAVY · <strong>sole 3rd-heaviest</strong>. Carrick rebuild + Rashford return adds premium attacker. Casemiro CONFIRMED leaving (destination TBD). Fletcher Scotland TBC (not counted).</li>
+      <li><strong>MUN</strong>: Mainoo, Rashford (ENG · return from Barcelona) + Bruno F., Dalot (POR) + Cunha (BRA) + L.Martínez (ARG) + Mazraoui (MAR) + Lammens (BEL) + Ugarte (URU) + Bayindir (TUR) + Amad (CIV) + <strong>Tyler Fletcher (SCO · replacing injured Gilmour)</strong> = <strong>12</strong> — 🔴🔴🔴 HEAVY · <strong>sole 3rd-heaviest</strong>. Carrick rebuild + Rashford return. Casemiro CONFIRMED leaving.</li>
       <li><strong>NEW</strong>: Livramento, Burn (ENG) + Thiaw, Woltemade (GER) + Bruno G. (BRA) + <strong>Elanga (SWE)</strong> = 6 — 🔴🔴 HEAVY</li>
       <li><strong>TOT</strong>: Spence (ENG) + P.M.Sarr (SEN) + van de Ven (NED) + Porro (ESP) + Romero (ARG) + Bergvall (SWE) + <strong>Bentancur (URU)</strong> = 7 — 🔴🔴 HEAVY. <strong>Kudus (GHA) OMITTED</strong> — rested premium opportunity alongside Doku.</li>
-      <li><strong>AVL</strong>: Konsa, Rogers, Watkins (ENG) + E.Martínez (ARG) + Digne (FRA) + Lindelöf (SWE) + <strong>Tielemans, Onana (BEL)</strong> = <strong>8</strong> — 🔴🔴🔴 ties CRY/LIV 3rd-heaviest. AVL just exploded +60% in load — Emery's 1.0× discount needs revisit.</li>
+      <li><strong>AVL</strong>: Konsa, Rogers, Watkins (ENG) + E.Martínez (ARG) + Digne (FRA) + Lindelöf (SWE) + Tielemans, Onana (BEL) + <strong>McGinn (SCO)</strong> = <strong>9</strong> — 🔴🔴🔴 HEAVY (only behind ARS/MCI/MUN). +1 McGinn nailed CM. Emery's 1.0× discount → 0.85× required.</li>
       <li><strong>SUN</strong>: Diarra (SEN) + Xhaka (SUI) + Brobbey, Roefs (NED·rev) = 4 — 🟡 mod</li>
       <li><strong>BHA</strong>: Verbruggen, van Hecke, Wieffer (NED·rev) + Ayari (SWE) + <strong>De Cuyper (BEL)</strong> = 5 — 🟡 mod-heavy</li>
-      <li><strong>EVE</strong>: Pickford (ENG) + Gueye, I.Ndiaye (SEN) = 3 — 🟡 mod</li>
-      <li><strong>BRE</strong>: Ajer (NOR) + J.Henderson (ENG) + I.Thiago (BRA) = 3 — 🟡 mod</li>
-      <li><strong>NFO</strong>: E.Anderson (ENG) + Ndoye (SUI) + <strong>Sels (BEL)</strong> = 3 — 🟡 mod (Sels nailed #1 GK)</li>
+      <li><strong>EVE</strong>: Pickford (ENG) + Gueye, I.Ndiaye (SEN) + <strong>N.Patterson (SCO)</strong> = 4 — 🟡 mod</li>
+      <li><strong>BRE</strong>: Ajer (NOR) + J.Henderson (ENG) + I.Thiago (BRA) + <strong>Hickey (SCO)</strong> = 4 — 🟡 mod</li>
+      <li><strong>NFO</strong>: E.Anderson (ENG) + Ndoye (SUI) + Sels (BEL) + <strong>Gunn (SCO)</strong> = 4 — 🟡 mod (Sels nailed #1 GK · Gunn backup)</li>
       <li><strong>FUL</strong>: Berge, Bobb (NOR) + Diop (MAR) + <strong>Castagne (BEL)</strong> = 4 — 🟡 mod</li>
-      <li><strong>BOU</strong>: Kluivert (NED·rev) = 1 — 🟢 light</li>
+      <li><strong>BOU</strong>: Kluivert (NED·rev) + <strong>Christie, Gannon-Doak (SCO)</strong> = 3 — 🟡 mod (jumped from 1 to 3 via Scotland adds)</li>
       <li><strong>HUL</strong> 🆕: <strong>Pandur (CRO)</strong> = 1 — 🟢 light (first WC exposure for promoted HUL)</li>
       <li><strong>LEE</strong> 🆕: <strong>Gudmundsson (SWE)</strong> = 1 — 🟢 light (first WC exposure for Leeds)</li>
       <li><strong>COV</strong> 🆕: <strong>Thomas-Asante (GHA)</strong> = 1 — 🟢 light (first WC exposure for promoted COV)</li>
       <li><strong>IPS</strong>: 0 — 🟢 cleanest 26/27 PL club (other than relegated WHU)</li>
       <li><strong>WHU</strong>: 🔻 RELEGATED — removed from 26/27 PL load tracker</li>
     </ul>
-    <strong>🎯 25 WC nations announced.</strong> Heat-map rank: <strong>ARS 16 tied MCI 16</strong> → <strong>MUN 11 (sole 3rd · +3 Bayindir TUR + Amad CIV + Rashford ENG return)</strong> → CHE 9 → AVL/CRY 8 each → LIV/TOT 7 each → NEW 6 → BHA 5 → FUL 4 → NFO 3 → LEE/COV/BOU/HUL 1 each → IPS 0. <strong>Rested premium pair: Doku (MCI · BEL omitted) + Kudus (TOT · GHA omitted)</strong>. 🏆 CL Final: PSG 4-3 ARS pens → ARS 0.75× compound. Konaté CONFIRMED leaving LIV. Stones CONFIRMED leaving MCI. Casemiro CONFIRMED leaving MUN. Rashford RETURNING to MUN.
+    <strong>🎯 26 WC nations announced (Scotland qualified!).</strong> Heat-map rank: <strong>ARS 16 tied MCI 16</strong> → <strong>MUN 12 (+1 Fletcher SCO)</strong> → <strong>AVL 9 (+1 McGinn)</strong> → CHE 9 → CRY 8 → LIV/TOT 7 → NEW 6 → BHA 5 → SUN/FUL/EVE/BRE/NFO 4 each (BRE/EVE/NFO +1 SCO) → <strong>BOU 3</strong> (+2 Christie/Doak SCO) → LEE/COV/HUL 1 each → IPS 0. Robertson SCO (LIV) CONFIRMED LEAVING — not counted. <strong>Rested premium pair: Doku (MCI) + Kudus (TOT)</strong>. 🏆 CL Final: PSG 4-3 ARS pens → ARS 0.75×. Konaté LEAVING LIV. Stones LEAVING MCI. Casemiro LEAVING MUN. Rashford RETURNING to MUN.
   </div>
 </div>
 
