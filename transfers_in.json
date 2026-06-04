@@ -51,7 +51,14 @@
       }
     ],
     "Manchester City": [],
-    "Manchester United": [],
+    "Manchester United": [
+      {
+        "n": "Marcus Rashford",
+        "from": "Barcelona (loan return)",
+        "note": "Confirmed return to MUN end of 25/26 · England WC squad #11",
+        "c": "England"
+      }
+    ],
     "Newcastle United": [],
     "Nottingham Forest": [],
     "Sunderland A.F.C.": [],
