@@ -290,6 +290,7 @@ td strong { color: var(--ink); font-weight: 600; }
     <button class="nation-tab" id="ntab-URU" onclick="showNation('URU')">🇺🇾 Uruguay</button>
     <button class="nation-tab" id="ntab-GHA" onclick="showNation('GHA')">🇬🇭 Ghana</button>
     <button class="nation-tab" id="ntab-UZB" onclick="showNation('UZB')">🇺🇿 Uzbekistan</button>
+    <button class="nation-tab" id="ntab-MUN-others" onclick="showNation('MUN-others')">🇹🇷🇨🇮 MUN-other WC</button>
   </div>
   <p style="font-size:11px; color:var(--ink-3); margin-top:8px;"><em>Note: 🇮🇹 Italy did not qualify for WC 2026 — Serie A PL-relevant players (Casemiro/Bremer types) only via other national teams.</em></p>
 
@@ -1075,6 +1076,42 @@ td strong { color: var(--ink); font-weight: 600; }
   </table>
   </div>
 
+  <!-- MUN-OTHER WC (Turkey + Ivory Coast confirmed via MUN Jun 2 club announcement) -->
+  <div class="nation-panel" id="nation-MUN-others">
+  <h3>🇹🇷 Turkey · 🇨🇮 Ivory Coast · partial picks from MUN club announcement (Jun 2, 2026)</h3>
+
+  <div class="callout" style="border-left:4px solid var(--accent); background:var(--bad-soft); padding:12px; margin-bottom:16px;">
+    <strong>⚡ MUN club news (Jun 2) confirmed 2 additional WC nations + DB CONFLICTS on Casemiro / Rashford.</strong> Apply 0.95× to MUN Turkey/CIV picks (group-stage only — both nations expected early exit). Two definite MUN additions (+2): Bayindir (Turkey GK), Amad (Ivory Coast).
+  </div>
+
+  <h4>✅ Confirmed MUN WC additions</h4>
+  <table>
+    <thead><tr><th>Pos</th><th>Player</th><th>Nation</th><th>Club</th><th>Discount</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--bad-soft);"><td>GK</td><td><strong>Altay Bayindir</strong></td><td>🇹🇷 Turkey (WC #12)</td><td>MUN</td><td>0.95× (rotation GK)</td></tr>
+      <tr style="background:var(--bad-soft);"><td>FWD</td><td><strong>Amad Diallo</strong></td><td>🇨🇮 Ivory Coast (WC #15)</td><td>MUN</td><td>0.90× (wide attacker, likely group stage exit)</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top:24px;">⚠️ DB conflicts to verify</h4>
+  <table>
+    <thead><tr><th>Player</th><th>MUN announcement</th><th>DB</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--warn-soft);"><td><strong>Casemiro</strong></td><td>Listed by MUN for WC Brazil #5</td><td>Inter Miami</td><td>If at MUN: +1 MUN heat-map. Awaiting user confirmation.</td></tr>
+      <tr style="background:var(--warn-soft);"><td><strong>Marcus Rashford</strong></td><td>Listed by MUN for WC England #11</td><td>Barcelona</td><td>If at MUN: +1 MUN heat-map. Awaiting user confirmation.</td></tr>
+      <tr style="background:var(--warn-soft);"><td><strong>Tyler Fletcher</strong></td><td>Listed by MUN (Scotland #8)</td><td>MUN #39 confirmed</td><td>Scotland senior WC status TBC (Scotland not in confirmed WC nation list). Skip MUN +1 until WC vs U21 tournament clarified.</td></tr>
+    </tbody>
+  </table>
+
+  <h4 style="margin-top:24px;">📌 Net MUN heat-map impact</h4>
+  <table>
+    <thead><tr><th>Confirmed adds</th><th>Pending</th><th>New MUN total</th></tr></thead>
+    <tbody>
+      <tr><td>+2 (Bayindir + Amad)</td><td>+2 if Casemiro + Rashford confirmed at MUN</td><td>MUN goes from 8 → <strong>10</strong> (definite) → up to <strong>12</strong> (if both confirmed at MUN)</td></tr>
+    </tbody>
+  </table>
+  </div>
+
   <!-- NETHERLANDS -->
   <div class="nation-panel" id="nation-NED">
   <h3>🇳🇱 Netherlands · Ronald Koeman · REVISED squad (May 2026)</h3>
@@ -1126,14 +1163,14 @@ td strong { color: var(--ink); font-weight: 600; }
   <div class="callout" style="margin-top:16px; font-size:12px;">
     <strong>Discount logic:</strong> 0.80× = expected deep tournament run + heavy minutes. 0.85× = squad starter, group + R16 likely. 0.90-0.95× = rotation/depth player, low fatigue. Reassess after group stage (Jun 26) and again after tournament concludes (Jul 19) based on actual minutes played. Group-stage exit → revise all to 0.95× for opening 2-3 GWs only.
     <br><br>
-    <strong>FINAL Master cross-reference (23 WC nations announced · ENG+NOR+SEN+GER+EGY+SUI+POR+BRA+NED·rev+ESP+ARG+FRA+CRO+MAR+ECU+COL+SWE+BEL+ALG+URU+GHA+UZB):</strong>
+    <strong>FINAL Master cross-reference (25 WC nations announced · 23 full + TUR+CIV partial via MUN club news · ENG+NOR+SEN+GER+EGY+SUI+POR+BRA+NED·rev+ESP+ARG+FRA+CRO+MAR+ECU+COL+SWE+BEL+ALG+URU+GHA+UZB+TUR+CIV):</strong>
     <ul style="margin:6px 0 0 18px;">
       <li><strong>ARS</strong>: Saka, Rice, Eze, Madueke (ENG) + Ødegaard (NOR) + Havertz (GER) + Gabriel, Martinelli (BRA) + J.Timber (NED) + Raya, Zubimendi, Merino (ESP) + Saliba (FRA) + Hincapié (ECU) + Gyökeres (SWE) + <strong>Trossard (BEL)</strong> = <strong>16</strong> — 🔴🔴🔴🔴 <strong>TIED HEAVIEST with MCI</strong> · <strong>LOST CL Final to PSG 3-4 on penalties</strong> · 120min legs + emotional fatigue + WC compound. Apply <strong>0.75×</strong> to all ARS premiums for opening 3 GWs.</li>
       <li><strong>MCI</strong>: O'Reilly, Trafford, Guehi (ENG) + Haaland (NOR) + Marmoush (EGY) + Dias, M.Nunes (POR) + Reijnders, Aké (NED) + Rodri (ESP) + Cherki (FRA) + Gvardiol, Kovačić (CRO) + Aït-Nouri (ALG) + Semenyo (GHA) + <strong>Khusanov (UZB)</strong> = <strong>16</strong> — 🔴🔴🔴🔴 <strong>TIES ARS for HEAVIEST</strong>. Stones CONFIRMED leaving MCI (destination TBD). Doku (BEL) OMITTED — lone rested premium.</li>
       <li><strong>LIV</strong> 🔄: Wirtz (GER) + Alisson (BRA) + van Dijk, Gravenberch, Gakpo (NED·rev) + Mac Allister (ARG) + <strong>Isak (SWE)</strong> = <strong>7</strong> — 🔴🔴 + Slot out + Iraola rumored. <strong>Konaté CONFIRMED LEAVING May 30 (official LFC)</strong> — drops LIV from 8 to 7. France WC squad pick but no longer at LIV.</li>
       <li><strong>CRY</strong>: D.Henderson (ENG) + I.Sarr (SEN) + Pino (ESP) + Lacroix, Mateta (FRA) + Riad (MAR) + <strong>Muñoz, Lerma (COL)</strong> = <strong>8</strong> — 🔴🔴🔴 sole 3rd-heaviest · essentially the entire CRY first XI in WC service + Glasner exit. Avoid all CRY picks opening 3 GWs.</li>
       <li><strong>CHE</strong>: R.James (ENG) + P.Neto (POR) + Hato (NED) + Cucurella (ESP) + Enzo F. (ARG) + Gusto (FRA) + Lavia (BEL) + <strong>Caicedo (ECU) + M.Sarr (SEN)</strong> = <strong>9</strong> — 🔴🔴🔴 SOLE 3rd-heaviest. Alonso transition + Caicedo IN squad (FIFA May 31 confirmed · prior "omitted" call reversed). Páez/Penders/Jackson are CHE-owned but on loan → not counted.</li>
-      <li><strong>MUN</strong>: Mainoo (ENG) + Bruno F., Dalot (POR) + Cunha (BRA) + L.Martínez (ARG) + Mazraoui (MAR) + Lammens (BEL) + <strong>Ugarte (URU)</strong> = <strong>8</strong> — 🔴🔴🔴 HEAVY · ties AVL/CRY 3rd-heaviest. Carrick rebuild + Ugarte nailed CDM.</li>
+      <li><strong>MUN</strong>: Mainoo (ENG) + Bruno F., Dalot (POR) + Cunha (BRA) + L.Martínez (ARG) + Mazraoui (MAR) + Lammens (BEL) + Ugarte (URU) + <strong>Bayindir (TUR) + Amad (CIV)</strong> = <strong>10</strong> — 🔴🔴🔴 HEAVY. Carrick rebuild + 2 new low-impact additions (Bayindir GK rotation · Amad CIV group stage). <strong>Pending: Casemiro + Rashford</strong> per MUN club news Jun 2 (DB conflicts).</li>
       <li><strong>NEW</strong>: Livramento, Burn (ENG) + Thiaw, Woltemade (GER) + Bruno G. (BRA) + <strong>Elanga (SWE)</strong> = 6 — 🔴🔴 HEAVY</li>
       <li><strong>TOT</strong>: Spence (ENG) + P.M.Sarr (SEN) + van de Ven (NED) + Porro (ESP) + Romero (ARG) + Bergvall (SWE) + <strong>Bentancur (URU)</strong> = 7 — 🔴🔴 HEAVY. <strong>Kudus (GHA) OMITTED</strong> — rested premium opportunity alongside Doku.</li>
       <li><strong>AVL</strong>: Konsa, Rogers, Watkins (ENG) + E.Martínez (ARG) + Digne (FRA) + Lindelöf (SWE) + <strong>Tielemans, Onana (BEL)</strong> = <strong>8</strong> — 🔴🔴🔴 ties CRY/LIV 3rd-heaviest. AVL just exploded +60% in load — Emery's 1.0× discount needs revisit.</li>
@@ -1150,7 +1187,7 @@ td strong { color: var(--ink); font-weight: 600; }
       <li><strong>IPS</strong>: 0 — 🟢 cleanest 26/27 PL club (other than relegated WHU)</li>
       <li><strong>WHU</strong>: 🔻 RELEGATED — removed from 26/27 PL load tracker</li>
     </ul>
-    <strong>🎯 23 WC nations announced.</strong> Heat-map rank: <strong>ARS 16 tied MCI 16</strong> (Khusanov UZB +1) → CHE 9 → AVL/CRY/MUN 8 each → LIV/TOT 7 each → NEW 6 → BHA 5 → FUL 4 → NFO 3 → LEE/COV/BOU/HUL 1 each → IPS 0. <strong>Rested premium pair: Doku (MCI · BEL omitted) + Kudus (TOT · GHA omitted)</strong>. CHE-owned loanees not in fatigue count: Páez/Penders/Jackson. 🏆 CL Final: PSG 4-3 ARS pens → ARS 0.75× compound. Konaté CONFIRMED leaving LIV. Stones CONFIRMED leaving MCI. Rashford → Barcelona (non-PL).
+    <strong>🎯 25 WC nations announced (23 full + TUR/CIV partial via MUN club news Jun 2).</strong> Heat-map rank: <strong>ARS 16 tied MCI 16</strong> → <strong>MUN 10 (+2 Bayindir TUR + Amad CIV)</strong> → CHE 9 → AVL/CRY 8 each → LIV/TOT 7 each → NEW 6 → BHA 5 → FUL 4 → NFO 3 → LEE/COV/BOU/HUL 1 each → IPS 0. ⚠️ Pending verification: Casemiro + Rashford listed at MUN per club news but DB shows Inter Miami / Barcelona respectively. <strong>Rested premium pair: Doku (MCI · BEL omitted) + Kudus (TOT · GHA omitted)</strong>. 🏆 CL Final: PSG 4-3 ARS pens → ARS 0.75× compound. Konaté CONFIRMED leaving LIV. Stones CONFIRMED leaving MCI.
   </div>
 </div>
 
