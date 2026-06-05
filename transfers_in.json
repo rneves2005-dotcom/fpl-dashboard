@@ -62,6 +62,13 @@
     "Newcastle United": [],
     "Nottingham Forest": [],
     "Sunderland A.F.C.": [],
-    "Tottenham Hotspur": []
+    "Tottenham Hotspur": [
+      {
+        "n": "Andy Robertson",
+        "from": "Liverpool (free transfer)",
+        "note": "CONFIRMED · free transfer · joins Jul 1 after Liverpool contract expiry · Scotland WC squad",
+        "c": "Scotland"
+      }
+    ]
   }
 }
