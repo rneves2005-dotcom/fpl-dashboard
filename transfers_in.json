@@ -47,7 +47,20 @@
     "Everton": [],
     "Fulham": [],
     "Hull City A.F.C.": [],
-    "Ipswich Town": [],
+    "Ipswich Town": [
+      {
+        "n": "Chuba Akpom",
+        "from": "Ajax",
+        "note": "Confirmed 26/27 · English ST · adds to McKenna's attack",
+        "c": "England"
+      },
+      {
+        "n": "Cédric Kipré",
+        "from": "Stade de Reims",
+        "note": "Confirmed 26/27 · CB · Ivorian (not in CIV WC squad)",
+        "c": "Ivory Coast"
+      }
+    ],
     "Leeds United": [],
     "Liverpool": [
       {
