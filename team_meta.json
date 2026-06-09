@@ -57,9 +57,9 @@
   },
   "CRY": {
     "name": "Crystal Palace",
-    "manager": "TBD (Glasner moving to another club · destination TBC)",
+    "manager": "Pierre Sage (STRONG RUMOR · ex-Lens · in negotiations) · Glasner leaving",
     "discount": "0.85×",
-    "note": "Manager change: Glasner confirmed leaving Palace for another club. Replacement TBD. Apply 0.85× discount until new manager + system confirmed.",
+    "note": "Manager change: Glasner confirmed leaving Palace. Pierre Sage (ex-Lens · ex-Lyon) in advanced negotiations — ready to say yes since last week per source. Sage's profile = vertical/transition football, similar to what made Lyon over-perform early in 24/25. Combined with 10 WC reps (sole 4th-heaviest — entire CRY first XI in WC service) = max compound risk. Apply 0.85× — could drop to 0.8× if Sage's PL learning curve adds variance.",
     "db_club": "Crystal Palace F.C",
     "division": "Premier League"
   },
