@@ -137,9 +137,9 @@
   },
   "NFO": {
     "name": "Nott'm Forest",
-    "manager": "continuity",
+    "manager": "Vítor Pereira (continuity · in role since ~Feb 2026 · half-season pedigree)",
     "discount": "1.0×",
-    "note": "",
+    "note": "Vítor Pereira (Portuguese · ex-FC Porto · ex-Wolves) has been Forest manager since ~Feb 2026. Half-season already played under him → continuity for 26/27 (Nuno Espírito Santo left mid-25/26, now at WHU Championship). 3 WC reps (E.Anderson ENG, Ndoye SUI, Gunn SCO). Sels was BEL-revised dropped — remains the rested-premium GK pick. Boly leaving CB depth. NFO is one of the cleaner continuity targets for 26/27 openers given Sels gold-pick status.",
     "db_club": "Nottingham Forest",
     "division": "Premier League"
   },
@@ -161,9 +161,9 @@
   },
   "WHU": {
     "name": "West Ham 🔻",
-    "manager": "",
+    "manager": "Nuno Espírito Santo (ex-NFO · joined for Championship 26/27)",
     "discount": "N/A",
-    "note": "26/27 status: West Ham confirmed relegated end of 25/26 season. Players with PL clauses (Bowen most likely, plus Castellanos, Summerville, Kilman, Walker-Peters) will be aggressively pursued by other PL clubs. The IN/OUT records below were the 25/26 transfer history; the 26/27 squad shape will not exist as a PL roster. WHU drops off the FPL toolkit's WC-load cross-reference (was tagged \"zero WC load\" — now irrelevant for PL planning).",
+    "note": "26/27 status: West Ham in Championship after relegation. Nuno Espírito Santo joins as manager (left NFO mid-25/26 cycle? — actually left NFO end of 25/26 for Championship rebuild). Veteran arrivals: Trippier (ex-NEW), Jiménez (ex-FUL, return), Adama Traoré + Fabiański leaving. PL-clause exits expected (Bowen?). WHU non-PL — off FPL planning beyond tracking PL-bound poaches.",
     "db_club": "West Ham United F.C.",
     "division": "Championship"
   }
