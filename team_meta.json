@@ -96,10 +96,10 @@
     "division": "Premier League"
   },
   "LEE": {
-    "name": "Leeds",
+    "name": "Leeds (Promoted Champions)",
     "manager": "continuity",
     "discount": "1.0×",
-    "note": "",
+    "note": "Promoted as Championship 25/26 champions. Manager continuity. GK Illan Meslier CONFIRMED LEAVING end of 25/26 (contract expired) → GK position OPEN. 3 WC reps (Gudmundsson SWE LB, Tanaka Ao JPN CDM, Aaronson USA MID). Squad rebuild for PL adaptation in progress.",
     "db_club": "Leeds United",
     "division": "Premier League"
   },
