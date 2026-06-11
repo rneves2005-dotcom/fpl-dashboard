@@ -107,9 +107,16 @@ STANDALONE_HIGH = [
 
 KEYWORDS_LOW_TRANSFER = TRANSFER_WORDS  # transfer word reqd for rumor too
 RUMOR_WORDS = [
+    # English
     "rumor", "rumour", "talks", "discussions", "talks with", "in advanced negotiations",
     "verbal agreement", "negotiations underway", "interested in", "close to signing",
     "set to sign", "set to join", "wants to sign",
+    # Portuguese
+    "interessado em", "interessada em", "procura", "alvo", "alvos",
+    "negociações avançadas", "negociação avançada", "quer contratar",
+    "acordo verbal", "em conversações", "em conversações com", "perto de",
+    "apontado", "apontados", "apontada", "rumor", "rumores",
+    "tentar", "pretende", "pretendem", "deverá", "negocia", "negociar",
 ]
 
 # Anti-keywords: presence reduces confidence (likely social/marketing not transfer)
@@ -191,27 +198,44 @@ def poll_maisfutebol() -> list[dict[str, Any]]:
                 "id": e.get("id") or e.get("link"),
             })
 
-    # Source 2: Cronologia HTML scrape · h2 > a entries (transfer-window curation)
+    # Source 2: Cronologia HTML scrape · handles both <h2><a> and <h2 class="titulo">
     cron_html = fetch(MAISFUTEBOL_CRONOLOGIA, timeout=20)
     if cron_html:
         soup = BeautifulSoup(cron_html, "html.parser")
+        # Strategy: find all h2 entries · grab title from h2 text · find nearest <a> in parent for the link
         for h2 in soup.find_all("h2"):
-            a = h2.find("a", href=True)
-            if not a:
-                continue
-            title = a.get_text(" ", strip=True)
+            title = h2.get_text(" ", strip=True)
             if not title or len(title) < 10:
                 continue
-            link = a["href"]
+            # Try link in h2 first (some entries have it)
+            a = h2.find("a", href=True)
+            link = a["href"] if a else None
+            if not link:
+                # Look in parent / sibling for a link
+                parent = h2.find_parent()
+                if parent:
+                    sibling_a = parent.find("a", href=True)
+                    if sibling_a:
+                        link = sibling_a["href"]
+            if not link:
+                # Fall back to cronologia page itself with anchor based on title
+                link = f"{MAISFUTEBOL_CRONOLOGIA}#{title[:40]}"
             if not link.startswith("http"):
                 link = f"https://maisfutebol.iol.pt{link}"
+            # Pull body paragraph for summary (helps filter accuracy)
+            body_text = ""
+            parent = h2.find_parent()
+            if parent:
+                p = parent.find_next("p")
+                if p:
+                    body_text = p.get_text(" ", strip=True)[:500]
             out.append({
                 "source": "maisfutebol cronologia",
                 "title": title[:300],
-                "summary": title,  # use title as summary for filter purposes
+                "summary": f"{title} · {body_text}",
                 "link": link,
                 "published": "",
-                "id": f"cron:{link}",
+                "id": f"cron:{link}:{title[:60]}",
             })
 
     return out
