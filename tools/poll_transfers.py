@@ -42,6 +42,8 @@ CACHE_DIR = ROOT / "tools" / "cache"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 LAST_RUN_PATH = CACHE_DIR / "last_run.json"
 TRACKER_DOCX = ROOT / "Transfer_Tracker.docx"
+DESKTOP_TRACKER = Path("/Users/ruimiguelneves/Desktop/Transfer_Tracker.docx")
+ONEDRIVE_VISIBLE = Path("/Users/ruimiguelneves/Library/CloudStorage/OneDrive-Personal/Claude/FPL/Transfer_Tracker.docx")
 ONEDRIVE_TRACKER = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/FPL/Transfer_Tracker.docx")
 
 XCANCEL = "https://nitter.net"  # primary Nitter mirror · fallback to others if needed
@@ -371,13 +373,15 @@ def main():
     doc.save(str(TRACKER_DOCX))
     print(f"Wrote {TRACKER_DOCX} ({TRACKER_DOCX.stat().st_size:,} bytes)")
 
-    # Sync to OneDrive
-    try:
-        ONEDRIVE_TRACKER.parent.mkdir(parents=True, exist_ok=True)
-        ONEDRIVE_TRACKER.write_bytes(TRACKER_DOCX.read_bytes())
-        print(f"Synced to OneDrive: {ONEDRIVE_TRACKER}")
-    except Exception as e:
-        print(f"OneDrive sync skipped: {e}", file=sys.stderr)
+    # Sync to Desktop (most-visible) + OneDrive
+    body = TRACKER_DOCX.read_bytes()
+    for dest in (DESKTOP_TRACKER, ONEDRIVE_VISIBLE, ONEDRIVE_TRACKER):
+        try:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(body)
+            print(f"Synced: {dest}")
+        except Exception as e:
+            print(f"Sync to {dest} skipped: {e}", file=sys.stderr)
 
     print(f"Sources: X={counts['X']} maisfutebol={counts['maisfutebol']} PL={counts['PL']}")
     print(f"Elapsed: {time.time()-started:.1f}s")
