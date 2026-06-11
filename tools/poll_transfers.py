@@ -28,11 +28,11 @@ try:
     import feedparser
     import requests
     from bs4 import BeautifulSoup
-    from docx import Document
-    from docx.shared import Inches, RGBColor, Pt
-    from docx.enum.table import WD_ALIGN_VERTICAL
+    import openpyxl
+    from openpyxl.styles import Font, PatternFill, Alignment
+    from openpyxl.utils import get_column_letter
 except ImportError as e:
-    print(f"Missing dep: {e}\nInstall: pip3 install feedparser requests beautifulsoup4 python-docx", file=sys.stderr)
+    print(f"Missing dep: {e}\nInstall: pip3 install feedparser requests beautifulsoup4 openpyxl", file=sys.stderr)
     sys.exit(1)
 
 # ─── Config ──────────────────────────────────────────────────────────────
@@ -41,10 +41,10 @@ ROOT = Path(__file__).resolve().parent.parent
 CACHE_DIR = ROOT / "tools" / "cache"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 LAST_RUN_PATH = CACHE_DIR / "last_run.json"
-TRACKER_DOCX = ROOT / "Transfer_Tracker.docx"
-DESKTOP_TRACKER = Path("/Users/ruimiguelneves/Desktop/Transfer_Tracker.docx")
-ONEDRIVE_VISIBLE = Path("/Users/ruimiguelneves/Library/CloudStorage/OneDrive-Personal/Claude/FPL/Transfer_Tracker.docx")
-ONEDRIVE_TRACKER = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/FPL/Transfer_Tracker.docx")
+TRACKER_XLSX = ROOT / "Transfer_Tracker.xlsx"
+DESKTOP_TRACKER = Path("/Users/ruimiguelneves/Desktop/Transfer_Tracker.xlsx")
+ONEDRIVE_VISIBLE = Path("/Users/ruimiguelneves/Library/CloudStorage/OneDrive-Personal/Claude/FPL/Transfer_Tracker.xlsx")
+ONEDRIVE_TRACKER = Path("/Users/ruimiguelneves/Library/Group Containers/UBF8T346G9.OneDriveSyncClientSuite/OneDrive.noindex/OneDrive/Claude/FPL/Transfer_Tracker.xlsx")
 
 XCANCEL = "https://nitter.net"  # primary Nitter mirror · fallback to others if needed
 NITTER_FALLBACKS = ["https://nitter.net", "https://xcancel.com", "https://lightbrd.com"]
@@ -253,68 +253,80 @@ def save_seen(seen: set[str]):
         seen = set(list(seen)[-5000:])
     LAST_RUN_PATH.write_text(json.dumps({"seen_ids": sorted(seen), "updated": datetime.now(timezone.utc).isoformat()}, indent=2))
 
-# ─── Word doc output ─────────────────────────────────────────────────────
+# ─── Excel output (tabs: HIGH · LOW · ABOUT) ────────────────────────────
 
-def ensure_doc() -> Document:
-    """Open existing tracker or create new."""
-    if TRACKER_DOCX.exists():
-        return Document(str(TRACKER_DOCX))
-    doc = Document()
-    # Header
-    h = doc.add_heading("FPL 26/27 Transfer Tracker", 0)
-    p = doc.add_paragraph()
-    p.add_run("Append-only log · review entries · mark with ✓ when applied to Squads_2026.xlsm DB.\n").italic = True
-    p.add_run(f"Created: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n").italic = True
-    p.add_run("Sources: xcancel.com (Twitter mirror) · maisfutebol cronologia · premierleague.com official\n").italic = True
-    return doc
+HEADERS = ["✓", "When (UTC)", "Source", "Title / Headline", "Keywords matched", "Link"]
 
-def append_run_section(doc: Document, entries: list[dict[str, Any]]):
-    """Add a new section with table for this run's new entries."""
+def ensure_workbook() -> openpyxl.Workbook:
+    """Open existing tracker or create new with 3 tabs."""
+    if TRACKER_XLSX.exists():
+        return openpyxl.load_workbook(str(TRACKER_XLSX))
+    wb = openpyxl.Workbook()
+    # Default sheet becomes HIGH
+    high = wb.active
+    high.title = "HIGH"
+    low = wb.create_sheet("LOW")
+    about = wb.create_sheet("ABOUT")
+
+    for ws, color in ((high, "C6EFCE"), (low, "FFF2CC")):
+        for col, header in enumerate(HEADERS, 1):
+            cell = ws.cell(row=1, column=col, value=header)
+            cell.font = Font(bold=True, size=11)
+            cell.fill = PatternFill("solid", fgColor=color)
+            cell.alignment = Alignment(horizontal="left", vertical="center")
+        ws.freeze_panes = "A2"
+        # Column widths
+        widths = {1: 4, 2: 18, 3: 24, 4: 80, 5: 30, 6: 60}
+        for col, w in widths.items():
+            ws.column_dimensions[get_column_letter(col)].width = w
+
+    # ABOUT tab
+    about.cell(row=1, column=1, value="FPL 26/27 Transfer Tracker").font = Font(bold=True, size=14)
+    about_rows = [
+        "",
+        f"Created: {datetime.now().strftime('%Y-%m-%d %H:%M')}",
+        "Append-only · ✓ column for marking when applied to Squads_2026.xlsm DB",
+        "",
+        "TABS:",
+        "  HIGH = confirmed transfers (OFICIAL · HERE WE GO · signed · joins · etc)",
+        "  LOW = rumored / in-talks tier (likely but unconfirmed)",
+        "",
+        "SOURCES:",
+        "  - X (27 accounts via nitter.net): journalists + clubs",
+        "  - maisfutebol.iol.pt RSS",
+        "  - premierleague.com official transfers page",
+        "",
+        "FILTER LOGIC:",
+        "  HIGH requires (confirm-word AND transfer-word) OR standalone trigger",
+        "  LOW requires (rumor-word AND transfer-word)",
+        "  Anti-words (matchday, ticket, kit launch, etc) skip the entry",
+        "",
+        "SCHEDULE: every hour on the hour via launchd (com.fpl.transfer-poll)",
+    ]
+    for i, txt in enumerate(about_rows, 2):
+        about.cell(row=i, column=1, value=txt)
+    about.column_dimensions["A"].width = 100
+    return wb
+
+def append_run_entries(wb: openpyxl.Workbook, entries: list[dict[str, Any]]):
+    """Append each entry to its appropriate tab (HIGH or LOW)."""
     if not entries:
         return
-    doc.add_heading(f"Run · {datetime.now().strftime('%Y-%m-%d %H:%M')}", level=2)
-    p = doc.add_paragraph()
-    p.add_run(f"{len(entries)} new entries found · highest-confidence first").italic = True
-
-    # Table
-    tbl = doc.add_table(rows=1, cols=6)
-    tbl.style = "Light Grid Accent 1"
-    hdr = tbl.rows[0].cells
-    hdr[0].text = "✓"
-    hdr[1].text = "Confidence"
-    hdr[2].text = "Source"
-    hdr[3].text = "Title / Headline"
-    hdr[4].text = "Keywords matched"
-    hdr[5].text = "Link"
-    for c in hdr:
-        for run in c.paragraphs[0].runs:
-            run.font.bold = True
-            run.font.size = Pt(9)
-    # Sort entries: HIGH first, then LOW
-    sorted_entries = sorted(entries, key=lambda e: (0 if e["confidence"] == "HIGH" else 1, e["source"]))
-    for e in sorted_entries:
-        row = tbl.add_row().cells
-        row[0].text = ""  # checkbox column · user marks manually
-        row[1].text = e["confidence"]
-        row[2].text = e["source"]
-        title = e["title"]
-        # Strip HTML tags from summary if present in title
-        title = re.sub(r"<[^>]+>", "", title)
-        row[3].text = title[:200] + ("…" if len(title) > 200 else "")
-        row[4].text = ", ".join(e["keywords"][:5])
-        row[5].text = e["link"][:120]
-        # Color code by confidence
-        if e["confidence"] == "HIGH":
-            for cell in row:
-                for para in cell.paragraphs:
-                    for run in para.runs:
-                        run.font.size = Pt(9)
-        else:
-            for cell in row:
-                for para in cell.paragraphs:
-                    for run in para.runs:
-                        run.font.size = Pt(8)
-                        run.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
+    now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
+    for e in entries:
+        tab = "HIGH" if e["confidence"] == "HIGH" else "LOW"
+        ws = wb[tab]
+        next_row = ws.max_row + 1
+        title = re.sub(r"<[^>]+>", "", e["title"])[:300]
+        keywords = ", ".join(e["keywords"][:6])
+        ws.cell(row=next_row, column=1, value="")  # checkbox
+        ws.cell(row=next_row, column=2, value=now_iso)
+        ws.cell(row=next_row, column=3, value=e["source"])
+        ws.cell(row=next_row, column=4, value=title).alignment = Alignment(wrap_text=True, vertical="top")
+        ws.cell(row=next_row, column=5, value=keywords).alignment = Alignment(wrap_text=True, vertical="top")
+        ws.cell(row=next_row, column=6, value=e["link"][:200])
+        # Mild row colour for newest run separator
+        # (skipping for now to keep file clean on append)
 
 # ─── Main ────────────────────────────────────────────────────────────────
 
@@ -367,14 +379,14 @@ def main():
         print(f"No new entries this run · elapsed {time.time()-started:.1f}s")
         return 0
 
-    # Append to Word doc
-    doc = ensure_doc()
-    append_run_section(doc, keep)
-    doc.save(str(TRACKER_DOCX))
-    print(f"Wrote {TRACKER_DOCX} ({TRACKER_DOCX.stat().st_size:,} bytes)")
+    # Append to Excel tracker (tabs: HIGH · LOW · ABOUT)
+    wb = ensure_workbook()
+    append_run_entries(wb, keep)
+    wb.save(str(TRACKER_XLSX))
+    print(f"Wrote {TRACKER_XLSX} ({TRACKER_XLSX.stat().st_size:,} bytes)")
 
     # Sync to Desktop (most-visible) + OneDrive
-    body = TRACKER_DOCX.read_bytes()
+    body = TRACKER_XLSX.read_bytes()
     for dest in (DESKTOP_TRACKER, ONEDRIVE_VISIBLE, ONEDRIVE_TRACKER):
         try:
             dest.parent.mkdir(parents=True, exist_ok=True)
