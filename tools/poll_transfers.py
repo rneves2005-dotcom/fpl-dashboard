@@ -20,9 +20,15 @@ import re
 import sys
 import json
 import time
+import hashlib
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Any
+
+def title_hash(title: str) -> str:
+    """Stable short hash of title for dedup key · catches title freshness."""
+    norm = re.sub(r"\s+", " ", (title or "").strip().lower())[:300]
+    return hashlib.sha1(norm.encode("utf-8")).hexdigest()[:10]
 
 try:
     import feedparser
@@ -442,13 +448,18 @@ def main():
 
     print(f"Total raw entries: {len(all_entries)}")
 
-    # Filter + dedup
+    # Filter + dedup · ID = link + title_hash so titled-edits re-emit
     keep = []
     new_seen = set(seen)
     expand_targets = []  # posts mentioning lists · expand later
     for e in all_entries:
-        eid = e.get("id") or e.get("link") or e.get("title")
-        if not eid or eid in seen:
+        base_id = e.get("id") or e.get("link") or e.get("title")
+        if not base_id:
+            continue
+        # Compose dedup key with title-hash so updated titles re-emit
+        eid = f"{base_id}::{title_hash(e.get('title',''))}"
+        e["_dedup_id"] = eid
+        if eid in seen:
             continue
         new_seen.add(eid)
         text = f"{e.get('title','')} {e.get('summary','')}"
