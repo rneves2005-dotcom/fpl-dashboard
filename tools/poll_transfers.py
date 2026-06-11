@@ -112,6 +112,12 @@ ANTI_WORDS = [
     "wallpaper", "buy now", "save", "discount",
 ]
 
+# Posts matching these trigger link-follow → fetch linked article + extract names
+EXPAND_PATTERNS = [
+    "retained", "released list", "list of", "list confirmed",
+    "retained/released", "releases & retains", "retained and released",
+]
+
 # ─── HTTP helpers ────────────────────────────────────────────────────────
 
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
@@ -237,6 +243,56 @@ def matched_keywords(text: str) -> list[str]:
             matched.append(w)
     return matched[:8]  # cap shown
 
+def should_expand(text: str) -> bool:
+    """True if post mentions a 'list' type article that needs link-following."""
+    tl = text.lower()
+    return any(p.lower() in tl for p in EXPAND_PATTERNS)
+
+def extract_article_url_from_post(summary: str, link: str) -> str | None:
+    """Find a club-website link inside the post summary, or fall back to the post link."""
+    # Look for canonical club URLs in the summary HTML
+    club_patterns = [
+        r'https?://(?:www\.)?(?:chelseafc\.com|liverpoolfc\.com|manutd\.com|mancity\.com|arsenal\.com|tottenhamhotspur\.com|cpfc\.co\.uk|everton\.com|bhafc\.com|nffc\.co\.uk|lcfc\.com|burnleyofficial\.com|premierleague\.com|fulhamfc\.com|brentfordfc\.com|afcbournemouth\.com|leedsunited\.com|coventrycity\.com|sunderlandafc\.com|nufc\.co\.uk|whufc\.com|hullcityfc\.com|ipswichtownfc\.com|wolves\.co\.uk|aston-villa\.com)[^\s"\'<>]+',
+    ]
+    for pat in club_patterns:
+        m = re.search(pat, summary or "", flags=re.I)
+        if m:
+            return m.group(0).rstrip(".,)")
+    # Fall back to the post link itself · we'll try following Nitter→Twitter→external link chain
+    return None
+
+def extract_player_names_from_article(html: str) -> list[str]:
+    """Extract likely player names from club-news HTML.
+    Strategy: bullet-list items + headings inside the article body, names of 2-4 capitalized words."""
+    soup = BeautifulSoup(html, "html.parser")
+    text_blocks = []
+    # Common content containers
+    for tag in soup.find_all(["li", "p", "h3", "h4", "h2", "strong"]):
+        t = tag.get_text(" ", strip=True)
+        if 4 < len(t) < 250:
+            text_blocks.append(t)
+    # Name pattern: 2-4 capitalised words, possibly with apostrophes/hyphens/accents
+    name_pat = re.compile(r"\b([A-Z][a-zA-Z'\-]+(?:\s[A-Z][a-zA-Z'\-]+){1,3})\b")
+    names = []
+    seen = set()
+    for blk in text_blocks:
+        # Filter out non-name patterns
+        if any(skip in blk.lower() for skip in ["read more", "share this", "cookie", "click here", "subscribe"]):
+            continue
+        for m in name_pat.finditer(blk):
+            name = m.group(1).strip()
+            # Avoid generic phrases · require 2+ words but reject common false positives
+            if name.lower() in {"premier league", "champions league", "europa league", "fa cup", "league cup",
+                                "new york", "old trafford", "stamford bridge", "the athletic", "club website",
+                                "academy product", "first team", "head coach", "youth team"}:
+                continue
+            if len(name.split()) < 2:
+                continue
+            if name not in seen:
+                seen.add(name)
+                names.append(name)
+    return names[:30]  # cap
+
 # ─── Dedup ───────────────────────────────────────────────────────────────
 
 def load_seen() -> set[str]:
@@ -359,6 +415,7 @@ def main():
     # Filter + dedup
     keep = []
     new_seen = set(seen)
+    expand_targets = []  # posts mentioning lists · expand later
     for e in all_entries:
         eid = e.get("id") or e.get("link") or e.get("title")
         if not eid or eid in seen:
@@ -371,8 +428,16 @@ def main():
         e["confidence"] = conf
         e["keywords"] = matched_keywords(text)
         keep.append(e)
+        if should_expand(text):
+            expand_targets.append(e)
 
-    print(f"After filter+dedup: {len(keep)} new entries")
+    # Mark expansion-needing posts so user sees them clearly in tracker
+    for e in keep:
+        text = f"{e.get('title','')} {e.get('summary','')}"
+        if should_expand(text):
+            e["keywords"] = ["⚠️ FOLLOW-UP CLICK LINK"] + e["keywords"][:5]
+
+    print(f"After filter+dedup: {len(keep)} new entries · {sum(1 for e in keep if '⚠️ FOLLOW-UP CLICK LINK' in e['keywords'])} need follow-up")
     save_seen(new_seen)
 
     if not keep:
