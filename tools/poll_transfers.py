@@ -93,11 +93,17 @@ TRANSFER_WORDS = [
     # Portuguese
     "transferência", "contratação", "contrato", "saída", "deixa", "chega",
     "regressa", "empréstimo", "transferiu", "abandona", "novo treinador",
+    "lesão", "lesionado", "fora do mundial", "retira-se", "retirou-se",
     # English
     "signed", "signs", "joins", "joining", "joined", "leaves", "leaving", "departure",
     "departs", "loan", "loaned", "release", "released", "free transfer", "free agent",
     "contract expires", "contract expiry", "appointed", "step down", "steps down",
     "stepping down", "new head coach", "new manager", "thank you", "farewell",
+    # Injury / WC squad withdrawal (heat-map relevant)
+    "withdrew from", "withdrawn from", "withdraw from", "ruled out", "ruled out of",
+    "out of the world cup", "injured", "injury", "retires", "retirement",
+    "retires from international", "retired from international",
+    "out of squad", "miss the world cup", "miss world cup",
 ]
 
 # Standalone triggers — single keywords that ALWAYS qualify regardless of context
