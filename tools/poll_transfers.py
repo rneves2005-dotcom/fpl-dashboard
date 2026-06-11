@@ -68,6 +68,7 @@ X_ACCOUNTS = [
 ]
 
 MAISFUTEBOL_RSS = "http://feeds.feedburner.com/iol/maisfutebol"
+MAISFUTEBOL_CRONOLOGIA = "https://maisfutebol.iol.pt/cronologia/6373897a0cf2254fb2824fe4"
 PL_TRANSFERS_URL = "https://www.premierleague.com/en/transfers/2026-27/summer"
 
 # Keyword filters — case-insensitive substring match
@@ -164,20 +165,49 @@ def poll_x_accounts() -> list[dict[str, Any]]:
 # ─── Source: maisfutebol RSS ─────────────────────────────────────────────
 
 def poll_maisfutebol() -> list[dict[str, Any]]:
-    body = fetch(MAISFUTEBOL_RSS, timeout=20)
-    if not body:
-        return []
-    feed = feedparser.parse(body)
+    """Two sources from maisfutebol:
+       1. General RSS feed (broad football news · low transfer signal)
+       2. Cronologia transfer-window timeline (h2 > a entries · high signal)
+    """
     out = []
-    for e in feed.entries[:50]:
-        out.append({
-            "source": "maisfutebol",
-            "title": e.get("title", "")[:300],
-            "summary": e.get("summary", "")[:1500],
-            "link": e.get("link", ""),
-            "published": e.get("published", ""),
-            "id": e.get("id") or e.get("link"),
-        })
+
+    # Source 1: General RSS (kept for breadth)
+    body = fetch(MAISFUTEBOL_RSS, timeout=20)
+    if body:
+        feed = feedparser.parse(body)
+        for e in feed.entries[:30]:
+            out.append({
+                "source": "maisfutebol RSS",
+                "title": e.get("title", "")[:300],
+                "summary": e.get("summary", "")[:1500],
+                "link": e.get("link", ""),
+                "published": e.get("published", ""),
+                "id": e.get("id") or e.get("link"),
+            })
+
+    # Source 2: Cronologia HTML scrape · h2 > a entries (transfer-window curation)
+    cron_html = fetch(MAISFUTEBOL_CRONOLOGIA, timeout=20)
+    if cron_html:
+        soup = BeautifulSoup(cron_html, "html.parser")
+        for h2 in soup.find_all("h2"):
+            a = h2.find("a", href=True)
+            if not a:
+                continue
+            title = a.get_text(" ", strip=True)
+            if not title or len(title) < 10:
+                continue
+            link = a["href"]
+            if not link.startswith("http"):
+                link = f"https://maisfutebol.iol.pt{link}"
+            out.append({
+                "source": "maisfutebol cronologia",
+                "title": title[:300],
+                "summary": title,  # use title as summary for filter purposes
+                "link": link,
+                "published": "",
+                "id": f"cron:{link}",
+            })
+
     return out
 
 # ─── Source: Premier League HTML ─────────────────────────────────────────
