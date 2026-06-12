@@ -108,6 +108,196 @@
         "note": "CONFIRMED · TOT #5 · starter shirt signals nailed starter role · Argentine CB · NOT in ARG WC squad (zero WC fatigue) · pairs with van de Ven/Romero · rested-premium-adjacent FPL pick",
         "c": "Argentina"
       }
+    ],
+    "Burnley": [
+      {
+        "n": "Florentino",
+        "from": "Benfica",
+        "note": "OFICIAL Jun 11 · permanent CDM signing",
+        "c": "Portugal"
+      }
+    ]
+  },
+  "La Liga": {
+    "Real Madrid": [
+      {
+        "n": "Bernardo Silva",
+        "from": "Manchester City",
+        "note": "🚨 HERE WE GO Jun 11 · 2yr + 1yr option · sealed in 36h · Mourinho priority",
+        "c": "Portugal"
+      },
+      {
+        "n": "José Mourinho (HC)",
+        "from": "Benfica",
+        "note": "OFFICIAL Jun 11 · 3yr deal · 2nd Real spell · Benfica €15m fee",
+        "c": "Portugal"
+      }
+    ],
+    "Sevilla": [
+      {
+        "n": "Juan Iglesias",
+        "from": "Getafe",
+        "note": "OFICIAL Jun 11 · confirmed reinforcement",
+        "c": "Spain"
+      }
+    ],
+    "Girona": [
+      {
+        "n": "Oleksandr Pyshchur",
+        "from": "—",
+        "note": "Confirmed FWD signing",
+        "c": "Ukraine"
+      }
+    ],
+    "Villarreal": [
+      {
+        "n": "Renato Veiga",
+        "from": "Chelsea",
+        "note": "Sold by Chelsea",
+        "c": "Portugal"
+      }
+    ]
+  },
+  "Liga Betclic": {
+    "Benfica": [
+      {
+        "n": "Marco Silva (HC)",
+        "from": "Fulham",
+        "note": "OFICIAL Jun 11 · €15m clause from Fulham · Benfica biggest challenge of career",
+        "c": "Portugal"
+      },
+      {
+        "n": "Tomás Cordeiro",
+        "from": "Benfica academy",
+        "note": "OFICIAL Jun 11 · First pro contract",
+        "c": "Portugal"
+      }
+    ],
+    "FC Porto": [
+      {
+        "n": "Iván Jaime",
+        "from": "CF Montréal (loan return)",
+        "note": "OFICIAL Jun 11 · Returns to FCP",
+        "c": "Spain"
+      },
+      {
+        "n": "André Silva",
+        "from": "Werder Bremen",
+        "note": "OFICIAL · Return to FC Porto",
+        "c": "Portugal"
+      }
+    ],
+    "Gil Vicente": [
+      {
+        "n": "Ricardo Esgaio",
+        "from": "Sporting CP",
+        "note": "OFICIAL Jun 11 · DEF reinforcement",
+        "c": "Portugal"
+      }
+    ]
+  },
+  "Bundesliga": {
+    "1. FC Köln": [
+      {
+        "n": "Jahmai Simpson-Pusey",
+        "from": "Manchester City",
+        "note": "OFICIAL Jun 12 · permanent until 2030 · 20yo CB · was loaned Jan 2026",
+        "c": "England"
+      }
+    ],
+    "Bayern Munich": [
+      {
+        "n": "Nicolas Jackson",
+        "from": "Chelsea (loan)",
+        "note": "Loan deal from Chelsea",
+        "c": "Senegal"
+      }
+    ],
+    "SC Freiburg": [
+      {
+        "n": "Keisuke Goto",
+        "from": "—",
+        "note": "OFICIAL Jun 11",
+        "c": "Japan"
+      }
+    ],
+    "Bayer Leverkusen": [
+      {
+        "n": "16yo pearl signing",
+        "from": "—",
+        "note": "OFICIAL Jun 11",
+        "c": "—"
+      }
+    ],
+    "Mainz": [
+      {
+        "n": "Peruvian CB",
+        "from": "—",
+        "note": "OFICIAL Jun 12 · Peruvian defender",
+        "c": "Peru"
+      }
+    ],
+    "RB Leipzig": [
+      {
+        "n": "Martin Demichelis (HC)",
+        "from": "—",
+        "note": "Romano Jun 12 · replaces Ole Werner · release clause activated",
+        "c": "Argentina"
+      }
+    ]
+  },
+  "Serie A": {
+    "Como": [
+      {
+        "n": "Yan Couto",
+        "from": "Borussia Dortmund (loan)",
+        "note": "Romano Jun 11 · Loan until Jun 2027 · salary covered",
+        "c": "Brazil"
+      }
+    ],
+    "Napoli": [
+      {
+        "n": "Rasmus Højlund",
+        "from": "Manchester United",
+        "note": "Permanent · was on loan at NAP 25/26",
+        "c": "Denmark"
+      }
+    ],
+    "Sassuolo": [
+      {
+        "n": "Alberto Aquilani (HC)",
+        "from": "—",
+        "note": "OFICIAL Jun 12 · new HC",
+        "c": "Italy"
+      }
+    ],
+    "Torino": [
+      {
+        "n": "Ignazio Abate (HC)",
+        "from": "—",
+        "note": "OFICIAL Jun 12 · new HC",
+        "c": "Italy"
+      }
+    ]
+  },
+  "Ligue 1": {
+    "Auxerre": [
+      {
+        "n": "Will Still (HC)",
+        "from": "—",
+        "note": "OFICIAL Jun 11 · new HC",
+        "c": "Belgium"
+      }
+    ]
+  },
+  "Major League Soccer": {
+    "Charlotte FC": [
+      {
+        "n": "Allan Saint-Maximin",
+        "from": "Free Agent",
+        "note": "HERE WE GO Jun 12 · 3yr contract · medical done in London",
+        "c": "France"
+      }
     ]
   }
 }

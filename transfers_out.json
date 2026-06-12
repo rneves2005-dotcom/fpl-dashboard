@@ -55,9 +55,15 @@
       },
       {
         "n": "Bernardo Silva",
-        "to": "Real Madrid (rumored · Mourinho influence) or Atlético Madrid",
-        "note": "End of 25/26 · multiple Spanish destinations rumored · maisfutebol Jun 11: Mourinho pulling Bernardo toward Real Madrid",
+        "to": "Real Madrid",
+        "note": "CONFIRMED HERE WE GO (Romano Jun 11 23:09 EDT) · 2-year deal + 1-year option · sealed in 36h after Mourinho's Tue night meeting requested him as priority · Mourinho coaches RMA · Portugal WC squad still goes to WC from RMA",
         "c": "Portugal"
+      },
+      {
+        "n": "Jahmai Simpson-Pusey",
+        "to": "1. FC Köln (Bundesliga · permanent)",
+        "note": "CONFIRMED OFICIAL Jun 12 2026 · 20yo English CB · academy product · was loaned to Köln in Jan 2026 (11 apps, helped Bundesliga survival) · now permanent until 2030 · had short Celtic spell · non-FPL relevant (fringe academy)",
+        "c": "England"
       }
     ],
     "Manchester United": [
@@ -315,6 +321,44 @@
         "note": "From 26/27",
         "c": "Portugal"
       }
+    ],
+    "Benfica": [
+      {
+        "n": "José Mourinho (HC)",
+        "to": "Real Madrid",
+        "note": "OFICIAL Jun 11 · Benfica receives €15m fee",
+        "c": "Portugal"
+      },
+      {
+        "n": "Florentino",
+        "to": "Burnley",
+        "note": "OFICIAL Jun 11 · permanent · CDM to PL",
+        "c": "Portugal"
+      }
+    ],
+    "Sporting CP": [
+      {
+        "n": "Ricardo Esgaio",
+        "to": "Gil Vicente",
+        "note": "OFICIAL Jun 11",
+        "c": "Portugal"
+      }
+    ],
+    "Rio Ave": [
+      {
+        "n": "Marc Gual",
+        "to": "TBD",
+        "note": "OFICIAL Jun 12 · leaving · destination TBC",
+        "c": "Spain"
+      }
+    ],
+    "Estrela Amadora": [
+      {
+        "n": "Cristiano Bacci",
+        "to": "TBD",
+        "note": "OFICIAL Jun 11",
+        "c": "—"
+      }
     ]
   },
   "Bundesliga": {
@@ -324,6 +368,20 @@
         "to": "Tottenham (loan)",
         "note": "Loan, return TBC",
         "c": "Portugal"
+      },
+      {
+        "n": "Maurice Krattenmacher",
+        "to": "SV Elversberg",
+        "note": "Romano Jun 11 · 20yo · after Hertha BSC loan",
+        "c": "Germany"
+      }
+    ],
+    "Borussia Dortmund": [
+      {
+        "n": "Yan Couto",
+        "to": "Como (loan until 2027)",
+        "note": "Romano Jun 11 · salary covered by Como",
+        "c": "Brazil"
       }
     ]
   },
@@ -344,6 +402,16 @@
         "to": "Brentford",
         "note": "Confirmed 26/27",
         "c": "Germany"
+      }
+    ]
+  },
+  "La Liga": {
+    "Sevilla": [
+      {
+        "n": "Pelo Gudelj",
+        "to": "TBD",
+        "note": "OFICIAL Jun 11 · leaves after 7 years",
+        "c": "Serbia"
       }
     ]
   }

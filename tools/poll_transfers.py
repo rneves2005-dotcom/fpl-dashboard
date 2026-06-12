@@ -71,6 +71,34 @@ X_ACCOUNTS = [
     "WestHam", "BurnleyOfficial",
     # Other PL
     "BrentfordFC", "afcbournemouth", "FulhamFC", "SunderlandAFC",
+    # ── WC26 NATION HANDLES (priority: sides with PL/big-club players · added Jun 2026 for WC) ──
+    "CanadaSoccerEN",    # Canada — Davies, Buchanan, Eustáquio, Larin
+    "England",            # England — Bellingham, Kane, Foden, Saka
+    "OnsOranje",          # Netherlands — Van Dijk, Gakpo, De Vrij, Frimpong, Dumfries
+    "DFB_Team",           # Germany — Musiala, Kimmich, Wirtz, Havertz, Tah
+    "FFF",                # France — Mbappé, Maignan, Saliba, Tchouaméni
+    "SEFutbol",           # Spain — Yamal, Pedri, Rodri, Cucurella, Le Normand
+    "selecaoportugal",    # Portugal — Ronaldo, B. Fernandes, Cancelo, Porro
+    "Argentina",          # Argentina — Messi, MacAllister, Romero
+    "CBF_Futebol",        # Brazil — Vinícius, Casemiro, Raphinha
+    "USMNT",              # USA — Pulisic, McKennie, Reyna
+    "miseleccionmx",      # Mexico — Jiménez, Lozano
+    "SFV_ASF",            # Switzerland — Akanji, Xhaka, Embolo
+    "jfa_samuraiblue",    # Japan — Endō, Mitoma, Tomiyasu
+    "theKFA",             # Korea Republic — Son, Hwang Hee-Chan
+    "EnMaroc",            # Morocco — Hakimi, Ziyech, Bono
+    "BelRedDevils",       # Belgium — De Bruyne, Lukaku, Doku, Trossard, Saelemaekers
+    "ScottishFA",         # Scotland — McTominay, Robertson, Tierney
+    "LaTri",              # Ecuador — Hincapié, Caicedo, Estupiñán, Sarmiento
+    "EFA",                # Egypt — Salah, Hegazi
+    "Footsenegal",        # Senegal — Mendy, Koulibaly
+    # ── BIG FOREIGN CLUB HANDLES (for player injuries: Davies@Bayern, Mbappé@RMA, etc.) ──
+    "FCBayern",           # Bayern Munich — Davies, Musiala, Kimmich
+    "realmadrid",         # Real Madrid — Bellingham, Vinícius, Mbappé, Tchouaméni
+    "FCBarcelona",        # Barcelona — Yamal, Pedri, Cancelo, Lewandowski
+    "PSG_inside",         # PSG — Dembélé, Vitinha
+    "BVB",                # Borussia Dortmund — various
+    "acmilan",            # AC Milan — Maignan, Theo Hernández
 ]
 
 MAISFUTEBOL_RSS = "http://feeds.feedburner.com/iol/maisfutebol"
@@ -109,6 +137,21 @@ TRANSFER_WORDS = [
 # Standalone triggers — single keywords that ALWAYS qualify regardless of context
 STANDALONE_HIGH = [
     "HERE WE GO", "Here we go!", "🚨 OFICIAL", "🚨 OFFICIAL",
+]
+
+# Injury keywords · trigger INJURY confidence (separate tab from HIGH/LOW)
+# Includes English, Portuguese, plus specific body-part injuries
+INJURY_WORDS = [
+    "withdrew from", "withdrawn from", "withdraw from",
+    "ruled out", "ruled out of", "out of the world cup", "out of the world",
+    "miss the world cup", "miss world cup", "will miss the",
+    "injured", "injury", "fitness concern", "doubt for", "doubtful for",
+    "hamstring", "hamstring injury", "knee injury", "ankle injury",
+    "muscle injury", "groin", "calf injury", "torn ", "tear in", "set to miss",
+    "out for", "sidelined", "lesão", "lesionado", "fora do mundial",
+    "lesionou-se", "torção", "rotura", "rasgão muscular",
+    "WILL NOT PLAY", "Will Not Play", "won't play", "won't feature",
+    "ruled himself out", "stretchered off", "limped off",
 ]
 
 KEYWORDS_LOW_TRANSFER = TRANSFER_WORDS  # transfer word reqd for rumor too
@@ -275,7 +318,8 @@ def poll_premier_league() -> list[dict[str, Any]]:
 # ─── Filter ──────────────────────────────────────────────────────────────
 
 def classify_confidence(text: str) -> str:
-    """HIGH requires (CONFIRM word AND TRANSFER word) or standalone trigger.
+    """INJURY beats all (any injury keyword → INJURY tab).
+    HIGH requires (CONFIRM word AND TRANSFER word) or standalone trigger.
     LOW requires (RUMOR word AND TRANSFER word).
     Anti-words downgrade or skip.
     """
@@ -285,6 +329,11 @@ def classify_confidence(text: str) -> str:
     for w in ANTI_WORDS:
         if w.lower() in tl:
             return "SKIP"
+
+    # INJURY first — routes to its own tab
+    for w in INJURY_WORDS:
+        if w.lower() in tl:
+            return "INJURY"
 
     # Standalone HIGH triggers (HERE WE GO, 🚨 OFICIAL)
     for w in STANDALONE_HIGH:
@@ -304,7 +353,7 @@ def classify_confidence(text: str) -> str:
 def matched_keywords(text: str) -> list[str]:
     tl = text.lower()
     matched = []
-    for w in CONFIRM_WORDS + TRANSFER_WORDS + RUMOR_WORDS + STANDALONE_HIGH:
+    for w in INJURY_WORDS + CONFIRM_WORDS + TRANSFER_WORDS + RUMOR_WORDS + STANDALONE_HIGH:
         if w.lower() in tl:
             matched.append(w)
     return matched[:8]  # cap shown
@@ -380,17 +429,31 @@ def save_seen(seen: set[str]):
 HEADERS = ["✓", "When (UTC)", "Source", "Title / Headline", "Keywords matched", "Link"]
 
 def ensure_workbook() -> openpyxl.Workbook:
-    """Open existing tracker or create new with 3 tabs."""
+    """Open existing tracker or create new with 4 tabs (HIGH · LOW · INJURY · ABOUT)."""
     if TRACKER_XLSX.exists():
-        return openpyxl.load_workbook(str(TRACKER_XLSX))
+        wb = openpyxl.load_workbook(str(TRACKER_XLSX))
+        # Backfill INJURY tab on older workbooks
+        if "INJURY" not in wb.sheetnames:
+            inj = wb.create_sheet("INJURY", index=2)  # after HIGH, LOW
+            for col, header in enumerate(HEADERS, 1):
+                cell = inj.cell(row=1, column=col, value=header)
+                cell.font = Font(bold=True, size=11)
+                cell.fill = PatternFill("solid", fgColor="FFCCCC")  # pink
+                cell.alignment = Alignment(horizontal="left", vertical="center")
+            inj.freeze_panes = "A2"
+            widths = {1: 4, 2: 18, 3: 24, 4: 80, 5: 30, 6: 60}
+            for col, w in widths.items():
+                inj.column_dimensions[get_column_letter(col)].width = w
+        return wb
     wb = openpyxl.Workbook()
     # Default sheet becomes HIGH
     high = wb.active
     high.title = "HIGH"
     low = wb.create_sheet("LOW")
+    injury = wb.create_sheet("INJURY")  # pink for visibility
     about = wb.create_sheet("ABOUT")
 
-    for ws, color in ((high, "C6EFCE"), (low, "FFF2CC")):
+    for ws, color in ((high, "C6EFCE"), (low, "FFF2CC"), (injury, "FFCCCC")):
         for col, header in enumerate(HEADERS, 1):
             cell = ws.cell(row=1, column=col, value=header)
             cell.font = Font(bold=True, size=11)
@@ -410,18 +473,24 @@ def ensure_workbook() -> openpyxl.Workbook:
         "Append-only · ✓ column for marking when applied to Squads_2026.xlsm DB",
         "",
         "TABS:",
-        "  HIGH = confirmed transfers (OFICIAL · HERE WE GO · signed · joins · etc)",
-        "  LOW = rumored / in-talks tier (likely but unconfirmed)",
+        "  HIGH   = confirmed transfers (OFICIAL · HERE WE GO · signed · joins · etc)",
+        "  LOW    = rumored / in-talks tier (likely but unconfirmed)",
+        "  INJURY = WC-relevant injuries (ruled out, withdrew, hamstring, etc) — pink tab",
         "",
-        "SOURCES:",
-        "  - X (27 accounts via nitter.net): journalists + clubs",
-        "  - maisfutebol.iol.pt RSS",
+        "SOURCES (poll runs hourly):",
+        "  - X via nitter.net (~50 handles): journalists + PL clubs + WC nation teams + big foreign clubs",
+        "  - maisfutebol.iol.pt RSS + Cronologia HTML scrape",
         "  - premierleague.com official transfers page",
         "",
         "FILTER LOGIC:",
-        "  HIGH requires (confirm-word AND transfer-word) OR standalone trigger",
+        "  INJURY beats all — any injury-keyword → INJURY tab (pink)",
+        "  HIGH requires (confirm-word AND transfer-word) OR standalone trigger (HERE WE GO, 🚨 OFICIAL)",
         "  LOW requires (rumor-word AND transfer-word)",
         "  Anti-words (matchday, ticket, kit launch, etc) skip the entry",
+        "",
+        "KNOWN LIMITATION: FIFA Fantasy injury feed (play.fifa.com WILL NOT PLAY list)",
+        "  is React-rendered with no public API — must be checked manually in-app or",
+        "  via Chrome MCP session. WC nation X handles cover most cases via team announcements.",
         "",
         "SCHEDULE: every hour on the hour via launchd (com.fpl.transfer-poll)",
     ]
@@ -431,12 +500,17 @@ def ensure_workbook() -> openpyxl.Workbook:
     return wb
 
 def append_run_entries(wb: openpyxl.Workbook, entries: list[dict[str, Any]]):
-    """Append each entry to its appropriate tab (HIGH or LOW)."""
+    """Append each entry to its appropriate tab (HIGH, LOW, or INJURY)."""
     if not entries:
         return
     now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M")
     for e in entries:
-        tab = "HIGH" if e["confidence"] == "HIGH" else "LOW"
+        if e["confidence"] == "INJURY":
+            tab = "INJURY"
+        elif e["confidence"] == "HIGH":
+            tab = "HIGH"
+        else:
+            tab = "LOW"
         ws = wb[tab]
         next_row = ws.max_row + 1
         title = re.sub(r"<[^>]+>", "", e["title"])[:300]
