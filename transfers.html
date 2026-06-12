@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔄 Transfers · Rui Neves</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf7;
+  --bg-card: #ffffff;
+  --bg-soft: #f4f3ee;
+  --ink: #1a1816;
+  --ink-2: #56524d;
+  --ink-3: #8a847c;
+  --line: #e6e3dc;
+  --accent: #c1410c;
+  --accent-soft: #fde6d4;
+  --good: #4d8154;
+  --good-soft: #e3eee5;
+  --bad: #a8332e;
+  --bad-soft: #f3dad8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--ink); font-family: 'Inter Tight', -apple-system, sans-serif; line-height: 1.5; font-size: 14px; }
+.container { max-width: 1280px; margin: 0 auto; padding: 28px 22px; }
+
+header { border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 18px; }
+header h1 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
+header .sub { color: var(--ink-2); font-size: 13px; margin-top: 4px; }
+
+.topbar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; padding:8px 0; margin-bottom:8px; border-bottom:1px solid var(--line); font-size:12px; }
+.topbar a { color:var(--ink-2); text-decoration:none; }
+.topbar a.active { color: var(--accent); font-weight: 700; }
+.topbar a:hover { color: var(--accent); }
+.topbar .dot { color:var(--ink-3); }
+
+/* Country tab bar */
+.country-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.country-tab {
+  padding: 8px 14px; font-size: 13px; font-weight: 600;
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 999px;
+  cursor: pointer; color: var(--ink-2); font-family: inherit; transition: all 0.15s;
+}
+.country-tab:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.country-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.country-tab .count { font-weight: 400; font-size: 11px; margin-left: 4px; opacity: 0.85; }
+
+/* Direction filter */
+.dir-bar { display: flex; gap: 6px; margin-bottom: 14px; }
+.dir-btn {
+  padding: 6px 12px; font-size: 12px; font-weight: 600;
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 6px;
+  cursor: pointer; color: var(--ink-2); font-family: inherit;
+}
+.dir-btn.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.dir-btn.active.in { background: var(--good); border-color: var(--good); }
+.dir-btn.active.out { background: var(--bad); border-color: var(--bad); }
+
+/* Search */
+.search-bar { margin-bottom: 14px; }
+.search-bar input {
+  width: 100%; max-width: 380px; padding: 8px 12px; font-size: 13px; font-family: inherit;
+  background: var(--bg-card); border: 1px solid var(--line); border-radius: 6px; color: var(--ink);
+}
+.search-bar input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+/* Table */
+.club-section { margin-bottom: 16px; }
+.club-section h3 {
+  font-family: 'Fraunces', serif; font-size: 17px; font-weight: 700; padding-bottom: 6px;
+  border-bottom: 1px solid var(--line); margin-bottom: 0; color: var(--ink);
+}
+.club-section .meta { font-size: 11px; color: var(--ink-3); margin-bottom: 8px; }
+
+table { width: 100%; border-collapse: collapse; background: var(--bg-card); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 13px; margin-bottom: 6px; }
+thead { background: var(--bg-soft); }
+th { text-align: left; padding: 8px 10px; font-size: 11px; font-weight: 700; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--line); }
+td { padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+tr:hover { background: var(--bg-soft); }
+
+.dir-badge { font-weight: 700; font-size: 11px; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
+.dir-badge.in { background: var(--good-soft); color: var(--good); }
+.dir-badge.out { background: var(--bad-soft); color: var(--bad); }
+
+.player { font-weight: 600; }
+.country-flag { color: var(--ink-3); font-size: 12px; }
+.fromto { color: var(--ink-2); font-size: 12px; }
+.note { color: var(--ink-3); font-size: 11px; font-style: italic; }
+
+.empty { padding: 30px; text-align: center; color: var(--ink-3); font-style: italic; background: var(--bg-card); border: 1px dashed var(--line); border-radius: 8px; }
+
+.stat-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; font-size: 12px; }
+.chip { padding: 4px 10px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 12px; color: var(--ink-2); }
+.chip strong { color: var(--ink); font-weight: 700; }
+.chip.in { background: var(--good-soft); border-color: var(--good); }
+.chip.in strong { color: var(--good); }
+.chip.out { background: var(--bad-soft); border-color: var(--bad); }
+.chip.out strong { color: var(--bad); }
+
+.foot { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: 12px; text-align: center; }
+.foot a { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+@media (max-width: 768px) {
+  .container { padding: 14px 10px; }
+  header h1 { font-size: 20px; }
+  td, th { padding: 5px 7px; font-size: 12px; }
+  .country-tab { padding: 6px 10px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="topbar">
+  <a href="./toolkit.html">🚀 Portal</a>
+  <span class="dot">·</span>
+  <a href="./toolkit.html">🧠 Toolkit</a>
+  <span class="dot">·</span>
+  <a href="./squads.html">🏟️ FPL Squads</a>
+  <span class="dot">·</span>
+  <a href="./world.html">🌍 Worldwide DB</a>
+  <span class="dot">·</span>
+  <a href="./transfers.html" class="active">🔄 Transfers</a>
+  <span class="dot">·</span>
+  <a href="./stats.html">📊 Stats</a>
+  <span class="dot">·</span>
+  <a href="./index.html">📡 Live Dashboard</a>
+</div>
+
+<header>
+  <h1>🔄 Worldwide Confirmed Transfers · 26/27</h1>
+  <div class="sub">All confirmed player & coach moves · grouped by country/league · grouped by club</div>
+</header>
+
+<div class="country-tabs" id="countryTabs"></div>
+
+<div class="stat-bar" id="statBar"></div>
+
+<div class="dir-bar">
+  <button class="dir-btn active" data-dir="all">⇄ ALL</button>
+  <button class="dir-btn" data-dir="in">↘ IN only</button>
+  <button class="dir-btn" data-dir="out">↗ OUT only</button>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="searchInp" placeholder="🔍 Filter player / club / note…">
+</div>
+
+<div id="content"></div>
+
+<div class="foot">
+  Source: <code>transfers_in.json</code> + <code>transfers_out.json</code> · sync'd from hourly <code>poll_transfers.py</code> + manual curation
+  <br><a href="./world.html">🌍 Worldwide DB (player search)</a> · <a href="./squads.html">🏟️ FPL Squads</a> · <a href="./toolkit.html">FPL Toolkit</a>
+</div>
+
+</div>
+
+<script>
+let TRANSFERS_IN = {};
+let TRANSFERS_OUT = {};
+let currentDivision = null;
+let currentDir = 'all';
+let currentSearch = '';
+
+// Country/division metadata — flag emoji + display order
+const DIVISIONS_META = {
+  'Premier League': { flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', order: 1 },
+  'Championship': { flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', order: 2, label: 'Championship' },
+  'La Liga': { flag: '🇪🇸', order: 3 },
+  'Bundesliga': { flag: '🇩🇪', order: 4 },
+  'Serie A': { flag: '🇮🇹', order: 5 },
+  'Ligue 1': { flag: '🇫🇷', order: 6 },
+  'Liga Betclic': { flag: '🇵🇹', order: 7, label: 'Liga Portugal' },
+  'Eredivisie League': { flag: '🇳🇱', order: 8, label: 'Eredivisie' },
+  'Eredivisie': { flag: '🇳🇱', order: 8 },
+  'Major League Soccer': { flag: '🇺🇸', order: 9, label: 'MLS' },
+  'Liga MX': { flag: '🇲🇽', order: 10 },
+  'Brasileirao': { flag: '🇧🇷', order: 11 },
+  'Argentina Superliga': { flag: '🇦🇷', order: 12, label: 'Liga Argentina' },
+  'J-League': { flag: '🇯🇵', order: 13 },
+  'Saudi Pro League': { flag: '🇸🇦', order: 14 },
+  'Scotland Premiership': { flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', order: 15, label: 'Scotland' },
+};
+
+async function loadData() {
+  const v = '?v=' + Math.floor(Date.now() / 600000);  // 10-min cache bust
+  try {
+    const [resIn, resOut] = await Promise.all([
+      fetch('./transfers_in.json' + v).then(r => r.json()).catch(() => ({})),
+      fetch('./transfers_out.json' + v).then(r => r.json()).catch(() => ({}))
+    ]);
+    TRANSFERS_IN = resIn;
+    TRANSFERS_OUT = resOut;
+    buildTabs();
+    document.querySelectorAll('.dir-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        currentDir = b.dataset.dir;
+        document.querySelectorAll('.dir-btn').forEach(x => x.classList.remove('active', 'in', 'out'));
+        b.classList.add('active');
+        if (currentDir === 'in') b.classList.add('in');
+        if (currentDir === 'out') b.classList.add('out');
+        render();
+      });
+    });
+    document.getElementById('searchInp').addEventListener('input', (e) => {
+      currentSearch = e.target.value.trim().toLowerCase();
+      render();
+    });
+  } catch (e) {
+    document.getElementById('content').innerHTML = '<div class="empty">Failed to load transfer data: ' + e.message + '</div>';
+  }
+}
+
+function getAllDivisions() {
+  const divs = new Set();
+  for (const d of Object.keys(TRANSFERS_IN)) if (!d.startsWith('_')) divs.add(d);
+  for (const d of Object.keys(TRANSFERS_OUT)) if (!d.startsWith('_')) divs.add(d);
+  return Array.from(divs);
+}
+
+function buildTabs() {
+  const divs = getAllDivisions();
+  divs.sort((a, b) => {
+    const oa = DIVISIONS_META[a]?.order ?? 99;
+    const ob = DIVISIONS_META[b]?.order ?? 99;
+    if (oa !== ob) return oa - ob;
+    return a.localeCompare(b);
+  });
+
+  const tabsEl = document.getElementById('countryTabs');
+  tabsEl.innerHTML = '';
+  for (const d of divs) {
+    const meta = DIVISIONS_META[d] || { flag: '🌐', label: d };
+    const label = meta.label || d;
+    const inCount = countEntries(TRANSFERS_IN[d]);
+    const outCount = countEntries(TRANSFERS_OUT[d]);
+    const total = inCount + outCount;
+    const btn = document.createElement('button');
+    btn.className = 'country-tab';
+    btn.textContent = `${meta.flag} ${label}`;
+    const sp = document.createElement('span');
+    sp.className = 'count';
+    sp.textContent = `· ${total}`;
+    btn.appendChild(sp);
+    btn.addEventListener('click', () => selectDivision(d));
+    tabsEl.appendChild(btn);
+  }
+
+  // Default: first division with entries OR Premier League if exists
+  const defaultDiv = divs.find(d => d === 'Premier League') || divs[0];
+  if (defaultDiv) selectDivision(defaultDiv);
+}
+
+function countEntries(divMap) {
+  if (!divMap) return 0;
+  return Object.values(divMap).reduce((s, arr) => s + (Array.isArray(arr) ? arr.length : 0), 0);
+}
+
+function selectDivision(d) {
+  currentDivision = d;
+  document.querySelectorAll('.country-tab').forEach(b => {
+    const meta = DIVISIONS_META[d] || {};
+    const label = meta.label || d;
+    const isMatch = b.textContent.includes(label) || b.textContent.includes(d);
+    b.classList.toggle('active', isMatch);
+  });
+  render();
+}
+
+function render() {
+  const c = document.getElementById('content');
+  const stat = document.getElementById('statBar');
+  if (!currentDivision) { c.innerHTML = '<div class="empty">Pick a country.</div>'; stat.innerHTML = ''; return; }
+
+  const inMap = TRANSFERS_IN[currentDivision] || {};
+  const outMap = TRANSFERS_OUT[currentDivision] || {};
+  const allClubs = new Set([...Object.keys(inMap), ...Object.keys(outMap)]);
+  const clubs = Array.from(allClubs).sort();
+
+  // Stat bar
+  const inCount = countEntries(inMap);
+  const outCount = countEntries(outMap);
+  stat.innerHTML = `<span class="chip"><strong>${currentDivision}</strong></span>
+    <span class="chip">${clubs.length} clubs</span>
+    <span class="chip in"><strong>${inCount}</strong> IN</span>
+    <span class="chip out"><strong>${outCount}</strong> OUT</span>`;
+
+  let html = '';
+  let totalShown = 0;
+  for (const club of clubs) {
+    const ins = (inMap[club] || []).map(e => ({...e, _dir: 'IN'}));
+    const outs = (outMap[club] || []).map(e => ({...e, _dir: 'OUT'}));
+    let rows = [...ins, ...outs];
+
+    // Direction filter
+    if (currentDir === 'in') rows = rows.filter(r => r._dir === 'IN');
+    if (currentDir === 'out') rows = rows.filter(r => r._dir === 'OUT');
+
+    // Search filter
+    if (currentSearch) {
+      rows = rows.filter(r => {
+        const haystack = [r.n, r.from, r.to, r.note, r.c, club].filter(Boolean).join(' ').toLowerCase();
+        return haystack.includes(currentSearch);
+      });
+    }
+
+    if (!rows.length) continue;
+
+    // Sort IN first then OUT, then by player name
+    rows.sort((a, b) => {
+      if (a._dir !== b._dir) return a._dir === 'IN' ? -1 : 1;
+      return (a.n || '').localeCompare(b.n || '');
+    });
+
+    html += `<div class="club-section">
+      <h3>${escapeHtml(club)}</h3>
+      <div class="meta">${rows.filter(r=>r._dir==='IN').length} IN · ${rows.filter(r=>r._dir==='OUT').length} OUT</div>
+      <table><thead><tr>
+        <th style="width:60px;">Dir</th>
+        <th>Player / Entity</th>
+        <th>Nation</th>
+        <th>${currentDir === 'in' ? 'From' : currentDir === 'out' ? 'To' : 'From / To'}</th>
+        <th>Note</th>
+      </tr></thead><tbody>`;
+    for (const r of rows) {
+      const dirClass = r._dir === 'IN' ? 'in' : 'out';
+      const dirIcon = r._dir === 'IN' ? '↘ IN' : '↗ OUT';
+      const fromTo = r._dir === 'IN' ? (r.from || '—') : (r.to || '—');
+      html += `<tr>
+        <td><span class="dir-badge ${dirClass}">${dirIcon}</span></td>
+        <td class="player">${escapeHtml(r.n)}</td>
+        <td class="country-flag">${escapeHtml(r.c || '—')}</td>
+        <td class="fromto">${escapeHtml(fromTo)}</td>
+        <td class="note">${escapeHtml(r.note || '')}</td>
+      </tr>`;
+      totalShown++;
+    }
+    html += '</tbody></table></div>';
+  }
+
+  if (!totalShown) {
+    html = '<div class="empty">No transfers match this filter/search.</div>';
+  }
+  c.innerHTML = html;
+}
+
+function escapeHtml(s) {
+  if (s == null) return '';
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+loadData();
+</script>
+</body>
+</html>
