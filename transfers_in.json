@@ -277,7 +277,15 @@
     ]
   },
   "Major League Soccer": {
-    "Charlotte FC": []
+    "Charlotte FC": [],
+    "Los Angeles FC": [
+      {
+        "n": "Stephen Eustáquio",
+        "from": "FC Porto (loan)",
+        "note": "OFICIAL Feb 6 2026 · loan through Jun 30 2026 · $7.25m purchase option · 29yo CAN MID · captain · ex-FCP 150+ apps · target for purchase post-WC26",
+        "c": "Canada"
+      }
+    ]
   },
   "Championship": {
     "Burnley F.C.": [
