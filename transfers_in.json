@@ -39,7 +39,7 @@
     "Crystal Palace F.C": [
       {
         "n": "Jørgen Strand Larsen",
-        "from": "Wolves",
+        "from": "Wolverhampton Wanderers Wanderers",
         "note": "26/27 — NOR WC squad",
         "c": "Norway"
       }
@@ -56,7 +56,7 @@
       },
       {
         "n": "Cédric Kipré",
-        "from": "Stade de Reims",
+        "from": "Stade Stade Reims",
         "note": "Confirmed 26/27 · CB · Ivorian (not in CIV WC squad)",
         "c": "Ivory Coast"
       }
@@ -88,7 +88,7 @@
     "Newcastle United": [
       {
         "n": "Ewen Jaouen",
-        "from": "Stade de Reims",
+        "from": "Stade Stade Reims",
         "note": "Confirmed 26/27 · long-term contract · young French GK · fills void left by Ramsdale loan return + Ruddy/Thompson releases · likely competes with Pope or backs up",
         "c": "France"
       }
@@ -107,14 +107,6 @@
         "from": "Bournemouth (free transfer)",
         "note": "CONFIRMED · TOT #5 · starter shirt signals nailed starter role · Argentine CB · NOT in ARG WC squad (zero WC fatigue) · pairs with van de Ven/Romero · rested-premium-adjacent FPL pick",
         "c": "Argentina"
-      }
-    ],
-    "Burnley": [
-      {
-        "n": "Florentino",
-        "from": "Benfica",
-        "note": "OFICIAL Jun 11 · permanent CDM signing",
-        "c": "Portugal"
       }
     ]
   },
@@ -176,7 +168,7 @@
     "FC Porto": [
       {
         "n": "Iván Jaime",
-        "from": "CF Montréal (loan return)",
+        "from": "Montréal (loan return)",
         "note": "OFICIAL Jun 11 · Returns to FCP",
         "c": "Spain"
       },
@@ -190,14 +182,14 @@
     "Gil Vicente": [
       {
         "n": "Ricardo Esgaio",
-        "from": "Karagümrük (Turkey)",
+        "from": "Fatih Karagümrük S.K. (Turkey)",
         "note": "OFICIAL Jun 11 · regressa após 1 época na Turquia (28 jogos) · 33yo RB/LB · ex-Sporting/Braga/Académica · contrato até 2028 · 1ª contratação 26/27 do GVFC",
         "c": "Portugal"
       }
     ]
   },
   "Bundesliga": {
-    "1. FC Köln": [
+    "Koln": [
       {
         "n": "Jahmai Simpson-Pusey",
         "from": "Manchester City",
@@ -213,7 +205,7 @@
         "c": "Senegal"
       }
     ],
-    "SC Freiburg": [
+    "Freiburg": [
       {
         "n": "Keisuke Goto",
         "from": "—",
@@ -229,7 +221,7 @@
         "c": "—"
       }
     ],
-    "Mainz": [
+    "Mainz 05": [
       {
         "n": "Peruvian CB",
         "from": "—",
@@ -271,7 +263,7 @@
         "c": "Italy"
       }
     ],
-    "Torino": [
+    "Torino FC": [
       {
         "n": "Ignazio Abate (HC)",
         "from": "—",
@@ -297,6 +289,16 @@
         "from": "Free Agent",
         "note": "HERE WE GO Jun 12 · 3yr contract · medical done in London",
         "c": "France"
+      }
+    ]
+  },
+  "Championship": {
+    "Burnley F.C.": [
+      {
+        "n": "Florentino",
+        "from": "Benfica",
+        "note": "OFICIAL Jun 11 · permanent CDM signing",
+        "c": "Portugal"
       }
     ]
   }

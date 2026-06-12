@@ -1,0 +1,137 @@
+{
+  "_meta": "Aliases for club + division names. Maps common shorthand/alternate names → DB canonical. Used by tools/normalize_transfers.py + poll_transfers.py to keep overlays aligned to world_data.json (Squads_Data DB).",
+
+  "_divisions": {
+    "Eredivisie": "Eredivisie League",
+    "Liga Portugal": "Liga Betclic",
+    "Primeira Liga": "Liga Betclic",
+    "MLS": "Major League Soccer",
+    "Bundesliga 2": "Bundesliga",
+    "Türkiye": "Super Lig",
+    "Turkey": "Super Lig",
+    "🌐 Türkiye": "Super Lig",
+    "Süper Lig": "Super Lig",
+    "Scotland": "Scotland Premiership"
+  },
+
+  "_clubs": {
+    "Premier League": {
+      "Sunderland": "Sunderland A.F.C.",
+      "Hull City": "Hull City A.F.C.",
+      "Brighton": "Brighton & Hove Albion F.C.",
+      "Brighton & Hove Albion": "Brighton & Hove Albion F.C.",
+      "Crystal Palace": "Crystal Palace F.C",
+      "Tottenham": "Tottenham Hotspur",
+      "Spurs": "Tottenham Hotspur",
+      "Man United": "Manchester United",
+      "Man Utd": "Manchester United",
+      "Man City": "Manchester City"
+    },
+    "Championship": {
+      "Burnley": "Burnley F.C.",
+      "Southampton": "Southampton F.C.",
+      "West Ham": "West Ham United F.C.",
+      "West Ham United": "West Ham United F.C.",
+      "Wolves": "Wolverhampton Wanderers",
+      "Wolverhampton": "Wolverhampton Wanderers",
+      "Wolverhampton (Championship)": "Wolverhampton Wanderers",
+      "Watford": "Watford F.C.",
+      "Norwich": "Norwich City F.C.",
+      "Norwich City": "Norwich City F.C.",
+      "Millwall": "Millwall F.C."
+    },
+    "Liga Betclic": {
+      "Sporting CP": "Sporting",
+      "Sporting Lisbon": "Sporting",
+      "Porto": "FC Porto",
+      "Braga": "Sporting Braga",
+      "S.C. Braga": "Sporting Braga",
+      "SC Braga": "Sporting Braga",
+      "Estrela Amadora": "Estrela da Amadora",
+      "Vitória SC": "Vitória de Guimarães",
+      "V. Guimarães": "Vitória de Guimarães"
+    },
+    "La Liga": {
+      "Atlético": "Atlético Madrid",
+      "Atletico Madrid": "Atlético Madrid",
+      "Atletico": "Atlético Madrid",
+      "Real Betis": "Betis",
+      "Real Sociedad": "Real Sociedad",
+      "FC Barcelona": "Barcelona",
+      "Barça": "Barcelona",
+      "Athletic Club": "Athletic Bilbao",
+      "Celta Vigo": "Celta de Vigo"
+    },
+    "Bundesliga": {
+      "1. FC Köln": "Koln",
+      "1. FC Koln": "Koln",
+      "FC Köln": "Koln",
+      "Köln": "Koln",
+      "Cologne": "Koln",
+      "Colónia": "Koln",
+      "SC Freiburg": "Freiburg",
+      "Freiburg im Breisgau": "Freiburg",
+      "FC Bayern München": "Bayern Munich",
+      "FC Bayern": "Bayern Munich",
+      "Bayern": "Bayern Munich",
+      "FSV Mainz 05": "Mainz 05",
+      "Mainz": "Mainz 05",
+      "1. FSV Mainz": "Mainz 05",
+      "VfB Stuttgart": "Stuttgart",
+      "Borussia Mönchengladbach": "Borussia Monchengladbach",
+      "Eintracht Frankfurt": "Frankfurt"
+    },
+    "Serie A": {
+      "Inter": "Internazionale",
+      "Inter Milan": "Internazionale",
+      "AC Milan": "Milan",
+      "Torino": "Torino FC",
+      "AS Roma": "Roma",
+      "SS Lazio": "Lazio",
+      "Hellas Verona": "Verona",
+      "Bologna FC": "Bologna",
+      "Atalanta BC": "Atalanta",
+      "ACF Fiorentina": "Fiorentina"
+    },
+    "Ligue 1": {
+      "PSG": "Paris Saint-Germain",
+      "Paris SG": "Paris Saint-Germain",
+      "Stade Rennes": "Rennes",
+      "Stade de Reims": "Stade Reims",
+      "Reims": "Stade Reims",
+      "OM": "Marseille",
+      "Olympique Marseille": "Marseille",
+      "OL": "Olympique Lyonnais",
+      "Lyon": "Olympique Lyonnais",
+      "LOSC": "Lille"
+    },
+    "Super Lig": {
+      "Karagümrük": "Fatih Karagümrük S.K.",
+      "Fatih Karagumruk": "Fatih Karagümrük S.K.",
+      "Karagumruk": "Fatih Karagümrük S.K.",
+      "Galatasaray SK": "Galatasaray",
+      "Beşiktaş": "Besiktas",
+      "Fenerbahçe": "Fenerbahce"
+    },
+    "Eredivisie League": {
+      "FC Groningen": "Groningen",
+      "PSV Eindhoven": "PSV",
+      "Ajax Amsterdam": "Ajax",
+      "AFC Ajax": "Ajax",
+      "FC Twente": "Twente",
+      "FC Utrecht": "Utrecht"
+    },
+    "Major League Soccer": {
+      "Atlanta United": "Atlanta United FC",
+      "LA Galaxy": "Los Angeles Galaxy",
+      "LAFC": "Los Angeles FC",
+      "CF Montréal": "Montréal",
+      "Montreal": "Montréal",
+      "DC United": "D.C. United"
+    },
+    "Scotland Premiership": {
+      "Celtic FC": "Celtic",
+      "Rangers FC": "Rangers"
+    }
+  }
+}

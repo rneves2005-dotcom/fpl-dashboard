@@ -23,7 +23,7 @@
       },
       {
         "n": "Andy Robertson",
-        "to": "Tottenham Hotspur",
+        "to": "Tottenham Hotspur Hotspur",
         "note": "CONFIRMED free transfer to TOT · joins Jul 1 · Scotland WC captain · 26/27 at TOT counts for TOT heat-map",
         "c": "Scotland"
       },
@@ -61,7 +61,7 @@
       },
       {
         "n": "Jahmai Simpson-Pusey",
-        "to": "1. FC Köln (Bundesliga · permanent)",
+        "to": "Koln (Bundesliga · permanent)",
         "note": "CONFIRMED OFICIAL Jun 12 2026 · 20yo English CB · academy product · was loaned to Köln in Jan 2026 (11 apps, helped Bundesliga survival) · now permanent until 2030 · had short Celtic spell · non-FPL relevant (fringe academy)",
         "c": "England"
       }
@@ -95,7 +95,7 @@
     "Chelsea": [
       {
         "n": "Nicolas Jackson",
-        "to": "Bayern Munich (loan)",
+        "to": "Bayern Munich Munich (loan)",
         "note": "Return TBC 26/27",
         "c": "Senegal"
       },
@@ -163,7 +163,7 @@
       },
       {
         "n": "Marcos Senesi",
-        "to": "Tottenham (free transfer)",
+        "to": "Tottenham Hotspur (free transfer)",
         "note": "CONFIRMED free transfer to TOT · Argentine CB · NOT in ARG WC squad (zero WC fatigue)",
         "c": "Argentina"
       }
@@ -183,13 +183,13 @@
       },
       {
         "n": "Kieran Trippier",
-        "to": "Wolverhampton (Championship · free)",
+        "to": "Wolverhampton Wanderers (Championship · free)",
         "note": "Released NEW end of 25/26 · signed Wolves (Championship · non-PL · Wolves' 1st 26/27 signing)",
         "c": "England"
       },
       {
         "n": "Aaron Ramsdale",
-        "to": "Southampton",
+        "to": "Southampton F.C.",
         "note": "Return to parent club (loan ended)",
         "c": "England"
       },
@@ -213,7 +213,7 @@
       },
       {
         "n": "Travis Hernes",
-        "to": "FC Groningen",
+        "to": "Groningen",
         "note": "Permanent move (undisclosed fee) · was NEW U21 #45 · Norwegian youngster",
         "c": "Norway"
       }
@@ -285,7 +285,7 @@
     "Fulham": [
       {
         "n": "Raúl Jiménez",
-        "to": "Wolverhampton (Championship · free)",
+        "to": "Wolverhampton Wanderers (Championship · free)",
         "note": "CONFIRMED return to Wolves on free transfer · ex-Wolves 2018-2023 · Championship for 26/27 · non-PL · still goes to Mexico WC squad from Wolves",
         "c": "Mexico"
       },
@@ -323,12 +323,12 @@
       },
       {
         "n": "Florentino",
-        "to": "Burnley",
+        "to": "Burnley F.C.",
         "note": "OFICIAL Jun 11 · permanent · CDM to PL",
         "c": "Portugal"
       }
     ],
-    "Sporting CP": [
+    "Sporting": [
       {
         "n": "Geovany Quenda",
         "to": "Chelsea",
@@ -344,7 +344,7 @@
         "c": "Spain"
       }
     ],
-    "Estrela Amadora": [
+    "Estrela da Amadora": [
       {
         "n": "Cristiano Bacci",
         "to": "TBD",
@@ -357,7 +357,7 @@
     "Bayern Munich": [
       {
         "n": "João Palhinha",
-        "to": "Tottenham (loan)",
+        "to": "Tottenham Hotspur (loan)",
         "note": "Loan, return TBC",
         "c": "Portugal"
       },
@@ -407,8 +407,8 @@
       }
     ]
   },
-  "🌐 Türkiye": {
-    "Karagümrük": [
+  "Super Lig": {
+    "Fatih Karagümrük S.K.": [
       {
         "n": "Ricardo Esgaio",
         "to": "Gil Vicente (Liga Portugal)",
