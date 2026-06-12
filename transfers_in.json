@@ -113,12 +113,6 @@
   "La Liga": {
     "Real Madrid": [
       {
-        "n": "Bernardo Silva",
-        "from": "Manchester City",
-        "note": "🚨 HERE WE GO Jun 11 · 2yr + 1yr option · sealed in 36h · Mourinho priority",
-        "c": "Portugal"
-      },
-      {
         "n": "José Mourinho (HC)",
         "from": "Benfica",
         "note": "OFFICIAL Jun 11 · 3yr deal · 2nd Real spell · Benfica €15m fee",
@@ -283,14 +277,7 @@
     ]
   },
   "Major League Soccer": {
-    "Charlotte FC": [
-      {
-        "n": "Allan Saint-Maximin",
-        "from": "Free Agent",
-        "note": "HERE WE GO Jun 12 · 3yr contract · medical done in London",
-        "c": "France"
-      }
-    ]
+    "Charlotte FC": []
   },
   "Championship": {
     "Burnley F.C.": [

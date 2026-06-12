@@ -134,9 +134,19 @@ TRANSFER_WORDS = [
     "out of squad", "miss the world cup", "miss world cup",
 ]
 
-# Standalone triggers — single keywords that ALWAYS qualify regardless of context
+# Standalone HIGH triggers — only club-OFFICIAL announcements.
+# Per user policy (Jun 12 2026): CONFIRMED = OFICIAL/club source only.
+# Journalists (Romano "HERE WE GO", Ornstein "EXCL") are LIKELY but NOT confirmed
+# until the club issues a statement. "🚨 OFICIAL" / "🚨 OFFICIAL" with colon =
+# Romano reporting on an actual club announcement (i.e. piggybacking the official) → HIGH.
 STANDALONE_HIGH = [
-    "HERE WE GO", "Here we go!", "🚨 OFICIAL", "🚨 OFFICIAL",
+    "🚨 OFICIAL", "🚨 OFFICIAL", "OFICIAL:", "OFFICIAL:", "OFICIALMENTE",
+]
+
+# Journalist-confirmed-but-not-club-official → LOW tier
+# Romano's "HERE WE GO" is highly reliable but pending official club statement.
+STANDALONE_LIKELY = [
+    "HERE WE GO", "Here we go!", "Here We Go", "here we go",
 ]
 
 # Injury keywords · trigger INJURY confidence (separate tab from HIGH/LOW)
@@ -335,10 +345,15 @@ def classify_confidence(text: str) -> str:
         if w.lower() in tl:
             return "INJURY"
 
-    # Standalone HIGH triggers (HERE WE GO, 🚨 OFICIAL)
+    # Standalone HIGH triggers — club-OFFICIAL only (🚨 OFICIAL, OFICIAL:, OFFICIAL:)
     for w in STANDALONE_HIGH:
         if w.lower() in tl:
             return "HIGH"
+
+    # Standalone LIKELY triggers — Romano "HERE WE GO" etc · route to LOW per policy
+    for w in STANDALONE_LIKELY:
+        if w.lower() in tl:
+            return "LOW"
 
     has_transfer = any(w.lower() in tl for w in TRANSFER_WORDS)
     has_confirm = any(w.lower() in tl for w in CONFIRM_WORDS)
@@ -353,7 +368,7 @@ def classify_confidence(text: str) -> str:
 def matched_keywords(text: str) -> list[str]:
     tl = text.lower()
     matched = []
-    for w in INJURY_WORDS + CONFIRM_WORDS + TRANSFER_WORDS + RUMOR_WORDS + STANDALONE_HIGH:
+    for w in INJURY_WORDS + CONFIRM_WORDS + TRANSFER_WORDS + RUMOR_WORDS + STANDALONE_HIGH + STANDALONE_LIKELY:
         if w.lower() in tl:
             matched.append(w)
     return matched[:8]  # cap shown
