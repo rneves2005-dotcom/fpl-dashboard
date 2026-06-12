@@ -314,14 +314,6 @@
     ]
   },
   "Liga Betclic": {
-    "Sporting": [
-      {
-        "n": "Geovany Quenda",
-        "to": "Chelsea",
-        "note": "From 26/27",
-        "c": "Portugal"
-      }
-    ],
     "Benfica": [
       {
         "n": "José Mourinho (HC)",
@@ -338,9 +330,9 @@
     ],
     "Sporting CP": [
       {
-        "n": "Ricardo Esgaio",
-        "to": "Gil Vicente",
-        "note": "OFICIAL Jun 11",
+        "n": "Geovany Quenda",
+        "to": "Chelsea",
+        "note": "From 26/27",
         "c": "Portugal"
       }
     ],
@@ -412,6 +404,16 @@
         "to": "TBD",
         "note": "OFICIAL Jun 11 · leaves after 7 years",
         "c": "Serbia"
+      }
+    ]
+  },
+  "🌐 Türkiye": {
+    "Karagümrük": [
+      {
+        "n": "Ricardo Esgaio",
+        "to": "Gil Vicente (Liga Portugal)",
+        "note": "OFICIAL Jun 11 · após 1 época em Istambul (28 jogos) · regresso a Portugal · contrato até 2028",
+        "c": "Portugal"
       }
     ]
   }
