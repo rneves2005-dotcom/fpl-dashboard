@@ -59,15 +59,23 @@ def normalize_club(div: str, club: str, club_aliases: dict, world_data: dict) ->
 
 def normalize_fromto(value: str, club_aliases: dict) -> str:
     """For 'from'/'to' free-text fields, swap any known club alias with its canonical name.
-    Only matches club names appearing as a clean token (no partial replacements)."""
+    Skip when alias is a prefix/substring of canonical AND canonical already appears
+    (prevents "Tottenham" → "Tottenham Hotspur" from doubling "Tottenham Hotspur" → "Tottenham Hotspur Hotspur").
+    """
     if not value or value == "—":
         return value
     out = value
     for div, mapping in club_aliases.items():
         if div.startswith("_"):
             continue
-        for alias, canonical in mapping.items():
-            # Replace only when alias is a standalone token (word boundary), longest-first to avoid Sporting→Sporting CP collision
+        # Sort longest-alias-first so multi-word aliases match before substring aliases
+        for alias, canonical in sorted(mapping.items(), key=lambda kv: -len(kv[0])):
+            if alias == canonical:
+                continue
+            # Idempotency guard: if canonical already in text, don't replace alias (it's already canonical)
+            if canonical in out:
+                continue
+            # Only standalone tokens
             pat = r"\b" + re.escape(alias) + r"\b"
             out = re.sub(pat, canonical, out)
     return out
