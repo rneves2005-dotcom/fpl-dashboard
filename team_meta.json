@@ -50,8 +50,8 @@
   "COV": {
     "name": "Coventry (Promoted)",
     "manager": "Frank Lampard (95-pt Championship winner)",
-    "discount": "1.0×",
-    "note": "",
+    "discount": "0.85×",
+    "note": "Promoted to PL 26/27 (1-1 v Blackburn confirmed promotion). WC26 reps: 2 confirmed — Haji Wright (USA FWD #19 · 20G in promotion campaign · on USA bench v PAR tonight), Brandon Thomas-Asante (GHA FWD · in Ghana 26-man squad). Promoted-club WC fatigue + system bedding-in risk → 0.85× discount.",
     "db_club": "Coventry City",
     "division": "Premier League"
   },
@@ -139,7 +139,7 @@
     "name": "Nott'm Forest",
     "manager": "Vítor Pereira (continuity · in role since ~Feb 2026 · half-season pedigree)",
     "discount": "1.0×",
-    "note": "Vítor Pereira (Portuguese · ex-FC Porto · ex-Wolves) has been Forest manager since ~Feb 2026. Half-season already played under him → continuity for 26/27 (Nuno Espírito Santo left mid-25/26, now at WHU Championship). 3 WC reps (E.Anderson ENG, Ndoye SUI, Gunn SCO). Sels was BEL-revised dropped — remains the rested-premium GK pick. Boly leaving CB depth. NFO is one of the cleaner continuity targets for 26/27 openers given Sels gold-pick status.",
+    "note": "Vítor Pereira (Portuguese · ex-FC Porto · ex-Wolves) has been Forest manager since ~Feb 2026. Half-season already played under him → continuity for 26/27 (Nuno Espírito Santo left mid-25/26, now at WHU Championship). 4 WC reps (E.Anderson ENG, Ndoye SUI, Gunn SCO, Sosa PAR — Sosa confirmed in PAR squad, on bench v USA tonight). Sels was BEL-revised dropped — remains the rested-premium GK pick. Boly leaving CB depth. NFO is one of the cleaner continuity targets for 26/27 openers given Sels gold-pick status.",
     "db_club": "Nottingham Forest",
     "division": "Premier League"
   },
