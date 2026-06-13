@@ -178,11 +178,38 @@ RUMOR_WORDS = [
     "tentar", "pretende", "pretendem", "deverá", "negocia", "negociar",
 ]
 
-# Anti-keywords: presence reduces confidence (likely social/marketing not transfer)
+# Anti-keywords: presence skips the entry entirely (HIGH/LOW/INJURY all SKIP'd)
+# Per user (Jun 13 2026): football/soccer ONLY. Filter out other sports.
+# NFL may be re-enabled later when user wants summer NFL tracking — keep as TODO.
 ANTI_WORDS = [
+    # Marketing/social noise
     "match preview", "matchday", "ticket", "kit launch", "behind the scenes",
     "🎶", "🎤", "podcast", "interview", "feature", "matchcam", "highlight",
     "wallpaper", "buy now", "save", "discount",
+    # ── Non-football sports (skip entire entry) ──
+    # Motor sports
+    "superbike", "superbikes", "motogp", "moto2", "moto3", "motociclismo",
+    "formula 1", "formula one", "f1 grand prix", "grande prémio de fórmula",
+    "nascar", "rallying", "rally cross", " wrc ",
+    # Racket sports
+    "wimbledon", "roland garros", "atp tour", "wta tour", "atp finals",
+    " tennis ", "padel",
+    # Rugby
+    "six nations", "world rugby", "rugby world", " rugby ",
+    # Basketball
+    " nba ", "euroleague", "ncaa basketball",
+    # Cricket
+    "test cricket", " ipl ", "twenty20", "t20 world",
+    # Golf
+    " pga ", "ryder cup", "the masters tournament", "open championship golf",
+    # Cycling
+    "tour de france", "giro d'italia", "la vuelta", "uci cycling",
+    # Combat sports
+    " mma ", " ufc ", "boxing match",
+    # Swimming/athletics
+    "swimming championship", "world athletics",
+    # NFL (user said may re-enable in summer · keep here for now)
+    " nfl ", " super bowl ", "american football",
 ]
 
 # Posts matching these trigger link-follow → fetch linked article + extract names
