@@ -1,7 +1,14 @@
 {
   "_meta": "Confirmed transfers IN from May 2026 onwards (26/27 season). Mirrors squads.html team-panel IN tables.",
   "Premier League": {
-    "Arsenal": [],
+    "Arsenal": [
+      {
+        "n": "Piero Hincapié",
+        "from": "Bayer Leverkusen",
+        "note": "CONFIRMED · ECU CB · transferred from Leverkusen to Arsenal · #5 · 23yo · ECU WC26 squad starter",
+        "c": "Ecuador"
+      }
+    ],
     "Aston Villa": [],
     "Bournemouth": [
       {
