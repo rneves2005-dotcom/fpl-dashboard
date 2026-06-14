@@ -326,30 +326,106 @@ def poll_maisfutebol() -> list[dict[str, Any]]:
 
     return out
 
-# ─── Source: Premier League HTML ─────────────────────────────────────────
+# ─── Source: Premier League official API (structured) ────────────────────
+
+# Discovered via Chrome DevTools network log Jun 14 2026:
+# - Parent "Transfer Centre" playlist: 4658365
+# - Each club has its own playlist referenced by parent
+# - Each transfer = "promo" item with tags[].label indicating type
+# - Tags: player-released, transfer-in, transfer-out, end-of-loan
+# This is more robust than HTML scraping (React SPA · raw fetch was returning empty)
+
+PL_API_PARENT_PLAYLIST = "https://api.premierleague.com/content/premierleague/playlist/en/4658365?detail=DETAILED"
+PL_API_CLUB_PLAYLIST = "https://api.premierleague.com/content/premierleague/playlist/en/{playlist_id}?detail=DETAILED"
+PL_API_HEADERS = {
+    "User-Agent": USER_AGENT,
+    "Origin": "https://www.premierleague.com",
+    "Referer": "https://www.premierleague.com/en/transfers/2026-27/summer",
+    "Accept": "application/json",
+}
+
+# Tag → human-readable transfer type
+PL_TAG_LABELS = {
+    "player-released": "Released",
+    "transfer-in": "Transfer In",
+    "transfer-out": "Transfer Out",
+    "end-of-loan": "End of Loan",
+    "transfer": "Transfer",
+    "signing": "Signed",
+}
+
+def fetch_json(url: str, timeout: int = 15) -> dict | None:
+    try:
+        r = requests.get(url, headers=PL_API_HEADERS, timeout=timeout)
+        r.raise_for_status()
+        return r.json()
+    except Exception as e:
+        print(f"PL API FAIL {url}: {e}", file=sys.stderr)
+        return None
 
 def poll_premier_league() -> list[dict[str, Any]]:
-    body = fetch(PL_TRANSFERS_URL, timeout=20)
-    if not body:
-        return []
-    soup = BeautifulSoup(body, "html.parser")
+    """Pull structured transfer entries from premierleague.com via the underlying Pulselive API.
+    Each transfer surfaces with: club, player name, transfer type, optional destination/source club, club's official article link.
+    """
     out = []
-    # PL transfers are usually in a list with player + direction
-    # Generic crawl — find any link with /transfers/ in href
-    for a in soup.find_all("a", href=True):
-        txt = a.get_text(strip=True)
-        if not txt or len(txt) > 200:
+    parent = fetch_json(PL_API_PARENT_PLAYLIST)
+    if not parent:
+        return out
+
+    # Discover all club playlists
+    club_playlists = []
+    for it in parent.get("items", []):
+        resp = it.get("response", {})
+        title = resp.get("title", "") or ""
+        # Title format: "Summer 2026 - Transfer Centre - <CLUB>" or similar
+        if "Transfer Centre" in title:
+            # Extract club name from title
+            parts = title.split("- ")
+            club_name = parts[-1].strip() if parts else title
+            club_playlists.append((resp.get("id"), club_name))
+
+    # Walk each club's playlist
+    for playlist_id, club_name in club_playlists:
+        if not playlist_id:
             continue
-        href = a["href"]
-        if "transfer" in href.lower() or "signing" in txt.lower() or "joins" in txt.lower():
+        club_data = fetch_json(PL_API_CLUB_PLAYLIST.format(playlist_id=playlist_id))
+        if not club_data:
+            continue
+
+        for it in club_data.get("items", []):
+            resp = it.get("response", {})
+            player = resp.get("title", "") or ""
+            description = resp.get("description", "") or ""
+
+            # Map tags → type label
+            tags = resp.get("tags", []) or []
+            tag_labels = [t.get("label", "") for t in tags if isinstance(t, dict)]
+            type_label = next(
+                (PL_TAG_LABELS[t] for t in tag_labels if t in PL_TAG_LABELS),
+                ", ".join(tag_labels) or "Transfer",
+            )
+
+            # Linked article (club's official site)
+            links = resp.get("links", []) or []
+            link_url = links[0].get("promoUrl", "") if links else ""
+
+            date = resp.get("date", "") or resp.get("lastModified", "")
+
+            # Prefix with OFFICIAL: so classify_confidence routes to HIGH
+            # (PL Official entries are inherently club-confirmed)
+            title_str = f"OFFICIAL: {club_name} · {player} — {type_label}"
+            if description:
+                title_str += f" · {description[:120]}"
+
             out.append({
                 "source": "PL Official",
-                "title": txt,
-                "summary": "",
-                "link": href if href.startswith("http") else f"https://www.premierleague.com{href}",
-                "published": datetime.now(timezone.utc).isoformat(),
-                "id": f"PL:{txt}:{href}",
+                "title": title_str[:300],
+                "summary": f"{club_name} · {player} · {type_label}",
+                "link": link_url or "https://www.premierleague.com/en/transfers/2026-27/summer",
+                "published": date,
+                "id": f"PL:{playlist_id}:{resp.get('id')}",
             })
+
     return out
 
 # ─── Filter ──────────────────────────────────────────────────────────────
