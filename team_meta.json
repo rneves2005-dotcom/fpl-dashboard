@@ -34,8 +34,8 @@
   "BHA": {
     "name": "Brighton",
     "manager": "continuity",
-    "discount": "0.95×",
-    "note": "WC26 heat-map: 2 confirmed — Diego Gómez (PAR MID · £14m club-record Jan 2025 from Inter Miami · started v USA Jun 12), Ferdi Kadıoğlu (TUR RB · #24 from Fenerbahce · starts v AUS tonight). Likely additional reps (in squad · WC selection probable): Verbruggen (NED GK), Mitoma (JPN), Wieffer (NED), De Cuyper (BEL). If all 4 confirmed → BHA hits 6 WC reps · would justify 0.9× discount (from current 0.95×). Manager continuity (Hürzeler) keeps system risk LOW.",
+    "discount": "0.9×",
+    "note": "WC26 heat-map: 5 confirmed (jumped from 2 after NED v JAP scan today): Diego Gómez (PAR MID · played v USA), Ferdi Kadıoğlu (TUR RB · played v AUS), Verbruggen (NED GK · starts v JPN), van Hecke (NED CB · starts v JPN), Wieffer (NED CDM · NED bench v JPN). Likely additional: De Cuyper (BEL). Possible: Mitoma (JPN) — NOT in JPN XI or bench tonight, may not be in 26-man squad. 5-6 confirmed reps · Hürzeler continuity. 0.9× discount appropriate (down from 0.95×) — heavier WC load than other 1.0× clubs.",
     "db_club": "Brighton & Hove Albion F.C.",
     "division": "Premier League"
   },
