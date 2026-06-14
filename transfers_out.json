@@ -64,6 +64,12 @@
         "to": "Koln (Bundesliga · permanent)",
         "note": "CONFIRMED OFICIAL Jun 12 2026 · 20yo English CB · academy product · was loaned to Köln in Jan 2026 (11 apps, helped Bundesliga survival) · now permanent until 2030 · had short Celtic spell · non-FPL relevant (fringe academy)",
         "c": "England"
+      },
+      {
+        "n": "Stefan Ortega",
+        "to": "Nottingham Forest (free)",
+        "note": "CONFIRMED Jan 2026 · free transfer to NFO · 56 MCI apps in 3.5 yrs · backup behind Ederson · was in MCI 22/23 Treble squad · Germany",
+        "c": "Germany"
       }
     ],
     "Manchester United": [
@@ -236,6 +242,12 @@
         "to": "🪦 Retired",
         "note": "Retiring end of 25/26 · age 40 · ended 21-year top-flight career at BHA · 633 PL apps (3rd all-time behind Giggs/Lampard)",
         "c": "England"
+      },
+      {
+        "n": "Joël Veltman",
+        "to": "Free Agent (released)",
+        "note": "CONFIRMED PL Official Jun 2026 · contract expired · 34yo Dutch RB/CB · ex-Ajax · veteran depth piece · likely NOT in NED WC squad given age",
+        "c": "Netherlands"
       }
     ],
     "Ipswich Town": [
@@ -276,6 +288,12 @@
         "to": "Free Agent (released)",
         "note": "CONFIRMED released end of 25/26 · contract expired Jun 2026 · joined NFO Aug 2025 from Norwich on free · made only 1 sub appearance in entire 25/26 season · SCO #1 GK · starting tonight v HAI · likely new club post-WC",
         "c": "Scotland"
+      },
+      {
+        "n": "Stefan Ortega",
+        "to": "Free Agent (released)",
+        "note": "CONFIRMED PL Official Jun 2026 · was at MCI 2022-2026 (56 apps · Treble winner backup) · free transfer to NFO Jan 2026 to backup Sels (after John Victor knee injury) · short-term deal through 25/26 · now released",
+        "c": "Germany"
       }
     ],
     "Leeds United": [
@@ -326,6 +344,20 @@
         "to": "Free Agent (released)",
         "note": "CONFIRMED released end of 25/26 · contract expired Jun 2026 · 30yo Burkina Faso winger · ex-Ajax/Aston Villa · BFA didn't qualify for WC26 so zero WC fatigue impact on SUN",
         "c": "Burkina Faso"
+      }
+    ],
+    "Arsenal": [
+      {
+        "n": "Jakub Kiwior",
+        "to": "FC Porto",
+        "note": "CONFIRMED PL Official Jun 2026 · 26yo POL CB · Arsenal squad depth · Poland didn't qualify for WC26",
+        "c": "Poland"
+      },
+      {
+        "n": "Karl Hein",
+        "to": "Werder Bremen",
+        "note": "CONFIRMED PL Official Jun 2026 · 23yo Estonian backup GK · 0 first-team apps · Estonia didn't qualify for WC26",
+        "c": "Estonia"
       }
     ]
   },

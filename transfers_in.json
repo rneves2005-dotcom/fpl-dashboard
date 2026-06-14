@@ -106,7 +106,14 @@
         "c": "France"
       }
     ],
-    "Nottingham Forest": [],
+    "Nottingham Forest": [
+      {
+        "n": "Stefan Ortega",
+        "from": "Manchester City (free)",
+        "note": "CONFIRMED Jan 2026 · free transfer · short-term deal as Sels backup after John Victor knee injury · contract ended Jun 2026 (released)",
+        "c": "Germany"
+      }
+    ],
     "Sunderland A.F.C.": [
       {
         "n": "Granit Xhaka",
@@ -191,6 +198,12 @@
         "from": "Werder Bremen",
         "note": "OFICIAL · Return to FC Porto",
         "c": "Portugal"
+      },
+      {
+        "n": "Jakub Kiwior",
+        "from": "Arsenal",
+        "note": "CONFIRMED PL Official Jun 2026 · 26yo POL CB · CB depth for FCP",
+        "c": "Poland"
       }
     ],
     "Gil Vicente": [
@@ -265,6 +278,14 @@
         "from": "Leicester City",
         "note": "CONFIRMED May 2026 · loan obligation-to-buy triggered · permanent · 22yo MOR AM · 9G/7A in 25/26 loan",
         "c": "Morocco"
+      }
+    ],
+    "Werder Bremen": [
+      {
+        "n": "Karl Hein",
+        "from": "Arsenal",
+        "note": "CONFIRMED PL Official Jun 2026 · 23yo Estonian GK · backup signing",
+        "c": "Estonia"
       }
     ]
   },
