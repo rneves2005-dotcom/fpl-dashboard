@@ -19,7 +19,7 @@
     "name": "Bournemouth",
     "manager": "Marco Rose (NEW)",
     "discount": "0.8×",
-    "note": "Manager change: Iraola → Marco Rose. Tactical reset · 0.8× discount until pre-season friendlies confirm system. BOU finished 6th in 25/26 (best-ever · first European qualification) — adds fixture load. WC26 reps: 4 confirmed — Tyler Adams (USA CDM · 90min v PAR + yellow), Ben Gannon Doak (SCO RW · £25m Aug 2025 · starts v HAI tonight), Ryan Christie (SCO MID · just signed 3-yr extension through 2028-29 Jun 13 2026), Rayan Vitor (BRA FWD · #37 from Vasco da Gama · on BRA bench v MOR Jun 13 unused). Adams card-risk + 2 SCO midfielders + BRA depth piece building WC load. 0.8× holds (manager + WC + European-cup fixture compound).",
+    "note": "Manager change: Iraola → Marco Rose. Tactical reset · 0.8× discount until pre-season friendlies confirm system. BOU finished 6th in 25/26 (best-ever · first European qualification) — adds fixture load. WC26 reps: 5 confirmed — Tyler Adams (USA CDM · 90min v PAR + yellow), Ben Gannon Doak (SCO RW · £25m Aug 2025 · 75min v HAI), Ryan Christie (SCO MID · 3-yr ext Jun 13 · 15min v HAI), Rayan Vitor (BRA FWD · #37 from Vasco · BRA bench v MOR unused), Bafodé Diakité (CIV CB · BOU #18 prev Lille · CIV bench v ECU tonight). Heavy WC load + manager + European-cup fixture compound. 0.8× holds.",
     "db_club": "Bournemouth",
     "division": "Premier League"
   },
@@ -139,7 +139,7 @@
     "name": "Nott'm Forest",
     "manager": "Vítor Pereira (continuity · in role since ~Feb 2026 · half-season pedigree)",
     "discount": "1.0×",
-    "note": "Vítor Pereira (Portuguese · ex-FC Porto · ex-Wolves) has been Forest manager since ~Feb 2026. Half-season already played under him → continuity for 26/27 (Nuno Espírito Santo left mid-25/26, now at WHU Championship). 2 WC reps (E.Anderson ENG, Ndoye SUI). Gunn SCO RELEASED (joined Aug 2025 from Norwich free · only 1 sub apperance entire season · contract expired Jun 2026 · destination TBC post-WC). Sels remains nailed #1 GK + rested-premium gold pick. Boly leaving CB depth. NFO is one of the cleaner continuity targets for 26/27 openers given Sels gold-pick status.",
+    "note": "Vítor Pereira (Portuguese · ex-FC Porto · ex-Wolves) has been Forest manager since ~Feb 2026. Half-season already played under him → continuity for 26/27 (Nuno Espírito Santo left mid-25/26, now at WHU Championship). 3 WC reps confirmed: E.Anderson (ENG), Ndoye (SUI · played QAT v SUI), Sangaré (CIV · on bench v ECU tonight). Gunn SCO RELEASED (only 1 sub app entire 25/26). Sels remains nailed #1 GK + rested-premium gold pick. Boly leaving CB depth. NFO is one of the cleaner continuity targets for 26/27 openers given Sels gold-pick status.",
     "db_club": "Nottingham Forest",
     "division": "Premier League"
   },
