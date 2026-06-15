@@ -576,5 +576,15 @@
         "c": "Iran"
       }
     ]
+  },
+  "Greece Superliga": {
+    "Olympiacos": [
+      {
+        "n": "Costinha",
+        "to": "Brighton",
+        "note": "CONFIRMED Jun 15 2026 · transfer to PL · Portuguese player",
+        "c": "Portugal"
+      }
+    ]
   }
 }

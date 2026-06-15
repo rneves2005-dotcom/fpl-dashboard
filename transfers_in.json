@@ -45,6 +45,12 @@
         "from": "AIK (Sweden)",
         "note": "Confirmed 26/27 · 18yo Nigerian FWD · contract until 2031 · 5G/4A in 12 apps for AIK last season",
         "c": "Nigeria"
+      },
+      {
+        "n": "Costinha",
+        "from": "Olympiacos",
+        "note": "CONFIRMED PL Official + maisfutebol Jun 15 2026 · Portuguese player signing for BHA · POR WC squad TBC (likely NOT in 26-man so zero WC fatigue add)",
+        "c": "Portugal"
       }
     ],
     "Chelsea": [
@@ -62,6 +68,12 @@
         "from": "Wolverhampton Wanderers",
         "note": "26/27 — NOR WC squad",
         "c": "Norway"
+      },
+      {
+        "n": "Pierre Sage (HC)",
+        "from": "—",
+        "note": "CONFIRMED Jun 15 2026 · 3-yr contract · ex-Lens/Lyon · vertical/transition football · replaces Glasner",
+        "c": "France"
       }
     ],
     "Everton": [],
@@ -97,7 +109,14 @@
         "c": "France"
       }
     ],
-    "Manchester City": [],
+    "Manchester City": [
+      {
+        "n": "Joško Gvardiol (new contract)",
+        "from": "Manchester City (extension)",
+        "note": "CONFIRMED Romano Jun 15 2026 · new deal until Jun 2031 · move to Spain OFF for summer (RMA rumor dead) · 24yo CRO CB · key player for MCI rebuild · CRO WC26 squad",
+        "c": "Croatia"
+      }
+    ],
     "Manchester United": [
       {
         "n": "Marcus Rashford",
@@ -398,6 +417,14 @@
         "n": "Florentino",
         "from": "Benfica",
         "note": "OFICIAL Jun 11 · permanent CDM signing",
+        "c": "Portugal"
+      }
+    ],
+    "Wolverhampton Wanderers": [
+      {
+        "n": "César Peixoto (HC)",
+        "from": "Gil Vicente",
+        "note": "CONFIRMED Jun 15 2026 · new HC for Wolves Championship 26/27",
         "c": "Portugal"
       }
     ]
