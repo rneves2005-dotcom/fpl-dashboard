@@ -10,8 +10,8 @@
   "AVL": {
     "name": "Aston Villa",
     "manager": "Unai Emery (UEL champion · continuity)",
-    "discount": "1.0×",
-    "note": "",
+    "discount": "0.9×",
+    "note": "WC26 heat-map: 7-9 confirmed reps — Lindelöf (SWE C · starts v TUN tonight · from MUN Sep 2025), Konsa (ENG · plays Wed v CRO), McGinn (SCO · played 83min v HAI), Emiliano Martínez (ARG #1 GK · plays Tue v ALG), Watkins (ENG FW · plays Wed v CRO), Tielemans (BEL CM · plays Mon v EGY), Pau Torres (ESP CB · plays Mon v CPV). Possible additional: Maatsen (NED), Kamara (FRA), Buendía (ARG). Bailey (JAM) and Cash (POL) — nations didn't qualify. Onana (CMR) — also didn't qualify. Emery continuity but 7+ confirmed WC reps = 0.9× discount appropriate (down from 1.0×).",
     "db_club": "Aston Villa",
     "division": "Premier League"
   },
@@ -154,8 +154,8 @@
   "TOT": {
     "name": "Tottenham",
     "manager": "Roberto De Zerbi (3-4 games in) · IF SURVIVES",
-    "discount": "0.9×",
-    "note": "Multiple loan-status TBC for 26/27: Palhinha (Bayern, Sporting linked), Tel (Bayern?), Kolo Muani (PSG?). Cross-reference at late-June squad reveal.",
+    "discount": "0.85×",
+    "note": "WC26 heat-map: 9-11 confirmed reps — Porro (POR RB · new 5-yr ext until 2031 · plays Wed v COD), van de Ven (NED CB · played 90min v JPN), Bergvall (SWE MID · starts v TUN tonight), Romero (ARG CB · plays Tue v ALG), Kudus (GHA · plays Wed v PAN), Bentancur (URU CM · plays Mon v KSA), Sarr (SEN MID · plays Tue v FRA), Danso (AUT CB · plays Wed v JOR), Palhinha (POR CDM · likely on bench v COD Wed), Robertson (SCO LB · from LIV free · played 90min v HAI), possibly Kulusevski (SWE) on TUN bench. Frank under pressure for opener · 9+ reps + multiple deep-run nations (POR/ARG/NED/FRA) = heavy WC fatigue. 0.85× discount appropriate (down from 1.0×).",
     "db_club": "Tottenham Hotspur",
     "division": "Premier League"
   },
