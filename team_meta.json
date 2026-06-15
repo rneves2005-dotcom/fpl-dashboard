@@ -42,8 +42,8 @@
   "CHE": {
     "name": "Chelsea",
     "manager": "Xabi Alonso CONFIRMED (NEW · ex-Real Madrid · ex-Leverkusen)",
-    "discount": "0.8×",
-    "note": "Manager change: Maresca → Xabi Alonso CONFIRMED (coming from Real Madrid, where his system made Carreras a 9.5 MOTM LB). Possession-system rooted in his Leverkusen 24/25 title campaign. 8 WC reps (R.James, P.Neto, Hato, Cucurella, Enzo F., Gusto, Caicedo, M.Sarr · Lavia DROPPED from revised BEL squad). CHE-owned loanees (Páez, Penders, Jackson) not counted for PL fatigue. Apply 0.8× discount until Alonso's system + first-XI confirmed in pre-season friendlies. Cole Palmer (no WC fatigue · TUCHEL SNUB) + Caicedo central to whatever Alonso builds — both rested-premium opener candidates.",
+    "discount": "0.85×",
+    "note": "Manager change: Maresca → Xabi Alonso CONFIRMED. 🚨 CUCURELLA SOLD TO REAL MADRID Jun 15 2026 (€55m + €5m add-ons · contract to 2032 · Mourinho's first signing). Updated WC26 reps: 7 (Cucurella OUT) — R.James (ENG), P.Neto (POR), Hato (NED), Enzo F. (ARG), Gusto (FRA), Caicedo (ECU), M.Sarr (SEN). Lavia DROPPED from BEL revised squad. CHE-owned loanees (Páez, Penders, Jackson) not counted for PL fatigue. Apply 0.85× discount until Alonso's system + first-XI confirmed in pre-season friendlies (slight relief vs 0.8× due to Cucurella's departure). Cole Palmer (no WC fatigue · TUCHEL SNUB) + Caicedo central to whatever Alonso builds — both rested-premium opener candidates.",
     "db_club": "Chelsea",
     "division": "Premier League"
   },
@@ -59,7 +59,7 @@
     "name": "Crystal Palace",
     "manager": "Pierre Sage (STRONG RUMOR · ex-Lens · in negotiations) · Glasner leaving",
     "discount": "0.85×",
-    "note": "Manager change: Glasner confirmed leaving Palace. Pierre Sage (ex-Lens · ex-Lyon) in advanced negotiations — ready to say yes since last week per source. Sage's profile = vertical/transition football, similar to what made Lyon over-perform early in 24/25. Combined with 10 WC reps (sole 4th-heaviest — entire CRY first XI in WC service) = max compound risk. Apply 0.85× — could drop to 0.8× if Sage's PL learning curve adds variance.",
+    "note": "Manager change: Glasner confirmed leaving Palace. **Pierre Sage CONFIRMED as new HC since Tue Jun 11 · all docs in place** (Romano Jun 15). Sage's profile = vertical/transition football, similar to what made Lyon over-perform early 24/25. Combined with 10 WC reps (sole 4th-heaviest — entire CRY first XI in WC service) = max compound risk. Apply 0.85× — could drop to 0.8× if Sage's PL learning curve adds variance.",
     "db_club": "Crystal Palace F.C",
     "division": "Premier League"
   },
