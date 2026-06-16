@@ -15,6 +15,12 @@
         "from": "Manchester United (free)",
         "note": "CONFIRMED Sep 2025 · free transfer end of MUN contract · 2-yr deal + 3rd yr option · 31yo SWE CB · SWE captain · #3 at AVL",
         "c": "Sweden"
+      },
+      {
+        "n": "Modou Keba Cisse",
+        "from": "LASK",
+        "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £4.3m · CB · Austrian league",
+        "c": "LASK"
       }
     ],
     "Bournemouth": [
@@ -59,6 +65,24 @@
         "from": "Sporting",
         "note": "26/27 incoming — confirmed",
         "c": "Portugal"
+      },
+      {
+        "n": "Denner",
+        "from": "Corinthians",
+        "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £7.6m · LB · Brazilian youth",
+        "c": "Corinthians"
+      },
+      {
+        "n": "Emmanuel Emegha",
+        "from": "Strasbourg",
+        "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · undisclosed · ST · was on loan · permanent in 26/27",
+        "c": "Strasbourg"
+      },
+      {
+        "n": "Dastan Satpayev",
+        "from": "Kairat",
+        "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £3.5m · ST · Kazakh prodigy",
+        "c": "Kairat"
       }
     ],
     "Coventry City": [],
@@ -76,7 +100,14 @@
         "c": "France"
       }
     ],
-    "Everton": [],
+    "Everton": [
+      {
+        "n": "Merlin Röhl",
+        "from": "SC Freiburg",
+        "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £21.6m · AM · attacking mid",
+        "c": "SC Freiburg"
+      }
+    ],
     "Fulham": [],
     "Hull City A.F.C.": [],
     "Ipswich Town": [
@@ -91,6 +122,12 @@
         "from": "Stade Stade Reims",
         "note": "Confirmed 26/27 · CB · Ivorian (not in CIV WC squad)",
         "c": "Ivory Coast"
+      },
+      {
+        "n": "Cedric Kipre",
+        "from": "Reims",
+        "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £3.9m · CB · returning to England",
+        "c": "Reims"
       }
     ],
     "Leeds United": [
@@ -107,6 +144,12 @@
         "from": "Rennes",
         "note": "Confirmed 26/27",
         "c": "France"
+      },
+      {
+        "n": "Jeremy Jacquet",
+        "from": "Rennes",
+        "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £55m · CB · big signing · Iraola era",
+        "c": "Rennes"
       }
     ],
     "Manchester City": [
