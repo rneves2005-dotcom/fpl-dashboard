@@ -204,6 +204,7 @@ ANTI_WORDS = [
     " pga ", "ryder cup", "the masters tournament", "open championship golf",
     # Cycling
     "tour de france", "giro d'italia", "la vuelta", "uci cycling",
+    "van aert", "wout van aert", "tour2026", "ciclismo:", "cotovelo",
     # Combat sports
     " mma ", " ufc ", "boxing match",
     # Swimming/athletics
