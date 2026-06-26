@@ -11,7 +11,7 @@
     "name": "Aston Villa",
     "manager": "Unai Emery (UEL champion · continuity)",
     "discount": "0.9×",
-    "note": "WC26 heat-map: 7-9 confirmed reps — Lindelöf (SWE C · starts v TUN tonight · from MUN Sep 2025), Konsa (ENG · plays Wed v CRO), McGinn (SCO · played 83min v HAI), Emiliano Martínez (ARG #1 GK · plays Tue v ALG), Watkins (ENG FW · plays Wed v CRO), Tielemans (BEL CM · plays Mon v EGY), Pau Torres (ESP CB · plays Mon v CPV). Possible additional: Maatsen (NED), Kamara (FRA), Buendía (ARG). Bailey (JAM) and Cash (POL) — nations didn't qualify. Onana (CMR) — also didn't qualify. Emery continuity but 7+ confirmed WC reps = 0.9× discount appropriate (down from 1.0×).",
+    "note": "WC26 heat-map: 7-9 confirmed reps — Lindelöf (SWE C · starts v TUN tonight · from MUN Sep 2025), Konsa (ENG · plays Wed v CRO), McGinn (SCO · played 83min v HAI), Emiliano Martínez (ARG #1 GK · plays Tue v ALG), Watkins (ENG FW · plays Wed v CRO), Tielemans (BEL CM · plays Mon v EGY), Pau Torres (ESP CB · plays Mon v CPV). Possible additional: Maatsen (NED), Kamara (FRA), Buendía (ARG). Bailey (JAM) and Cash (POL) — nations didn't qualify. Onana (CMR) — also didn't qualify. Emery continuity but 7+ confirmed WC reps = 0.9× discount appropriate (down from 1.0×). · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 McGinn (SCO) back early · -1 fatigue",
     "db_club": "Aston Villa",
     "division": "Premier League"
   },
@@ -19,7 +19,7 @@
     "name": "Bournemouth",
     "manager": "Marco Rose (NEW)",
     "discount": "0.8×",
-    "note": "Manager change: Iraola → Marco Rose. Tactical reset · 0.8× discount until pre-season friendlies confirm system. BOU finished 6th in 25/26 (best-ever · first European qualification) — adds fixture load. WC26 reps: 5 confirmed — Tyler Adams (USA CDM · 90min v PAR + yellow), Ben Gannon Doak (SCO RW · £25m Aug 2025 · 75min v HAI), Ryan Christie (SCO MID · 3-yr ext Jun 13 · 15min v HAI), Rayan Vitor (BRA FWD · #37 from Vasco · BRA bench v MOR unused), Bafodé Diakité (CIV CB · BOU #18 prev Lille · CIV bench v ECU tonight). Heavy WC load + manager + European-cup fixture compound. 0.8× holds.",
+    "note": "Manager change: Iraola → Marco Rose. Tactical reset · 0.8× discount until pre-season friendlies confirm system. BOU finished 6th in 25/26 (best-ever · first European qualification) — adds fixture load. WC26 reps: 5 confirmed — Tyler Adams (USA CDM · 90min v PAR + yellow), Ben Gannon Doak (SCO RW · £25m Aug 2025 · 75min v HAI), Ryan Christie (SCO MID · 3-yr ext Jun 13 · 15min v HAI), Rayan Vitor (BRA FWD · #37 from Vasco · BRA bench v MOR unused), Bafodé Diakité (CIV CB · BOU #18 prev Lille · CIV bench v ECU tonight). Heavy WC load + manager + European-cup fixture compound. 0.8× holds. · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Christie + Gannon-Doak (SCO) back early · -2 fatigue (biggest single-club SCO benefit)",
     "db_club": "Bournemouth",
     "division": "Premier League"
   },
@@ -27,7 +27,7 @@
     "name": "Brentford",
     "manager": "assumed continuity",
     "discount": "0.95×",
-    "note": "WC26 reps: 2 confirmed starters from today/tonight — Igor Thiago (BRA FW #9 · starts v MOR Jun 13 in BRE shirt), Aaron Hickey (SCO RB #2 · starts v HAI tonight 21:00 EDT). Likely additional reps (in squad · WC selection probable): Sepp van den Berg (NED), Kevin Schade (GER), Dango Ouattara (CIV), Kristoffer Ajer (NOR), Mikkel Damsgaard (DEN). Caoimhin Kelleher (IRL) & Nathan Collins (IRL) — Ireland didn't qualify. If 4-5 likely confirm → BRE hits 6-7 WC reps · would justify 0.85× discount. Currently 0.95× holds (manager continuity assumed). · 🇭🇹 WISSA back early (HAI eliminated MD2 · fresh for 26/27) — heat-map -1 fatigue · ⚠️ CORRECTION: Wissa plays for DR Congo (COD) NOT Haiti · COD still alive MD3 vs UZB · NOT back early yet",
+    "note": "WC26 reps: 2 confirmed starters from today/tonight — Igor Thiago (BRA FW #9 · starts v MOR Jun 13 in BRE shirt), Aaron Hickey (SCO RB #2 · starts v HAI tonight 21:00 EDT). Likely additional reps (in squad · WC selection probable): Sepp van den Berg (NED), Kevin Schade (GER), Dango Ouattara (CIV), Kristoffer Ajer (NOR), Mikkel Damsgaard (DEN). Caoimhin Kelleher (IRL) & Nathan Collins (IRL) — Ireland didn't qualify. If 4-5 likely confirm → BRE hits 6-7 WC reps · would justify 0.85× discount. Currently 0.95× holds (manager continuity assumed). · 🇭🇹 WISSA back early (HAI eliminated MD2 · fresh for 26/27) — heat-map -1 fatigue · ⚠️ CORRECTION: Wissa plays for DR Congo (COD) NOT Haiti · COD still alive MD3 vs UZB · NOT back early yet · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Hickey (SCO) back early · -1 fatigue",
     "db_club": "Brentford",
     "division": "Premier League"
   },
@@ -67,7 +67,7 @@
     "name": "Everton",
     "manager": "Moyes (continuity)",
     "discount": "1.0×",
-    "note": "WC26 reps: 1 confirmed — Nathan Patterson (SCO RB · #2 at EVE · on bench v HAI tonight). Coleman + Gueye CONFIRMED leaving end of 25/26 — dropped EVE WC heat-map from 4 → 3 historically. Patterson the one current PL 26/27 WC active rep. 1.0× holds (continuity).",
+    "note": "WC26 reps: 1 confirmed — Nathan Patterson (SCO RB · #2 at EVE · on bench v HAI tonight). Coleman + Gueye CONFIRMED leaving end of 25/26 — dropped EVE WC heat-map from 4 → 3 historically. Patterson the one current PL 26/27 WC active rep. 1.0× holds (continuity). · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Patterson (SCO) back early · -1 fatigue",
     "db_club": "Everton",
     "division": "Premier League"
   },
@@ -91,7 +91,7 @@
     "name": "Ipswich (Promoted)",
     "manager": "Gary O'Neil (43 · appointed Jun 23 2026 · 3-yr deal · from Strasbourg)",
     "discount": "0.90×",
-    "note": "🆕 MANAGER CONFIRMED Jun 23 2026: Gary O'Neil (43) signs 3-yr deal · arrives from Strasbourg (took them to UEL semi 25/26). Replaces Kieran McKenna who stepped down Jun 10. Prior PL: BOU (kept up · DoF spat ended tenure) + Wolves (kept up 23/24 · sacked Dec 2024). Pragmatic mid-block 4-2-3-1 / 5-4-1 manager · defensive structure FIRST. FPL implication: IPS GK + CB likely value picks (clean sheet upside · O'Neil shape). Attacking returns less reliable except for nailed striker. WC26 reps: 1 (George Hirst SCO bench). Discount nudged to 0.90× (system known · 0 WC fatigue · biggest upside vs Jun 10 panic).",
+    "note": "🆕 MANAGER CONFIRMED Jun 23 2026: Gary O'Neil (43) signs 3-yr deal · arrives from Strasbourg (took them to UEL semi 25/26). Replaces Kieran McKenna who stepped down Jun 10. Prior PL: BOU (kept up · DoF spat ended tenure) + Wolves (kept up 23/24 · sacked Dec 2024). Pragmatic mid-block 4-2-3-1 / 5-4-1 manager · defensive structure FIRST. FPL implication: IPS GK + CB likely value picks (clean sheet upside · O'Neil shape). Attacking returns less reliable except for nailed striker. WC26 reps: 1 (George Hirst SCO bench). Discount nudged to 0.90× (system known · 0 WC fatigue · biggest upside vs Jun 10 panic). · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Hirst (SCO) back early from WC (SCO eliminated group C) · -1 fatigue",
     "db_club": "Ipswich Town",
     "division": "Premier League"
   },
@@ -123,7 +123,7 @@
     "name": "Man Utd",
     "manager": "Michael Carrick (permanent)",
     "discount": "0.85×",
-    "note": "Carrick rebuild + Casemiro CONFIRMED leaving (destination TBD) + Rashford RETURNING from Barcelona loan. 12 WC reps (Mainoo, Rashford, Bruno F., Dalot, Cunha, L.Martínez, Mazraoui, Lammens, Ugarte, Bayindir, Amad, T.Fletcher) = sole 3rd-heaviest behind MCI 17/ARS 15. RB hierarchy under Carrick: Dalot > Mazraoui. 🆕 RESTED PREMIUM: Mbeumo (CMR didn't qualify) = full pre-season rest, zero WC fatigue — likely Carrick's preferred wide attacker. Apply 0.85× cluster but Mbeumo himself is exempt. · 🇹🇳 Hannibal back early (TUN eliminated · loan likely 26/27) · 🚨 GK SITUATION: Lammens (BEL · 2880 mins 32 starts 25/26) is MUN #1 GK · Bayındır (TUR · 540 mins · backup) · Onana LOAN to Trabzonspor · Lammens fatigue depends on BEL WC depth",
+    "note": "Carrick rebuild + Casemiro CONFIRMED leaving (destination TBD) + Rashford RETURNING from Barcelona loan. 12 WC reps (Mainoo, Rashford, Bruno F., Dalot, Cunha, L.Martínez, Mazraoui, Lammens, Ugarte, Bayindir, Amad, T.Fletcher) = sole 3rd-heaviest behind MCI 17/ARS 15. RB hierarchy under Carrick: Dalot > Mazraoui. 🆕 RESTED PREMIUM: Mbeumo (CMR didn't qualify) = full pre-season rest, zero WC fatigue — likely Carrick's preferred wide attacker. Apply 0.85× cluster but Mbeumo himself is exempt. · 🇹🇳 Hannibal back early (TUN eliminated · loan likely 26/27) · 🚨 GK SITUATION: Lammens (BEL · 2880 mins 32 starts 25/26) is MUN #1 GK · Bayındır (TUR · 540 mins · backup) · Onana LOAN to Trabzonspor · Lammens fatigue depends on BEL WC depth · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Fletcher (SCO) back early · -1 fatigue",
     "db_club": "Manchester United",
     "division": "Premier League"
   },
@@ -139,7 +139,7 @@
     "name": "Nott'm Forest",
     "manager": "Vítor Pereira (continuity · in role since ~Feb 2026 · half-season pedigree)",
     "discount": "1.0×",
-    "note": "Vítor Pereira (Portuguese · ex-FC Porto · ex-Wolves) has been Forest manager since ~Feb 2026. Half-season already played under him → continuity for 26/27 (Nuno Espírito Santo left mid-25/26, now at WHU Championship). 4 WC reps confirmed: E.Anderson (ENG), Ndoye (SUI · played QAT v SUI), Sangaré (CIV · bench v ECU), Chris Wood (NZL · starts v IRN Mon). Gunn SCO RELEASED (only 1 sub app entire 25/26). Sels remains nailed #1 GK + rested-premium gold pick. Boly leaving CB depth. NFO opener prep manageable · Sels gold-pick status stays.",
+    "note": "Vítor Pereira (Portuguese · ex-FC Porto · ex-Wolves) has been Forest manager since ~Feb 2026. Half-season already played under him → continuity for 26/27 (Nuno Espírito Santo left mid-25/26, now at WHU Championship). 4 WC reps confirmed: E.Anderson (ENG), Ndoye (SUI · played QAT v SUI), Sangaré (CIV · bench v ECU), Chris Wood (NZL · starts v IRN Mon). Gunn SCO RELEASED (only 1 sub app entire 25/26). Sels remains nailed #1 GK + rested-premium gold pick. Boly leaving CB depth. NFO opener prep manageable · Sels gold-pick status stays. · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Gunn (SCO · backup GK) back early",
     "db_club": "Nottingham Forest",
     "division": "Premier League"
   },
@@ -155,7 +155,7 @@
     "name": "Tottenham",
     "manager": "Roberto De Zerbi (3-4 games in) · IF SURVIVES",
     "discount": "0.85×",
-    "note": "WC26 heat-map: 9-11 confirmed reps — Porro (POR RB · new 5-yr ext until 2031 · plays Wed v COD), van de Ven (NED CB · played 90min v JPN), Bergvall (SWE MID · starts v TUN tonight), Romero (ARG CB · plays Tue v ALG), Kudus (GHA · plays Wed v PAN), Bentancur (URU CM · plays Mon v KSA), Sarr (SEN MID · plays Tue v FRA), Danso (AUT CB · plays Wed v JOR), Palhinha (POR CDM · likely on bench v COD Wed), Robertson (SCO LB · from LIV free · played 90min v HAI), possibly Kulusevski (SWE) on TUN bench. Frank under pressure for opener · 9+ reps + multiple deep-run nations (POR/ARG/NED/FRA) = heavy WC fatigue. 0.85× discount appropriate (down from 1.0×).",
+    "note": "WC26 heat-map: 9-11 confirmed reps — Porro (POR RB · new 5-yr ext until 2031 · plays Wed v COD), van de Ven (NED CB · played 90min v JPN), Bergvall (SWE MID · starts v TUN tonight), Romero (ARG CB · plays Tue v ALG), Kudus (GHA · plays Wed v PAN), Bentancur (URU CM · plays Mon v KSA), Sarr (SEN MID · plays Tue v FRA), Danso (AUT CB · plays Wed v JOR), Palhinha (POR CDM · likely on bench v COD Wed), Robertson (SCO LB · from LIV free · played 90min v HAI), possibly Kulusevski (SWE) on TUN bench. Frank under pressure for opener · 9+ reps + multiple deep-run nations (POR/ARG/NED/FRA) = heavy WC fatigue. 0.85× discount appropriate (down from 1.0×). · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Robertson (SCO · new TOT signing) back early · fresh pre-season",
     "db_club": "Tottenham Hotspur",
     "division": "Premier League"
   },
