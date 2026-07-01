@@ -59,7 +59,7 @@
     "name": "Crystal Palace",
     "manager": "Pierre Sage (STRONG RUMOR · ex-Lens · in negotiations) · Glasner leaving",
     "discount": "0.85×",
-    "note": "Manager change: Glasner confirmed leaving Palace. **Pierre Sage CONFIRMED as new HC since Tue Jun 11 · all docs in place** (Romano Jun 15). Sage's profile = vertical/transition football, similar to what made Lyon over-perform early 24/25. Combined with 10 WC reps (sole 4th-heaviest — entire CRY first XI in WC service) = max compound risk. Apply 0.85× — could drop to 0.8× if Sage's PL learning curve adds variance.",
+    "note": "Manager change: Glasner confirmed leaving Palace. **Pierre Sage CONFIRMED as new HC since Tue Jun 11 · all docs in place** (Romano Jun 15). Sage's profile = vertical/transition football, similar to what made Lyon over-perform early 24/25. Combined with 10 WC reps (sole 4th-heaviest — entire CRY first XI in WC service) = max compound risk. Apply 0.85× — could drop to 0.8× if Sage's PL learning curve adds variance. · 🇸🇳 Ismaïla Sarr (SEN) back early (SEN eliminated R32)",
     "db_club": "Crystal Palace F.C",
     "division": "Premier League"
   },
@@ -67,7 +67,7 @@
     "name": "Everton",
     "manager": "Moyes (continuity)",
     "discount": "1.0×",
-    "note": "WC26 reps: 1 confirmed — Nathan Patterson (SCO RB · #2 at EVE · on bench v HAI tonight). Coleman + Gueye CONFIRMED leaving end of 25/26 — dropped EVE WC heat-map from 4 → 3 historically. Patterson the one current PL 26/27 WC active rep. 1.0× holds (continuity). · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Patterson (SCO) back early · -1 fatigue · ✅ OFFICIAL Jun 26: Merlin Röhl permanent from Freiburg · £20m (was on LOAN since Sep 2025 · obligation-to-buy triggered by EVE PL survival · was already EVE MID 25/26 · NOT new arrival)",
+    "note": "WC26 reps: 1 confirmed — Nathan Patterson (SCO RB · #2 at EVE · on bench v HAI tonight). Coleman + Gueye CONFIRMED leaving end of 25/26 — dropped EVE WC heat-map from 4 → 3 historically. Patterson the one current PL 26/27 WC active rep. 1.0× holds (continuity). · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Patterson (SCO) back early · -1 fatigue · ✅ OFFICIAL Jun 26: Merlin Röhl permanent from Freiburg · £20m (was on LOAN since Sep 2025 · obligation-to-buy triggered by EVE PL survival · was already EVE MID 25/26 · NOT new arrival) · 🇸🇳 Gueye + Ndiaye (SEN) back early ×2 (SEN eliminated R32)",
     "db_club": "Everton",
     "division": "Premier League"
   },
@@ -147,7 +147,7 @@
     "name": "Sunderland",
     "manager": "continuity",
     "discount": "0.9×",
-    "note": "SUN was in PL 25/26 (not promoted · clarified Jun 2026). Per official club news Jun 2026: 9 WC reps across 4 continents (Diarra SEN, Xhaka SUI captain, Brobbey + Roefs NED, Alderete PAR, Talbi MAR, Isidor HAI, Angulo ECU, Sadiki COD). Loanees Masuaku (Lens) + Adingra (Monaco) NOT counted unless return. 4th-heaviest tied with CHE/AVL. Apply 0.9× — no longer a 'clean continuity' target. · 🇭🇹 Wilson Isidor (HAI) back early from WC (HAI eliminated MD2 · 0 pts) — fresh for SUN 26/27 pre-season · -1 fatigue",
+    "note": "SUN was in PL 25/26 (not promoted · clarified Jun 2026). Per official club news Jun 2026: 9 WC reps across 4 continents (Diarra SEN, Xhaka SUI captain, Brobbey + Roefs NED, Alderete PAR, Talbi MAR, Isidor HAI, Angulo ECU, Sadiki COD). Loanees Masuaku (Lens) + Adingra (Monaco) NOT counted unless return. 4th-heaviest tied with CHE/AVL. Apply 0.9× — no longer a 'clean continuity' target. · 🇭🇹 Wilson Isidor (HAI) back early from WC (HAI eliminated MD2 · 0 pts) — fresh for SUN 26/27 pre-season · -1 fatigue · 🇸🇳 Diarra (SEN) back early (SEN eliminated R32)",
     "db_club": "Sunderland A.F.C.",
     "division": "Premier League"
   },
@@ -155,7 +155,7 @@
     "name": "Tottenham",
     "manager": "Roberto De Zerbi (3-4 games in) · IF SURVIVES",
     "discount": "0.85×",
-    "note": "WC26 heat-map: 9-11 confirmed reps — Porro (POR RB · new 5-yr ext until 2031 · plays Wed v COD), van de Ven (NED CB · played 90min v JPN), Bergvall (SWE MID · starts v TUN tonight), Romero (ARG CB · plays Tue v ALG), Kudus (GHA · plays Wed v PAN), Bentancur (URU CM · plays Mon v KSA), Sarr (SEN MID · plays Tue v FRA), Danso (AUT CB · plays Wed v JOR), Palhinha (POR CDM · likely on bench v COD Wed), Robertson (SCO LB · from LIV free · played 90min v HAI), possibly Kulusevski (SWE) on TUN bench. Frank under pressure for opener · 9+ reps + multiple deep-run nations (POR/ARG/NED/FRA) = heavy WC fatigue. 0.85× discount appropriate (down from 1.0×). · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Robertson (SCO · new TOT signing) back early · fresh pre-season · 🇺🇾 Bentancur (URU) back early (URU eliminated MD3) · -1 fatigue · 🟡 WATCH (HWG · not yet OFICIAL): Mateus Fernandes £85m club-record from Sporting",
+    "note": "WC26 heat-map: 9-11 confirmed reps — Porro (POR RB · new 5-yr ext until 2031 · plays Wed v COD), van de Ven (NED CB · played 90min v JPN), Bergvall (SWE MID · starts v TUN tonight), Romero (ARG CB · plays Tue v ALG), Kudus (GHA · plays Wed v PAN), Bentancur (URU CM · plays Mon v KSA), Sarr (SEN MID · plays Tue v FRA), Danso (AUT CB · plays Wed v JOR), Palhinha (POR CDM · likely on bench v COD Wed), Robertson (SCO LB · from LIV free · played 90min v HAI), possibly Kulusevski (SWE) on TUN bench. Frank under pressure for opener · 9+ reps + multiple deep-run nations (POR/ARG/NED/FRA) = heavy WC fatigue. 0.85× discount appropriate (down from 1.0×). · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Robertson (SCO · new TOT signing) back early · fresh pre-season · 🇺🇾 Bentancur (URU) back early (URU eliminated MD3) · -1 fatigue · 🟡 WATCH (HWG · not yet OFICIAL): Mateus Fernandes £85m club-record from Sporting · 🇸🇳 P.M.Sarr (SEN) back early (SEN eliminated R32)",
     "db_club": "Tottenham Hotspur",
     "division": "Premier League"
   },
