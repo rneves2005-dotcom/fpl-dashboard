@@ -376,7 +376,7 @@ def poll_premier_league() -> list[dict[str, Any]]:
     # Discover all club playlists
     club_playlists = []
     for it in parent.get("items", []):
-        resp = it.get("response", {})
+        resp = it.get("response") or {}
         title = resp.get("title", "") or ""
         # Title format: "Summer 2026 - Transfer Centre - <CLUB>" or similar
         if "Transfer Centre" in title:
@@ -394,7 +394,7 @@ def poll_premier_league() -> list[dict[str, Any]]:
             continue
 
         for it in club_data.get("items", []):
-            resp = it.get("response", {})
+            resp = it.get("response") or {}
             player = resp.get("title", "") or ""
             description = resp.get("description", "") or ""
 
