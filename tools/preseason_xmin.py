@@ -76,19 +76,42 @@ def find_player(elements, teams, name, club_id=None):
     resolving to Palace's Chris Richards, 0 mins vs 2825) — never do that again.
     """
     n = norm(name)
-    pool_elements = [e for e in elements if e["team"] == club_id] if club_id else elements
-    cands = []
-    for e in pool_elements:
-        pool = [
-            norm(e.get("second_name", "")),
-            norm(e.get("web_name", "")),
-            norm(f"{e.get('first_name','')} {e.get('second_name','')}"),
-        ]
-        if any(n == p for p in pool) or any(n in p and len(n) > 4 for p in pool):
-            cands.append(e)
-    if not cands:
-        return None
-    return max(cands, key=lambda e: e["minutes"])
+
+    def scan(pool_elements):
+        out = []
+        for e in pool_elements:
+            pool = [
+                norm(e.get("second_name", "")),
+                norm(e.get("web_name", "")),
+                norm(f"{e.get('first_name','')} {e.get('second_name','')}"),
+            ]
+            if any(n == p for p in pool) or any(n in p and len(n) > 4 for p in pool):
+                out.append(e)
+        return out
+
+    if club_id:
+        cands = scan([e for e in elements if e["team"] == club_id])
+        if cands:
+            return max(cands, key=lambda e: e["minutes"]), False
+        # No one at this club matches. During a transfer window the player may be
+        # a new signing still listed at his OLD club in the 25/26 dataset, so fall
+        # back league-wide — but FLAG it so it's never read as a same-club fact.
+        #
+        # GUARD: only attempt this for MULTI-TOKEN names ("Andrey Santos"). A bare
+        # surname is far too ambiguous across 20 squads — "Williams" wrongly
+        # resolved to Forest's Neco Williams when the real player was a United
+        # academy kid. Single-surname misses stay unresolved by design.
+        if len(n.split()) < 2:
+            return None, False
+        cands = [e for e in scan(elements)
+                 if norm(f"{e.get('first_name','')} {e.get('second_name','')}") == n
+                 or norm(e.get("web_name", "")) == n]
+        if cands:
+            return max(cands, key=lambda e: e["minutes"]), True
+        return None, False
+
+    cands = scan(elements)
+    return (max(cands, key=lambda e: e["minutes"]), False) if cands else (None, False)
 
 
 def main():
@@ -131,17 +154,20 @@ def main():
     rows = []
     for group, raw in (("XI", a.xi), ("SUB", a.subs)):
         for name in [x.strip() for x in raw.split(",") if x.strip()]:
-            e = find_player(elements, teams, name, club_id)
+            e, other_club = find_player(elements, teams, name, club_id)
             found = e is not None
             starts = e["starts"] if found else 0
             mins = e["minutes"] if found else 0
             tag, why = classify(starts, mins, found)
+            if found and other_club:
+                why = f"⚠️ NEW SIGNING — 25/26 stats are from {teams[e['team']]}"
             rows.append({
                 "name": name, "group": group,
                 "pos": POS.get(e["element_type"]) if found else "?",
                 "mins_2526": mins, "starts_2526": starts,
                 "goals": scorers.get(norm(name), 0),
                 "tag": tag, "note": why,
+                "from_other_club": teams[e["team"]] if (found and other_club) else None,
             })
 
     print(f"\n=== {a.club} vs {a.opponent} · {a.date} — pre-season xMin triage ===")
