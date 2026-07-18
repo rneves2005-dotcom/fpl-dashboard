@@ -462,5 +462,252 @@
         "note": "academy/deep bench — ignore for FPL"
       }
     ]
+  },
+  {
+    "club": "NFO",
+    "opponent": "Notts County",
+    "date": "2026-07-18",
+    "players": [
+      {
+        "name": "Sels",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 2667,
+        "starts_2526": 30,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "Aina",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 1587,
+        "starts_2526": 18,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation"
+      },
+      {
+        "name": "Cunha",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 514,
+        "starts_2526": 6,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Gibbs-White",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 3101,
+        "starts_2526": 35,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "Hutchinson",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1676,
+        "starts_2526": 17,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation"
+      },
+      {
+        "name": "Igor Jesus",
+        "group": "XI",
+        "pos": "FWD",
+        "mins_2526": 2293,
+        "starts_2526": 28,
+        "goals": 1,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "McAtee",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 288,
+        "starts_2526": 2,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Milenkovic",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 3375,
+        "starts_2526": 37,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "Morato",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 1340,
+        "starts_2526": 14,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Williams",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 3203,
+        "starts_2526": 36,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "Yates",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 602,
+        "starts_2526": 2,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Abbott",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 165,
+        "starts_2526": 2,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Awoniyi",
+        "group": "SUB",
+        "pos": "FWD",
+        "mins_2526": 480,
+        "starts_2526": 3,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Bakwa",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 549,
+        "starts_2526": 6,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Bindon",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "da Silva Moreira",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Dominguez",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 1168,
+        "starts_2526": 17,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation"
+      },
+      {
+        "name": "John Victor",
+        "group": "SUB",
+        "pos": "GK",
+        "mins_2526": 437,
+        "starts_2526": 5,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Kalimuendo",
+        "group": "SUB",
+        "pos": "FWD",
+        "mins_2526": 89,
+        "starts_2526": 0,
+        "goals": 1,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "McDonnell",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Netz",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 353,
+        "starts_2526": 3,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Richards",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Sinclair",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Thompson",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      }
+    ]
   }
 ]

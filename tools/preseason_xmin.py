@@ -17,6 +17,7 @@ import json
 import os
 import sys
 import argparse
+import unicodedata
 import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -42,9 +43,14 @@ def load_bootstrap(refresh=False):
     return d
 
 
+def strip_accents(s):
+    """Milenković -> Milenkovic, Sangaré -> Sangare."""
+    return "".join(c for c in unicodedata.normalize("NFKD", s) if not unicodedata.combining(c))
+
+
 def norm(s):
-    """Strip trailing initials/periods and lowercase for matching."""
-    s = s.strip().rstrip(".")
+    """Strip accents + trailing initials/periods, lowercase, for matching."""
+    s = strip_accents(s).strip().rstrip(".")
     parts = [p for p in s.split() if not (len(p.rstrip(".")) == 1)]
     return " ".join(parts).lower() if parts else s.lower()
 
@@ -63,9 +69,16 @@ def classify(starts, mins, found):
 
 
 def find_player(elements, teams, name, club_id=None):
+    """Resolve a name to an FPL player.
+
+    STRICT on club: if club_id is known we ONLY match within that club. Matching
+    across clubs silently produced false positives (e.g. Forest's Omar Richards
+    resolving to Palace's Chris Richards, 0 mins vs 2825) — never do that again.
+    """
     n = norm(name)
+    pool_elements = [e for e in elements if e["team"] == club_id] if club_id else elements
     cands = []
-    for e in elements:
+    for e in pool_elements:
         pool = [
             norm(e.get("second_name", "")),
             norm(e.get("web_name", "")),
@@ -75,10 +88,6 @@ def find_player(elements, teams, name, club_id=None):
             cands.append(e)
     if not cands:
         return None
-    if club_id:
-        same = [e for e in cands if e["team"] == club_id]
-        if same:
-            cands = same
     return max(cands, key=lambda e: e["minutes"])
 
 
@@ -96,12 +105,23 @@ def main():
     d = load_bootstrap(a.refresh)
     elements, teams = d["elements"], {t["id"]: t["name"] for t in d["teams"]}
 
-    # resolve club id loosely from the code/name
+    # Resolve club via FPL's own short_name (CRY/EVE/NFO/...) — fuzzy name
+    # matching silently failed for "NFO" vs "Nott'm Forest", which disabled the
+    # club filter entirely and produced cross-club false matches.
     club_id = None
     for t in d["teams"]:
-        if a.club.lower() in t["name"].lower() or t["name"].lower().startswith(a.club.lower()[:3]):
+        if t.get("short_name", "").lower() == a.club.lower():
             club_id = t["id"]
             break
+    if club_id is None:
+        for t in d["teams"]:
+            if a.club.lower() in t["name"].lower():
+                club_id = t["id"]
+                break
+    if club_id is None:
+        codes = ", ".join(sorted(t.get("short_name", "") for t in d["teams"]))
+        sys.exit(f"ERROR: club '{a.club}' not recognised. Valid codes: {codes}")
+    print(f"[club resolved: {teams[club_id]} — matching restricted to this squad]")
 
     scorers = {}
     for tok in [s for s in a.scorers.split(",") if s.strip()]:
