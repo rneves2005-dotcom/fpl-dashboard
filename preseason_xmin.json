@@ -1,0 +1,239 @@
+[
+  {
+    "club": "CRY",
+    "opponent": "Swindon",
+    "date": "2026-07-18",
+    "players": [
+      {
+        "name": "Benitez",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 90,
+        "starts_2526": 1,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "King",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Mingueza",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Mitchell",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 3253,
+        "starts_2526": 36,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "Rak-Sakyi",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Ozoh",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Nketiah",
+        "group": "XI",
+        "pos": "FWD",
+        "mins_2526": 414,
+        "starts_2526": 2,
+        "goals": 2,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Hughes",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1560,
+        "starts_2526": 19,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation"
+      },
+      {
+        "name": "Walker-Smith",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Adaramola",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Esse",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 40,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Jemide",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Matthews",
+        "group": "SUB",
+        "pos": "GK",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Devenny",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 785,
+        "starts_2526": 7,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Cardines",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 90,
+        "starts_2526": 1,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Benamar",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Canvot",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 1331,
+        "starts_2526": 14,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Johnson",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 1710,
+        "starts_2526": 19,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation"
+      },
+      {
+        "name": "Matheus Franca",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 3,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Drakes-Thomas",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 7,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Sosa",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 99,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Doucoure",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Imray",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      }
+    ]
+  }
+]
