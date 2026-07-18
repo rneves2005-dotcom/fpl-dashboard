@@ -235,5 +235,232 @@
         "note": "academy/deep bench — ignore for FPL"
       }
     ]
+  },
+  {
+    "club": "EVE",
+    "opponent": "Dundee",
+    "date": "2026-07-18",
+    "players": [
+      {
+        "name": "Travers",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "O'Brien",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 3118,
+        "starts_2526": 35,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "Keane",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 2588,
+        "starts_2526": 29,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "Aznou",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Rohl",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Dewsbury-Hall",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 2629,
+        "starts_2526": 30,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "Iroegbunam",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1477,
+        "starts_2526": 17,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation"
+      },
+      {
+        "name": "Armstrong",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 524,
+        "starts_2526": 6,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Dibling",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 349,
+        "starts_2526": 4,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "George",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 351,
+        "starts_2526": 1,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Beto",
+        "group": "XI",
+        "pos": "FWD",
+        "mins_2526": 1551,
+        "starts_2526": 17,
+        "goals": 1,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation"
+      },
+      {
+        "name": "King",
+        "group": "SUB",
+        "pos": "GK",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Tarkowski",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 3330,
+        "starts_2526": 37,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter"
+      },
+      {
+        "name": "McNeil",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 1161,
+        "starts_2526": 14,
+        "goals": 1,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Alcaraz",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 679,
+        "starts_2526": 6,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE"
+      },
+      {
+        "name": "Barry",
+        "group": "SUB",
+        "pos": "FWD",
+        "mins_2526": 1898,
+        "starts_2526": 21,
+        "goals": 1,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation"
+      },
+      {
+        "name": "Campbell",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Finney",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Tamen",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      },
+      {
+        "name": "Foster",
+        "group": "SUB",
+        "pos": "FWD",
+        "mins_2526": 1361,
+        "starts_2526": 15,
+        "goals": 1,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation"
+      },
+      {
+        "name": "Olayiwola",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy"
+      },
+      {
+        "name": "Graham",
+        "group": "SUB",
+        "pos": "FWD",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL"
+      }
+    ]
   }
 ]
