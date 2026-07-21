@@ -1143,5 +1143,254 @@
         "from_other_club": null
       }
     ]
+  },
+  {
+    "club": "AVL",
+    "opponent": "Walsall",
+    "date": "2026-07-21",
+    "players": [
+      {
+        "name": "Gauci",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Bailey",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 450,
+        "starts_2526": 3,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Barkley",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 844,
+        "starts_2526": 7,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Bogarde",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 1042,
+        "starts_2526": 11,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Buendia",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1753,
+        "starts_2526": 21,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Carroll",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Cisse",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Hemmings",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 25,
+        "starts_2526": 0,
+        "goals": 1,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Maatsen",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 1590,
+        "starts_2526": 17,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Madjo",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 2,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Nedeljkovic",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Alysson",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 47,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Borland",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 1,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Burrowes",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 16,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Cash",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 3016,
+        "starts_2526": 34,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "Iling Junior",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Jimoh-Aloba",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 8,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Joao Gomes",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Lynch",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 1,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Mings",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 1322,
+        "starts_2526": 15,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Rowe",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Wright",
+        "group": "SUB",
+        "pos": "GK",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      }
+    ]
   }
 ]
