@@ -43,14 +43,14 @@ Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4
 ### GK (2)
 | # | Player | Club | Price | Status | Note |
 |---|---|---|---|---|---|
-| 1 | **Sels** | NFO | ~5.0 est | 🟢 | Nailed, back-3 CS, GW1 v Leeds 🟢 · **[NFO 1/3]** |
-| 2 | 🔲 bench GK | — | ~4.0 | 🔲 | Cheapest playing #2 — TBC on prices |
+| 1 | **Raya** | ARS | £6.2 (25/26) | 🟢 | **#1 GK 25/26 — 162 pts, +19 on the field** · 19 CS / 37 st (51%) · nailed · FRESH (ESP WC backup, barely played) · **SET-AND-FORGET all-season CS anchor** · **[ARS 1/3]** |
+| 2 | 🔲 bench GK | — | ~4.0 | 🔲 | Cheapest NON-playing #2 (never used behind Raya) — TBC |
 
 ### DEF (5)
 | # | Player | Club | Price | Status | Note |
 |---|---|---|---|---|---|
 | 1 | **Neco Williams** | NFO | ~5.0 est | 🟢 | Attacking WB (confirmed) · BPS-favoured · GW1 v Leeds 🟢 · **[NFO 2/3]** |
-| 2 | **Mosquera** | ARS | ~4.5 TBD | 🟢⏳ | Cheap CB off Saliba injury · soft ARS run (Cov/Sun/Leeds) · fresh · GW1 starter. Watch Mosquera-vs-Hincapié + price |
+| 2 | **Mosquera** | ARS | ~4.5 TBD | 🟢⏳ | Cheap CB off Saliba injury · soft ARS run (Cov/Sun/Leeds) · fresh · **ARS CS DOUBLE-UP with Raya** (each shutout pays twice). Watch Mosquera-vs-Hincapié + price · **[ARS 2/3]** |
 | 3 | **Shaw** | MUN | ~5.0 est | 🟢 | Nailed LB (38 st), FRESH (no WC), easy MUN openers (Hull/Ipswich) · **[MUN 3/3]** |
 | 4 | 🔲 cheap DEF | — | ~4.0 | 🔲 | Bench enabler — nailed + fresh, TBC |
 | 5 | 🔲 cheap DEF | — | ~4.0 | 🔲 | Bench enabler — TBC |
@@ -69,10 +69,10 @@ Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4
 |---|---|---|---|---|---|
 | 1 | **Haaland** | MCI | £15.5 ✅ | 🟡 | Anchor · GW1 v BOU 🟢 · Norway QF fatigue = monitor minutes but keep · **[MCI 1/3]** |
 | 2 | **Watkins** | AVL | ~9.0 est | 🟢 | THE Villa attacker · light WC load · fixtures ease from GW3 |
-| 3 | **Igor Jesus** | NFO | ~5.5 est | 🟢 | Budget striker, nailed, scored pre-season, GW1 v Leeds 🟢 · **[NFO 3/3]** |
+| 3 | **Igor Jesus** | NFO | ~5.5 est | 🟢 | Budget striker, nailed, scored pre-season, GW1 v Leeds 🟢 · **[NFO 2/3]** |
 
-**Budget frame:** confident 9 ≈ £69.5m (est) → ~£30.5m for the 6 enablers = comfortable; spare goes to upgrading a cheap MID to a nailed ~6.0-6.5.
-**Caps used:** MUN 3 (Bruno/Mbeumo/Shaw) · NFO 3 (Sels/Williams/Igor Jesus) — both maxed.
+**Budget frame:** confident 10 ≈ £70.7m (Raya real £6.2) + bench GK £4.0 → ~£25m for 5 enablers (2 DEF + 3 MID) = comfortable; spare upgrades a cheap MID to ~6.0-6.5.
+**Caps used:** MUN 3 (Bruno/Mbeumo/Shaw) · **ARS 2** (Raya/Mosquera — CS double-up, 1 slot free) · **NFO 2** (Williams/Igor Jesus — Sels dropped for Raya → 1 Forest slot FREED, e.g. Gibbs-White as a cheap MID, or leave lean given NFO's no-manager disarray).
 
 ## 🃏 GW4-WILDCARD SHORTLIST (deferred until roles/minutes confirm)
 | Player | Trigger to promote |
@@ -87,11 +87,9 @@ Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4
 
 ---
 
-## 🚨 KEY DECISION: the Forest cap
-Forest is our strongest value hub — **but max 3/club** forces choosing 3 of:
-**Sels (GK) · Neco Williams (WB) · Igor Jesus (FWD) · Gibbs-White (MID) · Diomande (CB, if signs)**
-- v0.1 default: **Sels + Neco Williams + Igor Jesus** (CS + attacking-WB + budget striker — a cheap value triple)
-- Alternatives: swap Igor Jesus → Gibbs-White (creativity) or → Diomande (if he signs, cheap CB w/ pre-cleared minutes)
+## 🚨 KEY DECISION: the Forest cap (now only 2 used — Raya freed the GK slot)
+With **Raya** as GK (not Sels), Forest drops to **Neco Williams + Igor Jesus (2/3)** → 1 slot free.
+Options for the freed slot: **Gibbs-White** (MID creativity, fills a cheap-MID slot) or **Diomande** (CB, if he signs) — OR leave it and stay lean, since NFO are in disarray (no manager after Pereira out + Anderson sold €135m → heavy discount on all Forest assets). Default: **hold the slot open**, revisit at GW4-WC.
 
 ## ⛔ FADE for GW1 (do NOT pick)
 - **Saliba** (extended injury)
