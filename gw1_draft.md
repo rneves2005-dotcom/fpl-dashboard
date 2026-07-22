@@ -52,7 +52,7 @@ Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4
 | 1 | **Neco Williams** | NFO | ~5.0 est | 🟢 | Attacking WB (confirmed) · BPS-favoured · GW1 v Leeds 🟢 · **[NFO 2/3]** |
 | 2 | **Mosquera** | ARS | ~4.5 TBD | 🟢⏳ | Cheap CB off Saliba injury · soft ARS run (Cov/Sun/Leeds) · fresh · **ARS CS DOUBLE-UP with Raya** (each shutout pays twice). Watch Mosquera-vs-Hincapié + price · **[ARS 2/3]** |
 | 3 | **Shaw** | MUN | ~5.0 est | 🟢 | Nailed LB (38 st), FRESH (no WC), easy MUN openers (Hull/Ipswich) · **[MUN 3/3]** |
-| 4 | 🔲 (Mukiele SUN?) | ~5.0 est | 🔲 | **Nordi Mukiele** — FRESH (FRA, no WC) + nailed (32st) + **151 pts** 25/26. A cheap DEF that SCORES (not fodder). Confirm permanent (PSG loan) + price |
+| 4 | **Mukiele** (SUN) | ~5.0 est | 🟢⏳ | FRESH (FRA, no WC) + nailed (32st) + **151 pts** 25/26 (DEF that SCORES) · ✅ PERMANENT (£12M from PSG 2025). Only price + CS-fixtures TBC (SUN defence may regress yr 2) |
 | 5 | 🔲 (Rodon LEE?) | ~3.9 est | 🔲 | Cheapest-playing-DEF ENABLER candidate (LEE, nailed 33st) — bench fodder, NOT a CS source (Leeds leaky, 6-7 CS). Confirm nailed+price 26/27 |
 
 ### MID (5)
@@ -60,7 +60,7 @@ Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4
 |---|---|---|---|---|---|
 | 1 | **Bruno Fernandes** | MUN | £12.0 ✅ | 🟢 | Premium, 235 pts · fresh-ish (POR early exit) · easy openers · **[MUN 1/3]** |
 | 2 | **Mbeumo** | MUN | ~8.0 est | 🟢 | FRESH (CMR didn't qualify) · best fixture run · **[MUN 2/3]** |
-| 3 | 🔲 (Le Fée SUN?) | ~5.5 est | 🔲 | **Enzo Le Fée** — FRESH (FRA, no WC) + nailed (33st) + **147 pts** 25/26. Starts GW1 ahead of tired returnees. Confirm permanent (Roma loan) + price + SUN fixtures |
+| 3 | **Le Fée** (SUN) | ~5.5 est | 🟢⏳ | FRESH (FRA, no WC) + nailed (33st) + **147 pts** 25/26 · ✅ PERMANENT (£23M from Roma 2025 — club invested = minutes secure). Starts GW1 ahead of tired returnees. Only price + SUN fixtures TBC |
 | 4 | 🔲 fresh cheap MID | — | ~5.0 | 🔲 | Bench enabler — TBC |
 | 5 | 🔲 cheap MID | — | ~4.5 | 🔲 | Bench enabler — TBC |
 
