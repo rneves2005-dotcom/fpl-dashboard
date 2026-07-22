@@ -37,38 +37,53 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 4. **Forest CS cluster is fixture-dependent** — good GW1 (Leeds) but hard GW2 (Liverpool); don't over-commit to the triple-up as a set-and-forget.
 5. **Watkins: hold through GW2**, his fixtures ease from GW3 (Hull/Forest/Brentford).
 
-## Squad
+## Squad — v0.2 (GW1–3 STARTER · fresh/nailed/good-fixture only)
+Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4 shortlist below.
 
 ### GK (2)
 | # | Player | Club | Price | Status | Note |
 |---|---|---|---|---|---|
-| 1 | **Sels** | NFO | ~5.0 est | 🟢 | Nailed, CS under Glasner back-3 · **[Forest 1/3]** |
-| 2 | 🔲 bench GK | — | ~4.0 | 🔲 | Cheapest playing #2 — TBC |
+| 1 | **Sels** | NFO | ~5.0 est | 🟢 | Nailed, back-3 CS, GW1 v Leeds 🟢 · **[NFO 1/3]** |
+| 2 | 🔲 bench GK | — | ~4.0 | 🔲 | Cheapest playing #2 — TBC on prices |
 
 ### DEF (5)
 | # | Player | Club | Price | Status | Note |
 |---|---|---|---|---|---|
-| 1 | **Neco Williams** | NFO | ~5.0 est | 🟢 | Attacking WB (confirmed role) · BPS-favoured · **[Forest 2/3]** |
-| 2 | **Sessegnon** | FUL | ~5.0 est | ⏳ | DEF reclass, attacking LB — needs the nailed LB role |
-| 3 | 🔲 premium DEF | — | ~8.0 | ⚠️🔲 | Gabriel (£8.0) is the template pick but Saliba-injury + WC-fatigue tempered for opener — HOLD/placeholder |
-| 4 | **Mosquera** (ARS) | ~4.5-5.0 TBD | 🟢⏳ | Cheap CB enabling off Saliba injury + soft ARS fixtures — GW1 starter candidate. Watch: Mosquera vs Hincapié for the spot + price |
-| 5 | 🔲 cheap DEF | — | ~4.0 | 🔲 | Enabler / bench |
+| 1 | **Neco Williams** | NFO | ~5.0 est | 🟢 | Attacking WB (confirmed) · BPS-favoured · GW1 v Leeds 🟢 · **[NFO 2/3]** |
+| 2 | **Mosquera** | ARS | ~4.5 TBD | 🟢⏳ | Cheap CB off Saliba injury · soft ARS run (Cov/Sun/Leeds) · fresh · GW1 starter. Watch Mosquera-vs-Hincapié + price |
+| 3 | **Shaw** | MUN | ~5.0 est | 🟢 | Nailed LB (38 st), FRESH (no WC), easy MUN openers (Hull/Ipswich) · **[MUN 3/3]** |
+| 4 | 🔲 cheap DEF | — | ~4.0 | 🔲 | Bench enabler — nailed + fresh, TBC |
+| 5 | 🔲 cheap DEF | — | ~4.0 | 🔲 | Bench enabler — TBC |
 
 ### MID (5)
 | # | Player | Club | Price | Status | Note |
 |---|---|---|---|---|---|
-| 1 | **Kroupi** | BOU | ~6.0 TBD | 🟢⏳ | FWD→MID reclass — value pick IF he starts + price cheap. **THE watch.** |
-| 2 | **Bruno Fernandes** | MUN | £12.0 ✅ | ⏳ | Premium, 235 pts · POR exited before final = FRESHER than finalists · **[MUN 1/3]** |
-| 3 | 🔲 fresh mid-price MID | — | ~8.0 | 🔲 | **Mbeumo (MUN)** = FRESH (CMR didn't qualify), strong opener pick · [MUN 2/3] — or Gibbs-White (but Forest cap) |
-| 4 | 🔲 cheap MID / diff | — | ~5.0 | 🔲 | Promoted-side differential? (Fatawu/Maeda if they start) — speculative |
-| 5 | 🔲 cheap MID | — | ~4.5 | 🔲 | Enabler / bench |
+| 1 | **Bruno Fernandes** | MUN | £12.0 ✅ | 🟢 | Premium, 235 pts · fresh-ish (POR early exit) · easy openers · **[MUN 1/3]** |
+| 2 | **Mbeumo** | MUN | ~8.0 est | 🟢 | FRESH (CMR didn't qualify) · best fixture run · **[MUN 2/3]** |
+| 3 | 🔲 fresh cheap MID | — | ~5.5 | 🔲 | Safe nailed mid, good fixtures — TBC (NOT a punt; a reliable enabler-that-plays) |
+| 4 | 🔲 fresh cheap MID | — | ~5.0 | 🔲 | Bench enabler — TBC |
+| 5 | 🔲 cheap MID | — | ~4.5 | 🔲 | Bench enabler — TBC |
 
 ### FWD (3)
 | # | Player | Club | Price | Status | Note |
 |---|---|---|---|---|---|
-| 1 | **Haaland** | MCI | £15.5 ✅ | ⚠️ | Anchor — but Norway QF run = heavy WC fatigue; monitor GW1 minutes |
-| 2 | **Watkins** | AVL | ~9.0 est | 🟢 | THE Villa attacker to own (rest of their attack faded); light WC load |
-| 3 | **Igor Jesus** | NFO | ~5.5 est | 🟢 | Budget striker, nailed, scored in pre-season · **[Forest 3/3]** |
+| 1 | **Haaland** | MCI | £15.5 ✅ | 🟡 | Anchor · GW1 v BOU 🟢 · Norway QF fatigue = monitor minutes but keep · **[MCI 1/3]** |
+| 2 | **Watkins** | AVL | ~9.0 est | 🟢 | THE Villa attacker · light WC load · fixtures ease from GW3 |
+| 3 | **Igor Jesus** | NFO | ~5.5 est | 🟢 | Budget striker, nailed, scored pre-season, GW1 v Leeds 🟢 · **[NFO 3/3]** |
+
+**Budget frame:** confident 9 ≈ £69.5m (est) → ~£30.5m for the 6 enablers = comfortable; spare goes to upgrading a cheap MID to a nailed ~6.0-6.5.
+**Caps used:** MUN 3 (Bruno/Mbeumo/Shaw) · NFO 3 (Sels/Williams/Igor Jesus) — both maxed.
+
+## 🃏 GW4-WILDCARD SHORTLIST (deferred until roles/minutes confirm)
+| Player | Trigger to promote |
+|---|---|
+| **Kroupi** (BOU MID) | Starts BOU strong XIs + GW4 = v Brentford 🟢 = ideal entry |
+| **Sessegnon** (FUL DEF) | Nailed the LB role in pre-season |
+| **Diomande** (NFO CB) | Signs (⏳ LIKELY) → minutes pre-cleared |
+| **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
+| **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
+| **Gabriel** (ARS £8.0) | WC fatigue clears + you want the premium ARS CB |
+| **Watkins-type upgrades** | Whoever's proven nailed + in form by GW4 |
 
 ---
 
