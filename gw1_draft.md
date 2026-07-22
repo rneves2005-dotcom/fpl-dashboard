@@ -6,6 +6,23 @@
 
 ---
 
+## 📅 GW1 fixtures (26/27 · Fri 21–Mon 24 Aug · from premierleague.com)
+Arsenal v Coventry · Hull v Man Utd · Everton v Crystal Palace · Ipswich v Sunderland · **Forest v Leeds** · Brentford v Tottenham · Brighton v Aston Villa · **Man City v Bournemouth** · Newcastle v Liverpool · Fulham v Chelsea
+
+### FDR read on draft picks (GW1)
+| Pick | GW1 | Difficulty | Effect |
+|---|---|---|---|
+| **Forest cluster** (Sels/Williams/Igor Jesus) | v Leeds (H) | 🟢 easy (home v promoted) | BOOSTS the CS triple-up — great opener |
+| **Haaland** | v Bournemouth (H) | 🟢 easy | GOOD — home v mid-table, offsets some WC fatigue |
+| **Bruno / Mbeumo** (MUN) | @ Hull (A) | 🟢 easy (away v promoted) | GOOD opener for the MUN mids |
+| **Kroupi** (BOU) | @ Man City (A) | 🔴 HARD | ⚠️ tough first start at the Etihad — his GW1 haul is unlikely; consider benching GW1 or waiting |
+| **Watkins** (AVL) | @ Brighton (A) | 🟡 moderate | not the easiest opener |
+| **Gabriel / ARS def** | v Coventry (H) | 🟢 easy | home v promoted = high CS chance → PARTLY offsets the Saliba-out/fatigue fade for GW1 specifically |
+| **Sessegnon** (FUL) | v Chelsea (H) | 🔴 hard | tough opener for a FUL clean sheet |
+| **IPS attack** (Fatawu/Maeda) | v Sunderland (H) | 🟢 favourable | if one starts, a decent low-owned GW1 differential spot |
+
+**Key FDR takeaways:** Forest's cluster + the MUN mids + Haaland all have soft openers (good). **Kroupi's is the problem** — away at Man City GW1 undercuts the template case for *week one* even if he starts. Arsenal home-to-Coventry partly rescues an ARS-defence pick despite Saliba. TODO: pull GW2–6 for the full early-run picture.
+
 ## Squad
 
 ### GK (2)
