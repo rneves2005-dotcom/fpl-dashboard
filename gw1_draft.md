@@ -51,7 +51,7 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 | 1 | **Neco Williams** | NFO | ~5.0 est | 🟢 | Attacking WB (confirmed role) · BPS-favoured · **[Forest 2/3]** |
 | 2 | **Sessegnon** | FUL | ~5.0 est | ⏳ | DEF reclass, attacking LB — needs the nailed LB role |
 | 3 | 🔲 premium DEF | — | ~8.0 | ⚠️🔲 | Gabriel (£8.0) is the template pick but Saliba-injury + WC-fatigue tempered for opener — HOLD/placeholder |
-| 4 | 🔲 cheap DEF | — | ~4.5 | 🔲 | Enabler — TBC (Diop? another) |
+| 4 | **Mosquera** (ARS) | ~4.5-5.0 TBD | 🟢⏳ | Cheap CB enabling off Saliba injury + soft ARS fixtures — GW1 starter candidate. Watch: Mosquera vs Hincapié for the spot + price |
 | 5 | 🔲 cheap DEF | — | ~4.0 | 🔲 | Enabler / bench |
 
 ### MID (5)
