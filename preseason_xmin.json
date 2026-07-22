@@ -1674,5 +1674,243 @@
         "from_other_club": null
       }
     ]
+  },
+  {
+    "club": "TOT",
+    "opponent": "MK Dons",
+    "date": "2026-07-22",
+    "players": [
+      {
+        "name": "Kinsky",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 630,
+        "starts_2526": 7,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Gray",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1471,
+        "starts_2526": 18,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Takai",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Davies",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 136,
+        "starts_2526": 2,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Kyerematen",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Fernandes",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 1,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Tonali",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Solomon",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Gallagher",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1183,
+        "starts_2526": 14,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Tel",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1334,
+        "starts_2526": 13,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Solanke",
+        "group": "XI",
+        "pos": "FWD",
+        "mins_2526": 997,
+        "starts_2526": 11,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Richarlison",
+        "group": "SUB",
+        "pos": "FWD",
+        "mins_2526": 1954,
+        "starts_2526": 20,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Williams-Barnett",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Moore",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Dubravka",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Donley",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Yang Min-Hyuk",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Byrne",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Scarlett",
+        "group": "SUB",
+        "pos": "FWD",
+        "mins_2526": 7,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Hall",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Hardy",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      }
+    ]
   }
 ]
