@@ -1392,5 +1392,287 @@
         "from_other_club": null
       }
     ]
+  },
+  {
+    "club": "NFO",
+    "opponent": "Blackburn",
+    "date": "2026-07-22",
+    "players": [
+      {
+        "name": "Sels",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 2667,
+        "starts_2526": 30,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "Aina",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 1587,
+        "starts_2526": 18,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Cunha",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 514,
+        "starts_2526": 6,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Dominguez",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1168,
+        "starts_2526": 17,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Gibbs-White",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 3101,
+        "starts_2526": 35,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "Igor Jesus",
+        "group": "XI",
+        "pos": "FWD",
+        "mins_2526": 2293,
+        "starts_2526": 28,
+        "goals": 1,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "McAtee",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 288,
+        "starts_2526": 2,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Milenkovic",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 3375,
+        "starts_2526": 37,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "Morato",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 1340,
+        "starts_2526": 14,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Williams",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 3203,
+        "starts_2526": 36,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "Yates",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 602,
+        "starts_2526": 2,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Abbott",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 165,
+        "starts_2526": 2,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Awoniyi",
+        "group": "SUB",
+        "pos": "FWD",
+        "mins_2526": 480,
+        "starts_2526": 3,
+        "goals": 1,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Bakwa",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 549,
+        "starts_2526": 6,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Bindon",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "da Silva Moreira",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "John Victor",
+        "group": "SUB",
+        "pos": "GK",
+        "mins_2526": 437,
+        "starts_2526": 5,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Kalimuendo",
+        "group": "SUB",
+        "pos": "FWD",
+        "mins_2526": 89,
+        "starts_2526": 0,
+        "goals": 1,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "McDonnell",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Netz",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 353,
+        "starts_2526": 3,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Nwosu",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Richards",
+        "group": "SUB",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Sinclair",
+        "group": "SUB",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Thompson",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Willows",
+        "group": "SUB",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      }
+    ]
   }
 ]
