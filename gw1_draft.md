@@ -1,5 +1,14 @@
 # FPL 26/27 — GW1 Squad Draft (v0.1 · placeholders)
 
+## 🧭 STRATEGY: GW1–3 starter → WILDCARD at GW4
+Chosen approach (fits 26/27's unusual chaos: WC-fatigue rotation + heavy transfer window + unconfirmed key roles).
+- **GW1–3 team** = FRESH + NAILED + good-fixture players ONLY (players we're confident in). Do NOT lock into role-uncertain picks.
+- **Wildcard GW4** = informed rebuild once real lineups/minutes are known → bring in Kroupi (GW4 = v Brentford 🟢, role by then confirmed), proven-nailed players, injury returnees, breakout differentials.
+- Chip structure supports it: **2 Wildcards, first usable to GW19** → early WC is nearly "free."
+- Rule: don't PUNT GW1–3 — still field a competitive team; just avoid guesses.
+- **KROUPI = a GW4-WILDCARD pick, NOT a GW1 pick** (lumpy fixtures + unconfirmed minutes).
+
+
 **Rules:** 15 players (2 GK / 5 DEF / 5 MID / 3 FWD) · £100.0m budget · **max 3 per club**
 **Status:** 🟢 high-conviction · ⏳ pending (move/role/price) · ⚠️ fade-flag · 🔲 placeholder (TBD)
 **⚠️ 26/27 API not live yet** — prices are REVEALS (confirmed) or *estimates* from 25/26. Refine when API rolls over.
