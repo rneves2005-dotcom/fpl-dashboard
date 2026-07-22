@@ -53,7 +53,7 @@ Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4
 | 2 | **Mosquera** | ARS | ~4.5 TBD | 🟢⏳ | Cheap CB off Saliba injury · soft ARS run (Cov/Sun/Leeds) · fresh · **ARS CS DOUBLE-UP with Raya** (each shutout pays twice). Watch Mosquera-vs-Hincapié + price · **[ARS 2/3]** |
 | 3 | **Shaw** | MUN | ~5.0 est | 🟢 | Nailed LB (38 st), FRESH (no WC), easy MUN openers (Hull/Ipswich) · **[MUN 3/3]** |
 | 4 | 🔲 cheap DEF | — | ~4.0 | 🔲 | Bench enabler — nailed + fresh, TBC |
-| 5 | 🔲 cheap DEF | — | ~4.0 | 🔲 | Bench enabler — TBC |
+| 5 | 🔲 (Rodon LEE?) | ~3.9 est | 🔲 | Cheapest-playing-DEF ENABLER candidate (LEE, nailed 33st) — bench fodder, NOT a CS source (Leeds leaky, 6-7 CS). Confirm nailed+price 26/27 |
 
 ### MID (5)
 | # | Player | Club | Price | Status | Note |
