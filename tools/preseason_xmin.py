@@ -93,6 +93,18 @@ def find_player(elements, teams, name, club_id=None):
         cands = scan([e for e in elements if e["team"] == club_id])
         if cands:
             return max(cands, key=lambda e: e["minutes"]), False
+        # Same-club surname fallback: the graphic's first name may differ from
+        # FPL's ("Dan Ballard" vs "Daniel Ballard"), so the full-name scan misses
+        # and the player is wrongly tagged NEW/ACADEMY. Within ONE club a bare
+        # surname is low-collision — retry the last token against this squad only
+        # (max-by-minutes picks the established player if several share it).
+        surname = n.split()[-1]
+        if len(surname) > 3:
+            sc = [e for e in elements if e["team"] == club_id
+                  and (norm(e.get("web_name", "")) == surname
+                       or surname in norm(e.get("second_name", "")).split())]
+            if sc:
+                return max(sc, key=lambda e: e["minutes"]), False
         # No one at this club matches. During a transfer window the player may be
         # a new signing still listed at his OLD club in the 25/26 dataset, so fall
         # back league-wide — but FLAG it so it's never read as a same-club fact.

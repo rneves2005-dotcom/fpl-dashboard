@@ -52,7 +52,7 @@ Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4
 | 1 | **Neco Williams** | NFO | ~5.0 est | 🟢 | Attacking WB (confirmed) · BPS-favoured · GW1 v Leeds 🟢 · **[NFO 2/3]** |
 | 2 | **Mosquera** | ARS | ~4.5 TBD | 🟢⏳ | Cheap CB off Saliba injury · soft ARS run (Cov/Sun/Leeds) · fresh · **ARS CS DOUBLE-UP with Raya** (each shutout pays twice). Watch Mosquera-vs-Hincapié + price · **[ARS 2/3]** |
 | 3 | **Shaw** | MUN | ~5.0 est | 🟢 | Nailed LB (38 st), FRESH (no WC), easy MUN openers (Hull/Ipswich) · **[MUN 3/3]** |
-| 4 | 🔲 cheap DEF | — | ~4.0 | 🔲 | Bench enabler — nailed + fresh, TBC |
+| 4 | 🔲 (Mukiele SUN?) | ~5.0 est | 🔲 | **Nordi Mukiele** — FRESH (FRA, no WC) + nailed (32st) + **151 pts** 25/26. A cheap DEF that SCORES (not fodder). Confirm permanent (PSG loan) + price |
 | 5 | 🔲 (Rodon LEE?) | ~3.9 est | 🔲 | Cheapest-playing-DEF ENABLER candidate (LEE, nailed 33st) — bench fodder, NOT a CS source (Leeds leaky, 6-7 CS). Confirm nailed+price 26/27 |
 
 ### MID (5)
@@ -60,7 +60,7 @@ Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4
 |---|---|---|---|---|---|
 | 1 | **Bruno Fernandes** | MUN | £12.0 ✅ | 🟢 | Premium, 235 pts · fresh-ish (POR early exit) · easy openers · **[MUN 1/3]** |
 | 2 | **Mbeumo** | MUN | ~8.0 est | 🟢 | FRESH (CMR didn't qualify) · best fixture run · **[MUN 2/3]** |
-| 3 | 🔲 fresh cheap MID | — | ~5.5 | 🔲 | Safe nailed mid, good fixtures — TBC (NOT a punt; a reliable enabler-that-plays) |
+| 3 | 🔲 (Le Fée SUN?) | ~5.5 est | 🔲 | **Enzo Le Fée** — FRESH (FRA, no WC) + nailed (33st) + **147 pts** 25/26. Starts GW1 ahead of tired returnees. Confirm permanent (Roma loan) + price + SUN fixtures |
 | 4 | 🔲 fresh cheap MID | — | ~5.0 | 🔲 | Bench enabler — TBC |
 | 5 | 🔲 cheap MID | — | ~4.5 | 🔲 | Bench enabler — TBC |
 
@@ -72,7 +72,7 @@ Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4
 | 3 | **Igor Jesus** | NFO | ~5.5 est | 🟢 | Budget striker, nailed, scored pre-season, GW1 v Leeds 🟢 · **[NFO 2/3]** |
 
 **Budget frame:** confident 10 ≈ £70.7m (Raya real £6.2) + bench GK £4.0 → ~£25m for 5 enablers (2 DEF + 3 MID) = comfortable; spare upgrades a cheap MID to ~6.0-6.5.
-**Caps used:** MUN 3 (Bruno/Mbeumo/Shaw) · **ARS 2** (Raya/Mosquera — CS double-up, 1 slot free) · **NFO 2** (Williams/Igor Jesus — Sels dropped for Raya → 1 Forest slot FREED, e.g. Gibbs-White as a cheap MID, or leave lean given NFO's no-manager disarray).
+**Caps used:** MUN 3 (Bruno/Mbeumo/Shaw) · **ARS 2** (Raya/Mosquera — CS double-up) · **NFO 2** (Williams/Igor Jesus — 1 slot freed) · **SUN 2** (Le Fée/Mukiele candidates — fresh nailed point-scorers, better than fodder; Hume/Ballard in reserve if either falls through).
 
 ## 🃏 GW4-WILDCARD SHORTLIST (deferred until roles/minutes confirm)
 | Player | Trigger to promote |

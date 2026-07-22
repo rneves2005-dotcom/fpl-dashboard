@@ -1912,5 +1912,338 @@
         "from_other_club": null
       }
     ]
+  },
+  {
+    "club": "SUN",
+    "opponent": "USA Tour 2026",
+    "date": "2026-07-22",
+    "players": [
+      {
+        "name": "Anthony Patterson",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Simon Moore",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Melker Ellborg",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 270,
+        "starts_2526": 3,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Trai Hume",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 3032,
+        "starts_2526": 34,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "Dan Ballard",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Luke O'Nien",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 565,
+        "starts_2526": 5,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Reinildo",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 1966,
+        "starts_2526": 23,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Leo Hjelde",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Jenson Seelt",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 133,
+        "starts_2526": 1,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Jenson Jones",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Ben Kindon",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Archie Lightfoot",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Nordi Mukiele",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 2784,
+        "starts_2526": 32,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "Chris Rigg",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 758,
+        "starts_2526": 11,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Enzo Le Fée",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 2930,
+        "starts_2526": 33,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "Alan Browne",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Jack Whittaker",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Charlie Dinsdale",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Jaydon Jones",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Tom Proctor",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Wilson Isidor",
+        "group": "XI",
+        "pos": "FWD",
+        "mins_2526": 1148,
+        "starts_2526": 11,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Trey Ogunsuyi",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Finn Geragusian",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Felix Scott",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Romaine Mundle",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 399,
+        "starts_2526": 2,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Timur Tutierov",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      }
+    ]
+  },
+  {
+    "club": "SUN",
+    "opponent": "verify",
+    "date": "2026-07-22",
+    "players": [
+      {
+        "name": "Dan Ballard",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 2144,
+        "starts_2526": 24,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Leo Hjelde",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Alan Browne",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      }
+    ]
   }
 ]
