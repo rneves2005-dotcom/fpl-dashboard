@@ -8,6 +8,9 @@ Chosen approach (fits 26/27's unusual chaos: WC-fatigue rotation + heavy transfe
 - Rule: don't PUNT GW1–3 — still field a competitive team; just avoid guesses.
 - **KROUPI = a GW4-WILDCARD pick, NOT a GW1 pick** (lumpy fixtures + unconfirmed minutes).
 
+### ❌ Considered & rejected: Bench Boost GW1
+Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15 nailed-and-playing — undermined by WC-fatigue rotation in the opening weeks; (2) BB's optimal use is a DOUBLE GAMEWEEK, not a single GW1; (3) forces an expensive flat 15 (weaker XI), conflicting with the lean-starter/WC4 plan. **Decision: HOLD Bench Boost for a DGW; do NOT BB GW1.**
+
 
 **Rules:** 15 players (2 GK / 5 DEF / 5 MID / 3 FWD) · £100.0m budget · **max 3 per club**
 **Status:** 🟢 high-conviction · ⏳ pending (move/role/price) · ⚠️ fade-flag · 🔲 placeholder (TBD)
