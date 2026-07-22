@@ -6,22 +6,24 @@
 
 ---
 
-## 📅 GW1 fixtures (26/27 · Fri 21–Mon 24 Aug · from premierleague.com)
-Arsenal v Coventry · Hull v Man Utd · Everton v Crystal Palace · Ipswich v Sunderland · **Forest v Leeds** · Brentford v Tottenham · Brighton v Aston Villa · **Man City v Bournemouth** · Newcastle v Liverpool · Fulham v Chelsea
+## 📅 FDR matrix GW1–6 (26/27 · from premierleague.com) · H=home a=away · 🟢easy 🟡mod 🔴hard
+| Pick (club) | GW1 | GW2 | GW3 | GW4 | GW5 | GW6 | Run verdict |
+|---|---|---|---|---|---|---|---|
+| **Bruno/Mbeumo** (MUN) | Hull a 🟢 | Ipswich H 🟢 | Everton a 🟡 | City H 🔴 | Fulham a 🟡 | Spurs H 🟡 | ✅ **BEST premium run** — 2 easy openers + fresh legs |
+| **Haaland** (MCI) | BOU H 🟢 | Palace a 🟡 | Cov H 🟢 | Utd a 🔴 | Sun H 🟢 | Liv a 🔴 | 🟢 home games = feasts (BOU/Cov/Sun); anchor regardless |
+| **Watkins** (AVL) | Brighton a 🟡 | Arsenal H 🔴 | Hull a 🟢 | Forest H 🟡 | Spurs a 🟡 | Bren H 🟢 | 🟡 tough start (Bri/Ars), EASES from GW3 |
+| **Kroupi** (BOU) | City a 🔴 | Everton H 🟢 | New a 🟡 | Bren H 🟢 | Liv H 🔴 | Che a 🔴 | ⚠️ **LUMPY** — 3 hard (City/Liv/Che). Best entry GW2 (Everton) or GW4 (Bren). NOT a GW1 start. |
+| **Forest cluster** (Sels/Williams/Igor J) | Leeds H 🟢 | Liv a 🔴 | Spurs H 🟡 | Villa a 🟡 | Cov H 🟢 | Palace a 🟡 | 🟡 good opener, hard GW2, mixed after — CS is fixture-dependent, not a lock |
+| **ARS defence** (cheap DEF, not Gabriel) | Cov H 🟢 | Villa a 🟡 | Che H 🔴 | Sun a 🟢 | Bri a 🟡 | Leeds H 🟢 | 🟢 **soft early run** (Cov/Sun/Leeds) → a cheap ARS defender is VIABLE despite Saliba out |
+| **Sessegnon** (FUL) | Che H 🔴 | Sun a 🟢 | Palace H 🟡 | Liv a 🔴 | Utd H 🟡 | Ipswich a 🟢 | 🟡 lumpy CS run — reclass value real but fixtures mixed |
+| **IPS attack** (Fatawu/Maeda) | Sun H 🟢 | Utd a 🔴 | Liv H 🔴 | Palace a 🟡 | Everton a 🟡 | Fulham H 🟡 | 🟡 nice opener then TOUGH (Utd/Liv) |
 
-### FDR read on draft picks (GW1)
-| Pick | GW1 | Difficulty | Effect |
-|---|---|---|---|
-| **Forest cluster** (Sels/Williams/Igor Jesus) | v Leeds (H) | 🟢 easy (home v promoted) | BOOSTS the CS triple-up — great opener |
-| **Haaland** | v Bournemouth (H) | 🟢 easy | GOOD — home v mid-table, offsets some WC fatigue |
-| **Bruno / Mbeumo** (MUN) | @ Hull (A) | 🟢 easy (away v promoted) | GOOD opener for the MUN mids |
-| **Kroupi** (BOU) | @ Man City (A) | 🔴 HARD | ⚠️ tough first start at the Etihad — his GW1 haul is unlikely; consider benching GW1 or waiting |
-| **Watkins** (AVL) | @ Brighton (A) | 🟡 moderate | not the easiest opener |
-| **Gabriel / ARS def** | v Coventry (H) | 🟢 easy | home v promoted = high CS chance → PARTLY offsets the Saliba-out/fatigue fade for GW1 specifically |
-| **Sessegnon** (FUL) | v Chelsea (H) | 🔴 hard | tough opener for a FUL clean sheet |
-| **IPS attack** (Fatawu/Maeda) | v Sunderland (H) | 🟢 favourable | if one starts, a decent low-owned GW1 differential spot |
-
-**Key FDR takeaways:** Forest's cluster + the MUN mids + Haaland all have soft openers (good). **Kroupi's is the problem** — away at Man City GW1 undercuts the template case for *week one* even if he starts. Arsenal home-to-Coventry partly rescues an ARS-defence pick despite Saliba. TODO: pull GW2–6 for the full early-run picture.
+### 🎯 Headline FDR conclusions (reshape the draft)
+1. **MUN mids (Bruno + Mbeumo) = the standout early picks** — best premium fixture run (Hull+Ipswich openers) AND freshest legs (Portugal early exit / Cameroon didn't qualify). Elevate to the premium core.
+2. **Kroupi is NOT a GW1 start** — away at City, then a lumpy run (Liverpool/Chelsea in the first 6). Template value intact, but WAIT for GW2 (Everton) or GW4 (Brentford) to bring him in. Big change to the plan.
+3. **Cheap ARS defender is viable despite Saliba** — Coventry/Sunderland/Leeds in the opening 6 = soft CS run. (Still fade Gabriel at £8.0m premium; a budget ARS DEF is the play.)
+4. **Forest CS cluster is fixture-dependent** — good GW1 (Leeds) but hard GW2 (Liverpool); don't over-commit to the triple-up as a set-and-forget.
+5. **Watkins: hold through GW2**, his fixtures ease from GW3 (Hull/Forest/Brentford).
 
 ## Squad
 
