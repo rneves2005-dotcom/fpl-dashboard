@@ -79,7 +79,7 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 ## 🃏 GW4-WILDCARD SHORTLIST (deferred until roles/minutes confirm)
 | Player | Trigger to promote |
 |---|---|
-| **Kroupi** (BOU MID £7.5 ✅ reclass CONFIRMED) | Nailed BOU minutes + GW4 = v Brentford 🟢. NOT cheap (£7.5 = Mbeumo tier) — must earn the mid-price slot on output |
+| **Kroupi** (BOU MID £7.5) ⬇️ DOWNGRADED | 🚫 bargain thesis DEAD: priced 13th/244 but 3.4 ppm (51st) + **0.0% owned (237th)** = market-rejected. PROVE-IT only: needs early evidence of nailed+scoring MID. IF he steps up, 0.0% own = big differential; on current data a PASS (Mbeumo £8.0 better) |
 | **Sessegnon** (FUL DEF) | Nailed the LB role in pre-season |
 | **Diomande** (NFO CB) | Signs (⏳ LIKELY) → minutes pre-cleared |
 | **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
