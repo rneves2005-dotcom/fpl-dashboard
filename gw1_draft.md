@@ -59,8 +59,8 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 | GW1–3 FDR | 9 | **8** |
 | Owned | — | 8.1% (differential) |
 | Role | Attacking WB — **BPS tailwind** | Pure CB — CBI devaluation is a headwind |
-| Risk | ⚠️ **Forest have NO MANAGER** → role undefined | New club; Romero/Senesi competition |
-**VERDICT: HOLD N.Williams for now** (margin thin, rests on a Romero-exit RUMOUR). **SWAP TRIGGERS:** (1) Romero exit CONFIRMED club-official, or (2) Forest appoint a manager who doesn't use attacking wing-backs.
+| Risk | ✅ **GLASNER** → attacking-WB role MAXIMISED | New club; Romero/Senesi competition |
+**✅ RESOLVED — KEEP N.WILLIAMS, SWAP DEAD.** Forest manager = **OLIVER GLASNER** (confirmed Jul 23) = THE attacking-wing-back manager. His Palace WBs both produced ~135 pts (Muñoz 136: 4G+4A; Mitchell 135). N.Williams scored 128 WITHOUT him ⇒ that is now a FLOOR. van Hecke is a pure CB hit by CBI devaluation = wrong archetype. Williams has BOTH the system AND the BPS tailwind.
 
 ## Squad — v0.3 (✅ ENTERED IN FPL · LIVE PRICES) · 4-3-3 · £100.0m, £0.0 ITB
 All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU 🟢) · **VC: Bruno** (a Hull 🟢).
