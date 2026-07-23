@@ -61,7 +61,7 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 | Player | Club | £ | Note |
 |---|---|---|---|
 | **Forster** (or cheapest) | BOU | 4.0 | Non-playing #2 behind Raya |
-| **Rodon** | LEE | 4.5 | Cheapest-playing DEF cover (33 st) |
+| **Rodon** | LEE | 4.5 | Cheapest-playing DEF cover (33 PL st) · ⚠️ spot CONTESTED by Leeds £40M CB Muharemović · **SWAP CANDIDATE → van Ewijk (COV £4.0)**: £0.5 cheaper, attacking-RB role (9 Champ assists), 13.2% owned. ⚠️ but Championship stats — DISCOUNT the 17 CS (wont repeat in PL); 0 PL sample; COV churn. DECIDE ON PRE-SEASON XIs |
 | **Hughes** | CRY | 4.5 | Nailed-ish £4.5 MID (19 st) = fodder-that-plays (auto-sub value) |
 | **Yarmoliuk** | BRE | 5.0 | ✅ ENTERED — nailed £5.0 mid (30 st, 104 pts), best fodder-that-plays, no cap clash. Set as FIRST bench outfield sub |
 
