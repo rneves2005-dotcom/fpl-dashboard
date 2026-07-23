@@ -37,6 +37,31 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 4. **Forest CS cluster is fixture-dependent** — good GW1 (Leeds) but hard GW2 (Liverpool); don't over-commit to the triple-up as a set-and-forget.
 5. **Watkins: hold through GW2**, his fixtures ease from GW3 (Hull/Forest/Brentford).
 
+
+### ✅ REAL FDR from live API (Jul 23) — GW1–3 sums (lower = easier)
+| Club (our players) | GW1 | GW2 | GW3 | Sum |
+|---|---|---|---|---|
+| **MUN** (Bruno/Mbeumo/Shaw) | Hull a (2) | Ipswich H (2) | Everton a (3) | **7** ✅ |
+| **SUN** (Le Fée/Mukiele) | Ipswich a (2) | Fulham H (2) | Brentford a (3) | **7** ✅ |
+| MCI (Haaland) | — | — | — | 8 |
+| AVL (Watkins) | — | — | — | 9 |
+| NFO (N.Williams/Igor Jesus) | Leeds H (2) | **Liverpool a (4)** | Spurs H (3) | 9 |
+| **ARS** (Raya/Mosquera) | Cov H (2) | **Villa a (4)** | **Chelsea H (4)** | **10** ⚠️ |
+| *TOT (van Hecke option)* | *Brentford a (3)* | *Newcastle H (2)* | *Forest a (3)* | *8* |
+
+🚨 **CORRECTION to earlier claim:** I described ARS's opening as a "soft run (Cov/Sun/Leeds)". **WRONG** — the real sequence is Coventry (2), then **Villa away (4) and Chelsea home (4)**. Only GW1 is soft. The Raya+Mosquera CS double-up mainly pays in **GW1**; GW2–3 are hard. Raya is unaffected (season-long set-and-forget) but **Mosquera is fixture-exposed**.
+✅ **Validated:** our two club concentrations (MUN 3, SUN 2) have the BEST GW1–3 runs in the league.
+
+### ⚖️ LIVE DECISION #2 — Neco Williams (NFO £5.0) vs van Hecke (TOT £5.0)
+| | N.Williams | van Hecke |
+|---|---|---|
+| 25/26 | 36 st, 9 CS, **128 pts** | 36 st, 10 CS, **148 pts** (at Brighton) |
+| GW1–3 FDR | 9 | **8** |
+| Owned | — | 8.1% (differential) |
+| Role | Attacking WB — **BPS tailwind** | Pure CB — CBI devaluation is a headwind |
+| Risk | ⚠️ **Forest have NO MANAGER** → role undefined | New club; Romero/Senesi competition |
+**VERDICT: HOLD N.Williams for now** (margin thin, rests on a Romero-exit RUMOUR). **SWAP TRIGGERS:** (1) Romero exit CONFIRMED club-official, or (2) Forest appoint a manager who doesn't use attacking wing-backs.
+
 ## Squad — v0.3 (✅ ENTERED IN FPL · LIVE PRICES) · 4-3-3 · £100.0m, £0.0 ITB
 All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU 🟢) · **VC: Bruno** (a Hull 🟢).
 
