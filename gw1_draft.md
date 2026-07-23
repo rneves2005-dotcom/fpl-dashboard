@@ -62,7 +62,7 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 | Risk | ✅ **GLASNER** → attacking-WB role MAXIMISED | New club; Romero/Senesi competition |
 **✅ RESOLVED — KEEP N.WILLIAMS, SWAP DEAD.** Forest manager = **OLIVER GLASNER** (confirmed Jul 23) = THE attacking-wing-back manager. His Palace WBs both produced ~135 pts (Muñoz 136: 4G+4A; Mitchell 135). N.Williams scored 128 WITHOUT him ⇒ that is now a FLOOR. van Hecke is a pure CB hit by CBI devaluation = wrong archetype. Williams has BOTH the system AND the BPS tailwind.
 
-## Squad — v0.3 (✅ ENTERED IN FPL · LIVE PRICES) · 4-3-3 · £100.0m, £0.0 ITB
+## Squad — v0.4 FINAL (✅ ENTERED & VERIFIED) · 4-3-3 · £99.5m, £0.5m ITB
 All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU 🟢) · **VC: Bruno** (a Hull 🟢).
 
 ### 🟢 STARTING XI (4-3-3)
@@ -70,7 +70,7 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 |---|---|---|---|---|---|
 | GK | **Raya** | ARS | 6.0 | Cov H 🟢 | #1 GK 25/26 (162 pts) · set-and-forget CS anchor · fresh (ESP WC backup) |
 | DEF | **Neco Williams** | NFO | 5.0 | Leeds H 🟢 | Attacking WB · BPS-favoured |
-| DEF | **Mosquera** | ARS | 5.5 | Cov H 🟢 | ARS CS double-up w/ Raya · ⚠️ =Hincapié 5.5 → watch who starts next to Gabriel |
+| DEF | **Van Hecke** | TOT | 5.0 | Bre a 🟡 | ✅ REPLACED MOSQUERA Jul 23 — 36 st, 10 CS, 148 pts, £55m signing = nailed; best GW1-3 FDR (8); rivals fatigued/leaving. (Mosquera dropped: only 9 st, 6th in ARS queue behind Gabriel/Timber/Calafiori/Hincapié + Konsa-Stones interest) |
 | DEF | **Shaw** | MUN | 4.5 | Hull a 🟢 | Fresh nailed LB · cheap easy-fixture CS |
 | DEF | **Mukiele** | SUN | 5.5 | Ips? | Fresh, 151 pts, DEF-that-scores · permanent |
 | MID | **Bruno** (VC) | MUN | 12.0 | Hull a 🟢 | Premium engine · pens · easy openers |
@@ -91,7 +91,7 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 | **Yarmoliuk** | BRE | 5.0 | ✅ ENTERED — nailed £5.0 mid (30 st, 104 pts), best fodder-that-plays, no cap clash. Set as FIRST bench outfield sub |
 
 **Bench total: £18.0m → SQUAD £100.0m, £0.0 ITB (Yarmoliuk £5.0 in the last slot). ✅ ENTERED. Unlimited free transfers until GW1 deadline (Aug 21).**
-**Caps:** MUN 3 (Bruno/Mbeumo/Shaw) · ARS 2 (Raya/Mosquera) · NFO 2 (Williams/Igor Jesus) · SUN 2 (Le Fée/Mukiele).
+**Caps:** MUN 3 (Bruno/Mbeumo/Shaw) · NFO 2 (Williams/Igor Jesus) · SUN 2 (Le Fée/Mukiele) · ARS 1 (Raya) · TOT 1 (van Hecke) · rest 1 each. ✅ VERIFIED LEGAL: 15 players, 2/5/5/3, £99.5m, £0.5m ITB, max-3 respected.
 
 ### 📌 Live-price findings (vs estimates)
 - **Watkins £8.0** = bargain (est 9.0) — best value shift in the squad.
