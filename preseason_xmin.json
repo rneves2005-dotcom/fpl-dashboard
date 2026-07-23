@@ -2245,5 +2245,265 @@
         "from_other_club": null
       }
     ]
+  },
+  {
+    "club": "TOT",
+    "opponent": "NZ/Aus Tour",
+    "date": "2026-07-26",
+    "players": [
+      {
+        "name": "Lucas Bergvall",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 955,
+        "starts_2526": 11,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Kevin Danso",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 1489,
+        "starts_2526": 17,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Ben Davies",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 136,
+        "starts_2526": 2,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Martin Dubravka",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 3150,
+        "starts_2526": 35,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "⚠️ NEW SIGNING — 25/26 stats are from Burnley",
+        "from_other_club": "Burnley"
+      },
+      {
+        "name": "Mateus Fernandes",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Conor Gallagher",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1183,
+        "starts_2526": 14,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Archie Gray",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1471,
+        "starts_2526": 18,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Antonin Kinsky",
+        "group": "XI",
+        "pos": "GK",
+        "mins_2526": 630,
+        "starts_2526": 7,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "James Maddison",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 34,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Richarlison",
+        "group": "XI",
+        "pos": "FWD",
+        "mins_2526": 1954,
+        "starts_2526": 20,
+        "goals": 0,
+        "tag": "🟡 ROTATION",
+        "note": "squad rotation",
+        "from_other_club": null
+      },
+      {
+        "name": "Andy Robertson",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Dominic Solanke",
+        "group": "XI",
+        "pos": "FWD",
+        "mins_2526": 997,
+        "starts_2526": 11,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Manor Solomon",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Kota Takai",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Mathys Tel",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 1334,
+        "starts_2526": 13,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Sandro Tonali",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 2534,
+        "starts_2526": 31,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "⚠️ NEW SIGNING — 25/26 stats are from Newcastle",
+        "from_other_club": "Newcastle"
+      },
+      {
+        "name": "Destiny Udogie",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 1335,
+        "starts_2526": 14,
+        "goals": 0,
+        "tag": "🟠 FRINGE",
+        "note": "fringe — pre-season output is NOISE",
+        "from_other_club": null
+      },
+      {
+        "name": "Micky van de Ven",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 3041,
+        "starts_2526": 35,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "first-choice starter",
+        "from_other_club": null
+      },
+      {
+        "name": "Jan Paul van Hecke",
+        "group": "XI",
+        "pos": "DEF",
+        "mins_2526": 3210,
+        "starts_2526": 36,
+        "goals": 0,
+        "tag": "🟢 NAILED",
+        "note": "⚠️ NEW SIGNING — 25/26 stats are from Brighton",
+        "from_other_club": "Brighton"
+      },
+      {
+        "name": "Yang Min-Hyeok",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Mikey Moore",
+        "group": "XI",
+        "pos": "MID",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      },
+      {
+        "name": "Jamie Donley",
+        "group": "XI",
+        "pos": "?",
+        "mins_2526": 0,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 NEW/ACADEMY",
+        "note": "no PL record — new signing or academy",
+        "from_other_club": null
+      },
+      {
+        "name": "Dane Scarlett",
+        "group": "XI",
+        "pos": "FWD",
+        "mins_2526": 7,
+        "starts_2526": 0,
+        "goals": 0,
+        "tag": "🔴 MINIMAL",
+        "note": "academy/deep bench — ignore for FPL",
+        "from_other_club": null
+      }
+    ]
   }
 ]
