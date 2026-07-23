@@ -14,7 +14,7 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 
 **Rules:** 15 players (2 GK / 5 DEF / 5 MID / 3 FWD) · £100.0m budget · **max 3 per club**
 **Status:** 🟢 high-conviction · ⏳ pending (move/role/price) · ⚠️ fade-flag · 🔲 placeholder (TBD)
-**⚠️ 26/27 API not live yet** — prices are REVEALS (confirmed) or *estimates* from 25/26. Refine when API rolls over.
+**✅ 26/27 API LIVE (Jul 23)** — all prices REAL. Squad below is buildable and fits £100m.
 
 ---
 
@@ -37,47 +37,49 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 4. **Forest CS cluster is fixture-dependent** — good GW1 (Leeds) but hard GW2 (Liverpool); don't over-commit to the triple-up as a set-and-forget.
 5. **Watkins: hold through GW2**, his fixtures ease from GW3 (Hull/Forest/Brentford).
 
-## Squad — v0.2 (GW1–3 STARTER · fresh/nailed/good-fixture only)
-Confident spine (9) + 6 cheap enablers TBD on prices. Kroupi/speculative → GW4 shortlist below.
+## Squad — v0.3 (⚡ LIVE 26/27 PRICES · BUILDABLE) · 4-3-3 · **fits £99.5m, £0.5 ITB**
+All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU 🟢) · **VC: Bruno** (a Hull 🟢).
 
-### GK (2)
-| # | Player | Club | Price | Status | Note |
+### 🟢 STARTING XI (4-3-3)
+| Pos | Player | Club | £ | GW1 | Note |
 |---|---|---|---|---|---|
-| 1 | **Raya** | ARS | £6.2 (25/26) | 🟢 | **#1 GK 25/26 — 162 pts, +19 on the field** · 19 CS / 37 st (51%) · nailed · FRESH (ESP WC backup, barely played) · **SET-AND-FORGET all-season CS anchor** · **[ARS 1/3]** |
-| 2 | 🔲 bench GK | — | ~4.0 | 🔲 | Cheapest NON-playing #2 (never used behind Raya) — TBC |
+| GK | **Raya** | ARS | 6.0 | Cov H 🟢 | #1 GK 25/26 (162 pts) · set-and-forget CS anchor · fresh (ESP WC backup) |
+| DEF | **Neco Williams** | NFO | 5.0 | Leeds H 🟢 | Attacking WB · BPS-favoured |
+| DEF | **Mosquera** | ARS | 5.5 | Cov H 🟢 | ARS CS double-up w/ Raya · ⚠️ =Hincapié 5.5 → watch who starts next to Gabriel |
+| DEF | **Shaw** | MUN | 4.5 | Hull a 🟢 | Fresh nailed LB · cheap easy-fixture CS |
+| DEF | **Mukiele** | SUN | 5.5 | Ips? | Fresh, 151 pts, DEF-that-scores · permanent |
+| MID | **Bruno** (VC) | MUN | 12.0 | Hull a 🟢 | Premium engine · pens · easy openers |
+| MID | **Mbeumo** | MUN | 8.0 | Hull a 🟢 | Fresh (CMR no WC) · best fixture run |
+| MID | **Le Fée** | SUN | 6.0 | Ips? | Fresh, 147 pts, nailed · permanent (£23M) |
+| FWD | **Haaland** (©) | MCI | 15.5 | BOU H 🟢 | Anchor · captain GW1 |
+| FWD | **Watkins** | AVL | 8.0 | Bri a 🟡 | 🔥 BARGAIN at £8.0 (est was 9.0) · THE Villa attacker |
+| FWD | **Igor Jesus** | NFO | 6.0 | Leeds H 🟢 | Budget striker, nailed, pre-season goals |
 
-### DEF (5)
-| # | Player | Club | Price | Status | Note |
-|---|---|---|---|---|---|
-| 1 | **Neco Williams** | NFO | ~5.0 est | 🟢 | Attacking WB (confirmed) · BPS-favoured · GW1 v Leeds 🟢 · **[NFO 2/3]** |
-| 2 | **Mosquera** | ARS | ~4.5 TBD | 🟢⏳ | Cheap CB off Saliba injury · soft ARS run (Cov/Sun/Leeds) · fresh · **ARS CS DOUBLE-UP with Raya** (each shutout pays twice). Watch Mosquera-vs-Hincapié + price · **[ARS 2/3]** |
-| 3 | **Shaw** | MUN | ~5.0 est | 🟢 | Nailed LB (38 st), FRESH (no WC), easy MUN openers (Hull/Ipswich) · **[MUN 3/3]** |
-| 4 | **Mukiele** (SUN) | ~5.0 est | 🟢⏳ | FRESH (FRA, no WC) + nailed (32st) + **151 pts** 25/26 (DEF that SCORES) · ✅ PERMANENT (£12M from PSG 2025). Only price + CS-fixtures TBC (SUN defence may regress yr 2) |
-| 5 | 🔲 (Rodon LEE?) | ~3.9 est | 🔲 | Cheapest-playing-DEF ENABLER candidate (LEE, nailed 33st) — bench fodder, NOT a CS source (Leeds leaky, 6-7 CS). Confirm nailed+price 26/27 |
+**XI total: £82.0m**
 
-### MID (5)
-| # | Player | Club | Price | Status | Note |
-|---|---|---|---|---|---|
-| 1 | **Bruno Fernandes** | MUN | £12.0 ✅ | 🟢 | Premium, 235 pts · fresh-ish (POR early exit) · easy openers · **[MUN 1/3]** |
-| 2 | **Mbeumo** | MUN | ~8.0 est | 🟢 | FRESH (CMR didn't qualify) · best fixture run · **[MUN 2/3]** |
-| 3 | **Le Fée** (SUN) | ~5.5 est | 🟢⏳ | FRESH (FRA, no WC) + nailed (33st) + **147 pts** 25/26 · ✅ PERMANENT (£23M from Roma 2025 — club invested = minutes secure). Starts GW1 ahead of tired returnees. Only price + SUN fixtures TBC |
-| 4 | 🔲 fresh cheap MID | — | ~5.0 | 🔲 | Bench enabler — TBC |
-| 5 | 🔲 cheap MID | — | ~4.5 | 🔲 | Bench enabler — TBC |
+### 🔲 BENCH (fodder — never expected to start)
+| Player | Club | £ | Note |
+|---|---|---|---|
+| **Forster** (or cheapest) | BOU | 4.0 | Non-playing #2 behind Raya |
+| **Rodon** | LEE | 4.5 | Cheapest-playing DEF cover (33 st) |
+| **Hughes** | CRY | 4.5 | Nailed-ish £4.5 MID (19 st) = fodder-that-plays (auto-sub value) |
+| cheap MID | — | 4.5 | Fodder |
 
-### FWD (3)
-| # | Player | Club | Price | Status | Note |
-|---|---|---|---|---|---|
-| 1 | **Haaland** | MCI | £15.5 ✅ | 🟡 | Anchor · GW1 v BOU 🟢 · Norway QF fatigue = monitor minutes but keep · **[MCI 1/3]** |
-| 2 | **Watkins** | AVL | ~9.0 est | 🟢 | THE Villa attacker · light WC load · fixtures ease from GW3 |
-| 3 | **Igor Jesus** | NFO | ~5.5 est | 🟢 | Budget striker, nailed, scored pre-season, GW1 v Leeds 🟢 · **[NFO 2/3]** |
+**Bench total: £17.5m → SQUAD £99.5m, £0.5 ITB. MAXED — all value is in the XI; no upgrade room without downgrading the spine.**
+**Caps:** MUN 3 (Bruno/Mbeumo/Shaw) · ARS 2 (Raya/Mosquera) · NFO 2 (Williams/Igor Jesus) · SUN 2 (Le Fée/Mukiele).
 
-**Budget frame:** confident 10 ≈ £70.7m (Raya real £6.2) + bench GK £4.0 → ~£25m for 5 enablers (2 DEF + 3 MID) = comfortable; spare upgrades a cheap MID to ~6.0-6.5.
-**Caps used:** MUN 3 (Bruno/Mbeumo/Shaw) · **ARS 2** (Raya/Mosquera — CS double-up) · **NFO 2** (Williams/Igor Jesus — 1 slot freed) · **SUN 2** (Le Fée/Mukiele candidates — fresh nailed point-scorers, better than fodder; Hume/Ballard in reserve if either falls through).
+### 📌 Live-price findings (vs estimates)
+- **Watkins £8.0** = bargain (est 9.0) — best value shift in the squad.
+- **Mosquera £5.5 = Hincapié £5.5** — no price tiebreaker; the ARS CB slot is purely "who starts". Gabriel £8.0.
+- **Kroupi CONFIRMED reclassified to MID at £7.5** — the reclass thesis holds, but he's NOT cheap (same tier as Mbeumo 8.0 / Gibbs-White 8.0). GW4-WC value now depends on nailed BOU minutes, not a bargain price.
+- **Gibbs-White £8.0** (freed Forest slot) = a premium-mid choice, can't fit a cheap slot; only via dropping spine.
+- Raya £6.0 / Shaw £4.5 came in cheaper than est → funded Mosquera/Mukiele/Le Fée being ~£0.5 dearer. Nets out to a fit.
+
 
 ## 🃏 GW4-WILDCARD SHORTLIST (deferred until roles/minutes confirm)
 | Player | Trigger to promote |
 |---|---|
-| **Kroupi** (BOU MID) | Starts BOU strong XIs + GW4 = v Brentford 🟢 = ideal entry |
+| **Kroupi** (BOU MID £7.5 ✅ reclass CONFIRMED) | Nailed BOU minutes + GW4 = v Brentford 🟢. NOT cheap (£7.5 = Mbeumo tier) — must earn the mid-price slot on output |
 | **Sessegnon** (FUL DEF) | Nailed the LB role in pre-season |
 | **Diomande** (NFO CB) | Signs (⏳ LIKELY) → minutes pre-cleared |
 | **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
