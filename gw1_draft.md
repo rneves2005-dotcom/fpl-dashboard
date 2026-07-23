@@ -37,7 +37,7 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 4. **Forest CS cluster is fixture-dependent** — good GW1 (Leeds) but hard GW2 (Liverpool); don't over-commit to the triple-up as a set-and-forget.
 5. **Watkins: hold through GW2**, his fixtures ease from GW3 (Hull/Forest/Brentford).
 
-## Squad — v0.3 (⚡ LIVE 26/27 PRICES · BUILDABLE) · 4-3-3 · **fits £99.5m, £0.5 ITB**
+## Squad — v0.3 (✅ ENTERED IN FPL · LIVE PRICES) · 4-3-3 · £100.0m, £0.0 ITB
 All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU 🟢) · **VC: Bruno** (a Hull 🟢).
 
 ### 🟢 STARTING XI (4-3-3)
@@ -63,9 +63,9 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 | **Forster** (or cheapest) | BOU | 4.0 | Non-playing #2 behind Raya |
 | **Rodon** | LEE | 4.5 | Cheapest-playing DEF cover (33 st) |
 | **Hughes** | CRY | 4.5 | Nailed-ish £4.5 MID (19 st) = fodder-that-plays (auto-sub value) |
-| cheap MID | — | 4.5 | Fodder |
+| **Yarmoliuk** | BRE | 5.0 | ✅ ENTERED — nailed £5.0 mid (30 st, 104 pts), best fodder-that-plays, no cap clash. Set as FIRST bench outfield sub |
 
-**Bench total: £17.5m → SQUAD £99.5m, £0.5 ITB. MAXED — all value is in the XI; no upgrade room without downgrading the spine.**
+**Bench total: £18.0m → SQUAD £100.0m, £0.0 ITB (Yarmoliuk £5.0 in the last slot). ✅ ENTERED. Unlimited free transfers until GW1 deadline (Aug 21).**
 **Caps:** MUN 3 (Bruno/Mbeumo/Shaw) · ARS 2 (Raya/Mosquera) · NFO 2 (Williams/Igor Jesus) · SUN 2 (Le Fée/Mukiele).
 
 ### 📌 Live-price findings (vs estimates)
