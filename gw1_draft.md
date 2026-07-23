@@ -101,6 +101,26 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 - Raya £6.0 / Shaw £4.5 came in cheaper than est → funded Mosquera/Mukiele/Le Fée being ~£0.5 dearer. Nets out to a fit.
 
 
+
+## 🔍 PRE-SEASON PROTOCOL AUDIT (toolkit.html#preseason) — run Jul 23
+| Directive | Status |
+|---|---|
+| Avoid promoted teams except £4.0-4.5 enablers | ✅ zero COV/HUL/IPS |
+| SF/Final WC players: discount 20-30%, avoid opening squad | ✅ faded Porro/Senesi/Romero/Spence + deep-run premiums |
+| CHE 0.8× — don't lock CHE in opening squad | ✅ no CHE players |
+| FUL 0.8× until manager confirmed | ✅ no FUL players |
+| Opening-6 fixture clustering | ✅ real FDR pulled; MUN+SUN (best runs) are our concentrations |
+| **Haaland 0.80× (Maresca transition)** | ⚠️ DEVIATION — we captain him. Justified (NOR exited QF not SF/Final; 69.4% owned) but compounded by Rodri surgery. MONITOR. |
+| **CRY 0.8× discount** | ⚠️ minor — Hughes £4.5 bench fodder only |
+| **WC-SNUB LIST ("single biggest pre-season signal")** | ❌ **GAP — never systematically consulted during the build** |
+
+### ❌ Gap detail — the zero-fatigue snub list
+Toolkit action item was *"flag Palmer as default opening-GW captain candidate"*. Never surfaced. Full list vs our squad:
+- **Gibbs-White (NFO £8.0, 35st, 15G+4A, 188 pts)** vs our **Mbeumo (£8.0, 31st, 148 pts)** — SAME PRICE, **+40 pts**, both zero-fatigue, and NFO slot is free (2/3).
+- Foden (MCI £7.0, 131) · Palmer (CHE £9.5, 114 — CHE 0.8× rule justifies skipping) · Wharton (CRY £5.5, 112 — CRY 0.8× + heaviest WC load) · L.Hall (NEW £5.0, 79).
+
+**DECISION: keep Mbeumo for GW1–3.** The plan optimises GW1–3 and that is exactly where Mbeumo's edge sits — the fixture gap is entirely GW2 (**Ipswich H (2)** vs **Liverpool a (4)**). Gibbs-White's edge is season-long pedigree → **promote him at the GW4 wildcard** (already on that shortlist, now upgraded to TOP target).
+
 ## 🃏 GW4-WILDCARD SHORTLIST (deferred until roles/minutes confirm)
 | Player | Trigger to promote |
 |---|---|
@@ -110,6 +130,7 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 | **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
 | **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
 | **Gabriel** (ARS £8.0) | WC fatigue clears + you want the premium ARS CB |
+| **⭐ Gibbs-White (NFO £8.0)** — TOP TARGET | 188 pts, zero WC fatigue, Glasner attacking system, free Forest slot. Straight swap for Mbeumo once MUN's easy opening run ends (MUN GW4 = City H 🔴) |
 | **Watkins-type upgrades** | Whoever's proven nailed + in form by GW4 |
 
 ---
