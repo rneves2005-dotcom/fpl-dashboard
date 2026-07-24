@@ -146,6 +146,7 @@ DefCon proxy (pts/start): Mukiele 0.84 · Van Hecke 0.64 · Kadıoğlu 0.32 · *
 | **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
 | **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
 | **Gabriel** (ARS £8.0) | WC fatigue clears + you want the premium ARS CB |
+| **⭐ Harry WILSON (LEE £6.5)** — 168 pts, 0.64 G+A/90 (elite), FK specialist, now nailed creative focal point at Leeds. Potential Le Fée upgrade (+21 pts) — gated on his Leeds output level + adaptation. WAL = fresh |
 | **⭐ Senesi (TOT £6.0)** — BEST DefCon defender in the game (1.38/start). Mukiele→Senesi costs exactly our £0.5 bank for +24 pts. Gated only on his ARG-finalist return (~Aug 10), which expires by GW4 |
 | **⭐⭐ Elliot ANDERSON (MCI £6.5) — TOP GW4 TARGET** | 37 st, 180 pts, 27.7 pts/£m. **DefCon monster: 1.22 pts/start (highest measured)** = 45 of his 180 pts. Survives the move — City CMs Rodri + N.González both hit 0.94/start, so expect ~1.0 not a collapse. Central rivals only Reijnders (19 st) + N.González (17), **Rodri having back surgery**. Only gate = ENG semi-final return ~Aug 10, which EXPIRES by GW4 |
 | **⭐ Semenyo (MCI £8.5)** — 202 pts, 37 st. Manager gate REMOVED (Maresca CONFIRMED) but HOLD stands: (1) his 202 pts were **PEP-ERA** → Maresca = RE-RATING EVENT, (2) MCI 0.8× = heaviest transition discount in our model, (3) Rodri post-surgery, (4) Ghana WC load unverified. Mbeumo (confirmed fresh + best FDR 7) held for GW1-3 instead |
