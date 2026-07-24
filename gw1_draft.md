@@ -78,7 +78,7 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 | MID | **Le Fée** | SUN | 6.0 | Ips? | Fresh, 147 pts, nailed · permanent (£23M) |
 | FWD | **Haaland** (©) | MCI | 15.5 | BOU H 🟢 | Anchor · captain GW1 |
 | FWD | **Watkins** | AVL | 8.0 | Bri a 🟡 | 🔥 BARGAIN at £8.0 (est was 9.0) · THE Villa attacker |
-| FWD | **Igor Jesus** | NFO | 6.0 | Leeds H 🟢 | Budget striker · ⚠️ SOFTEST XI STARTER (28 st) + NEW manager Glasner → verify striker role in Forest friendlies |
+| FWD | **Calvert-Lewin** | LEE | 6.0 | NFO a 🟡 | ⬆️ FREE UPGRADE over Igor Jesus (Jul 23, same £6.0): 30 st vs 28 · **14 G vs 6** · 142 pts vs 114 · **PENALTIES 1st choice vs 3rd** · ZERO WC fatigue (England snub, full pre-season) · 16% owned. Drops NFO to 1 → frees Forest slots for GW4 Gibbs-White |
 
 **XI total: £82.0m**
 
@@ -132,6 +132,7 @@ Toolkit action item was *"flag Palmer as default opening-GW captain candidate"*.
 | **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
 | **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
 | **Gabriel** (ARS £8.0) | WC fatigue clears + you want the premium ARS CB |
+| **⭐ Semenyo (MCI £8.5)** — 202 pts, 37 st, but GATED on: (1) Ghana WC load unverified, (2) MCI MANAGER UNCONFIRMED, (3) Rodri post-surgery, (4) toolkit 0.80× City transition discount. Mbeumo (confirmed fresh + best FDR 7) held for GW1-3 instead |
 | **⭐ Gibbs-White (NFO £8.0)** — TOP TARGET | 188 pts, zero WC fatigue, Glasner attacking system, free Forest slot. Straight swap for Mbeumo once MUN's easy opening run ends (MUN GW4 = City H 🔴) |
 | **Watkins-type upgrades** | Whoever's proven nailed + in form by GW4 |
 
