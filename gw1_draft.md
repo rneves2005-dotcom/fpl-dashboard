@@ -136,6 +136,10 @@ Toolkit action item was *"flag Palmer as default opening-GW captain candidate"*.
 ### ⚠️ STRUCTURAL NOTE — our defence is DEFCON-LIGHT
 DefCon proxy (pts/start): Mukiele 0.84 · Van Hecke 0.64 · Kadıoğlu 0.32 · **N.Williams 0.22 · Shaw 0.18**. Our full-backs earn via assists + CS, NOT clearances/blocks — centre-backs hoover DefCon, wing-backs do not. Deliberate trade (we took the BPS attacking-FB tailwind) but it forfeits ~40-50 pts/season of reliable floor. **Fix at GW4 with a DefCon CB: Senesi (1.38/start, best in game) or Tarkowski (1.16).**
 
+
+### 🎯 STRATEGY VALIDATION (LazyFPL "points-optimal XI", Jul 24)
+A Reddit points-maximiser (u/namtabmal) built the "best possible team by last-season total points". 7 of its 11 are OURS: Raya/Bruno/Thiago (owned) + Senesi/Anderson/Gibbs-White/Semenyo (our GW4 shortlist). BUT it is a **GW4 team, not GW1** — half of it (Guéhi/Rice/Anderson/Senesi semi-finalists + Gabriel) returns ~Aug 10, unsharp. **Proves the two-phase plan: the points-optimal squad is our DESTINATION (GW4 WC), not our starting point. Our GW1 XI = that team minus the fatigued names, with fresh nailed swaps; the WC4 converges back to it once the elite are rested + roles confirmed.**
+
 ## 🃏 GW4-WILDCARD SHORTLIST (deferred until roles/minutes confirm)
 | Player | Trigger to promote |
 |---|---|
