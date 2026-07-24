@@ -95,7 +95,7 @@ Underlying quality is a coin-flip (6.7 v 6.8 ppg) so nothing is sacrificed; ALL 
 ### 🔲 BENCH (fodder — never expected to start)
 | Player | Club | £ | Note |
 |---|---|---|---|
-| **Forster** (or cheapest) | BOU | 4.0 | Non-playing #2 behind Raya |
+| **Dubravka** | TOT | 4.0 | ⬆️ FREE UPGRADE over Forster (Jul 23, same £4.0): **35 starts / 96 pts vs Forster 0 / 0**. Vicario knock gives him a real chance of playing → actual auto-sub insurance instead of a guaranteed zero. 22.8% owned. [TOT 2/3 with van Hecke] |
 | **Rodon** | LEE | 4.5 | Cheapest-playing DEF cover (33 PL st) · ⚠️ spot CONTESTED by Leeds £40M CB Muharemović · ⚠️ **REOPENED (Jul 23)** — bench enablers are judged on PRICE + DOES-HE-PLAY, not fixtures (my earlier fixture argument was starter logic in a bench role). **Rodon minutes CONTESTED**: LEE have Struijk (33st) + Bijol + **Muharemović (€40m)** for 2 CB spots. A non-playing bench player = ZERO. **TRIGGER: if pre-season XIs show Rodon displaced, swap → nailed £4.0 promoted DEF (Diop IPS / van Ewijk COV), freeing £0.5.** |
 | **Hughes** | CRY | 4.5 | Nailed-ish £4.5 MID (19 st) = fodder-that-plays (auto-sub value) |
 | **Yarmoliuk** | BRE | 5.0 | ✅ ENTERED — nailed £5.0 mid (30 st, 104 pts), best fodder-that-plays, no cap clash. Set as FIRST bench outfield sub |
