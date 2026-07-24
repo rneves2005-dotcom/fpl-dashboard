@@ -43,12 +43,13 @@ def show(code, meta, managers_only=False):
     mgr = [s for s in parts if MGR.search(s)]
 
     print(f"\n=== {code} ===")
-    mi = meta[code].get("manager_info")
-    if mi:
-        flag = "⚠️ " if str(mi.get("confidence","")).upper().startswith("LOW") else "✅ "
-        print(f"{flag}MANAGER (authoritative): {mi.get('manager')}")
-        print(f"   system: {mi.get('system')}")
-        print(f"   confidence: {mi.get('confidence')}")
+    mgr_field = meta[code].get("manager", "(not recorded)")
+    stale = "RUMOR" in mgr_field.upper() or "TBD" in mgr_field.upper()
+    print(f"{'⚠️ ' if stale else '✅ '}MANAGER: {mgr_field}")
+    if meta[code].get("system"):
+        print(f"   system: {meta[code]['system']}")
+    if meta[code].get("discount"):
+        print(f"   discount: {meta[code]['discount']}")
     print()
     if mgr:
         print("🧑‍💼 MANAGER / SYSTEM:")
@@ -69,10 +70,9 @@ def main():
     if not args or "--all" in args:
         print("=== MANAGER / SYSTEM line per club ===")
         for code in sorted(meta):
-            mi = meta[code].get("manager_info", {})
-            name = mi.get("manager", "VERIFY")
-            flag = "⚠️" if str(mi.get("confidence","")).upper().startswith("LOW") else "✅"
-            print(f"{code:5} {flag} {name:22} {str(mi.get('system',''))[:70]}")
+            mgr = meta[code].get("manager", "(not recorded)")
+            flag = "⚠️" if ("RUMOR" in mgr.upper() or "TBD" in mgr.upper()) else "✅"
+            print(f"{code:5} {flag} {mgr[:60]:62}{str(meta[code].get('discount',''))}")
         return 0
     managers_only = "--managers" in args
     for code in [a.upper() for a in args if not a.startswith("--")]:

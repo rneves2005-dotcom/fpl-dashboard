@@ -63,7 +63,7 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 **✅ RESOLVED — KEEP N.WILLIAMS, SWAP DEAD.** Forest manager = **OLIVER GLASNER** (confirmed Jul 23) = THE attacking-wing-back manager. His Palace WBs both produced ~135 pts (Muñoz 136: 4G+4A; Mitchell 135). N.Williams scored 128 WITHOUT him ⇒ that is now a FLOOR. van Hecke is a pure CB hit by CBI devaluation = wrong archetype. Williams has BOTH the system AND the BPS tailwind.
 
 ## Squad — v0.4 FINAL (✅ ENTERED & VERIFIED) · 4-3-3 · £99.5m, £0.5m ITB
-All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU 🟢) · **VC: Bruno** (a Hull 🟢).
+All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU) · **VC: Bruno** (a Hull). ⚖️ CAPTAINCY NOTE: Bruno has the better underlying case — MUN 0.85× vs MCI **0.8× (heaviest discount)**, easier fixture (Hull a = 2 vs BOU H = 3), manager CONTINUITY (Carrick) vs Maresca-new + Rodri out, AND Bruno takes penalties. Haaland stays © as the 69.4%-owned template-safe play; Bruno is the defensible differential armband.
 
 ### 🟢 STARTING XI (4-3-3)
 | Pos | Player | Club | £ | GW1 | Note |
@@ -132,7 +132,7 @@ Toolkit action item was *"flag Palmer as default opening-GW captain candidate"*.
 | **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
 | **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
 | **Gabriel** (ARS £8.0) | WC fatigue clears + you want the premium ARS CB |
-| **⭐ Semenyo (MCI £8.5)** — 202 pts, 37 st, but GATED on: (1) Ghana WC load unverified, (2) MCI MANAGER UNCONFIRMED, (3) Rodri post-surgery, (4) toolkit 0.80× City transition discount. Mbeumo (confirmed fresh + best FDR 7) held for GW1-3 instead |
+| **⭐ Semenyo (MCI £8.5)** — 202 pts, 37 st. Manager gate REMOVED (Maresca CONFIRMED) but HOLD stands: (1) his 202 pts were **PEP-ERA** → Maresca = RE-RATING EVENT, (2) MCI 0.8× = heaviest transition discount in our model, (3) Rodri post-surgery, (4) Ghana WC load unverified. Mbeumo (confirmed fresh + best FDR 7) held for GW1-3 instead |
 | **⭐ Gibbs-White (NFO £8.0)** — TOP TARGET | 188 pts, zero WC fatigue, Glasner attacking system, free Forest slot. Straight swap for Mbeumo once MUN's easy opening run ends (MUN GW4 = City H 🔴) |
 | **Watkins-type upgrades** | Whoever's proven nailed + in form by GW4 |
 
