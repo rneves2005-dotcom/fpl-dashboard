@@ -63,7 +63,7 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 **✅ RESOLVED — KEEP N.WILLIAMS, SWAP DEAD.** Forest manager = **OLIVER GLASNER** (confirmed Jul 23) = THE attacking-wing-back manager. His Palace WBs both produced ~135 pts (Muñoz 136: 4G+4A; Mitchell 135). N.Williams scored 128 WITHOUT him ⇒ that is now a FLOOR. van Hecke is a pure CB hit by CBI devaluation = wrong archetype. Williams has BOTH the system AND the BPS tailwind.
 
 ## Squad — v0.5 FINAL (all 3 upgrades applied) (✅ ENTERED & VERIFIED) · 4-3-3 · £99.5m, £0.5m ITB
-All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU) · **VC: Bruno** (a Hull). ⚖️ **CAPTAINCY — RECOMMEND SWITCH TO BRUNO (C), HAALAND (V)** (Jul 23; corroborated independently by FPL Raptor).
+All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: HAALAND** (H v BOU) · **VC: Bruno** (a Hull). ⚖️ **CAPTAINCY — HAALAND (Jul 24 REVERSION):** my earlier Bruno-© switch rested on "Bruno fresher (POR early exit)" — FALSE: Portugal reached the QF (beat Croatia, lost to Spain), SAME fatigue tier as Haaland. Freshness equal ⇒ Haaland wins on ceiling + home-to-promoted-BOU fixture + 69.7% safety.
 | | Bruno MUN | Haaland MCI |
 |---|---|---|
 | pts / **ppg** | 235 / **6.7** | 239 / **6.8** |
@@ -83,10 +83,10 @@ Underlying quality is a coin-flip (6.7 v 6.8 ppg) so nothing is sacrificed; ALL 
 | DEF | **Van Hecke** | TOT | 5.0 | Bre a 🟡 | ✅ REPLACED MOSQUERA Jul 23 — 36 st, 10 CS, 148 pts, £55m signing = nailed; best GW1-3 FDR (8); rivals fatigued/leaving. (Mosquera dropped: only 9 st, 6th in ARS queue behind Gabriel/Timber/Calafiori/Hincapié + Konsa-Stones interest) |
 | DEF | **Shaw** | MUN | 4.5 | Hull a 🟢 | Fresh nailed LB · cheap easy-fixture CS |
 | DEF | **Mukiele** | SUN | 5.5 | Ips? | Fresh, 151 pts, DEF-that-scores · permanent |
-| MID | **Bruno** (VC) | MUN | 12.0 | Hull a 🟢 | Premium engine · pens · easy openers |
+| MID | **Bruno** (VC) | MUN | 12.0 | Hull a 🟢 | Premium engine · pens · easy openers · POR QF-fatigued (NOT "fresh" — corrected) but nailed+durable |
 | MID | **Mbeumo** | MUN | 8.0 | Hull a 🟢 | Fresh (CMR no WC) · best fixture run |
 | MID | **Le Fée** | SUN | 6.0 | Ips? | Fresh, 147 pts, nailed · permanent (£23M) |
-| FWD | **Haaland** (©) | MCI | 15.5 | BOU H 🟢 | Anchor · captain GW1 |
+| FWD | **Haaland** (©) | MCI | 15.5 | BOU H 🟢 | Anchor · **CAPTAIN GW1** (home to promoted BOU + higher ceiling + 69.7% safety; freshness = equal to Bruno now POR QF confirmed) |
 | FWD | **Watkins** | AVL | 8.0 | Bri a 🟡 | 🔥 BARGAIN at £8.0 (est was 9.0) · THE Villa attacker |
 | FWD | **Calvert-Lewin** | LEE | 6.0 | NFO a 🟡 | ⬆️ FREE UPGRADE over Igor Jesus (Jul 23, same £6.0): 30 st vs 28 · **14 G vs 6** · 142 pts vs 114 · **PENALTIES 1st choice vs 3rd** · ZERO WC fatigue (England snub, full pre-season) · 16% owned. Drops NFO to 1 → frees Forest slots for GW4 Gibbs-White |
 
