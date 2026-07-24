@@ -138,6 +138,7 @@ Toolkit action item was *"flag Palmer as default opening-GW captain candidate"*.
 |---|---|
 | **Kroupi** (BOU MID £7.5) ⬇️ DOWNGRADED | 🚫 bargain thesis DEAD: priced 13th/244 but 3.4 ppm (51st) + **0.0% owned (237th)** = market-rejected. PROVE-IT only: needs early evidence of nailed+scoring MID. IF he steps up, 0.0% own = big differential; on current data a PASS (Mbeumo £8.0 better) |
 | **Sessegnon** (FUL DEF) | Nailed the LB role in pre-season |
+| **A.Robinson** (FUL DEF £4.5) | 🎯 ONLY £4.5 defender in the game ON PENALTIES (order 1). Gated on Arbeloa nailing him — 17 st last yr, FUL rotate heavily. Only worth it from a STARTING slot, not bench |
 | **Diomande** (NFO CB) | Signs (⏳ LIKELY) → minutes pre-cleared |
 | **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
 | **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
