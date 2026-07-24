@@ -144,6 +144,7 @@ Toolkit action item was *"flag Palmer as default opening-GW captain candidate"*.
 | **Gabriel** (ARS £8.0) | WC fatigue clears + you want the premium ARS CB |
 | **⭐ Semenyo (MCI £8.5)** — 202 pts, 37 st. Manager gate REMOVED (Maresca CONFIRMED) but HOLD stands: (1) his 202 pts were **PEP-ERA** → Maresca = RE-RATING EVENT, (2) MCI 0.8× = heaviest transition discount in our model, (3) Rodri post-surgery, (4) Ghana WC load unverified. Mbeumo (confirmed fresh + best FDR 7) held for GW1-3 instead |
 | **⭐ Gibbs-White (NFO £8.0)** — TOP TARGET | 188 pts, zero WC fatigue, Glasner attacking system, free Forest slot. Straight swap for Mbeumo once MUN's easy opening run ends (MUN GW4 = City H 🔴) |
+| **Muñoz / CRY assets (Sarr, Wharton)** | 🔑 GATED ON SAGE SYSTEM: does he use attacking full-backs? CRY fixtures swing GW1-3 avg 3.33 → **GW4-12 avg 2.67** (IPS H, NEW H, COV a, HUL H all ≤2). If Sage keeps Muñoz advanced, that run + his Glasner-era 136-pt profile = strong WC4 target |
 | **Watkins-type upgrades** | Whoever's proven nailed + in form by GW4 |
 
 ---
