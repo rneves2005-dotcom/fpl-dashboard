@@ -63,7 +63,17 @@ Real strategy (score all 15 in GW1), but POOR FIT for 26/27: (1) requires all 15
 **✅ RESOLVED — KEEP N.WILLIAMS, SWAP DEAD.** Forest manager = **OLIVER GLASNER** (confirmed Jul 23) = THE attacking-wing-back manager. His Palace WBs both produced ~135 pts (Muñoz 136: 4G+4A; Mitchell 135). N.Williams scored 128 WITHOUT him ⇒ that is now a FLOOR. van Hecke is a pure CB hit by CBI devaluation = wrong archetype. Williams has BOTH the system AND the BPS tailwind.
 
 ## Squad — v0.4 FINAL (✅ ENTERED & VERIFIED) · 4-3-3 · £99.5m, £0.5m ITB
-All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU) · **VC: Bruno** (a Hull). ⚖️ CAPTAINCY NOTE: Bruno has the better underlying case — MUN 0.85× vs MCI **0.8× (heaviest discount)**, easier fixture (Hull a = 2 vs BOU H = 3), manager CONTINUITY (Carrick) vs Maresca-new + Rodri out, AND Bruno takes penalties. Haaland stays © as the 69.4%-owned template-safe play; Bruno is the defensible differential armband.
+All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality picks; bench = pure fodder. **GW1 ©: Haaland** (H v BOU) · **VC: Bruno** (a Hull). ⚖️ **CAPTAINCY — RECOMMEND SWITCH TO BRUNO (C), HAALAND (V)** (Jul 23; corroborated independently by FPL Raptor).
+| | Bruno MUN | Haaland MCI |
+|---|---|---|
+| pts / **ppg** | 235 / **6.7** | 239 / **6.8** |
+| G+A | 9+24 | 27+8 |
+| penalties | 1st | **1st (also — NOT a Bruno edge; I mis-stated this earlier)** |
+| GW1 | **Hull a, diff 2** | BOU H, diff 3 |
+| discount | **0.85×** | **0.8× heaviest** |
+| manager | **Carrick continuity** | Maresca new + Rodri OUT |
+| owned | 44.6% | 69.7% |
+Underlying quality is a coin-flip (6.7 v 6.8 ppg) so nothing is sacrificed; ALL FOUR situational tiebreakers favour Bruno. Counterweight: 69.7% own Haaland, so a haul costs rank — but you still capture it at 1×.
 
 ### 🟢 STARTING XI (4-3-3)
 | Pos | Player | Club | £ | GW1 | Note |
