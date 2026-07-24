@@ -133,6 +133,9 @@ Toolkit action item was *"flag Palmer as default opening-GW captain candidate"*.
 
 **DECISION: keep Mbeumo for GW1–3.** The plan optimises GW1–3 and that is exactly where Mbeumo's edge sits — the fixture gap is entirely GW2 (**Ipswich H (2)** vs **Liverpool a (4)**). Gibbs-White's edge is season-long pedigree → **promote him at the GW4 wildcard** (already on that shortlist, now upgraded to TOP target).
 
+### ⚠️ STRUCTURAL NOTE — our defence is DEFCON-LIGHT
+DefCon proxy (pts/start): Mukiele 0.84 · Van Hecke 0.64 · Kadıoğlu 0.32 · **N.Williams 0.22 · Shaw 0.18**. Our full-backs earn via assists + CS, NOT clearances/blocks — centre-backs hoover DefCon, wing-backs do not. Deliberate trade (we took the BPS attacking-FB tailwind) but it forfeits ~40-50 pts/season of reliable floor. **Fix at GW4 with a DefCon CB: Senesi (1.38/start, best in game) or Tarkowski (1.16).**
+
 ## 🃏 GW4-WILDCARD SHORTLIST (deferred until roles/minutes confirm)
 | Player | Trigger to promote |
 |---|---|
@@ -143,6 +146,7 @@ Toolkit action item was *"flag Palmer as default opening-GW captain candidate"*.
 | **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
 | **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
 | **Gabriel** (ARS £8.0) | WC fatigue clears + you want the premium ARS CB |
+| **⭐ Senesi (TOT £6.0)** — BEST DefCon defender in the game (1.38/start). Mukiele→Senesi costs exactly our £0.5 bank for +24 pts. Gated only on his ARG-finalist return (~Aug 10), which expires by GW4 |
 | **⭐⭐ Elliot ANDERSON (MCI £6.5) — TOP GW4 TARGET** | 37 st, 180 pts, 27.7 pts/£m. **DefCon monster: 1.22 pts/start (highest measured)** = 45 of his 180 pts. Survives the move — City CMs Rodri + N.González both hit 0.94/start, so expect ~1.0 not a collapse. Central rivals only Reijnders (19 st) + N.González (17), **Rodri having back surgery**. Only gate = ENG semi-final return ~Aug 10, which EXPIRES by GW4 |
 | **⭐ Semenyo (MCI £8.5)** — 202 pts, 37 st. Manager gate REMOVED (Maresca CONFIRMED) but HOLD stands: (1) his 202 pts were **PEP-ERA** → Maresca = RE-RATING EVENT, (2) MCI 0.8× = heaviest transition discount in our model, (3) Rodri post-surgery, (4) Ghana WC load unverified. Mbeumo (confirmed fresh + best FDR 7) held for GW1-3 instead |
 | **⭐ Gibbs-White (NFO £8.0)** — TOP TARGET | 188 pts, zero WC fatigue, Glasner attacking system, free Forest slot. Straight swap for Mbeumo once MUN's easy opening run ends (MUN GW4 = City H 🔴) |
