@@ -78,7 +78,7 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 | MID | **Le Fée** | SUN | 6.0 | Ips? | Fresh, 147 pts, nailed · permanent (£23M) |
 | FWD | **Haaland** (©) | MCI | 15.5 | BOU H 🟢 | Anchor · captain GW1 |
 | FWD | **Watkins** | AVL | 8.0 | Bri a 🟡 | 🔥 BARGAIN at £8.0 (est was 9.0) · THE Villa attacker |
-| FWD | **Igor Jesus** | NFO | 6.0 | Leeds H 🟢 | Budget striker, nailed, pre-season goals |
+| FWD | **Igor Jesus** | NFO | 6.0 | Leeds H 🟢 | Budget striker · ⚠️ SOFTEST XI STARTER (28 st) + NEW manager Glasner → verify striker role in Forest friendlies |
 
 **XI total: £82.0m**
 
@@ -89,6 +89,8 @@ All prices REAL (FPL 26/27 live Jul 23). Formation 4-3-3 starts all 11 quality p
 | **Rodon** | LEE | 4.5 | Cheapest-playing DEF cover (33 PL st) · ⚠️ spot CONTESTED by Leeds £40M CB Muharemović · ⚠️ **REOPENED (Jul 23)** — bench enablers are judged on PRICE + DOES-HE-PLAY, not fixtures (my earlier fixture argument was starter logic in a bench role). **Rodon minutes CONTESTED**: LEE have Struijk (33st) + Bijol + **Muharemović (€40m)** for 2 CB spots. A non-playing bench player = ZERO. **TRIGGER: if pre-season XIs show Rodon displaced, swap → nailed £4.0 promoted DEF (Diop IPS / van Ewijk COV), freeing £0.5.** |
 | **Hughes** | CRY | 4.5 | Nailed-ish £4.5 MID (19 st) = fodder-that-plays (auto-sub value) |
 | **Yarmoliuk** | BRE | 5.0 | ✅ ENTERED — nailed £5.0 mid (30 st, 104 pts), best fodder-that-plays, no cap clash. Set as FIRST bench outfield sub |
+
+**⚠️ BENCH ORDER (auto-sub fires ONLY on a starter recording ZERO mins; a cameo BLOCKS it) → order by who actually PLAYS: 1) Yarmoliuk (30 st) · 2) Rodon (33 st, but contested) · 3) Hughes (19 st = weakest insurance). Forster = standard dead GK slot.**
 
 **Bench total: £18.0m → SQUAD £100.0m, £0.0 ITB (Yarmoliuk £5.0 in the last slot). ✅ ENTERED. Unlimited free transfers until GW1 deadline (Aug 21).**
 **Caps:** MUN 3 (Bruno/Mbeumo/Shaw) · NFO 2 (Williams/Igor Jesus) · SUN 2 (Le Fée/Mukiele) · ARS 1 (Raya) · TOT 1 (van Hecke) · rest 1 each. ✅ VERIFIED LEGAL: 15 players, 2/5/5/3, £99.5m, £0.5m ITB, max-3 respected.
