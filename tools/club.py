@@ -44,7 +44,8 @@ def show(code, meta, managers_only=False):
 
     print(f"\n=== {code} ===")
     mgr_field = meta[code].get("manager", "(not recorded)")
-    stale = "RUMOR" in mgr_field.upper() or "TBD" in mgr_field.upper()
+    U = mgr_field.upper()
+    stale = any(k in U for k in ("RUMOR", "RUMOUR", "TBD", "?", "UNCERTAIN", "ASSUMED", "LIKELY"))
     print(f"{'⚠️ ' if stale else '✅ '}MANAGER: {mgr_field}")
     if meta[code].get("system"):
         print(f"   system: {meta[code]['system']}")
@@ -71,7 +72,8 @@ def main():
         print("=== MANAGER / SYSTEM line per club ===")
         for code in sorted(meta):
             mgr = meta[code].get("manager", "(not recorded)")
-            flag = "⚠️" if ("RUMOR" in mgr.upper() or "TBD" in mgr.upper()) else "✅"
+            U = mgr.upper()
+            flag = "⚠️" if any(k in U for k in ("RUMOR", "RUMOUR", "TBD", "?", "UNCERTAIN", "ASSUMED", "LIKELY")) else "✅"
             print(f"{code:5} {flag} {mgr[:60]:62}{str(meta[code].get('discount',''))}")
         return 0
     managers_only = "--managers" in args
