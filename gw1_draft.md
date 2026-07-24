@@ -147,7 +147,7 @@ A Reddit points-maximiser (u/namtabmal) built the "best possible team by last-se
 | **Sessegnon** (FUL DEF) | Nailed the LB role in pre-season |
 | **A.Robinson** (FUL DEF £4.5) | 🎯 ONLY £4.5 defender in the game ON PENALTIES (order 1). Gated on Arbeloa nailing him — 17 st last yr, FUL rotate heavily. Only worth it from a STARTING slot, not bench |
 | **Diomande** (NFO CB) | Signs (⏳ LIKELY) → minutes pre-cleared |
-| **Chelsea LWB** (position) | Alonso back-3 confirmed + who wins it (Barco/Hato/new signing) — Grimaldo-style upside |
+| **Chelsea LWB = HATO** (£4.5) | Simplified Jul 24: Cucurella gone, Barco not in FPL squad → Hato the front-runner (on tour). Unproven (12 st); gated on Alonso back-3 + 0.8× CHE discount — low priority |
 | **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
 | **Gabriel** (ARS £8.0) | WC fatigue clears + you want the premium ARS CB |
 | **⭐ Harry WILSON (LEE £6.5)** — 168 pts, 0.64 G+A/90 (elite), FK specialist, now nailed creative focal point at Leeds. Potential Le Fée upgrade (+21 pts) — gated on his Leeds output level + adaptation. WAL = fresh |
