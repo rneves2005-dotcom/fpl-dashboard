@@ -143,7 +143,7 @@ A Reddit points-maximiser (u/namtabmal) built the "best possible team by last-se
 ## 🃏 GW4-WILDCARD SHORTLIST (deferred until roles/minutes confirm)
 | Player | Trigger to promote |
 |---|---|
-| **Kroupi** (BOU MID £7.5) ⬇️ DOWNGRADED (1st-friendly absence = neutral, squad-split game) | 🚫 bargain thesis DEAD: priced 13th/244 but 3.4 ppm (51st) + **0.0% owned (237th)** = market-rejected. PROVE-IT only: needs early evidence of nailed+scoring MID. IF he steps up, 0.0% own = big differential; on current data a PASS (Mbeumo £8.0 better) |
+| **Kroupi** (BOU MID £7.5) ⬇️⬇️ near-DEAD | 🚨 linked with a MOVE AWAY from BOU (FFScout Jul 25) — if he leaves, the whole BOU-fixtures thesis collapses. + BOU Europa League rotation. £7.5/0.0% owned. Effectively off the GW4 board unless he stays + starts + scores | 🚫 bargain thesis DEAD: priced 13th/244 but 3.4 ppm (51st) + **0.0% owned (237th)** = market-rejected. PROVE-IT only: needs early evidence of nailed+scoring MID. IF he steps up, 0.0% own = big differential; on current data a PASS (Mbeumo £8.0 better) |
 | **Sessegnon** (FUL DEF) | Nailed the LB role in pre-season |
 | **A.Robinson** (FUL DEF £4.5) | 🎯 ONLY £4.5 defender in the game ON PENALTIES (order 1). Gated on Arbeloa nailing him — 17 st last yr, FUL rotate heavily. Only worth it from a STARTING slot, not bench |
 | **Diomande** (NFO CB) | Signs (⏳ LIKELY) → minutes pre-cleared |
