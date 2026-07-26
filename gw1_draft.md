@@ -145,7 +145,7 @@ A Reddit points-maximiser (u/namtabmal) built the "best possible team by last-se
 |---|---|
 | **Kroupi** (BOU MID £7.5) ⬇️⬇️ near-DEAD | 🚨 linked with a MOVE AWAY from BOU (FFScout Jul 25) — if he leaves, the whole BOU-fixtures thesis collapses. + BOU Europa League rotation. £7.5/0.0% owned. Effectively off the GW4 board unless he stays + starts + scores | 🚫 bargain thesis DEAD: priced 13th/244 but 3.4 ppm (51st) + **0.0% owned (237th)** = market-rejected. PROVE-IT only: needs early evidence of nailed+scoring MID. IF he steps up, 0.0% own = big differential; on current data a PASS (Mbeumo £8.0 better) |
 | **Sessegnon** (FUL DEF) | ⚠️ Arbeloa 4-4-2 (RMA default) TEMPERS the attacking-WB thesis (back-4 overlap, not WB). Moderate. Competes w/ Robinson for the single LB spot |
-| **A.Robinson** (FUL DEF £4.5) | 🎯 ONLY £4.5 defender ON PENALTIES. Arbeloa 4-4-2 = one clear LB spot could SUIT him (nailed LB + pens, cleaner path than a WB system). Gated on winning the LB spot vs Sessegnon + Arbeloa nailing him. Confirm Aug 15 |
+| **A.Robinson** (FUL DEF £4.5) | 🎯 ONLY £4.5 defender ON PENALTIES. Arbeloa 4-4-2 = one clear LB spot could SUIT him (nailed LB + pens, cleaner path than a WB system). Gated on winning the LB spot vs Sessegnon. ⚠️ + ARBELOA INEXPERIENCED/UNPROVEN (RMA 2nd/no trophy, mid-table mgmt untested) = Fulham competence itself is a risk. CONDITIONAL watch, cautious. Confirm Aug 15 |
 | **Diomande** (NFO CB) | Signs (⏳ LIKELY) → minutes pre-cleared |
 | **Chelsea LWB = HATO** (£4.5) | Simplified Jul 24: Cucurella gone, Barco not in FPL squad → Hato the front-runner (on tour). Unproven (12 st); gated on Alonso back-3 + 0.8× CHE discount — low priority |
 | **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
