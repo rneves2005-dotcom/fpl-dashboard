@@ -88,7 +88,7 @@ Underlying quality is a coin-flip (6.7 v 6.8 ppg) so nothing is sacrificed; ALL 
 | MID | **Le Fée** | SUN | 6.0 | Ips? | Fresh, 147 pts, nailed · permanent (£23M) |
 | FWD | **Haaland** (©) | MCI | 15.5 | BOU H 🟢 | Anchor · **CAPTAIN GW1** (home to promoted BOU + higher ceiling + 69.7% safety; freshness = equal to Bruno now POR QF confirmed) |
 | FWD | **Watkins** | AVL | 8.0 | Bri a 🟡 | 🔥 BARGAIN at £8.0 (est was 9.0) · THE Villa attacker |
-| FWD | **Calvert-Lewin** | LEE | 6.0 | NFO a 🟡 | ⬆️ FREE UPGRADE over Igor Jesus (Jul 23, same £6.0): 30 st vs 28 · **14 G vs 6** · 142 pts vs 114 · **PENALTIES 1st choice vs 3rd** · ZERO WC fatigue (England snub, full pre-season) · 16% owned. Drops NFO to 1 → frees Forest slots for GW4 Gibbs-White |
+| FWD | **Calvert-Lewin** ⚠️ 2-CLOUD WATCH | LEE | 6.0 | NFO a 🟡 | ⬆️ FREE UPGRADE over Igor Jesus (Jul 23, same £6.0): 30 st vs 28 · **14 G vs 6** · 142 pts vs 114 · **PENALTIES 1st choice vs 3rd** · ZERO WC fatigue (England snub, full pre-season) · 16% owned. Drops NFO to 1 → frees Forest slots for GW4 Gibbs-White |
 
 **XI total: £82.0m**
 
