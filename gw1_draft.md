@@ -147,7 +147,7 @@ A Reddit points-maximiser (u/namtabmal) built the "best possible team by last-se
 | **Sessegnon** (FUL DEF) | ⚠️ Arbeloa 4-4-2 (RMA default) TEMPERS the attacking-WB thesis (back-4 overlap, not WB). Moderate. Competes w/ Robinson for the single LB spot |
 | **A.Robinson** (FUL DEF £4.5) | 🎯 ONLY £4.5 defender ON PENALTIES. Arbeloa 4-4-2 = one clear LB spot could SUIT him (nailed LB + pens, cleaner path than a WB system). Gated on winning the LB spot vs Sessegnon. ⚠️ + ARBELOA INEXPERIENCED/UNPROVEN (RMA 2nd/no trophy, mid-table mgmt untested) = Fulham competence itself is a risk. CONDITIONAL watch, cautious. Confirm Aug 15 |
 | **Diomande** (NFO CB) | Signs (⏳ LIKELY) → minutes pre-cleared |
-| **Chelsea LWB = HATO** (£4.5) | Simplified Jul 24: Cucurella gone, Barco not in FPL squad → Hato the front-runner (on tour). Unproven (12 st); gated on Alonso back-3 + 0.8× CHE discount — low priority |
+| ~~Chelsea LWB~~ ❌ DEAD (Jul 28) | Alonso plays a BACK-4 (4-2-3-1), not the back-3 the wing-back thesis needed → no Grimaldo-style LWB role. Scrapped |
 | **IPS attack** (Fatawu/Maeda/Akpom) | Whichever starts — low-owned differential |
 | **Gabriel** (ARS £8.0) | WC fatigue clears + you want the premium ARS CB |
 | **⭐⭐ Szoboszlai (LIV £7.0) — TOP GW4 target** | SALAH GONE = Szob inherits focal-point/set-pieces; ISAK injury-prone (8 st) → Szob likely takes pens; nailed 36 st + fresh + FKs + DefCon-upside (Iraola/RB). = potential ELITE £7.0. **Prime Mbeumo→Szob GW4 swap** if Mbeumo output disappoints |
