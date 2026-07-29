@@ -219,3 +219,5 @@ Keeps © on ceiling + home-to-promoted-BOU + 69.7% ownership; NO fresher premium
 Automated bracket was internally inconsistent on the FRA/ARG semi detail — only asserting consistently-stated parts (Norway R16->QF->SF, Brazil out QF, Spain champions). Defer to user (watched live) on Norway's exact exit round; decision holds QF-or-SF.
 
 > ✅ CANONICAL WC26 BRACKET now persisted in **wc26_results.md** — cite that, never re-derive. Corrected Jul 29 per user's FlashScore screenshot: Norway QF (not SF), Brazil R16, Portugal R16.
+
+> 🚑 GW4 BOARD UPDATE (Jul 29): **KROUPI OUT (Jul 29)** — foot surgery, 3-4 months (~Oct/Nov). Removed from shortlist (was 'near-dead'). No squad impact.
