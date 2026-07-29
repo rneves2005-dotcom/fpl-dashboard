@@ -178,3 +178,23 @@ Options for the freed slot: **Gibbs-White** (MID creativity, fills a cheap-MID s
 - **Diomande signing** → could take a Forest DEF slot (mind the cap)
 - **26/27 API live** → real prices for the whole board → true budget maths
 - **Perri confirmed LEE #1** → cheaper GK alternative to Sels (frees a Forest slot)
+
+---
+## 🔄 RECONCILIATION — ACTUAL ENTERED TEAM (FFH screenshot, Jul 29) · FFH Team Ranking 92% (top 8%)
+The live team differs from v0.5 FINAL above in **two** spots (both cost-neutral, both in the 15):
+- **FWD:** **Igor Thiago (BRE £8.0)** is the 2nd striker, NOT Watkins. Thiago = 37 starts (most-nailed FWD in the set), status=a, penalties (Toney gone), ZERO WC fatigue (not in Brazil squad). ✅ strong pick.
+- **DEF:** **Kadıoğlu (BHA £4.5) STARTS**, **van Hecke (TOT £5.0) on BENCH** (v0.5 had them reversed). Marginal GW1 call (both away); van Hecke benched = nailed 36-start auto-sub insurance behind DCL. Fine.
+- **⚠️ if Watkins→Thiago wasn't an intentional swap, flag it** — treating the screenshot as authoritative.
+
+**Actual XI (4-3-3):** Raya · N.Williams/Mukiele/Kadıoğlu/Shaw · B.Fernandes(VC)/Mbeumo/Le Fée · Haaland(©)/Igor Thiago/Calvert-Lewin.
+**Bench:** Dubravka · van Hecke · Yarmoliuk · Hughes.
+
+### Benchmark vs FFH AI team (4-4-2)
+- **Shared:** Raya (GK) · **Haaland © (same captain)** · **Igor Thiago (FWD)** · Calvert-Lewin (FWD). FFH BENCHES DCL (hedging the exact fitness cloud) — we start him but hold unlimited-FT optionality to deadline.
+- **FFH tilt:** premium DEFENCE (Gabriel £8.0 + Virgil £6.5) + cheaper spread mid (Bruno Guimarães £7.0, Sarr, Barnes, **Szoboszlai £7.0**). 
+- **Our tilt:** cheap defence (no DEF > £5.5) + **premium mid (Bruno Fernandes £12.0)** riding MUN's Hull+Ipswich openers. 
+- Both anchor Haaland ©; both defensible; **FFH's own model scores OUR structure 92%** → no reason to chase theirs.
+- **Note:** FFH own **Szoboszlai at GW1** (our #1 GW4-WC target). He's a fresh snub (HUN no WC) so there's NO fatigue reason we deferred — purely the WC-GW4 timing choice. Hold the plan; revisit if he hauls GW1-3.
+
+### 🩹 DCL live decision (Jul 29): MONITOR-TO-DEADLINE
+Individual training (not full team) + FPL hides it (status=a, 17.7% owned). Unlimited FTs to Aug 21 ⇒ HOLD, watch for GROUP-training return. TRIGGER: still individual/flagged/not-nailed by ~Aug 14-17 → swap pre-deadline for a fit nailed £6.0 FWD. Cameo (not zero) blocks auto-sub = the risk. No act-now.
