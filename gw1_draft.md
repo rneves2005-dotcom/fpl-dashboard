@@ -201,3 +201,19 @@ Individual training (not full team) + FPL hides it (status=a, 17.7% owned). Unli
 
 ### ⚠️ FORWARD-LINE = softest area (Jul 29): TWO clouds behind Haaland
 Haaland (Norway snub) = clean anchor/©. **Igor Thiago** (BRA QF, late-return/sharpness watch) + **Calvert-Lewin** (injury, monitor-to-deadline) BOTH carry GW1 question marks. Not alarming (Haaland carries ©-points; Thiago QF-tier should be GW1-fit; GW4 WC resets). Action: monitor Thiago's return to BRE friendlies; if BOTH shaky near deadline, firm one with a VERIFIED-fresh nailed FWD (don't assume snub status). LESSON: verify WC-squad membership before calling any player 'fresh'.
+
+---
+## 🚨 FRESHNESS MAP REBUILT FROM ACTUAL WC26 BRACKET (Jul 29) — Haaland is DEEP, not fresh
+User: *'Norway eliminated Brazil...I dont get the none from Haaland?'* Correct. I'd assumed Norway didn't qualify. ACTUAL (Wikipedia bracket): **Norway beat Ivory Coast R16 → beat BRAZIL QF → lost to Spain SEMI-FINAL.** So:
+- **Haaland (Norway) = SEMI-FINAL tier** — DEEPEST fatigue, ~Aug 10 return, the Andy-Martin 'don't touch' group. My earlier 'fresh/none' was a wrong qualification assumption. NOT fresh.
+- **Igor Thiago (Brazil) = QF** (out to Norway) — refine from R16; QF-tier late return.
+- **Bruno Fernandes (Portugal) = QF** (beat Croatia, lost Spain) — unchanged.
+- **Raya (Spain) = CHAMPION** if in squad = latest return, but set-&-forget GK (starts regardless) = low GW1 risk. Verify squad membership.
+- **Shaw (England) = SEMI** if in squad = late return; start not nailed anyway, van Hecke (NL, fresh) is bench cover. Verify squad.
+- **Mbeumo (Cameroon), N.Williams (Wales), Kadioglu (Turkey) = GROUP STAGE exits → GENUINELY FRESH** ✓ (this part of the map held).
+- **Mukiele + Le Fee (France, SF nation) — almost certainly NOT selected (not FRA regulars) → fresh; verify not in squad.**
+
+### CAPTAINCY (Jul 29): HAALAND STAYS © — but freshness rationale is VOID + fitness watch = #1
+Keeps © on ceiling + home-to-promoted-BOU + 69.7% ownership; NO fresher premium alt (Bruno QF too). **NEW #1 GW1 WATCH: is Haaland fit + STARTING + 90 min after a SF run + ~Aug-10 return?** If City ease him in, © wobbles → game-time pivot to VC Bruno / fresh option. VC Bruno also QF-fatigued = no fresh failsafe; if Haaland flagged doubtful pre-deadline, want a fresh nailed VC.
+### SOURCE CAVEAT
+Automated bracket was internally inconsistent on the FRA/ARG semi detail — only asserting consistently-stated parts (Norway R16->QF->SF, Brazil out QF, Spain champions). Defer to user (watched live) on Norway's exact exit round; decision holds QF-or-SF.
