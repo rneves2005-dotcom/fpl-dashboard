@@ -182,7 +182,7 @@ Options for the freed slot: **Gibbs-White** (MID creativity, fills a cheap-MID s
 ---
 ## 🔄 RECONCILIATION — ACTUAL ENTERED TEAM (FFH screenshot, Jul 29) · FFH Team Ranking 92% (top 8%)
 The live team differs from v0.5 FINAL above in **two** spots (both cost-neutral, both in the 15):
-- **FWD:** **Igor Thiago (BRE £8.0)** is the 2nd striker, NOT Watkins. Thiago = 37 starts (most-nailed FWD in the set), status=a, penalties (Toney gone), ZERO WC fatigue (not in Brazil squad). ✅ strong pick.
+- **FWD:** **Igor Thiago (BRE £8.0)** is the 2nd striker, NOT Watkins. 37 starts (most-nailed FWD in set), status=a, penalties (Toney gone). ⚠️ CORRECTION (Jul 29, user): Thiago WAS in Brazil's WC squad — NOT a fresh snub (I asserted that without verifying; violated verify-WC-squad discipline). Brazil = NOT semi-finalists (ESP/ARG/ENG/FRA were) → QF-tier at most, clears Andy-Martin semi bar, returns earlier than ~Aug-10 semifinalists. Role survives (nailed #9+pens) but he's a LATE-RETURN / GW1-sharpness watch, same QF tier we accepted for Bruno Fernandes. Monitor his Brentford pre-season return.
 - **DEF:** **Kadıoğlu (BHA £4.5) STARTS**, **van Hecke (TOT £5.0) on BENCH** (v0.5 had them reversed). Marginal GW1 call (both away); van Hecke benched = nailed 36-start auto-sub insurance behind DCL. Fine.
 - **⚠️ if Watkins→Thiago wasn't an intentional swap, flag it** — treating the screenshot as authoritative.
 
@@ -198,3 +198,6 @@ The live team differs from v0.5 FINAL above in **two** spots (both cost-neutral,
 
 ### 🩹 DCL live decision (Jul 29): MONITOR-TO-DEADLINE
 Individual training (not full team) + FPL hides it (status=a, 17.7% owned). Unlimited FTs to Aug 21 ⇒ HOLD, watch for GROUP-training return. TRIGGER: still individual/flagged/not-nailed by ~Aug 14-17 → swap pre-deadline for a fit nailed £6.0 FWD. Cameo (not zero) blocks auto-sub = the risk. No act-now.
+
+### ⚠️ FORWARD-LINE = softest area (Jul 29): TWO clouds behind Haaland
+Haaland (Norway snub) = clean anchor/©. **Igor Thiago** (BRA QF, late-return/sharpness watch) + **Calvert-Lewin** (injury, monitor-to-deadline) BOTH carry GW1 question marks. Not alarming (Haaland carries ©-points; Thiago QF-tier should be GW1-fit; GW4 WC resets). Action: monitor Thiago's return to BRE friendlies; if BOTH shaky near deadline, firm one with a VERIFIED-fresh nailed FWD (don't assume snub status). LESSON: verify WC-squad membership before calling any player 'fresh'.
