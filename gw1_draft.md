@@ -223,3 +223,5 @@ Automated bracket was internally inconsistent on the FRA/ARG semi detail — onl
 > 🚑 GW4 BOARD UPDATE (Jul 29): **KROUPI OUT (Jul 29)** — foot surgery, 3-4 months (~Oct/Nov). Removed from shortlist (was 'near-dead'). No squad impact.
 
 > 🔥 GW4 BOARD (Jul 29): **SZOB FIRMED (Jul 29)** — 36 st / 160 pts / 47.7% owned / £7.0, nailed central in Liverpool's REBUILT post-Salah attack (Isak £9.0 + Ekitiké + Wirtz in). Isak = supply target, not a threat to Szob minutes. Stays #1 GW4 target. Isak NOT a target for us (£9.0, injury/rotation risk).
+
+> 📉 GW4 BOARD (Jul 30): **ANDERSON OFF GW4 BOARD** — Elliot Anderson CONFIRMED Forest→Man City (£6.5 MID). His DefCon appeal (37st/180pts at Forest) doesn't survive City's possession-dominant system + stacked midfield = fewer defensive actions + minutes risk. Downgrade to 'prove nailed at City first'. **Szoboszlai now standalone #1 GW4 target.**
