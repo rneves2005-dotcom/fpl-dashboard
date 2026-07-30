@@ -221,3 +221,5 @@ Automated bracket was internally inconsistent on the FRA/ARG semi detail — onl
 > ✅ CANONICAL WC26 BRACKET now persisted in **wc26_results.md** — cite that, never re-derive. Corrected Jul 29 per user's FlashScore screenshot: Norway QF (not SF), Brazil R16, Portugal R16.
 
 > 🚑 GW4 BOARD UPDATE (Jul 29): **KROUPI OUT (Jul 29)** — foot surgery, 3-4 months (~Oct/Nov). Removed from shortlist (was 'near-dead'). No squad impact.
+
+> 🔥 GW4 BOARD (Jul 29): **SZOB FIRMED (Jul 29)** — 36 st / 160 pts / 47.7% owned / £7.0, nailed central in Liverpool's REBUILT post-Salah attack (Isak £9.0 + Ekitiké + Wirtz in). Isak = supply target, not a threat to Szob minutes. Stays #1 GW4 target. Isak NOT a target for us (£9.0, injury/rotation risk).
