@@ -17,6 +17,7 @@ Run hourly via launchd plist `com.fpl.transfer-poll.plist`.
 from __future__ import annotations
 import os
 import re
+import subprocess
 import sys
 import json
 import time
@@ -725,6 +726,26 @@ def main():
             print(f"Sync to {dest} skipped: {e}", file=sys.stderr)
 
     print(f"Sources: X={counts['X']} maisfutebol={counts['maisfutebol']} PL={counts['PL']}")
+
+    # --- Auto-push tracker to GitHub (Option A). Only reached when new entries exist.
+    # Commits ONLY the tracker file; never crashes the poll on a git error.
+    try:
+        stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+        subprocess.run(["git", "add", "Transfer_Tracker.xlsx"], cwd=str(ROOT),
+                       check=True, capture_output=True, text=True)
+        if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=str(ROOT)).returncode == 0:
+            print("git: no tracker change to commit")
+        else:
+            subprocess.run(["git", "commit", "-m", f"auto: transfer poll {stamp} · {len(keep)} new"],
+                           cwd=str(ROOT), check=True, capture_output=True, text=True)
+            push = subprocess.run(["git", "push"], cwd=str(ROOT), capture_output=True, text=True)
+            if push.returncode == 0:
+                print(f"git: pushed to GitHub · {len(keep)} new")
+            else:
+                print(f"git: PUSH FAILED (commit is local) — {push.stderr.strip()[:200]}", file=sys.stderr)
+    except Exception as exc:
+        print(f"git: sync error (non-fatal) — {exc}", file=sys.stderr)
+
     print(f"Elapsed: {time.time()-started:.1f}s")
     return 0
 
