@@ -7,6 +7,30 @@
         "from": "Bayer Leverkusen",
         "note": "CONFIRMED · ECU CB · transferred from Leverkusen to Arsenal · #5 · 23yo · ECU WC26 squad starter",
         "c": "Ecuador"
+      },
+      {
+        "n": "Piero Hincapie",
+        "from": "Bayer Leverkusen",
+        "note": "OFFICIAL (club statement) · 2026-06-25",
+        "c": ""
+      },
+      {
+        "n": "Illan Meslier",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-07-09",
+        "c": ""
+      },
+      {
+        "n": "Elijah Upson",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-07-22",
+        "c": ""
+      },
+      {
+        "n": "Christos Tzolis",
+        "from": "Club Brugge",
+        "note": "OFFICIAL (club statement) · 2026-07-23",
+        "c": ""
       }
     ],
     "Aston Villa": [
@@ -21,6 +45,18 @@
         "from": "LASK",
         "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £4.3m · CB · Austrian league",
         "c": "LASK"
+      },
+      {
+        "n": "Johan Manzambi",
+        "from": "Freiburg",
+        "note": "OFFICIAL (club statement) · 2026-07-17",
+        "c": ""
+      },
+      {
+        "n": "Joao Gomes",
+        "from": "Wolves",
+        "note": "OFFICIAL (club statement) · 2026-07-20",
+        "c": ""
       }
     ],
     "Bournemouth": [
@@ -35,6 +71,12 @@
         "from": "Liverpool",
         "note": "CONFIRMED Aug 2025 · £25m permanent · 5-yr deal · shirt name change to reflect both parents · prior Middlesbrough loan 24/25 (3G/7A in 24 apps) · SCO RW WC #17",
         "c": "Scotland"
+      },
+      {
+        "n": "Alvaro Rodriguez",
+        "from": "Elche",
+        "note": "OFFICIAL (club statement) · 2026-07-14",
+        "c": ""
       }
     ],
     "Brentford": [
@@ -43,6 +85,24 @@
         "from": "Red Bull Salzburg",
         "note": "Confirmed 26/27",
         "c": "Germany"
+      },
+      {
+        "n": "Jaidon Anthony",
+        "from": "Burnley",
+        "note": "OFFICIAL (club statement) · 2026-07-08",
+        "c": ""
+      },
+      {
+        "n": "Callum Wilson",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-07-09",
+        "c": ""
+      },
+      {
+        "n": "Sam Sene-Richardson",
+        "from": "Chatham Town",
+        "note": "OFFICIAL (club statement) · 2026-07-24",
+        "c": ""
       }
     ],
     "Brighton & Hove Albion F.C.": [
@@ -57,6 +117,30 @@
         "from": "Olympiacos",
         "note": "CONFIRMED PL Official + maisfutebol Jun 15 2026 · Portuguese player signing for BHA · POR WC squad TBC (likely NOT in 26-man so zero WC fatigue add)",
         "c": "Portugal"
+      },
+      {
+        "n": "Pascal Struijk",
+        "from": "Leeds",
+        "note": "OFFICIAL (club statement) · 2026-06-30",
+        "c": ""
+      },
+      {
+        "n": "Rodrigo Rego",
+        "from": "Benfica",
+        "note": "OFFICIAL (club statement) · 2026-07-01",
+        "c": ""
+      },
+      {
+        "n": "Michael Svoboda",
+        "from": "Venezia",
+        "note": "OFFICIAL (club statement) · 2026-07-02",
+        "c": ""
+      },
+      {
+        "n": "Luka Vuskovic",
+        "from": "Spurs",
+        "note": "OFFICIAL (club statement) · 2026-07-14",
+        "c": ""
       }
     ],
     "Chelsea": [
@@ -83,9 +167,46 @@
         "from": "Kairat",
         "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £3.5m · ST · Kazakh prodigy",
         "c": "Kairat"
+      },
+      {
+        "n": "Marco Palestra",
+        "from": "Atalanta",
+        "note": "OFFICIAL (club statement) · 2026-07-01",
+        "c": ""
+      },
+      {
+        "n": "Morgan Rogers",
+        "from": "Aston Villa",
+        "note": "OFFICIAL (club statement) · 2026-07-21",
+        "c": ""
+      },
+      {
+        "n": "Harrison Bettoni",
+        "from": "Wigan",
+        "note": "OFFICIAL (club statement) · 2026-07-23",
+        "c": ""
       }
     ],
-    "Coventry City": [],
+    "Coventry City": [
+      {
+        "n": "Frank Onyeka",
+        "from": "Brentford",
+        "note": "OFFICIAL (club statement) · 2026-06-29",
+        "c": ""
+      },
+      {
+        "n": "Loum Tchaouna",
+        "from": "Burnley",
+        "note": "OFFICIAL (club statement) · 2026-07-11",
+        "c": ""
+      },
+      {
+        "n": "Aurele Amenda",
+        "from": "Frankfurt",
+        "note": "OFFICIAL (club statement) · 2026-07-16",
+        "c": ""
+      }
+    ],
     "Crystal Palace F.C": [
       {
         "n": "Jørgen Strand Larsen",
@@ -98,6 +219,12 @@
         "from": "—",
         "note": "CONFIRMED Jun 15 2026 · 3-yr contract · ex-Lens/Lyon · vertical/transition football · replaces Glasner",
         "c": "France"
+      },
+      {
+        "n": "Oscar Mingueza",
+        "from": "Celta Vigo",
+        "note": "OFFICIAL (club statement) · 2026-07-09",
+        "c": ""
       }
     ],
     "Everton": [
@@ -106,10 +233,66 @@
         "from": "SC Freiburg",
         "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £21.6m · AM · attacking mid",
         "c": "SC Freiburg"
+      },
+      {
+        "n": "Merlin Rohl",
+        "from": "Freiburg",
+        "note": "OFFICIAL (club statement) · 2026-06-26",
+        "c": ""
+      },
+      {
+        "n": "Hayden Hackney",
+        "from": "Middlesbrough",
+        "note": "OFFICIAL (club statement) · 2026-07-02",
+        "c": ""
+      },
+      {
+        "n": "Tyrique George",
+        "from": "Chelsea",
+        "note": "OFFICIAL (club statement) · 2026-07-06",
+        "c": ""
       }
     ],
-    "Fulham": [],
-    "Hull City A.F.C.": [],
+    "Fulham": [
+      {
+        "n": "Jonah Kusi-Asare",
+        "from": "Bayern Munich",
+        "note": "OFFICIAL (club statement) · 2026-06-27",
+        "c": ""
+      }
+    ],
+    "Hull City A.F.C.": [
+      {
+        "n": "Jack Butland",
+        "from": "Rangers",
+        "note": "OFFICIAL (club statement) · 2026-07-02",
+        "c": ""
+      },
+      {
+        "n": "Ben Robinson",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-07-08",
+        "c": ""
+      },
+      {
+        "n": "Oscar Zambrano",
+        "from": "Maribor",
+        "note": "OFFICIAL (club statement) · 2026-07-21",
+        "c": ""
+      },
+      {
+        "n": "Matt Targett",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-07-23",
+        "c": ""
+      },
+      {
+        "n": "Hidemasa Morita",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-07-24",
+        "c": ""
+      }
+    ],
     "Ipswich Town": [
       {
         "n": "Chuba Akpom",
@@ -128,6 +311,48 @@
         "from": "Reims",
         "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £3.9m · CB · returning to England",
         "c": "Reims"
+      },
+      {
+        "n": "Emersonn",
+        "from": "Toulouse",
+        "note": "OFFICIAL (club statement) · 2026-07-09",
+        "c": ""
+      },
+      {
+        "n": "Chris Atherton",
+        "from": "Chelsea",
+        "note": "OFFICIAL (club statement) · 2026-07-17",
+        "c": ""
+      },
+      {
+        "n": "Kayne van Oevelen",
+        "from": "FC Volendam",
+        "note": "OFFICIAL (club statement) · 2026-07-21",
+        "c": ""
+      },
+      {
+        "n": "Abdul Fatawu",
+        "from": "Leicester City",
+        "note": "OFFICIAL (club statement) · 2026-07-21",
+        "c": ""
+      },
+      {
+        "n": "Issa Diop",
+        "from": "Fulham",
+        "note": "OFFICIAL (club statement) · 2026-07-22",
+        "c": ""
+      },
+      {
+        "n": "Daizen Maeda",
+        "from": "Celtic",
+        "note": "OFFICIAL (club statement) · 2026-07-25",
+        "c": ""
+      },
+      {
+        "n": "Kjell Scherpen",
+        "from": "Royale Union Saint-Gilloise",
+        "note": "OFFICIAL (club statement) · 2026-07-28",
+        "c": ""
       }
     ],
     "Leeds United": [
@@ -136,6 +361,18 @@
         "from": "AC Milan",
         "note": "CONFIRMED Aug 21 2025 · £18m permanent · contract until Jun 2029 · 25yo SUI FWD · 34 apps + 8G in first LEE season · in SUI WC26 squad · on bench v QAT today",
         "c": "Switzerland"
+      },
+      {
+        "n": "Harry Wilson",
+        "from": "Fulham",
+        "note": "OFFICIAL (club statement) · 2026-07-09",
+        "c": ""
+      },
+      {
+        "n": "Tarik Muharemovic",
+        "from": "Sassuolo",
+        "note": "OFFICIAL (club statement) · 2026-07-17",
+        "c": ""
       }
     ],
     "Liverpool": [
@@ -150,6 +387,18 @@
         "from": "Rennes",
         "note": "CONFIRMED Jun 15-16 2026 (window open · per club statements via Sports Mole tracker) · £55m · CB · big signing · Iraola era",
         "c": "Rennes"
+      },
+      {
+        "n": "Victor Munoz",
+        "from": "Osasuna",
+        "note": "OFFICIAL (club statement) · 2026-06-18",
+        "c": ""
+      },
+      {
+        "n": "Samuel Martinez",
+        "from": "Atletico Nacional",
+        "note": "OFFICIAL (club statement) · 2026-07-21",
+        "c": ""
       }
     ],
     "Manchester City": [
@@ -158,6 +407,24 @@
         "from": "Manchester City (extension)",
         "note": "CONFIRMED Romano Jun 15 2026 · new deal until Jun 2031 · move to Spain OFF for summer (RMA rumor dead) · 24yo CRO CB · key player for MCI rebuild · CRO WC26 squad",
         "c": "Croatia"
+      },
+      {
+        "n": "Elliot Anderson",
+        "from": "Nottingham Forest",
+        "note": "OFFICIAL (club statement) · 2026-07-02",
+        "c": ""
+      },
+      {
+        "n": "Pierce Charles",
+        "from": "Sheff Wed",
+        "note": "OFFICIAL (club statement) · 2026-07-10",
+        "c": ""
+      },
+      {
+        "n": "Jeremy Monga",
+        "from": "Leicester",
+        "note": "OFFICIAL (club statement) · 2026-07-11",
+        "c": ""
       }
     ],
     "Manchester United": [
@@ -172,6 +439,30 @@
         "from": "Atalanta (RUMOR · NOT CONFIRMED)",
         "note": "Rumored July signing per news Jun 2026 · Brazil WC call-up (replacing injured Wesley) confirmed · midfielder. NOT counted in MUN heat-map until confirmed.",
         "c": "Brazil"
+      },
+      {
+        "n": "Andrey Santos",
+        "from": "Chelsea",
+        "note": "OFFICIAL (club statement) · 2026-07-13",
+        "c": ""
+      },
+      {
+        "n": "Karl Darlow",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-07-14",
+        "c": ""
+      },
+      {
+        "n": "Youri Tielemans",
+        "from": "Aston Villa",
+        "note": "OFFICIAL (club statement) · 2026-07-14",
+        "c": ""
+      },
+      {
+        "n": "Tynan Thompson",
+        "from": "Spurs",
+        "note": "OFFICIAL (club statement) · 2026-07-20",
+        "c": ""
       }
     ],
     "Newcastle United": [
@@ -180,6 +471,30 @@
         "from": "Stade Stade Reims",
         "note": "Confirmed 26/27 · long-term contract · young French GK · fills void left by Ramsdale loan return + Ruddy/Thompson releases · likely competes with Pope or backs up",
         "c": "France"
+      },
+      {
+        "n": "Bazoumana Toure",
+        "from": "Hoffenheim",
+        "note": "OFFICIAL (club statement) · 2026-07-06",
+        "c": ""
+      },
+      {
+        "n": "Sean Steur",
+        "from": "Ajax",
+        "note": "OFFICIAL (club statement) · 2026-07-09",
+        "c": ""
+      },
+      {
+        "n": "Aladji Bamba",
+        "from": "Monaco",
+        "note": "OFFICIAL (club statement) · 2026-07-24",
+        "c": ""
+      },
+      {
+        "n": "Afner Ca",
+        "from": "Levante",
+        "note": "OFFICIAL (club statement) · 2026-07-24",
+        "c": ""
       }
     ],
     "Nottingham Forest": [
@@ -188,6 +503,12 @@
         "from": "Manchester City (free)",
         "note": "CONFIRMED Jan 2026 · free transfer · short-term deal as Sels backup after John Victor knee injury · contract ended Jun 2026 (released)",
         "c": "Germany"
+      },
+      {
+        "n": "Xaver Schlager",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-07-23",
+        "c": ""
       }
     ],
     "Sunderland A.F.C.": [
@@ -196,6 +517,12 @@
         "from": "Bayer Leverkusen",
         "note": "CONFIRMED summer 2025 · £17m (£13m + £4m add-ons) · 3-yr contract · ex-Arsenal · 32yo SUI MID · Sunderland captain · star of LEV 24/25 double-winning side under Xabi Alonso",
         "c": "Switzerland"
+      },
+      {
+        "n": "Thomas Meunier",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-07-15",
+        "c": ""
       }
     ],
     "Tottenham Hotspur": [
@@ -216,6 +543,36 @@
         "from": "Tottenham Hotspur (extension)",
         "note": "CONFIRMED Romano Jun 14 2026 · new deal signed · contract through Jun 2031 + option to Jun 2032 · POR RB · long-term TOT RB anchor confirmed · part of TOT defensive rebuild (Robertson IN free + Senesi IN free)",
         "c": "Portugal"
+      },
+      {
+        "n": "Jan Paul van Hecke",
+        "from": "Brighton",
+        "note": "OFFICIAL (club statement) · 2026-06-18",
+        "c": ""
+      },
+      {
+        "n": "Martin Dubravka",
+        "from": "?",
+        "note": "OFFICIAL (club statement) · 2026-06-24",
+        "c": ""
+      },
+      {
+        "n": "Mateus Fernandes",
+        "from": "West Ham",
+        "note": "OFFICIAL (club statement) · 2026-07-02",
+        "c": ""
+      },
+      {
+        "n": "Sandro Tonali",
+        "from": "Newcastle",
+        "note": "OFFICIAL (club statement) · 2026-07-06",
+        "c": ""
+      },
+      {
+        "n": "Cole Ramsey",
+        "from": "Aston Villa",
+        "note": "OFFICIAL (club statement) · 2026-07-08",
+        "c": ""
       }
     ]
   },

@@ -731,8 +731,15 @@ def main():
     # Commits ONLY the tracker file; never crashes the poll on a git error.
     try:
         stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-        subprocess.run(["git", "add", "Transfer_Tracker.xlsx"], cwd=str(ROOT),
-                       check=True, capture_output=True, text=True)
+        # Feed the dashboard overlays from the new OFFICIAL entries, then normalize
+        # (keeps squads.html's per-club Transfers IN/OUT current — the pipeline that
+        # used to freeze). Both are idempotent; failures are non-fatal (outer except).
+        for tool in ("refresh_overlays.py", "normalize_transfers.py"):
+            subprocess.run([sys.executable, str(ROOT / "tools" / tool)], cwd=str(ROOT),
+                           capture_output=True, text=True)
+        subprocess.run(["git", "add", "Transfer_Tracker.xlsx",
+                        "transfers_in.json", "transfers_out.json"],
+                       cwd=str(ROOT), check=True, capture_output=True, text=True)
         if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=str(ROOT)).returncode == 0:
             print("git: no tracker change to commit")
         else:
