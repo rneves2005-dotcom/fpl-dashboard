@@ -2,6 +2,15 @@
 **Manager:** Rui Neves · draft.premierleague.com · standard FPL scoring (goals-by-pos, A=3, CS, DefCon+2, bonus, saves, pens)
 
 > **Draft ≠ Classic.** No budget (price irrelevant). Unique ownership + snake draft. Minutes matter MORE (no free transfer market — benched = dead weight, only waivers). Set-pieces/DefCon travel over.
+
+## 📜 RULES (VERIFIED vs official draft.premierleague.com/help — Aug 3)
+- **Squad 15**: 2 GK / 5 DEF / 5 MID / 3 FWD. Start 11/GW, valid formations, auto-subs (like classic).
+- **NO budget, unique ownership, snake draft.**
+- **🔑 NO CAPTAIN** (verified) — no points doubled ⇒ balance/consistency > top-heavy; Haaland still #1 but NO 2× armband premium, so the drop Haaland→next elite FWD is smaller than in classic.
+- **NO CHIPS** (no WC/TC/BB/FH).
+- **Scoring = standard FPL incl. DefCon + bonus + assists** ⇒ all our DefCon targets (Muharemović/Tarkowski/Florentino) valid.
+- **Transactions (no transfer market):** Waivers process ~24h before deadline (48h before season start), priority = reverse standings; then Free Agency (first-come); Trades pending 24h w/ league veto (~50% blocks); new PL players locked 24h.
+- ⚠️ TO CONFIRM: whether Draft keeps classic's max-3-per-club (likely dropped — can stack a club — but unverified).
 > Ranks = 25/26 total points ADJUSTED for 26/27 (transfers, new managers, WC fatigue, injuries). **Refine once league SIZE + your DRAFT SLOT are known.**
 
 ## 🎯 Core strategy
