@@ -69,8 +69,22 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 - **MID = DEEP** → can wait, load up mid-rounds
 - **GK = FLAT** → wait; take Raya or any top-6 keeper mid-draft
 
-## TO REFINE (need from user)
-- **League size** (8/10/12 teams) — sets board depth + how hard scarcity bites
-- **Your draft slot** (snake position) — shapes R1 pick + pairing strategy
-- **Scoring variant** (Draft-Classic vs Draft-H2H)
-- Draft date
+## ✅ LEAGUE = 4 TEAMS (locked) — strategy calibration
+- **60 players drafted total** (4×15) → **you'll have a STACKED squad**; edge = discipline, not landing studs (you will).
+- **Waiver pool is strong** (ranks ~60–100 undrafted) → DON'T hoard depth or reach for sleepers early; draft the best NAILED asset each round, grab useful FAs later.
+- **Scarcity is soft** → luxury of only drafting proven, non-rotation-risk players → **let the entire Man City logjam slide to rivals.**
+- **Slot matters less** (every seat gets 3–4 elites). Slot 1 = pick 1 then 8&9; turn slots (2–3) more evenly spaced.
+
+### 4-team round plan
+| Rounds | Action |
+|---|---|
+| 1–2 | 2 elite anchors (whatever falls: Haaland/Bruno/Gabriel/Gibbs-White/Rice/Igor Thiago/Virgil/Watkins) |
+| 3–5 | Tier-3 nailed studs, balance positions (Tarkowski, Szob, Mbeumo, DCL, Le Fée) |
+| 6–10 | Fill 2/5/5/3 with nailed starters + set-piece takers; **#1 GK here** (Raya-tier, don't reach); SKIP City rotation guys |
+| 11–15 | Bench depth + 1–2 upside swings (Muharemović/Florentino/Igor Jesus) + #2 GK |
+
+**Golden rule (4-team):** talent is abundant → NEVER draft a rotation risk over a nailed starter. Let rivals gamble on the City-influx names' pre-City numbers.
+
+### Still helps to know
+- **Your draft slot** (or randomised) — I'll tailor R1 + the turn
+- **Scoring** (Draft-Classic vs Draft-H2H) · **Draft date**
