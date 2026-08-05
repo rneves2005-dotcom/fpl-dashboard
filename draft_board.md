@@ -49,7 +49,7 @@
 | **Calvert-Lewin** | FWD | LEE | 142 | 14G, pens, fit + scoring (brace v LIV) — scarce FWD |
 | **Le Fée** | MID | SUN | 147 | pens, pre-season star man (3 goals) |
 | **João Pedro** | FWD | CHE | 177 | 15G+9A but Chelsea rotation risk — talented, volatile |
-| **Semenyo** | MID | MCI | 202 | ⬆️ UPGRADED (user eye-test + pre-season): marquee STARTER starring at City (MOTM v Inter, 2A v K-League). City chance-creation offsets shared usage. Strong pick — NOT a trap. Caveat: minor Maresca rotation across comps |
+| **Semenyo** | MID | MCI | 202 | ✅ STRONG PICK (corrected): moved to City MID-25/26 (Jan), NOT a summer adaptee — already PROVEN there: **7G in 17 City apps** (avg 7.0) + 10G/20 at BOU same yr = 202pts. Rate held (0.5→0.41 g/gm) in a better team. In pre-season form. Tier-2-worthy |
 
 ### TIER 4 — Round 4–7 (solid, some with caveats)
 Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Romero late) · Gakpo (LIV MID 131) · Cunha (MUN MID 143, new club) · Enzo (CHE MID 157, rotation) · Muñoz (CRY DEF 136, gated on Sage shape) · Mitchell (CRY DEF 135) · Zubimendi (ARS MID 133, DefCon) · Kelleher (BRE GK 143) · Roefs/Pickford/Henderson (GK ~135)
