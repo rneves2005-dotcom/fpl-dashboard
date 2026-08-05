@@ -56,13 +56,14 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 ### 💎 SLEEPERS / late-round value
 - **Muharemović** (LEE DEF) — elite DefCon (17/90 WC), nailed vs LIV — cheap-quality defender
 - **Florentino** (IPS MID) — 13.4 DefCon/90, DefCon-MID (gated on full-90 minutes)
+- **Sangaré** (BRE MID) — record signing, FFH-flagged 'DefCon magnet' — cheap DefCon-MID sleeper (also threatens our classic Yarmoliuk bench slot)
 - **Igor Jesus** (NFO FWD) — 4 pre-season goals, breakout potential
 - **Wirtz** (LIV MID) — #10, high ceiling, adapting (differential)
 
 ## 🚨 TRAPS — high 25/26 points, real 26/27 risk (let others overpay)
 | Player | 25/26 | Trap |
 |---|---|---|
-| Semenyo | MCI 202 | ⚠️ moved BOU→City = rotation risk under Maresca |
+| Semenyo | MCI 202 | ⚠️ 202pts was BOU-TALISMAN usage; at City = stacked attack + Maresca rotation ⇒ REGRESSION. Trap = drafting at his 202 REPUTATION (early). Fine mid-round upside (producing in pre-season), NOT an early lock |
 | E.Anderson | MCI 180 | ⚠️ NFO→City = stacked midfield, minutes uncertain |
 | Guéhi | MCI 179 | ⚠️ CRY→City = rotation + fewer attacking returns |
 | Senesi | TOT 175 | ⚠️ BOU→Spurs = behind Romero/van de Ven |
