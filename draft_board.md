@@ -17,7 +17,7 @@
 1. **Draft scarce positions early.** FWD is SHALLOW (few elites), elite DEF is scarce. MID is DEEP and GK is flat — so you can WAIT on those. Prioritise a top forward + an elite defender before the runs.
 2. **Best Player Available, weighted by scarcity.** Early rounds = grab elite talent; don't reach for need.
 3. **Nailed minutes + set-piece duty = reliable points.** In Draft you can't churn — draft players who START and take pens/FKs/corners.
-4. **🚨 AVOID THE MAN CITY LOGJAM.** City loaded up (Semenyo, E.Anderson, Guéhi, Cherki, M.Nunes, Donnarumma) + Haaland/Foden under a NEW manager (Maresca). Minutes hugely uncertain — DON'T over-draft City on last-year's points. Haaland is the only safe City pick.
+4. **🚨 CITY LOGJAM — but distinguish STARTERS from DEPTH.** City loaded up under Maresca. The real rotation gambles = squad-DEPTH additions (**E.Anderson, Guéhi, Cherki, M.Nunes**) — fade those. But marquee STARTERS are fine: **Haaland (safe), Semenyo (starring in pre-season)**. Don't blanket-avoid City — avoid the depth pieces.
 5. **Don't reach for GK.** The top ~6 keepers are close (Raya best). Take your #1 in the mid rounds, #2 late.
 
 ## 🏆 THE BOARD (tiered, snake-draft order)
@@ -49,6 +49,7 @@
 | **Calvert-Lewin** | FWD | LEE | 142 | 14G, pens, fit + scoring (brace v LIV) — scarce FWD |
 | **Le Fée** | MID | SUN | 147 | pens, pre-season star man (3 goals) |
 | **João Pedro** | FWD | CHE | 177 | 15G+9A but Chelsea rotation risk — talented, volatile |
+| **Semenyo** | MID | MCI | 202 | ⬆️ UPGRADED (user eye-test + pre-season): marquee STARTER starring at City (MOTM v Inter, 2A v K-League). City chance-creation offsets shared usage. Strong pick — NOT a trap. Caveat: minor Maresca rotation across comps |
 
 ### TIER 4 — Round 4–7 (solid, some with caveats)
 Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Romero late) · Gakpo (LIV MID 131) · Cunha (MUN MID 143, new club) · Enzo (CHE MID 157, rotation) · Muñoz (CRY DEF 136, gated on Sage shape) · Mitchell (CRY DEF 135) · Zubimendi (ARS MID 133, DefCon) · Kelleher (BRE GK 143) · Roefs/Pickford/Henderson (GK ~135)
@@ -63,7 +64,6 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 ## 🚨 TRAPS — high 25/26 points, real 26/27 risk (let others overpay)
 | Player | 25/26 | Trap |
 |---|---|---|
-| Semenyo | MCI 202 | ⚠️ 202pts was BOU-TALISMAN usage; at City = stacked attack + Maresca rotation ⇒ REGRESSION. Trap = drafting at his 202 REPUTATION (early). Fine mid-round upside (producing in pre-season), NOT an early lock |
 | E.Anderson | MCI 180 | ⚠️ NFO→City = stacked midfield, minutes uncertain |
 | Guéhi | MCI 179 | ⚠️ CRY→City = rotation + fewer attacking returns |
 | Senesi | TOT 175 | ⚠️ BOU→Spurs = behind Romero/van de Ven |
