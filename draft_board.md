@@ -60,6 +60,7 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 - **Sangaré** (BRE MID) — record signing, FFH-flagged 'DefCon magnet' — cheap DefCon-MID sleeper (also threatens our classic Yarmoliuk bench slot)
 - **Igor Jesus** (NFO FWD) — 4 pre-season goals, breakout potential
 - **Wirtz** (LIV MID) — #10, high ceiling, adapting (differential)
+- **Nørgaard** (→EVE MID £5.0) — DEEP/waiver only: Brentford DefCon pedigree BUT just 1 start/101min at Arsenal 25/26 + unproven EVE role. Minutes red flag (xMin-first) — behind Florentino/Sangaré; FA target IF he starts at Everton
 
 ## 🚨 TRAPS — high 25/26 points, real 26/27 risk (let others overpay)
 | Player | 25/26 | Trap |
