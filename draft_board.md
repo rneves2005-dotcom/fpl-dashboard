@@ -52,7 +52,7 @@
 | **Semenyo** | MID | MCI | 202 | ✅ STRONG PICK (corrected): moved to City MID-25/26 (Jan), NOT a summer adaptee — already PROVEN there: **7G in 17 City apps** (avg 7.0) + 10G/20 at BOU same yr = 202pts. Rate held (0.5→0.41 g/gm) in a better team. In pre-season form. Tier-2-worthy |
 
 ### TIER 4 — Round 4–7 (solid, some with caveats)
-Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Romero late) · Gakpo (LIV MID 131) · Cunha (MUN MID 143, new club) · Enzo (CHE MID 157, rotation) · Muñoz (CRY DEF 136, gated on Sage shape) · Mitchell (CRY DEF 135) · Zubimendi (ARS MID 133, DefCon) · Kelleher (BRE GK 143) · Roefs/Pickford/Henderson (GK ~135) · **Trafford** (LEE GK, new £40m nailed #1 — SAVE-heavy at shot-facing Leeds, viable mid/late draft GK)
+Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Romero late) · Gakpo (LIV MID 131) · Cunha (MUN MID 143, new club) · Enzo (CHE MID 157, rotation) · Muñoz (CRY DEF 136, gated on Sage shape) · Mitchell (CRY DEF 135) · Zubimendi (ARS MID 133, DefCon — ⚠️ rotation cloud, ARS midfield now stacked w/ Bruno G) · Kelleher (BRE GK 143) · Roefs/Pickford/Henderson (GK ~135) · **Trafford** (LEE GK, new £40m nailed #1 — SAVE-heavy at shot-facing Leeds, viable mid/late draft GK)
 
 ### 💎 SLEEPERS / late-round value
 - **Muharemović** (LEE DEF) — elite DefCon (17/90 WC), nailed vs LIV — cheap-quality defender
@@ -73,6 +73,7 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 | Garner / Timber / Saliba | injured | ⚠️ injury flags — discount on draft day |
 | **Salah** | — | GONE from PL (left) — not draftable |
 | **Palmer** (CHE) | <131 | Name-brand but 25/26 output outside top-55 — reputation ≠ output, don't overpay |
+| **Bruno G.** (NEW→ARS) | 154 | ⚠️ £75m to Arsenal but STACKED midfield (Rice/Ødegaard/Zubimendi/Merino/Partey) → likely DEEPER #8 role ⇒ his NEW attacking output (9G/7A) probably regresses. Unproven at ARS = wait-and-see, NOT a pick at his reputation |
 
 ## Position-scarcity cheat sheet
 - **FWD = SHALLOW** → prioritise (Haaland → Igor Thiago/Watkins/DCL/João Pedro, then a cliff)
