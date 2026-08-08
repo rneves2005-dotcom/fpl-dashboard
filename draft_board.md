@@ -56,7 +56,7 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 
 ### 💎 SLEEPERS / late-round value
 - **Muharemović** (LEE DEF) — elite DefCon (17/90 WC), nailed vs LIV — cheap-quality defender
-- **Florentino** (IPS MID) — 13.4 DefCon/90, DefCon-MID (gated on full-90 minutes — ⚠️ Lukić now competing for the central-mid spot, minutes harder to lock; could partner in a pivot but PROVE-IT-first)
+- **Florentino** (IPS MID) — 13.4 DefCon/90, DefCon-MID. ✅ Nailedness advancing: STARTED v Rayo (Aug 8), Lukić NOT in XI = ahead of the competition. Last tick = confirm full-90 minutes (DefCon needs them). Upgrading watch→likely draftable if 90s hold
 - **Sangaré** (BRE MID) — record signing, FFH-flagged 'DefCon magnet' — cheap DefCon-MID sleeper (also threatens our classic Yarmoliuk bench slot)
 - **Igor Jesus** (NFO FWD) — 4 pre-season goals, breakout potential
 - **Wirtz** (LIV MID) — #10, high ceiling, adapting (differential)
