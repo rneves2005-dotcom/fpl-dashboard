@@ -83,8 +83,8 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 - **MID = DEEP** → can wait, load up mid-rounds
 - **GK = FLAT** → wait; take Raya or any top-6 keeper mid-draft
 
-## ✅ LEAGUE = 5 TEAMS (locked) — strategy calibration
-- **75 players drafted total** (5×15) → **you'll have a STACKED squad**; edge = discipline, not landing studs (you will).
+## ✅ LEAGUE = 6 TEAMS (locked) — strategy calibration
+- **90 players drafted total** (6×15) → **you'll have a STACKED squad**; edge = discipline, not landing studs (you will).
 - **Waiver pool is strong** (ranks ~60–100 undrafted) → DON'T hoard depth or reach for sleepers early; draft the best NAILED asset each round, grab useful FAs later.
 - **Scarcity is soft** → luxury of only drafting proven, non-rotation-risk players → **let the entire Man City logjam slide to rivals.**
 - **Slot matters less** (every seat gets multiple elites). Slot 1 = pick 1 then 10&11; scarcity a touch tighter than 4-team but still soft.
@@ -120,3 +120,15 @@ AVOID: E.Anderson/Guéhi/Cherki (City depth), Bruno G. (ARS deeper role), Senesi
 - Exception: only a scarce elite LIV/CHE (Virgil DEF) is worth taking EARLY if wanted — but Gabriel/Tarkowski cover it, skip.
 - If CHE fan burns an early pick on PALMER (reputation trap) — LET HIM (wasted slot = value for us).
 - NB: draft-only. Szob stays #1 GW4 target in CLASSIC (everyone can own him there).
+
+## 🕵️ OPPONENT MAP (6-team — THREE loyalty drafters!)
+| Rival | Bias | Strategy |
+|---|---|---|
+| Stephen Flanagan | Liverpool 🔴 | CEDE LIV. Baited by team name 'Rui Will Get Wirtz' — if he reaches for Wirtz to spite us = wasted pick, we never wanted it |
+| Kevin Fleming | Arsenal 🔴 | CEDE ARS — incl. **Gabriel (lose our #3)**, Rice, Saka, **Raya**, Zubimendi |
+| [Chelsea fan] (Jordan?) | Chelsea 🔵 | CEDE CHE. LET him take Palmer (reputation trap) |
+| Simão | Man Utd (NOT fanatic) | Value drafter — take **Bruno/Mbeumo EARLY** before him |
+| Jordan | unknown | neutral until confirmed |
+**KEY PIVOT:** 2 of 3 elite DEFs gone to fans (Gabriel→Kevin, Virgil→Stephen) ⇒ **TARKOWSKI (EVE) = our elite DEF** (un-hoarded, falls to us). GK = non-Arsenal (Kelleher/Roefs/Pickford — Kevin takes Raya).
+**EDGE:** 3 rivals cluster on LIV/CHE/ARS ⇒ City/United/Forest/Everton/Leeds/Villa/SUN/BRE all funnel to us = basically our whole board.
+### Realistic priority (un-hoarded): 1 Haaland 2 Bruno(early) 3 Igor Thiago 4 Gibbs-White 5 Tarkowski 6 Watkins 7 Mbeumo 8 Semenyo 9 DCL 10 Le Fée → Mukiele/vanHecke/Ampadu/Muharemović/Sangaré/Muñoz + non-ARS GK.
