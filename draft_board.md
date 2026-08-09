@@ -126,9 +126,9 @@ AVOID: E.Anderson/Guéhi/Cherki (City depth), Bruno G. (ARS deeper role), Senesi
 |---|---|---|
 | Stephen Flanagan | Liverpool 🔴 | CEDE LIV. Baited by team name 'Rui Will Get Wirtz' — if he reaches for Wirtz to spite us = wasted pick, we never wanted it |
 | Kevin Fleming | Arsenal 🔴 | CEDE ARS — incl. **Gabriel (lose our #3)**, Rice, Saka, **Raya**, Zubimendi |
-| [Chelsea fan] (Jordan?) | Chelsea 🔵 | CEDE CHE. LET him take Palmer (reputation trap) |
+| Jordan | Chelsea 🔵 (CONFIRMED) | CEDE CHE. LET him take Palmer (reputation trap) |
 | Simão | Man Utd (NOT fanatic) | Value drafter — take **Bruno/Mbeumo EARLY** before him |
-| Jordan | unknown | neutral until confirmed |
+| Miguel | DOESN'T KNOW SOCCER (NFL/Cowboys fan) | WILDCARD — name-recognition/auto-draft = weak team. Won't recognise our value picks (feast). RISK: may name-grab HAALAND ⇒ take Haaland ASAP, don't assume he falls |
 **KEY PIVOT:** 2 of 3 elite DEFs gone to fans (Gabriel→Kevin, Virgil→Stephen) ⇒ **TARKOWSKI (EVE) = our elite DEF** (un-hoarded, falls to us). GK = non-Arsenal (Kelleher/Roefs/Pickford — Kevin takes Raya).
-**EDGE:** 3 rivals cluster on LIV/CHE/ARS ⇒ City/United/Forest/Everton/Leeds/Villa/SUN/BRE all funnel to us = basically our whole board.
+**EDGE:** You are the ONLY value-drafter (3 loyalists LIV/CHE/ARS + Simão mild-MUN + Miguel clueless). ENTIRE value pool funnels to one seat = yours. Only protect the biggest names (Haaland) from Miguel's name-grab — take early.
 ### Realistic priority (un-hoarded): 1 Haaland 2 Bruno(early) 3 Igor Thiago 4 Gibbs-White 5 Tarkowski 6 Watkins 7 Mbeumo 8 Semenyo 9 DCL 10 Le Fée → Mukiele/vanHecke/Ampadu/Muharemović/Sangaré/Muñoz + non-ARS GK.
