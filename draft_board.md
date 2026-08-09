@@ -110,3 +110,13 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 19 Ampadu MID · 20 Muharemović DEF · 21 Sangaré MID · 22 Raya GK · 23 Gakpo MID · 24 Wharton MID · 25 Caicedo MID · 26 Muñoz/Mitchell DEF
 R10-15: Igor Jesus, Wirtz, Florentino, Cunha, #2 GK (Kelleher/Roefs/Pickford). Waiver radar: Vušković, Hume.
 AVOID: E.Anderson/Guéhi/Cherki (City depth), Bruno G. (ARS deeper role), Senesi, H.Wilson, Palmer(rep trap). Salah gone.
+
+## 🕵️ OPPONENT INTEL (5-team) — 2 rivals are Liverpool & Chelsea fans (loyalty drafters)
+**CEDE Liverpool & Chelsea entirely** — don't fight the fans for their clubs' players (you don't need any).
+- Let LIV fan hoard Szoboszlai/Virgil/Wirtz/Gakpo; let CHE fan grab João Pedro/Caicedo/Enzo/Palmer.
+- Their bias = every OTHER club's players fall further to you (= your whole board: MCI/ARS/MUN/NFO/EVE/LEE/AVL/SUN). Premium value.
+- Loyalty picks = lopsided/weaker rival squads; you draft on VALUE, win the roster.
+- DE-PRIORITISE LIV/CHE names on the list (assume gone, don't reach).
+- Exception: only a scarce elite LIV/CHE (Virgil DEF) is worth taking EARLY if wanted — but Gabriel/Tarkowski cover it, skip.
+- If CHE fan burns an early pick on PALMER (reputation trap) — LET HIM (wasted slot = value for us).
+- NB: draft-only. Szob stays #1 GW4 target in CLASSIC (everyone can own him there).
