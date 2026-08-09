@@ -83,11 +83,11 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 - **MID = DEEP** → can wait, load up mid-rounds
 - **GK = FLAT** → wait; take Raya or any top-6 keeper mid-draft
 
-## ✅ LEAGUE = 4 TEAMS (locked) — strategy calibration
-- **60 players drafted total** (4×15) → **you'll have a STACKED squad**; edge = discipline, not landing studs (you will).
+## ✅ LEAGUE = 5 TEAMS (locked) — strategy calibration
+- **75 players drafted total** (5×15) → **you'll have a STACKED squad**; edge = discipline, not landing studs (you will).
 - **Waiver pool is strong** (ranks ~60–100 undrafted) → DON'T hoard depth or reach for sleepers early; draft the best NAILED asset each round, grab useful FAs later.
 - **Scarcity is soft** → luxury of only drafting proven, non-rotation-risk players → **let the entire Man City logjam slide to rivals.**
-- **Slot matters less** (every seat gets 3–4 elites). Slot 1 = pick 1 then 8&9; turn slots (2–3) more evenly spaced.
+- **Slot matters less** (every seat gets multiple elites). Slot 1 = pick 1 then 10&11; scarcity a touch tighter than 4-team but still soft.
 
 ### 4-team round plan
 | Rounds | Action |
@@ -102,3 +102,11 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 ### Still helps to know
 - **Your draft slot** (or randomised) — I'll tailor R1 + the turn
 - **Scoring** (Draft-Classic vs Draft-H2H) · **Draft date**
+
+## 🎯 DRAFT PRIORITY LIST (5-team — take highest available, obey scarcity rules)
+**Rules override ranking:** (1) lock a top FWD in first 3–4 picks (shallow); (2) grab 1 elite DEF early (Gabriel/Virgil/Tarkowski); (3) NEVER reach GK (wait ~R8); fade City DEPTH.
+1 Haaland FWD · 2 B.Fernandes MID · 3 Gabriel DEF · 4 Igor Thiago FWD · 5 Gibbs-White MID · 6 Rice MID · 7 Semenyo MID · 8 Watkins FWD · 9 Virgil DEF · 10 Szoboszlai MID
+11 Calvert-Lewin FWD · 12 Tarkowski DEF · 13 Mbeumo MID · 14 João Pedro FWD · 15 Saka MID · 16 Le Fée MID · 17 Mukiele DEF · 18 Van Hecke DEF
+19 Ampadu MID · 20 Muharemović DEF · 21 Sangaré MID · 22 Raya GK · 23 Gakpo MID · 24 Wharton MID · 25 Caicedo MID · 26 Muñoz/Mitchell DEF
+R10-15: Igor Jesus, Wirtz, Florentino, Cunha, #2 GK (Kelleher/Roefs/Pickford). Waiver radar: Vušković, Hume.
+AVOID: E.Anderson/Guéhi/Cherki (City depth), Bruno G. (ARS deeper role), Senesi, H.Wilson, Palmer(rep trap). Salah gone.
