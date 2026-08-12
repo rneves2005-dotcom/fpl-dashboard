@@ -36,7 +36,7 @@
 | **Rice** | MID | ARS | 184 | elite all-round (G/A/CS/bonus), nailed |
 | **Igor Thiago** | FWD | BRE | 181 | 22G, pens, nailed #9 (scarce FWD) |
 | **Virgil** | DEF | LIV | 175 | elite nailed CB (watch Iraola high-press = fewer CS) |
-| **Watkins** | FWD | AVL | 167 | 16G, pens, nailed Villa #9 (scarce FWD). ✅ absence = REST (not injury, per PSG-game missing list — Emery managing returning WC/senior players) = FIT, ranking fully intact |
+| ~~Watkins~~ | FWD | AVL | 167 | 🚨 TRANSFER RISK — reported AGREEMENT to join FENERBAHÇE (Turkey). 'Rest' from Super Cup = held out for the move (user caught it; only 6 WC mins = no fatigue). If he goes = LEAVES PL, NOT DRAFTABLE. DO NOT COUNT ON — draft only if move collapses + confirmed staying |
 
 ### TIER 3 — Round 2–4 (strong nailed starters)
 | Player | Pos | Tm | pts | Note |
@@ -78,7 +78,7 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 | **Bruno G.** (NEW→ARS) | 154 | ⚠️ £75m to Arsenal but STACKED midfield (Rice/Ødegaard/Zubimendi/Merino/Partey) → likely DEEPER #8 role ⇒ his NEW attacking output (9G/7A) probably regresses. Unproven at ARS = wait-and-see, NOT a pick at his reputation |
 
 ## Position-scarcity cheat sheet
-- **FWD = SHALLOW** → prioritise (Haaland → Igor Thiago/Watkins/DCL/João Pedro, then a cliff)
+- **FWD = SHALLOW → TIGHTER** (Watkins transfer-risk to Fenerbahçe) → prioritise Haaland → **Igor Thiago / DCL** (your anchors) → Igor Jesus depth. FWD scarcity tightened — secure a top FWD early.
 - **elite DEF = SCARCE** (Gabriel/Virgil/Tarkowski) → grab one early, then depth
 - **MID = DEEP** → can wait, load up mid-rounds
 - **GK = FLAT** → wait; take Raya or any top-6 keeper mid-draft
