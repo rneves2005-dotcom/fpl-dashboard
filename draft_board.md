@@ -36,7 +36,7 @@
 | **Rice** | MID | ARS | 184 | elite all-round (G/A/CS/bonus), nailed |
 | **Igor Thiago** | FWD | BRE | 181 | 22G, pens, nailed #9 (scarce FWD) |
 | **Virgil** | DEF | LIV | 175 | elite nailed CB (watch Iraola high-press = fewer CS) |
-| **Watkins** | FWD | AVL | 167 | 16G, pens, nailed Villa #9 (scarce FWD). ⚠️ absent from pre-season friendlies (no injury flag — likely ENG WC late-return/rotation) — confirm featuring+sharp before draft day |
+| **Watkins** | FWD | AVL | 167 | 16G, pens, nailed Villa #9 (scarce FWD). ✅ absence = REST (not injury, per PSG-game missing list — Emery managing returning WC/senior players) = FIT, ranking fully intact |
 
 ### TIER 3 — Round 2–4 (strong nailed starters)
 | Player | Pos | Tm | pts | Note |
