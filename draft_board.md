@@ -52,7 +52,7 @@
 | **Semenyo** | MID | MCI | 202 | ✅ STRONG PICK (corrected): moved to City MID-25/26 (Jan), NOT a summer adaptee — already PROVEN there: **7G in 17 City apps** (avg 7.0) + 10G/20 at BOU same yr = 202pts. Rate held (0.5→0.41 g/gm) in a better team. In pre-season form. Tier-2-worthy |
 
 ### TIER 4 — Round 4–7 (solid, some with caveats)
-Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Romero late) · Gakpo (LIV MID 131) · Cunha (MUN MID 143, new club) · Enzo (CHE MID 157, rotation) · Muñoz (CRY DEF 136, gated on Sage shape) · Mitchell (CRY DEF 135) · Zubimendi (ARS MID 133, DefCon — ⚠️ rotation cloud, ARS midfield now stacked w/ Bruno G) · Kelleher (BRE GK 143) · Roefs/Pickford/Henderson (GK ~135) · **Trafford** (LEE GK, new £40m nailed #1 — SAVE-heavy at shot-facing Leeds, viable mid/late draft GK)
+Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Romero late) · Gakpo (LIV MID 131) · Cunha (MUN MID 143, new club) · Enzo (CHE MID 157, rotation) · Muñoz (CRY DEF 136, gated on Sage shape) · Mitchell (CRY DEF 135) · Zubimendi (ARS MID 133, DefCon — ⚠️ rotation cloud, ARS midfield now stacked w/ Bruno G) · Ndiaye (EVE MID 128, ON PENS + nailed EVE attacker, 6G/3A — solid mid-round MID depth) · Kelleher (BRE GK 143) · Roefs/Pickford/Henderson (GK ~135) · **Trafford** (LEE GK, new £40m nailed #1 — SAVE-heavy at shot-facing Leeds, viable mid/late draft GK)
 
 ### 💎 SLEEPERS / late-round value
 - **Muharemović** (LEE DEF) — elite DefCon (17/90 WC), nailed vs LIV — cheap-quality defender
