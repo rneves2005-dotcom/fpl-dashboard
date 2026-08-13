@@ -36,12 +36,13 @@
 | **Rice** | MID | ARS | 184 | elite all-round (G/A/CS/bonus), nailed |
 | **Igor Thiago** | FWD | BRE | 181 | 22G, pens, nailed #9 (scarce FWD) |
 | **Virgil** | DEF | LIV | 175 | elite nailed CB (watch Iraola high-press = fewer CS) |
-| ~~Watkins~~ | FWD | AVL | 167 | 🚨 TRANSFER RISK — reported AGREEMENT to join FENERBAHÇE (Turkey). 'Rest' from Super Cup = held out for the move (user caught it; only 6 WC mins = no fatigue). If he goes = LEAVES PL, NOT DRAFTABLE. DO NOT COUNT ON — draft only if move collapses + confirmed staying |
+| ~~Watkins~~ | FWD | AVL | 167 | 🚨 TRANSFER RISK — reported AGREEMENT to join FENERBAHÇE (Turkey). 'Rest' from Super Cup = held out for the move (user caught it; only 6 WC mins = no fatigue). If he goes = LEAVES PL, NOT DRAFTABLE. DO NOT COUNT ON — draft only if move collapses + confirmed staying. CONTINGENCY: if he goes, Villa striker vacancy → **Madjo** (£5.5, 5 pre-season goals incl v PSG) = the flyer beneficiary — late-round watch |
 
 ### TIER 3 — Round 2–4 (strong nailed starters)
 | Player | Pos | Tm | pts | Note |
 |---|---|---|---|---|
 | **Tarkowski** | DEF | EVE | 170 | DefCon machine, nailed, back-5 |
+| **Araújo** | DEF | LIV | 🆕 | Barça loanee (season-long, £47.1m option, #33) REPLACING Konaté (→Real Madrid) — projected Virgil's CB partner once settled, elite pedigree, can play RB. £5.5. Watch: just-arrived (GW1 start?) + Iraola high-press = fewer CS. Stephen-the-LIV-fan magnet — may not fall to you |
 | **Raya** | GK | ARS | 162 | **best GK** (bonus magnet) — but GK is deep, don't reach |
 | **Szoboszlai** | MID | LIV | 160 | set-piece HUB (corners+FKs) + shooting, nailed |
 | **Mbeumo** | MID | MUN | 148 | #2 pens/FKs, fresh, in pre-season form (brace v Atlético) |
@@ -52,7 +53,7 @@
 | **Semenyo** | MID | MCI | 202 | ✅ STRONG PICK (corrected): moved to City MID-25/26 (Jan), NOT a summer adaptee — already PROVEN there: **7G in 17 City apps** (avg 7.0) + 10G/20 at BOU same yr = 202pts. Rate held (0.5→0.41 g/gm) in a better team. In pre-season form. Tier-2-worthy |
 
 ### TIER 4 — Round 4–7 (solid, some with caveats)
-Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Romero late) · Gakpo (LIV MID 131) · Cunha (MUN MID 143, new club) · Enzo (CHE MID 157, rotation) · Muñoz (CRY DEF 136, gated on Sage shape) · Mitchell (CRY DEF 135) · Zubimendi (ARS MID 133, DefCon — ⚠️ rotation cloud, ARS midfield now stacked w/ Bruno G) · Ndiaye (EVE MID 128, ON PENS + nailed EVE attacker, 6G/3A — solid mid-round MID depth) · Kelleher (BRE GK 143) · Roefs/Pickford/Henderson (GK ~135) · **Trafford** (LEE GK, new £40m nailed #1 — SAVE-heavy at shot-facing Leeds, viable mid/late draft GK)
+Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Romero late) · Gakpo (LIV MID 131) · Cunha (MUN MID 143, new club) · Enzo (CHE MID 157, rotation) · Muñoz (CRY DEF 136, gated on Sage shape) · Mitchell (CRY DEF 135) · Diomande (NFO DEF £5.5, 🆕 nailed new CB — started v Leverkusen w/ Murillo/Milenković, DefCon upside) · Zubimendi (ARS MID 133, DefCon — ⚠️ rotation cloud, ARS midfield now stacked w/ Bruno G) · Ndiaye (EVE MID 128, ON PENS + nailed EVE attacker, 6G/3A — solid mid-round MID depth) · Kelleher (BRE GK 143) · Roefs/Pickford/Henderson (GK ~135) · **Trafford** (LEE GK, new £40m nailed #1 — SAVE-heavy at shot-facing Leeds, viable mid/late draft GK)
 
 ### 💎 SLEEPERS / late-round value
 - **Muharemović** (LEE DEF) — elite DefCon (17/90 WC), nailed vs LIV — cheap-quality defender
