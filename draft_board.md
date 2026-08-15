@@ -71,7 +71,7 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 | E.Anderson | MCI 180 | ⚠️ NFO→City = stacked midfield, minutes uncertain |
 | Guéhi | MCI 179 | ⚠️ CRY→City = rotation + fewer attacking returns |
 | Senesi | TOT 175 | ⚠️ BOU→Spurs = behind Romero/van de Ven |
-| Rogers | CHE 169 | ⚠️ AVL→Chelsea = rotation |
+| Rogers | CHE 169 | ⚠️→👀 SOFTENING: 169 pts came off 37 STARTS at Villa (near-ever-present, NOT rotation-prone). Only trap = 'will he rotate at CHE'. STARTED v R.Sociedad in an advanced role → Xabi rates him. Proven producer, not a depth punt — if he holds a starting role = BUY, not trap. Monitor CHE minutes (attack still stacked) |
 | H.Wilson | LEE 168 | ⚠️ FUL→Leeds = role unproven |
 | Garner / Timber / Saliba | injured | ⚠️ injury flags — discount on draft day |
 | **Salah** | — | GONE from PL (left) — not draftable |
@@ -114,7 +114,7 @@ AVOID: E.Anderson/Guéhi/Cherki (City depth), Bruno G. (ARS deeper role), Senesi
 
 ## 🕵️ OPPONENT INTEL (5-team) — 2 rivals are Liverpool & Chelsea fans (loyalty drafters)
 **CEDE Liverpool & Chelsea entirely** — don't fight the fans for their clubs' players (you don't need any).
-- Let LIV fan hoard Szoboszlai/Virgil/Wirtz/Gakpo; let CHE fan grab João Pedro/Caicedo/Enzo/Palmer.
+- Let LIV fan hoard Szoboszlai/Virgil/Wirtz/Gakpo; let CHE fan grab the flashy rotated names (João Pedro/Enzo/Palmer). ⭐ EXCEPTION: **Caicedo** (DefCon ~11.8/90 = at threshold, nailed 32-start DM, £5.5) is the ONE Chelsea asset worth grabbing if he slips past Jordan — the SAFE nailed one, unlike the rotated attackers.
 - Their bias = every OTHER club's players fall further to you (= your whole board: MCI/ARS/MUN/NFO/EVE/LEE/AVL/SUN). Premium value.
 - Loyalty picks = lopsided/weaker rival squads; you draft on VALUE, win the roster.
 - DE-PRIORITISE LIV/CHE names on the list (assume gone, don't reach).
