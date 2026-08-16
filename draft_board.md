@@ -76,7 +76,7 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 | Garner / Timber / Saliba | injured | ⚠️ injury flags — discount on draft day |
 | **Salah** | — | GONE from PL (left) — not draftable |
 | **Palmer** (CHE) | <131 | Name-brand but 25/26 output outside top-55 — reputation ≠ output, don't overpay |
-| **Bruno G.** (NEW→ARS) | 154 | ⚠️ £75m to Arsenal but STACKED midfield (Rice/Ødegaard/Zubimendi/Merino/Partey) → likely DEEPER #8 role ⇒ his NEW attacking output (9G/7A) probably regresses. Unproven at ARS = wait-and-see, NOT a pick at his reputation |
+| **Bruno G.** (NEW→ARS) | 154 | ⚠️ £75m to Arsenal but STACKED midfield (Rice/Ødegaard/Zubimendi/Merino/Partey) → likely DEEPER #8 role — Shield (Aug 16): started but HOOKED AT HALF-TIME for Rice = behind the established mids, trap HOLDS ⇒ his NEW attacking output (9G/7A) probably regresses. Unproven at ARS = wait-and-see, NOT a pick at his reputation |
 
 ## Position-scarcity cheat sheet
 - **FWD = SHALLOW → TIGHTER** (Watkins transfer-risk to Fenerbahçe) → prioritise Haaland → **Igor Thiago / DCL** (your anchors) → Igor Jesus depth. FWD scarcity tightened — secure a top FWD early.
