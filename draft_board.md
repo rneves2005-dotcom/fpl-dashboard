@@ -49,7 +49,7 @@
 | **Saka** | MID | ARS | 157 | elite when fit (25 st, injury-hit = boom/bust) |
 | **Calvert-Lewin** | FWD | LEE | 142 | 14G, pens, fit + scoring (brace v LIV) — scarce FWD |
 | **Le Fée** | MID | SUN | 147 | pens, pre-season star man (3 goals) |
-| **João Pedro** | FWD | CHE | 177 | 15G+9A but Chelsea rotation risk — talented, volatile |
+| **João Pedro** | FWD | CHE | 177 | 15G+9A + LEADS all pre-season scorers (7G+2A), role firming (started R.Sociedad + Shield-week) — outrunning the 'volatile' tag. Chelsea rotation still the cap, but trending up |
 | **Semenyo** | MID | MCI | 202 | ✅ STRONG PICK (corrected): moved to City MID-25/26 (Jan), NOT a summer adaptee — already PROVEN there: **7G in 17 City apps** (avg 7.0) + 10G/20 at BOU same yr = 202pts. Rate held (0.5→0.41 g/gm) in a better team. In pre-season form. Tier-2-worthy |
 
 ### TIER 4 — Round 4–7 (solid, some with caveats)
@@ -61,7 +61,7 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 - **Sangaré** (BRE MID) — record signing, FFH-flagged 'DefCon magnet' — cheap DefCon-MID sleeper (also threatens our classic Yarmoliuk bench slot)
 - **Igor Jesus** (NFO FWD) — 4 pre-season goals, breakout potential
 - **Wirtz** (LIV MID) — #10, high ceiling, adapting (differential)
-- **Hume** (SUN DEF £4.5) — ATTACKING-DEF radar: FPL-classified DEFENDER but played RW + scored (multiple friendlies). Def goal = 6pts, cheap, + CS/DefCon upside = high value IF Le Bris keeps the winger role (gated — RB by trade). 4-team draft: likely UNDRAFTED → prime WAIVER target once role confirms. Classic: watch (poss. cheap-DEF upgrade over Kadioglu).
+- **Hume** (SUN DEF £4.5) — ✅ THESIS PROVEN (upgraded): NAILED (34 starts / 110 pts 25/26, status a) + attacking output confirmed (2G+1A pre-season on top). FPL-classified DEFENDER scoring goals = def goal 6pts + CS/DefCon upside at £4.5 = elite value. Draftable sleeper (not just waiver). CLASSIC: legit GW4-wildcard cheap-DEF target (attacking-FB = best-value archetype).
 - **Vušković** (BHA DEF) — DefCon-DEF radar: 6 DefCon in 45min + aerial threat v Roma (FFH). Sleeper mould (à la Muharemović) — gated on Brighton CB nailedness (young, rotation). Watch.
 - **Nørgaard** (→EVE MID £5.0) — DEEP/waiver only: Brentford DefCon pedigree BUT just 1 start/101min at Arsenal 25/26 + unproven EVE role. Minutes red flag (xMin-first) — behind Florentino/Sangaré; FA target IF he starts at Everton
 
