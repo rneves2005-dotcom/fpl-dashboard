@@ -61,8 +61,8 @@ Mukiele (SUN DEF 151, DEF-that-scores) · Van Hecke (TOT DEF 148, starts if Rome
 - **Sangaré** (BRE MID) — record signing, FFH-flagged 'DefCon magnet' — cheap DefCon-MID sleeper (also threatens our classic Yarmoliuk bench slot)
 - **Igor Jesus** (NFO FWD) — 4 pre-season goals, breakout potential
 - **Wirtz** (LIV MID) — #10, high ceiling, adapting (differential)
-- **Hume** (SUN DEF £4.5) — ✅ THESIS PROVEN (upgraded): NAILED (34 starts / 110 pts 25/26, status a) + attacking output confirmed (2G+1A pre-season on top). FPL-classified DEFENDER scoring goals = def goal 6pts + CS/DefCon upside at £4.5 = elite value. Draftable sleeper (not just waiver). CLASSIC: legit GW4-wildcard cheap-DEF target (attacking-FB = best-value archetype).
-- **Vušković** (BHA DEF) — DefCon-DEF radar: 6 DefCon in 45min + aerial threat v Roma (FFH). Sleeper mould (à la Muharemović) — gated on Brighton CB nailedness (young, rotation). Watch.
+- **Hume** (SUN DEF £4.5) — ✅ THESIS PROVEN (upgraded): NAILED (34 starts / 110 pts 25/26, status a) + attacking output confirmed (2G+1A pre-season on top). FPL-classified DEFENDER scoring goals = def goal 6pts + CS/DefCon upside at £4.5 = elite value. Draftable sleeper (not just waiver). CLASSIC: legit GW4-wildcard cheap-DEF target (attacking-FB = best-value archetype). ⬆️ GATE REMOVED (Aug 16 guide): scored his 2nd in 2 games but FROM NATURAL RIGHT-BACK (not the winger experiment) = attacking output is NOT role-dependent — the ideal cheap attacking-DEF profile.
+- **Vušković** (BHA DEF) — DefCon-DEF radar: 10 DefCon in 66min (Aug 16) + 6-in-45 v Roma = CONSISTENT elite rate. Sleeper mould (à la Muharemović) — gated on Brighton CB nailedness (young, rotation). Watch.
 - **Nørgaard** (→EVE MID £5.0) — DEEP/waiver only: Brentford DefCon pedigree BUT just 1 start/101min at Arsenal 25/26 + unproven EVE role. Minutes red flag (xMin-first) — behind Florentino/Sangaré; FA target IF he starts at Everton
 
 ## 🚨 TRAPS — high 25/26 points, real 26/27 risk (let others overpay)
