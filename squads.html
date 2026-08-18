@@ -254,7 +254,6 @@ td strong { color: var(--ink); font-weight: 600; }
   <button class="tab stable" id="tab-NFO" onclick="showTeam('NFO')">NFO</button>
   <button class="tab stable" id="tab-SUN" onclick="showTeam('SUN')">SUN</button>
   <button class="tab transition" id="tab-TOT" onclick="showTeam('TOT')">TOT</button>
-  <button class="tab" id="tab-WC26" onclick="showTeam('WC26')" style="background:var(--accent); color:#fff; font-weight:600;">🏆 WC26</button>
   <button class="tab" id="tab-TIMELINE" onclick="showTeam('TIMELINE')" style="background:#3b5bdb; color:#fff; font-weight:600;">📅 Timeline</button>
 </div>
 
@@ -262,7 +261,7 @@ td strong { color: var(--ink); font-weight: 600; }
 <!-- Dynamic team panel container -->
 <div id="team-content"></div>
 
-<!-- WC26 panel (kept manually-curated) -->
+<!-- WC26 panel — ARCHIVED Aug 2026: tab retired from nav (WC ended Jul 19 2026). Markup + showTeam('WC26')/showNation branches kept dormant for reference; no longer reachable via UI or #hash. Re-add the tab button + 'WC26' to VALID_CODES to restore. -->
 <!-- ENGLAND WC 2026 SQUAD -->
 <div class="team-panel" id="team-WC26">
   <div class="team-header" style="background:linear-gradient(135deg, var(--accent-soft), var(--good-soft));">
@@ -1674,7 +1673,7 @@ function showNation(code) {
   if (tab) tab.classList.add('active');
 }
 
-const VALID_CODES = ['ARS','AVL','BOU','BRE','BHA','CHE','COV','CRY','EVE','FUL','HUL','IPS','LEE','LIV','MCI','MUN','NEW','NFO','SUN','TOT','WHU','WC26','TIMELINE'];
+const VALID_CODES = ['ARS','AVL','BOU','BRE','BHA','CHE','COV','CRY','EVE','FUL','HUL','IPS','LEE','LIV','MCI','MUN','NEW','NFO','SUN','TOT','WHU','TIMELINE'];
 
 window.addEventListener('load', async () => {
   await loadData();
