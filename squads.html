@@ -1639,7 +1639,7 @@ function showTimeline() {
       + `<td><strong>${escapeHtml(r.player)}</strong></td>`
       + `<td><span style="background:var(--bg-soft); border:1px solid var(--line); padding:1px 6px; border-radius:3px; font-size:11px; font-weight:600;">${escapeHtml(r.club)}</span></td>`
       + `<td>${escapeHtml(r.other)}</td>`
-      + `<td style="font-size:11px; color:var(--ink-3);">${escapeHtml(r.note)}</td>`
+      + `<td style="font-size:11px; color:var(--ink-3); max-width:230px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${escapeHtml(r.note)}">${escapeHtml((r.note || '').replace(/\s*·\s*\d{4}-\d{2}-\d{2}\b/, '').trim())}</td>`
       + `</tr>`;
   }
   html += '</tbody></table>';
