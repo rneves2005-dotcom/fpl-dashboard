@@ -255,6 +255,7 @@ td strong { color: var(--ink); font-weight: 600; }
   <button class="tab stable" id="tab-SUN" onclick="showTeam('SUN')">SUN</button>
   <button class="tab transition" id="tab-TOT" onclick="showTeam('TOT')">TOT</button>
   <button class="tab" id="tab-WC26" onclick="showTeam('WC26')" style="background:var(--accent); color:#fff; font-weight:600;">🏆 WC26</button>
+  <button class="tab" id="tab-TIMELINE" onclick="showTeam('TIMELINE')" style="background:#3b5bdb; color:#fff; font-weight:600;">📅 Timeline</button>
 </div>
 
 
@@ -1575,6 +1576,76 @@ function renderTeamPanel(code) {
   c.innerHTML = html;
 }
 
+// Chronological view: every confirmed IN/OUT across all clubs, newest date first.
+function showTimeline() {
+  const c = document.getElementById('team-content');
+  if (!TIN || !TOUT || !META) { c.innerHTML = '<div class="empty">Loading…</div>'; return; }
+  // db_club full name -> short code (ARS, NFO, …) for compact display
+  const codeByClub = {};
+  for (const code in META) {
+    const dc = META[code] && META[code].db_club;
+    if (dc) codeByClub[dc] = code;
+  }
+  const dateRe = /(\d{4}-\d{2}-\d{2})/;
+  const rows = [];
+  function collect(store, dir) {
+    // Premier League only — the files also carry La Liga/Bundesliga/etc. divisions
+    const clubs = store['Premier League'];
+    if (clubs && typeof clubs === 'object') {
+      for (const club in clubs) {
+        const arr = clubs[club];
+        if (!Array.isArray(arr)) continue;
+        for (const t of arr) {
+          const mm = (t.note || '').match(dateRe);
+          rows.push({
+            date: mm ? mm[1] : '',
+            club: codeByClub[club] || club,
+            player: t.n || '',
+            dir,
+            other: dir === 'IN' ? (t.from || '') : (t.to || ''),
+            note: t.note || ''
+          });
+        }
+      }
+    }
+  }
+  collect(TIN, 'IN');
+  collect(TOUT, 'OUT');
+  // dated newest-first; undated sink to the bottom
+  rows.sort((a, b) => {
+    if (a.date && b.date) return b.date.localeCompare(a.date);
+    if (a.date) return -1;
+    if (b.date) return 1;
+    return 0;
+  });
+  const dated = rows.filter(r => r.date).length;
+  let html = `<div class="team-header" style="background:linear-gradient(135deg,#3b5bdb22,var(--accent-soft));">
+    <h2>📅 Transfer Timeline</h2>
+    <div class="team-meta">Premier League only · IN &amp; OUT combined · newest first · ${rows.length} entries (${dated} dated)</div>
+  </div>`;
+  html += '<table><thead><tr><th>Date</th><th>Dir</th><th>Player</th><th>Club</th><th>From / To</th><th>Notes</th></tr></thead><tbody>';
+  let lastDate = null;
+  for (const r of rows) {
+    const dLabel = r.date || '—';
+    const dirBadge = r.dir === 'IN'
+      ? '<span style="background:var(--good); color:#fff; padding:1px 6px; border-radius:3px; font-size:10px; font-weight:700;">IN</span>'
+      : '<span style="background:var(--bad); color:#fff; padding:1px 6px; border-radius:3px; font-size:10px; font-weight:700;">OUT</span>';
+    const newGroup = r.date && r.date !== lastDate;
+    lastDate = r.date;
+    const rowStyle = newGroup ? ' style="border-top:2px solid var(--accent);"' : '';
+    html += `<tr${rowStyle}>`
+      + `<td style="white-space:nowrap; font-weight:${newGroup ? '700' : '400'};">${escapeHtml(dLabel)}</td>`
+      + `<td>${dirBadge}</td>`
+      + `<td><strong>${escapeHtml(r.player)}</strong></td>`
+      + `<td><span style="background:var(--bg-soft); border:1px solid var(--line); padding:1px 6px; border-radius:3px; font-size:11px; font-weight:600;">${escapeHtml(r.club)}</span></td>`
+      + `<td>${escapeHtml(r.other)}</td>`
+      + `<td style="font-size:11px; color:var(--ink-3);">${escapeHtml(r.note)}</td>`
+      + `</tr>`;
+  }
+  html += '</tbody></table>';
+  c.innerHTML = html;
+}
+
 function showTeam(code) {
   // Hide WC26 panel; show team-content for normal teams
   document.querySelectorAll('.team-panel').forEach(el => el.classList.remove('active'));
@@ -1586,6 +1657,8 @@ function showTeam(code) {
     const panel = document.getElementById('team-WC26');
     if (panel) panel.classList.add('active');
     showNation('ENG');
+  } else if (code === 'TIMELINE') {
+    showTimeline();
   } else {
     renderTeamPanel(code);
   }
@@ -1601,7 +1674,7 @@ function showNation(code) {
   if (tab) tab.classList.add('active');
 }
 
-const VALID_CODES = ['ARS','AVL','BOU','BRE','BHA','CHE','COV','CRY','EVE','FUL','HUL','IPS','LEE','LIV','MCI','MUN','NEW','NFO','SUN','TOT','WHU','WC26'];
+const VALID_CODES = ['ARS','AVL','BOU','BRE','BHA','CHE','COV','CRY','EVE','FUL','HUL','IPS','LEE','LIV','MCI','MUN','NEW','NFO','SUN','TOT','WHU','WC26','TIMELINE'];
 
 window.addEventListener('load', async () => {
   await loadData();
