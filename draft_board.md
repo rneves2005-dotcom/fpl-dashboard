@@ -10,7 +10,7 @@
 - **NO CHIPS** (no WC/TC/BB/FH).
 - **Scoring = standard FPL incl. DefCon + bonus + assists** ⇒ all our DefCon targets (Muharemović/Tarkowski/Florentino) valid.
 - **Transactions (no transfer market):** Waivers process ~24h before deadline (48h before season start), priority = reverse standings; then Free Agency (first-come); Trades pending 24h w/ league veto (~50% blocks); new PL players locked 24h.
-- ⚠️ TO CONFIRM: whether Draft keeps classic's max-3-per-club (likely dropped — can stack a club — but unverified).
+- ✅ VERIFIED (Aug 18): NO per-club limit in Draft (unlike Classic's max-3). Only restriction = unique ownership. You can STACK a club freely (within 2/5/5/3 + 15-squad). Strategic upside: loyalty drafters can hoard their ENTIRE club uncapped (Kevin=all ARS, Stephen=all LIV, Jordan=all CHE) → even more non-hoarded value funnels to you.
 > Ranks = 25/26 total points ADJUSTED for 26/27 (transfers, new managers, WC fatigue, injuries). **Refine once league SIZE + your DRAFT SLOT are known.**
 
 ## 🎯 Core strategy
