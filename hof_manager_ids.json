@@ -1,0 +1,13 @@
+{
+  "_note": "FPL Hall-of-Fame elite managers — API-verified entry IDs (permanent across seasons). Verified against api/entry/{id}/ player_first_name+player_last_name. Compiled 2026-08-23.",
+  "verified": {
+    "Tom Dollimore": 179777, "Ben Crellin": 53517, "Fábio Borges": 3718868,
+    "Frank Pedersen": 1034642, "Gavin Butler": 31398, "Ignazio La Rosa": 48379,
+    "Jon Ballantyne": 3096757, "Mark Hurst": 35543, "Mark McGettigan": 176749,
+    "Obay Eid": 2570, "Ole Martin Stabbetorp": 243130, "Tod Modisette": 41875,
+    "Andy Dutton": 541024, "Cak Juris": 704701, "Ali Jahangirov": 747049,
+    "Marin Angelov": 729871, "Joshua Bull": 16738
+  },
+  "not_found": ["Alistair Hughes"],
+  "known_wrong_ids": {"Ali Jahangirov": 158332, "Alistair Hughes": 508, "Joshua Bull": 144550}
+}

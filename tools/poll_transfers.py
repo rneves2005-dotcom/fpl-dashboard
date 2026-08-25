@@ -236,16 +236,30 @@ def fetch(url: str, timeout: int = 20) -> str | None:
 # ─── Source: xcancel.com RSS ─────────────────────────────────────────────
 
 def poll_x_accounts() -> list[dict[str, Any]]:
-    """Pull RSS for each X account via Nitter · falls back through mirrors."""
+    """Pull RSS for each X account via Nitter · falls back through mirrors.
+    FAIL-FAST: probe the mirrors ONCE up front; if none are live, skip the whole
+    source in seconds instead of hanging 15s x 50 handles x 3 dead mirrors
+    (which was producing 1-6 hour runs on an hourly schedule)."""
+    if not X_ACCOUNTS:
+        return []
+    probe = X_ACCOUNTS[0]
+    live_mirrors = []
+    for mirror in NITTER_FALLBACKS:
+        body = fetch(f"{mirror}/{probe}/rss", timeout=8)
+        if body and "whitelist" not in body.lower()[:2000] and "<item>" in body:
+            live_mirrors.append(mirror)
+    if not live_mirrors:
+        print("poll_x_accounts: NO live Nitter mirror (all dead/blocked) - skipping X source",
+              file=sys.stderr)
+        return []
+    print(f"poll_x_accounts: live mirrors {live_mirrors}", file=sys.stderr)
     out = []
     for handle in X_ACCOUNTS:
         body = None
-        used_mirror = None
-        for mirror in NITTER_FALLBACKS:
+        for mirror in live_mirrors:
             url = f"{mirror}/{handle}/rss"
-            body = fetch(url, timeout=15)
+            body = fetch(url, timeout=10)
             if body and "whitelist" not in body.lower()[:2000] and "<item>" in body:
-                used_mirror = mirror
                 break
             body = None
         if not body:
