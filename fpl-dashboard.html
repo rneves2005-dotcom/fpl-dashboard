@@ -131,6 +131,8 @@ tbody tr:hover { background: var(--bg-inset); }
 .stand-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; font-size: 10px; color: var(--ink-muted); }
 .stand-legend span { display: inline-flex; align-items: center; gap: 5px; }
 .stand-legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+tbody tr.row-you { background: var(--warn-soft); }
+tbody tr.row-you:hover { background: var(--warn-soft); }
 
 /* ===== PITCH VIEW — FPL-official inspired ===== */
 .view-toggle { background: transparent; border: 1px solid var(--line); color: var(--ink-muted); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; cursor: pointer; border-radius: 2px; margin-left: 4px; transition: all 0.15s; }
@@ -1046,8 +1048,6 @@ tbody tr:hover { background: var(--bg-inset); }
   <label>LEAGUE</label>
   <select id="league-select" onchange="onLeagueChange()">
     <option value="940453">FANTASY PL 2026/27 (940453)</option>
-    <option value="1159941">USA Draft-adjacent (1159941)</option>
-    <option value="595244">Premier League 25/26 (595244)</option>
     <option value="__custom__">+ Add new league…</option>
   </select>
   <input type="text" id="league-id" value="940453" placeholder="Custom ID" style="display:none">
@@ -1074,6 +1074,10 @@ tbody tr:hover { background: var(--bg-inset); }
     <button class="main-tab" data-tab="league" onclick="switchTab('league')">
       <span class="main-tab-icon">🏆</span>
       <span>Mini-League</span>
+    </button>
+    <button class="main-tab" data-tab="draft" onclick="switchTab('draft')">
+      <span class="main-tab-icon">🎲</span>
+      <span>Draft</span>
     </button>
     <button class="main-tab" data-tab="prices" onclick="switchTab('prices')">
       <span class="main-tab-icon">💷</span>
@@ -1127,6 +1131,17 @@ tbody tr:hover { background: var(--bg-inset); }
         <div class="section-kicker">Live GW projection · full table</div>
       </div>
       <div id="league-table"><div class="loading">Loading mini-league...</div></div>
+    </div>
+  </div>
+
+  <!-- TAB: Draft league (draft.premierleague.com) -->
+  <div class="main-tab-panel" id="tab-draft">
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Draft League</div>
+        <div class="section-kicker">USA Draft 2026 · live standings</div>
+      </div>
+      <div id="draft-table"><div class="loading">Loading draft league...</div></div>
     </div>
   </div>
 
@@ -1320,9 +1335,10 @@ function setStatus(msg) {
 // LEAGUE MANAGEMENT — saved leagues with dropdown
 // ============================================================
 const DEFAULT_LEAGUES = [
-  { id: '595244', name: 'Premier League 25/26' },
-  { id: '1159941', name: 'League 1159941' }
+  { id: '940453', name: 'FANTASY PL 2026/27' }
 ];
+// Leagues retired from the picker (old season / stale). Pruned from saved list on load.
+const RETIRED_LEAGUES = ['595244', '1159941'];
 
 function getSavedLeagues() {
   try {
@@ -1400,6 +1416,10 @@ function loadConfig() {
   if (e) document.getElementById('entry-id').value = e;
   // Initialize league list (will write defaults if none saved)
   if (!localStorage.getItem('fpl-leagues')) saveSavedLeagues(DEFAULT_LEAGUES);
+  // Migration: drop retired leagues, ensure the current classic league is present
+  let saved = getSavedLeagues().filter(l => !RETIRED_LEAGUES.includes(l.id));
+  if (!saved.find(l => l.id === '940453')) saved.unshift({ id: '940453', name: 'FANTASY PL 2026/27' });
+  saveSavedLeagues(saved);
   renderLeagueSelect();
   // Sync the hidden input with the select
   document.getElementById('league-id').value = document.getElementById('league-select').value;
@@ -1461,6 +1481,7 @@ async function refreshAll() {
     renderThreatList();
     renderStandings();
     renderScorers();
+    renderDraft();
     updateMatchBadge();
 
     const now = new Date();
@@ -2449,7 +2470,7 @@ function renderStandings() {
   if (!STATE.bootstrap || !STATE.allFixtures) { el.innerHTML = '<div class="loading">No fixture data</div>'; return; }
   const tbl = {};
   STATE.bootstrap.teams.forEach(t => tbl[t.id] = { name: t.name, short: t.short_name, code: t.code, P:0,W:0,D:0,L:0,GF:0,GA:0,Pts:0 });
-  STATE.allFixtures.filter(f => f.finished && f.team_h_score != null).forEach(f => {
+  STATE.allFixtures.filter(f => f.finished_provisional && f.team_h_score != null).forEach(f => {
     const h = tbl[f.team_h], a = tbl[f.team_a];
     if (!h || !a) return;
     const hs = f.team_h_score, as = f.team_a_score;
@@ -2508,6 +2529,55 @@ function renderScorers() {
   el.innerHTML = `<table>
     <thead><tr><th class="c">#</th><th>Player</th><th class="c">Pos</th><th class="c">G</th><th class="c">A</th><th class="c">Min</th></tr></thead>
     <tbody>${body}</tbody></table>`;
+}
+
+// ===== Draft league (draft.premierleague.com — different host/API) =====
+const DRAFT_LEAGUE_ID = '6079';
+async function draftFetch(path) {
+  // The Worker only proxies the classic host, so route the draft host through the generic proxies.
+  const direct = 'https://draft.premierleague.com/api' + path;
+  const proxies = [
+    (u) => 'https://proxy.cors.sh/' + u,
+    (u) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),
+    (u) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u)
+  ];
+  for (const p of proxies) {
+    try { const r = await fetch(p(direct)); if (r.ok) return r.json(); } catch (e) { /* next */ }
+  }
+  throw new Error('all proxies failed');
+}
+
+async function renderDraft() {
+  const el = document.getElementById('draft-table');
+  if (!el) return;
+  try {
+    const d = await draftFetch('/league/' + DRAFT_LEAGUE_ID + '/details');
+    const entries = {};
+    (d.league_entries || []).forEach(e => entries[e.id] = e);
+    const rows = [...(d.standings || [])].sort((a, b) => a.rank - b.rank);
+    if (!rows.length) { el.innerHTML = '<div class="loading">No draft standings yet</div>'; return; }
+    const body = rows.map(s => {
+      const e = entries[s.league_entry] || {};
+      const mgr = ((e.player_first_name || '') + ' ' + (e.player_last_name || '')).trim();
+      const isYou = mgr.toLowerCase() === 'rui neves';
+      const move = s.last_rank ? (s.last_rank - s.rank) : 0;
+      const moveHtml = move > 0 ? `<span style="color:var(--good)">▲${move}</span>`
+        : move < 0 ? `<span style="color:var(--bad)">▼${Math.abs(move)}</span>`
+        : '<span style="color:var(--ink-faint)">—</span>';
+      return `<tr class="${isYou ? 'row-you' : ''}">
+        <td class="c" style="width:26px;color:var(--ink-muted)">${s.rank}</td>
+        <td><div class="pname">${e.entry_name || '—'}${isYou ? ' · YOU' : ''}</div><div class="pmeta">${mgr}</div></td>
+        <td class="c">${moveHtml}</td>
+        <td class="c">${s.event_total}</td>
+        <td class="c" style="font-weight:800">${s.total}</td>
+      </tr>`;
+    }).join('');
+    el.innerHTML = `<table>
+      <thead><tr><th class="c">#</th><th>Team</th><th class="c">+/−</th><th class="c">GW</th><th class="c">Total</th></tr></thead>
+      <tbody>${body}</tbody></table>`;
+  } catch (err) {
+    el.innerHTML = '<div class="loading">Draft league unavailable — ' + err.message + '</div>';
+  }
 }
 
 // ============================================================
