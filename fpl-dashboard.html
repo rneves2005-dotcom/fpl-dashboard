@@ -991,14 +991,15 @@ tbody tr:hover { background: var(--bg-inset); }
 <!-- Config -->
 <div class="config">
   <label>ENTRY</label>
-  <input type="text" id="entry-id" value="2938711" placeholder="Your FPL ID">
+  <input type="text" id="entry-id" value="37889" placeholder="Your FPL ID">
   <label>LEAGUE</label>
   <select id="league-select" onchange="onLeagueChange()">
+    <option value="940453">FANTASY PL 2026/27 (940453)</option>
+    <option value="1159941">USA Draft-adjacent (1159941)</option>
     <option value="595244">Premier League 25/26 (595244)</option>
-    <option value="1159941">League 1159941</option>
     <option value="__custom__">+ Add new league…</option>
   </select>
-  <input type="text" id="league-id" value="595244" placeholder="Custom ID" style="display:none">
+  <input type="text" id="league-id" value="940453" placeholder="Custom ID" style="display:none">
   <button class="btn ghost" onclick="saveConfig()">Save</button>
   <button class="btn" onclick="refreshAll()">Load</button>
 </div>
@@ -1164,7 +1165,7 @@ tbody tr:hover { background: var(--bg-inset); }
 <script>
 // ============================================================
 // FPL LIVE DASHBOARD
-// Built for entry 2938711 (Rui Neves) — league 595244
+// Built for entry 37889 (Rui Neves) — league 940453 (2026/27)
 // ============================================================
 
 const STATE = {
@@ -1177,7 +1178,7 @@ const STATE = {
   picks: null,
   history: null,
   leagueStandings: null,
-  currentGW: 33,
+  currentGW: 2,
   teamMap: {},
   elMap: {}
 };
@@ -1187,9 +1188,9 @@ const STATE = {
 // Tested working proxies for FPL API:
 const ON_FPL_DOMAIN = typeof location !== 'undefined' && location.hostname === 'fantasy.premierleague.com';
 const CORS_PROXIES = [
-  'https://api.codetabs.com/v1/proxy?quest=', // primary — verified works
-  'https://api.allorigins.win/raw?url=',
-  'https://corsproxy.io/?url='
+  (u) => 'https://proxy.cors.sh/' + u,                                   // primary — raw URL, handles the large bootstrap-static (~1.5MB) that others fail on
+  (u) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),  // fallback — works for small endpoints only
+  (u) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u)
 ];
 let workingProxy = null;
 
@@ -1207,7 +1208,7 @@ async function fpl(endpoint) {
   // If we have a known working proxy, use it
   if (workingProxy) {
     try {
-      const url = workingProxy + encodeURIComponent(direct);
+      const url = workingProxy(direct);
       const res = await fetch(url);
       if (res.ok) return res.json();
     } catch (e) { workingProxy = null; /* try others */ }
@@ -1216,7 +1217,7 @@ async function fpl(endpoint) {
   // Try each proxy in order
   for (const proxy of CORS_PROXIES) {
     try {
-      const url = proxy + encodeURIComponent(direct);
+      const url = proxy(direct);
       const res = await fetch(url);
       if (res.ok) {
         workingProxy = proxy;
