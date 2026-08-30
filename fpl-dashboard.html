@@ -1188,7 +1188,8 @@ const STATE = {
 // Tested working proxies for FPL API:
 const ON_FPL_DOMAIN = typeof location !== 'undefined' && location.hostname === 'fantasy.premierleague.com';
 const CORS_PROXIES = [
-  (u) => 'https://proxy.cors.sh/' + u,                                   // primary — raw URL, handles the large bootstrap-static (~1.5MB) that others fail on
+  (u) => u.replace('https://fantasy.premierleague.com/api', 'https://fpl-proxy.rneves2005.workers.dev'),  // primary — self-hosted Cloudflare Worker (durable, no rate limits, handles the 1.5MB bootstrap)
+  (u) => 'https://proxy.cors.sh/' + u,                                   // fallback — raw URL, also handles the large bootstrap-static (~1.5MB)
   (u) => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u),  // fallback — works for small endpoints only
   (u) => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u)
 ];
