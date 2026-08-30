@@ -1138,10 +1138,17 @@ tbody tr.row-you:hover { background: var(--warn-soft); }
   <div class="main-tab-panel" id="tab-draft">
     <div class="section">
       <div class="section-head">
+        <div class="section-title">My Draft Squad</div>
+        <div class="section-kicker">Rui Team back to 1st · live GW</div>
+      </div>
+      <div id="draft-squad"><div class="loading">Loading draft squad...</div></div>
+    </div>
+    <div class="section">
+      <div class="section-head">
         <div class="section-title">Draft League</div>
         <div class="section-kicker">USA Draft 2026 · live standings</div>
       </div>
-      <div id="draft-table"><div class="loading">Loading draft league...</div></div>
+      <div id="draft-table"><div class="loading">Loading standings...</div></div>
     </div>
   </div>
 
@@ -2575,8 +2582,55 @@ async function renderDraft() {
     el.innerHTML = `<table>
       <thead><tr><th class="c">#</th><th>Team</th><th class="c">+/−</th><th class="c">GW</th><th class="c">Total</th></tr></thead>
       <tbody>${body}</tbody></table>`;
+    renderDraftSquad(d);
   } catch (err) {
     el.innerHTML = '<div class="loading">Draft league unavailable — ' + err.message + '</div>';
+    const sq = document.getElementById('draft-squad');
+    if (sq) sq.innerHTML = el.innerHTML;
+  }
+}
+
+// Draft roster (from league element-status ownership — picks endpoint needs auth)
+async function renderDraftSquad(details) {
+  const el = document.getElementById('draft-squad');
+  if (!el) return;
+  if (!STATE.bootstrap || !STATE.live) { el.innerHTML = '<div class="loading">No live data</div>'; return; }
+  try {
+    const me = (details.league_entries || []).find(e =>
+      ((e.player_first_name || '') + ' ' + (e.player_last_name || '')).trim().toLowerCase() === 'rui neves');
+    if (!me) { el.innerHTML = '<div class="loading">Your draft team not found in this league</div>'; return; }
+    const status = await draftFetch('/league/' + DRAFT_LEAGUE_ID + '/element-status');
+    const mineIds = (status.element_status || []).filter(s => String(s.owner) === String(me.entry_id)).map(s => s.element);
+    if (!mineIds.length) { el.innerHTML = '<div class="loading">No roster found</div>'; return; }
+    const liveMap = {};
+    STATE.live.elements.forEach(e => liveMap[e.id] = e.stats.total_points || 0);
+    const posName = { 1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD' };
+    const byPos = { 1: [], 2: [], 3: [], 4: [] };
+    let total = 0;
+    mineIds.forEach(id => {
+      const e = STATE.elMap[id];
+      if (!e) return;
+      const p = liveMap[id] || 0;
+      total += p;
+      byPos[e.element_type].push({ e, p });
+    });
+    [1,2,3,4].forEach(pt => byPos[pt].sort((a, b) => b.p - a.p));
+    let rows = '';
+    [1,2,3,4].forEach(pt => {
+      byPos[pt].forEach(({ e, p }) => {
+        const t = STATE.teamMap[e.team] || { short: '' };
+        const badge = `https://resources.premierleague.com/premierleague/badges/50/t${(t.code||0)}.png`;
+        rows += `<tr>
+          <td class="c" style="width:40px"><span class="pos pos-${posName[pt].toLowerCase()}">${posName[pt]}</span></td>
+          <td><span class="stand-team"><img class="stand-badge" src="${badge}" alt="" onerror="this.style.display='none'"><span class="pname">${e.web_name}</span> <span class="pmeta">${t.short}</span></span></td>
+          <td class="c" style="font-weight:800;color:${p > 0 ? 'var(--good)' : 'var(--ink-faint)'}">${p}</td>
+        </tr>`;
+      });
+    });
+    el.innerHTML = `<div class="section-kicker" style="margin-bottom:8px">${me.entry_name} · ${mineIds.length} players · <strong style="color:var(--ink)">${total} pts</strong> this GW</div>
+      <table><thead><tr><th class="c">Pos</th><th>Player</th><th class="c">GW</th></tr></thead><tbody>${rows}</tbody></table>`;
+  } catch (err) {
+    el.innerHTML = '<div class="loading">Draft squad unavailable — ' + err.message + '</div>';
   }
 }
 
