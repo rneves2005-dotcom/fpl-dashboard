@@ -2435,39 +2435,53 @@ async function renderMiniLeague() {
     fpl('/entry/' + r.entry + '/event/' + STATE.currentGW + '/picks/').catch(() => null)
   ));
 
+  const elName = id => (STATE.elMap[id] && STATE.elMap[id].web_name) || '—';
+
   const withLive = results.map((r, i) => {
     const p = picksData[i];
-    if (!p) return { ...r, gwLive: 0, chip: null };
+    if (!p) return { ...r, gwLive: 0, chip: null, capId: null, vcId: null, tf: 0, hits: 0 };
     const chip = p.active_chip;
-    let pts = 0;
+    let pts = 0, capId = null, vcId = null;
     p.picks.forEach(pk => {
+      if (pk.is_captain) capId = pk.element;
+      if (pk.is_vice_captain) vcId = pk.element;
       const tp = liveMap[pk.element] || 0;
       if (chip === 'bboost') pts += tp * (pk.multiplier > 0 ? pk.multiplier : 1);
       else if (pk.position <= 11) pts += tp * (pk.multiplier || 1);
     });
-    return { ...r, gwLive: pts, chip };
+    const eh = p.entry_history || {};
+    return { ...r, gwLive: pts, chip, capId, vcId, tf: eh.event_transfers || 0, hits: eh.event_transfers_cost || 0 };
   });
 
   // Sort by projected total
   const sorted = [...withLive].sort((a,b) => (b.total - b.event_total + b.gwLive) - (a.total - a.event_total + a.gwLive));
 
-  const html = sorted.map((r, i) => {
+  const rows = sorted.map((r, i) => {
     const projRank = i + 1;
     const projTotal = r.total - r.event_total + r.gwLive;
     const isYou = r.entry == STATE.entry;
     const chipTag = r.chip ? `<span class="chip-tag chip-${r.chip === 'bboost' ? 'bb' : r.chip === 'freehit' ? 'fh' : 'wc'}">${chipLabel(r.chip)}</span>` : '<span class="chip-none">—</span>';
-    return `<div class="league-row ${isYou ? 'you' : ''} ${projRank <= 3 ? 'top' : ''}">
-      <span class="league-rank">${projRank}</span>
-      <div>
-        <div class="pname">${r.player_name}${isYou ? ' · YOU' : ''}</div>
-        <div class="pmeta">${r.entry_name}</div>
-      </div>
-      <div>${chipTag}</div>
-      <div class="gw-pts">${r.gwLive}</div>
-      <div class="mono" style="min-width:50px;text-align:right;color:var(--ink-muted)">${projTotal}</div>
-    </div>`;
+    const hitsCell = r.hits > 0 ? `<span style="color:var(--bad);font-weight:700">-${r.hits}</span>` : '<span style="color:var(--ink-faint)">0</span>';
+    return `<tr class="${isYou ? 'row-you' : ''}">
+      <td class="c" style="color:var(--ink-muted)">${projRank}</td>
+      <td><div class="pname">${r.player_name}${isYou ? ' · YOU' : ''}</div><div class="pmeta">${r.entry_name}</div></td>
+      <td class="c" style="font-weight:800">${r.gwLive}</td>
+      <td class="c" style="color:var(--ink-muted)">${projTotal}</td>
+      <td class="c">${hitsCell}</td>
+      <td>${elName(r.capId)}</td>
+      <td class="pmeta">${elName(r.vcId)}</td>
+      <td class="c">${r.tf || '—'}</td>
+      <td class="c">${chipTag}</td>
+    </tr>`;
   }).join('');
-  document.getElementById('league-table').innerHTML = html;
+  document.getElementById('league-table').innerHTML = `<div style="overflow-x:auto">
+    <table>
+      <thead><tr>
+        <th class="c">#</th><th>Manager</th><th class="c">GW</th><th class="c">Total</th>
+        <th class="c">Hits</th><th>Captain</th><th>Vice</th><th class="c">TF</th><th class="c">Chip</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
 }
 
 // ===== Real PL table — computed from finished fixtures =====
