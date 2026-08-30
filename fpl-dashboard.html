@@ -148,6 +148,15 @@ tbody tr:hover { background: var(--bg-inset); }
   pointer-events: none;
 }
 
+/* Perspective field wrapper — tilts ALL markings into 3D; players stay flat on top */
+.pitch-field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  transform: perspective(760px) rotateX(18deg);
+  transform-origin: 50% 82%;
+}
 /* Pitch white markings */
 .pitch-markings {
   position: absolute;
@@ -219,7 +228,7 @@ tbody tr:hover { background: var(--bg-inset); }
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  width: 78px;
+  width: 82px;
   flex-shrink: 0;
 }
 
@@ -238,56 +247,88 @@ tbody tr:hover { background: var(--bg-inset); }
 
 /* Name + points card — white rounded box (FPL-style) */
 .player-info {
-  background: transparent;
-  border-radius: 4px;
-  width: 76px;
+  background: #FFFFFF;
+  border-radius: 7px;
+  width: 80px;
   padding: 0;
-  margin-top: -4px;
+  margin-top: -2px;
   text-align: center;
   position: relative;
   z-index: 0;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.25);
 }
 .player-name {
-  color: white;
+  color: #1A1815;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-weight: 700;
   font-size: 11.5px;
-  line-height: 1.2;
+  line-height: 1.15;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 5px 4px 4px;
-  background: #1A4A3A;
+  padding: 5px 5px 1px;
+  background: #FFFFFF;
   margin: 0;
-  border-radius: 3px 3px 0 0;
+  border-radius: 0;
 }
 .player-fix { display: none; }
 
 /* Points bar — SAME dark teal for ALL players (matches FPL official style) */
 .player-points-bar {
   margin: 0;
-  padding: 5px 4px;
-  background: #06443A;
-  color: white;
+  padding: 0 4px 4px;
+  background: #FFFFFF;
+  color: #1A1815;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-weight: 700;
   font-size: 12px;
-  line-height: 1.2;
+  line-height: 1.1;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 3px;
+  min-height: 0;
+  border-radius: 0;
+}
+.player-points-bar .pts-num { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 800; color: #1A6B3F; }
+.player-points-bar .pts-label { font-size: 8.5px; font-weight: 600; color: #9A968E; text-transform: uppercase; letter-spacing: 0.05em; }
+.player-points-bar .pt-mult { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; font-weight: 700; color: #B57810; }
+/* zero / blank state = muted grey number */
+.player-points-bar.zero .pts-num { color: #9A968E; }
+
+/* Returns footer — light grey strip inside the card (FPL-official style) */
+.player-returns-footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  min-height: 22px;
-  border-radius: 0 0 3px 3px;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 3px 4px;
+  background: #F0EEE9;
+  border-top: 1px solid #E4DECF;
+  min-height: 20px;
 }
-.player-points-bar .pts-num { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 700; color: white; }
-.player-points-bar .pts-label { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.8); }
-.player-points-bar .pt-mult { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; opacity: 0.85; font-weight: 600; color: #FFD76E; }
-/* Only use color state on notable extremes */
-.player-points-bar.good { background: #1A6B3F; }
-.player-points-bar.zero { background: #3a3a3a; color: rgba(255,255,255,0.6); }
+.player-returns-footer .rf {
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  color: #1A1815;
+  background: #E4DECF;
+}
+.player-returns-footer .rf.goal { background: #E9E6DF; font-size: 10px; }
+.player-returns-footer .rf.assist { background: #E9E6DF; font-size: 9px; }
+.player-returns-footer .rf.b3 { background: #F1C40F; color: #3D2E05; }
+.player-returns-footer .rf.b2 { background: #C6C4BE; color: #1A1815; }
+.player-returns-footer .rf.b1 { background: #D8B98A; color: #3D2708; }
+.player-returns-footer .rf.yc { background: #F5C518; color: #1A1815; }
+.player-returns-footer .rf.rc { background: #D92525; color: #fff; }
+.player-returns-footer .rf.neg { background: #9A2626; color: #fff; font-size: 8px; }
 
 /* Return badges — small icons that sit ABOVE the card */
 .player-returns {
@@ -1795,7 +1836,7 @@ function renderPitch() {
     else if (displayPts === 0 && mins === 0) ptsClass = 'zero';
 
     // Return badges — only the most important ones, stacked top-right
-    const returns = [];
+    const rf = [];
     const goals = stats.goals_scored || 0;
     const assists = stats.assists || 0;
     const yc = stats.yellow_cards || 0;
@@ -1805,16 +1846,17 @@ function renderPitch() {
     const ps = stats.penalties_saved || 0;
     const bonus = stats.bonus || 0;
 
-    if (goals > 0) returns.push(`<span class="player-ret goal" title="${goals} goal${goals>1?'s':''}">${goals > 1 ? goals : 'G'}</span>`);
-    if (assists > 0) returns.push(`<span class="player-ret assist" title="${assists} assist${assists>1?'s':''}">${assists>1?assists+'A':'A'}</span>`);
-    if (ps > 0) returns.push(`<span class="player-ret pen-save" title="Penalty saved">PS</span>`);
-    if (pm > 0) returns.push(`<span class="player-ret pen-miss" title="Penalty missed">PM</span>`);
-    if (og > 0) returns.push(`<span class="player-ret own-goal" title="Own goal">OG</span>`);
-    if (rc > 0) returns.push(`<span class="player-ret rc" title="Red card">RC</span>`);
-    else if (yc > 0) returns.push(`<span class="player-ret yc" title="Yellow card">YC</span>`);
-    if (bonus === 3) returns.push(`<span class="player-ret bonus-3" title="3 bonus">B3</span>`);
-    else if (bonus === 2) returns.push(`<span class="player-ret bonus-2" title="2 bonus">B2</span>`);
-    else if (bonus === 1) returns.push(`<span class="player-ret bonus-1" title="1 bonus">B1</span>`);
+    for (let i = 0; i < Math.min(goals, 3); i++) rf.push(`<span class="rf goal" title="Goal">⚽</span>`);
+    for (let i = 0; i < Math.min(assists, 2); i++) rf.push(`<span class="rf assist" title="Assist">👟</span>`);
+    if (ps > 0) rf.push(`<span class="rf" title="Penalty saved">PS</span>`);
+    if (pm > 0) rf.push(`<span class="rf neg" title="Penalty missed">PM</span>`);
+    if (og > 0) rf.push(`<span class="rf neg" title="Own goal">OG</span>`);
+    if (rc > 0) rf.push(`<span class="rf rc" title="Red card">R</span>`);
+    else if (yc > 0) rf.push(`<span class="rf yc" title="Yellow card">Y</span>`);
+    if (bonus === 3) rf.push(`<span class="rf b3" title="3 bonus">3</span>`);
+    else if (bonus === 2) rf.push(`<span class="rf b2" title="2 bonus">2</span>`);
+    else if (bonus === 1) rf.push(`<span class="rf b1" title="1 bonus">1</span>`);
+    const returnsFooterHtml = rf.length ? `<div class="player-returns-footer">${rf.join('')}</div>` : '';
 
     // Fixture display - short
     const fixHtml = fixes.map(fx => {
@@ -1841,11 +1883,8 @@ function renderPitch() {
     const nameDisplay = el.web_name.length > 10 ? el.web_name.substring(0, 9) + '…' : el.web_name;
     const multDisplay = pk.multiplier > 1 && pk.position <= 11 ? `<span class="pt-mult">×${pk.multiplier}</span>` : '';
 
-    // Returns appear stacked on the right (unless status is there too)
-    const returnsHtml = returns.length > 0 && !rightMarker ? `<div class="player-returns">${returns.join('')}</div>` : '';
-
     return `<div class="player-card">
-      ${leftMarker}${rightMarker}${liveDotHtml}${returnsHtml}
+      ${leftMarker}${rightMarker}${liveDotHtml}
       <div class="shirt">
         <img src="${kitUrl}" alt="${team.short} kit" loading="lazy"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -1853,7 +1892,8 @@ function renderPitch() {
       </div>
       <div class="player-info">
         <div class="player-name" title="${el.web_name} · ${team.short}">${nameDisplay}</div>
-        <div class="player-points-bar">${displayPts} pts${multDisplay}</div>
+        <div class="player-points-bar ${ptsClass}"><span class="pts-num">${displayPts}</span><span class="pts-label">pts</span>${multDisplay}</div>
+        ${returnsFooterHtml}
       </div>
     </div>`;
   };
@@ -1888,9 +1928,11 @@ function renderPitch() {
 
   document.getElementById('squad-pitch').innerHTML = `
     <div class="pitch" style="padding-bottom:140px">
-      <div class="pitch-markings"></div>
-      <div class="six-yard-box"></div>
-      <div class="penalty-spot"></div>
+      <div class="pitch-field">
+        <div class="pitch-markings"></div>
+        <div class="six-yard-box"></div>
+        <div class="penalty-spot"></div>
+      </div>
       <div class="pitch-header">
         <div class="xi-total">${xiTotal}<em>${chip ? chipLabel(chip).toUpperCase() : formation}</em></div>
         ${rankBannerHtml}
