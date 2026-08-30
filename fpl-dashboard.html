@@ -6,7 +6,7 @@
 <title>FPL Live · Rui Neves</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #FAF8F3;
@@ -32,31 +32,31 @@
   --bronze: #B07A3E;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { background: var(--bg); color: var(--ink); font-family: 'Inter Tight', sans-serif; font-size: 14px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
-.page { max-width: 1340px; margin: 0 auto; padding: 20px 24px 60px; }
+html, body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 13px; line-height: 1.45; -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+.page { max-width: 1340px; margin: 0 auto; padding: 12px 18px 32px; }
 
 /* Masthead — editorial newspaper style */
-.masthead { border-top: 4px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); padding: 14px 0 12px; margin-bottom: 20px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
-.masthead-left { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
-.masthead-title { font-family: 'Fraunces', serif; font-weight: 500; font-size: 38px; letter-spacing: -0.02em; text-align: center; font-variation-settings: 'opsz' 144; line-height: 1; }
+.masthead { border-top: 3px solid var(--line-strong); border-bottom: 1px solid var(--line-strong); padding: 9px 0 8px; margin-bottom: 12px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+.masthead-left { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+.masthead-title { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 26px; letter-spacing: -0.02em; text-align: center; line-height: 1; }
 .masthead-title em { font-style: italic; font-weight: 400; }
-.masthead-right { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); text-align: right; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.masthead-right { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); text-align: right; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
 
 /* Section headers */
-.section { margin-bottom: 36px; }
+.section { margin-bottom: 22px; }
 .section-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid var(--line-strong); padding-bottom: 8px; }
-.section-title { font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px; letter-spacing: -0.01em; }
-.section-kicker { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
+.section-title { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; }
+.section-kicker { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); }
 
 /* Config card — input bar */
-.config { background: var(--bg-card); border: 1px solid var(--line); border-radius: 2px; padding: 14px 18px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 24px; box-shadow: 0 1px 0 rgba(0,0,0,0.02); }
-.config label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
-.config input { border: none; border-bottom: 1px solid var(--line-strong); background: transparent; font-family: 'JetBrains Mono', monospace; font-size: 13px; padding: 4px 0; width: 140px; color: var(--ink); }
+.config { background: var(--bg-card); border: 1px solid var(--line); border-radius: 2px; padding: 9px 14px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 14px; box-shadow: 0 1px 0 rgba(0,0,0,0.02); }
+.config label { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+.config input { border: none; border-bottom: 1px solid var(--line-strong); background: transparent; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 13px; padding: 4px 0; width: 140px; color: var(--ink); }
 .config input:focus { outline: none; border-bottom-color: var(--accent); }
-.config select { border: 1px solid var(--line-strong); background: var(--bg); font-family: 'Inter Tight', sans-serif; font-size: 12px; padding: 6px 10px; color: var(--ink); border-radius: 2px; cursor: pointer; min-width: 240px; }
+.config select { border: 1px solid var(--line-strong); background: var(--bg); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 12px; padding: 6px 10px; color: var(--ink); border-radius: 2px; cursor: pointer; min-width: 240px; }
 .config select:focus { outline: none; border-color: var(--accent); }
 .config .spacer { flex: 1; }
-.btn { font-family: 'Inter Tight', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 8px 18px; background: var(--ink); color: var(--bg); border: none; cursor: pointer; border-radius: 2px; transition: all 0.15s; }
+.btn { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; padding: 8px 18px; background: var(--ink); color: var(--bg); border: none; cursor: pointer; border-radius: 2px; transition: all 0.15s; }
 .btn:hover { background: var(--accent); }
 .btn:disabled { opacity: 0.5; cursor: wait; }
 .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line-strong); }
@@ -64,52 +64,52 @@ html, body { background: var(--bg); color: var(--ink); font-family: 'Inter Tight
 
 /* Hero stats */
 .hero { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; border: 1px solid var(--line-strong); margin-bottom: 20px; background: var(--bg-card); }
-.hero-cell { padding: 11px 14px; border-right: 1px solid var(--line); }
+.hero-cell { padding: 8px 12px; border-right: 1px solid var(--line); }
 .hero-cell:last-child { border-right: none; }
-.hero-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px; }
-.hero-value { font-family: 'Fraunces', serif; font-weight: 500; font-size: 25px; letter-spacing: -0.02em; line-height: 1; }
+.hero-label { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 4px; }
+.hero-value { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 20px; letter-spacing: -0.02em; line-height: 1; }
 .hero-value.good { color: var(--good); }
 .hero-value.bad { color: var(--bad); }
 .hero-value.warn { color: var(--warn); }
 .hero-sub { font-size: 10px; color: var(--ink-muted); margin-top: 3px; }
 
 /* Layout — two column */
-.cols { display: grid; grid-template-columns: 1.6fr 1fr; gap: 28px; }
+.cols { display: grid; grid-template-columns: 1.6fr 1fr; gap: 20px; }
 @media (max-width: 1100px) { .cols { grid-template-columns: 1fr; } .hero { grid-template-columns: repeat(3,1fr); } .hero-cell:nth-child(3n) { border-right: none; } .hero-cell { border-bottom: 1px solid var(--line); } }
 
 /* Tables */
 table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--bg-card); }
-thead th { text-align: left; padding: 8px 10px; font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); border-bottom: 1px solid var(--line-strong); background: var(--bg-inset); }
+thead th { text-align: left; padding: 8px 10px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); border-bottom: 1px solid var(--line-strong); background: var(--bg-inset); }
 thead th.r { text-align: right; }
 thead th.c { text-align: center; }
 tbody td { padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
 tbody td.r { text-align: right; }
 tbody td.c { text-align: center; }
 tbody tr:hover { background: var(--bg-inset); }
-.mono { font-family: 'JetBrains Mono', monospace; }
+.mono { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
 .pname { font-weight: 500; }
 .pmeta { color: var(--ink-muted); font-size: 11px; }
 
 /* Position badges */
-.pos { display: inline-block; padding: 1px 5px; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.05em; border: 1px solid var(--line); }
+.pos { display: inline-block; padding: 1px 5px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 9px; font-weight: 500; letter-spacing: 0.05em; border: 1px solid var(--line); }
 .pos-gk { border-color: var(--warn); color: var(--warn); }
 .pos-def { border-color: var(--good); color: var(--good); }
 .pos-mid { border-color: var(--blue); color: var(--blue); }
 .pos-fwd { border-color: var(--accent); color: var(--accent); }
 
 /* Score cells */
-.score { font-family: 'Fraunces', serif; font-weight: 500; font-size: 15px; }
+.score { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 15px; }
 .score.good { color: var(--good); }
 .score.bad { color: var(--bad); }
 .score.zero { color: var(--ink-faint); }
 
 /* Bonus dots */
-.bonus-3 { background: var(--gold); color: #3D2E05; padding: 1px 6px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; }
-.bonus-2 { background: var(--silver); color: #1A1815; padding: 1px 6px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; }
-.bonus-1 { background: var(--bronze); color: #3D2708; padding: 1px 6px; border-radius: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; }
+.bonus-3 { background: var(--gold); color: #3D2E05; padding: 1px 6px; border-radius: 10px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; font-weight: 500; }
+.bonus-2 { background: var(--silver); color: #1A1815; padding: 1px 6px; border-radius: 10px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; font-weight: 500; }
+.bonus-1 { background: var(--bronze); color: #3D2708; padding: 1px 6px; border-radius: 10px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; font-weight: 500; }
 
 /* DC threshold bar */
-.dc-bar { display: inline-flex; align-items: center; gap: 5px; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+.dc-bar { display: inline-flex; align-items: center; gap: 5px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; }
 .dc-track { width: 50px; height: 6px; background: var(--bg-inset); border: 0.5px solid var(--line); position: relative; overflow: hidden; }
 .dc-fill { height: 100%; background: var(--ink-faint); transition: width 0.3s; }
 .dc-fill.hit { background: var(--good); }
@@ -117,13 +117,13 @@ tbody tr:hover { background: var(--bg-inset); }
 
 /* Fixture chips */
 .fixs { display: inline-flex; gap: 3px; flex-wrap: wrap; }
-.fix { display: inline-block; padding: 1px 5px; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; border: 0.5px solid var(--line); border-radius: 1px; }
+.fix { display: inline-block; padding: 1px 5px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 9px; font-weight: 500; border: 0.5px solid var(--line); border-radius: 1px; }
 .fix-done { background: var(--bg-inset); color: var(--ink-muted); border-color: var(--line); }
 .fix-live { background: var(--warn-soft); color: var(--warn); border-color: var(--warn); }
 .fix-pending { background: var(--bg-card); color: var(--ink); border-color: var(--line-strong); }
 
 /* ===== PITCH VIEW — FPL-official inspired ===== */
-.view-toggle { background: transparent; border: 1px solid var(--line); color: var(--ink-muted); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; cursor: pointer; border-radius: 2px; margin-left: 4px; transition: all 0.15s; }
+.view-toggle { background: transparent; border: 1px solid var(--line); color: var(--ink-muted); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; cursor: pointer; border-radius: 2px; margin-left: 4px; transition: all 0.15s; }
 .view-toggle:hover { color: var(--ink); border-color: var(--ink-muted); }
 .view-toggle.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .squad-view { margin-top: 8px; }
@@ -134,7 +134,7 @@ tbody tr:hover { background: var(--bg-inset); }
   padding: 0;
   position: relative;
   overflow: hidden;
-  min-height: 720px;
+  min-height: 540px;
   box-shadow: inset 0 0 60px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.12);
 }
 
@@ -200,8 +200,8 @@ tbody tr:hover { background: var(--bg-inset); }
   position: relative;
   display: grid;
   grid-template-rows: auto auto auto auto;
-  gap: 16px;
-  padding: 78px 14px 24px;
+  gap: 10px;
+  padding: 56px 14px 16px;
   z-index: 2;
 }
 .pitch-row {
@@ -209,7 +209,7 @@ tbody tr:hover { background: var(--bg-inset); }
   justify-content: space-around;
   align-items: flex-start;
   gap: 6px;
-  min-height: 130px;
+  min-height: 100px;
 }
 
 /* Player card on pitch — FPL-style */
@@ -219,12 +219,12 @@ tbody tr:hover { background: var(--bg-inset); }
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  width: 88px;
+  width: 78px;
   flex-shrink: 0;
 }
 
 .shirt {
-  width: 54px; height: 70px;
+  width: 46px; height: 60px;
   position: relative;
   margin-bottom: -4px;
   display: flex;
@@ -240,7 +240,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .player-info {
   background: transparent;
   border-radius: 4px;
-  width: 86px;
+  width: 76px;
   padding: 0;
   margin-top: -4px;
   text-align: center;
@@ -251,9 +251,9 @@ tbody tr:hover { background: var(--bg-inset); }
 }
 .player-name {
   color: white;
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 11.5px;
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
@@ -271,7 +271,7 @@ tbody tr:hover { background: var(--bg-inset); }
   padding: 5px 4px;
   background: #06443A;
   color: white;
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-weight: 700;
   font-size: 12px;
   line-height: 1.2;
@@ -282,9 +282,9 @@ tbody tr:hover { background: var(--bg-inset); }
   min-height: 22px;
   border-radius: 0 0 3px 3px;
 }
-.player-points-bar .pts-num { font-family: 'Inter Tight', sans-serif; font-size: 13px; font-weight: 700; color: white; }
+.player-points-bar .pts-num { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 700; color: white; }
 .player-points-bar .pts-label { font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.8); }
-.player-points-bar .pt-mult { font-family: 'JetBrains Mono', monospace; font-size: 10px; opacity: 0.85; font-weight: 600; color: #FFD76E; }
+.player-points-bar .pt-mult { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; opacity: 0.85; font-weight: 600; color: #FFD76E; }
 /* Only use color state on notable extremes */
 .player-points-bar.good { background: #1A6B3F; }
 .player-points-bar.zero { background: #3a3a3a; color: rgba(255,255,255,0.6); }
@@ -309,7 +309,7 @@ tbody tr:hover { background: var(--bg-inset); }
   line-height: 1;
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
   font-weight: 600;
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   border: 1.5px solid white;
 }
 .player-ret.goal { background: #2b6b3f; color: white; font-size: 10px; font-weight: 700; }
@@ -330,7 +330,7 @@ tbody tr:hover { background: var(--bg-inset); }
   width: 18px; height: 18px;
   background: #D92525;
   color: white;
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 8px;
   font-weight: 700;
   border-radius: 50%;
@@ -352,7 +352,7 @@ tbody tr:hover { background: var(--bg-inset); }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 9px;
   font-weight: 700;
   z-index: 3;
@@ -389,7 +389,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .xi-total {
   background: rgba(0,0,0,0.78);
   color: white;
-  font-family: 'Fraunces', serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 28px;
   font-weight: 600;
   padding: 10px 20px;
@@ -403,7 +403,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .xi-total em {
   color: #FFD76E;
   font-style: normal;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -414,7 +414,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .formation-label {
   background: rgba(0,0,0,0.78);
   color: white;
-  font-family: 'Fraunces', serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 26px;
   font-weight: 600;
   padding: 10px 22px;
@@ -436,7 +436,7 @@ tbody tr:hover { background: var(--bg-inset); }
   min-width: 100px;
 }
 .pitch-rank-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 8px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -445,7 +445,7 @@ tbody tr:hover { background: var(--bg-inset); }
   margin-bottom: 2px;
 }
 .pitch-rank-value {
-  font-family: 'Fraunces', serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: #1A1815;
@@ -453,7 +453,7 @@ tbody tr:hover { background: var(--bg-inset); }
   line-height: 1;
 }
 .pitch-rank-change {
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 9px;
   font-weight: 600;
   margin-top: 1px;
@@ -483,7 +483,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .pitch-bench .player-fix { font-size: 8px; }
 .bench-label {
   color: rgba(255,255,255,0.85);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -496,7 +496,7 @@ tbody tr:hover { background: var(--bg-inset); }
   top: 4px;
   font-size: 8px;
   color: rgba(255,255,255,0.85);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-weight: 500;
   letter-spacing: 0.08em;
 }
@@ -512,7 +512,7 @@ tbody tr:hover { background: var(--bg-inset); }
 }
 
 /* Captain marker (used in table view) */
-.cap { display: inline-block; background: var(--ink); color: var(--bg); padding: 0 4px; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; margin-left: 4px; }
+.cap { display: inline-block; background: var(--ink); color: var(--bg); padding: 0 4px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 9px; font-weight: 500; margin-left: 4px; }
 
 /* Goal/assist badges next to name */
 .badge-g { display: inline-block; background: var(--good-soft); color: var(--good); padding: 1px 5px; border-radius: 2px; font-size: 10px; font-weight: 500; margin-left: 4px; letter-spacing: 0.02em; }
@@ -524,12 +524,12 @@ tbody tr:hover { background: var(--bg-inset); }
 .ret-goal { color: var(--good); font-weight: 500; }
 .ret-assist { color: var(--blue); font-weight: 500; }
 .ret-yc, .ret-rc { font-size: 9px; }
-.ret-og, .ret-pm { background: var(--bad-soft); color: var(--bad); padding: 1px 4px; border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; }
+.ret-og, .ret-pm { background: var(--bad-soft); color: var(--bad); padding: 1px 4px; border-radius: 2px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 9px; font-weight: 500; }
 .ret-ps { color: var(--good); font-size: 11px; }
-.ret-save { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-muted); }
+.ret-save { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; color: var(--ink-muted); }
 
 /* Status badges */
-.inj { color: var(--bad); font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+.inj { color: var(--bad); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; }
 
 /* Fixture cards for bonus */
 .fixture-box { background: var(--bg-card); border: 1px solid var(--line); margin-bottom: 8px; overflow: hidden; transition: all 0.2s; }
@@ -545,10 +545,10 @@ tbody tr:hover { background: var(--bg-inset); }
 .fixture-box:not(.collapsed) .fixture-summary { display: none; }
 
 .bonus-toolbar { display: flex; gap: 6px; justify-content: flex-end; margin-bottom: 10px; }
-.bonus-tool-btn { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; background: transparent; color: var(--ink-muted); border: 1px solid var(--line); border-radius: 2px; cursor: pointer; transition: all 0.15s; }
+.bonus-tool-btn { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 10px; background: transparent; color: var(--ink-muted); border: 1px solid var(--line); border-radius: 2px; cursor: pointer; transition: all 0.15s; }
 .bonus-tool-btn:hover { color: var(--ink); border-color: var(--ink-muted); }
-.fixture-teams { font-family: 'Fraunces', serif; font-weight: 500; font-size: 15px; }
-.fixture-status { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+.fixture-teams { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 15px; }
+.fixture-status { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
 .fixture-status.live { color: var(--warn); display: flex; align-items: center; gap: 6px; }
 .fixture-status.finished { color: var(--ink-muted); }
 .fixture-status.pending { color: var(--ink-faint); }
@@ -557,23 +557,23 @@ tbody tr:hover { background: var(--bg-inset); }
 .fixture-body { padding: 0; }
 .bps-row { display: grid; grid-template-columns: 24px 1fr 36px 44px 50px; gap: 8px; padding: 6px 12px; align-items: center; border-bottom: 0.5px solid var(--line); font-size: 12px; }
 .bps-row:last-child { border-bottom: none; }
-.bps-rank { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-muted); }
+.bps-rank { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; color: var(--ink-muted); }
 .bps-name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.bps-val { font-family: 'JetBrains Mono', monospace; font-weight: 600; text-align: right; font-size: 12px; }
-.bps-dc { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-muted); text-align: center; font-weight: 500; }
+.bps-val { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 600; text-align: right; font-size: 12px; }
+.bps-dc { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 11px; color: var(--ink-muted); text-align: center; font-weight: 500; }
 .bps-dc.dc-hit { color: var(--good); background: var(--good-soft); padding: 1px 5px; border-radius: 3px; font-weight: 600; }
 .bps-dc.dc-near { color: var(--warn); font-weight: 600; }
 .bps-bonus { text-align: right; }
 
 /* Header row for column labels */
-.bps-header { background: var(--bg-inset); font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); padding: 5px 12px; font-weight: 600; }
+.bps-header { background: var(--bg-inset); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); padding: 5px 12px; font-weight: 600; }
 .bps-header .bps-rank, .bps-header .bps-name, .bps-header .bps-val, .bps-header .bps-dc, .bps-header .bps-bonus { color: var(--ink-muted); font-weight: 600; }
 
 /* "Your other players" divider for owned players outside top 5 */
 .bps-divider {
   padding: 5px 12px;
   background: var(--good-soft);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 9px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -590,11 +590,11 @@ tbody tr:hover { background: var(--bg-inset); }
 .mv-team { border-right: 1px solid var(--line); min-width: 0; }
 .mv-team:last-child { border-right: none; }
 
-.mv-team-header { background: #1E9ED9; color: white; padding: 9px 14px; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter Tight', sans-serif; }
+.mv-team-header { background: #1E9ED9; color: white; padding: 9px 14px; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
 .mv-team-name { font-weight: 700; font-size: 15px; letter-spacing: 0.04em; }
-.mv-team-score { font-family: 'Fraunces', serif; font-weight: 600; font-size: 20px; }
+.mv-team-score { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 20px; }
 
-.mv-col-header { display: grid; grid-template-columns: 1fr auto 34px 38px 44px 32px; gap: 6px; padding: 6px 12px; background: var(--bg-inset); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; border-bottom: 1px solid var(--line); align-items: center; }
+.mv-col-header { display: grid; grid-template-columns: 1fr auto 34px 38px 44px 32px; gap: 6px; padding: 6px 12px; background: var(--bg-inset); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; border-bottom: 1px solid var(--line); align-items: center; }
 .mv-col-header .mv-name { text-align: left; }
 .mv-col-header .mv-pts, .mv-col-header .mv-bps, .mv-col-header .mv-dc, .mv-col-header .mv-shsv-wrap { text-align: center; }
 
@@ -605,13 +605,13 @@ tbody tr:hover { background: var(--bg-inset); }
 
 .mv-name { font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; font-size: 13px; }
 .mv-icons { display: inline-flex; gap: 3px; align-items: center; flex-shrink: 0; }
-.mv-pts { text-align: center; font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); }
-.mv-bps { text-align: center; font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 13px; color: var(--ink); }
+.mv-pts { text-align: center; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 700; font-size: 14px; color: var(--ink); }
+.mv-bps { text-align: center; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 13px; color: var(--ink); }
 .mv-shsv-wrap { text-align: center; }
-.mv-shsv { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 12px; color: var(--ink-muted); }
+.mv-shsv { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 12px; color: var(--ink-muted); }
 .mv-shsv.shsv-mid { color: var(--ink); font-weight: 600; }
 .mv-shsv.shsv-high { color: var(--good); font-weight: 700; background: var(--good-soft); padding: 2px 5px; border-radius: 3px; }
-.mv-dc { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--ink-muted); font-weight: 500; }
+.mv-dc { text-align: center; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 13px; color: var(--ink-muted); font-weight: 500; }
 
 /* BPS pill highlight for top-3 (matches screenshot style) */
 .mv-bps.bps-top1, .mv-bps.bps-top2, .mv-bps.bps-top3 {
@@ -631,8 +631,8 @@ tbody tr:hover { background: var(--bg-inset); }
 
 /* Return icons — slightly bigger */
 .mr-icon { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; font-size: 12px; line-height: 1; }
-.mr-icon.mr-goal { background: #2b6b3f; color: white; border-radius: 50%; font-size: 10px; font-weight: 700; font-family: 'Inter Tight', sans-serif; }
-.mr-icon.mr-a { background: #1E4F80; color: white; border-radius: 50%; font-size: 10px; font-weight: 700; font-family: 'Inter Tight', sans-serif; }
+.mr-icon.mr-goal { background: #2b6b3f; color: white; border-radius: 50%; font-size: 10px; font-weight: 700; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+.mr-icon.mr-a { background: #1E4F80; color: white; border-radius: 50%; font-size: 10px; font-weight: 700; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
 .mr-icon.mr-og { background: var(--bad); color: white; border-radius: 2px; font-size: 9px; font-weight: 700; padding: 0 3px; width: auto; }
 .mr-icon.mr-yc { background: #F5C518; width: 11px; height: 14px; border-radius: 1px; font-size: 0; }
 .mr-icon.mr-rc { background: #D92525; width: 11px; height: 14px; border-radius: 1px; font-size: 0; }
@@ -644,38 +644,38 @@ tbody tr:hover { background: var(--bg-inset); }
 .price-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .price-col { background: var(--bg-card); border: 1px solid var(--line); padding: 0; }
 .price-header { padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--bg-inset); display: flex; justify-content: space-between; align-items: center; }
-.price-title { font-family: 'Fraunces', serif; font-size: 14px; font-weight: 500; }
+.price-title { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 500; }
 .price-title.up { color: var(--bad); }
 .price-title.down { color: var(--good); }
 .price-row { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; padding: 7px 14px; border-bottom: 0.5px solid var(--line); font-size: 12px; align-items: center; }
 .price-row:last-child { border-bottom: none; }
 .price-name { font-weight: 500; }
-.price-confidence { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-muted); }
-.price-velocity { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.price-confidence { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; color: var(--ink-muted); }
+.price-velocity { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 11px; }
 
 /* League table */
 .league-row { display: grid; grid-template-columns: 24px 1fr auto auto auto; gap: 8px; padding: 7px 12px; border-bottom: 0.5px solid var(--line); font-size: 12px; align-items: center; background: var(--bg-card); }
 .league-row.you { background: var(--accent-soft); font-weight: 500; }
 .league-row.top { background: var(--warn-soft); }
-.league-rank { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-muted); }
-.chip-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 1px 5px; border-radius: 2px; letter-spacing: 0.05em; }
+.league-rank { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 11px; color: var(--ink-muted); }
+.chip-tag { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 9px; padding: 1px 5px; border-radius: 2px; letter-spacing: 0.05em; }
 .chip-bb { background: var(--bad-soft); color: var(--bad); }
 .chip-fh { background: var(--blue-soft); color: var(--blue); }
 .chip-wc { background: var(--warn-soft); color: var(--warn); }
 .chip-none { color: var(--ink-faint); }
-.gw-pts { font-family: 'Fraunces', serif; font-weight: 500; font-size: 15px; min-width: 28px; text-align: right; }
+.gw-pts { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 15px; min-width: 28px; text-align: right; }
 
 /* Loading / empty states */
-.loading { padding: 40px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
+.loading { padding: 40px; text-align: center; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); }
 .error { padding: 20px; background: var(--bad-soft); color: var(--bad); border-left: 3px solid var(--bad); font-size: 13px; }
 
 /* Meta strip at bottom */
-.foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line-strong); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--ink-muted); display: flex; justify-content: space-between; }
+.foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line-strong); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.08em; color: var(--ink-muted); display: flex; justify-content: space-between; }
 .foot a { color: var(--accent); text-decoration: none; }
 
 /* Tabs for sections (legacy, kept for other places) */
 .tabs { display: flex; gap: 0; margin-bottom: 16px; border-bottom: 1px solid var(--line-strong); }
-.tab { padding: 8px 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; }
+.tab { padding: 8px 16px; font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.15s; }
 .tab:hover { color: var(--ink); }
 .tab.active { color: var(--ink); border-bottom-color: var(--accent); font-weight: 500; }
 .tab-content { display: none; }
@@ -699,7 +699,7 @@ tbody tr:hover { background: var(--bg-inset); }
   background: transparent;
   border: none;
   padding: 14px 16px;
-  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-weight: 600;
   font-size: 14px;
   color: var(--ink-muted);
@@ -733,7 +733,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .main-tab-badge {
   background: var(--bad);
   color: white;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 10px;
   font-weight: 600;
   padding: 1px 7px;
@@ -792,7 +792,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .rail-stat:nth-child(even) { border-right: none; }
 .rail-stat:nth-last-child(-n+2) { border-bottom: none; }
 .rail-stat-label {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 9px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -801,7 +801,7 @@ tbody tr:hover { background: var(--bg-inset); }
   font-weight: 600;
 }
 .rail-stat-value {
-  font-family: 'Fraunces', serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-weight: 600;
   font-size: 20px;
   letter-spacing: -0.01em;
@@ -833,7 +833,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .rail-section-title {
   padding: 8px 12px;
   background: var(--bg-inset);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -864,13 +864,13 @@ tbody tr:hover { background: var(--bg-inset); }
 .rail-fixtures .ticker-item.pending { border-left-color: var(--line); }
 .rail-fixtures .ticker-item:last-child { border-bottom: none; }
 .rail-fixtures .ticker-teams {
-  font-family: 'Fraunces', serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-weight: 500;
   font-size: 12px;
   margin-bottom: 0;
 }
 .rail-fixtures .ticker-status {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 9px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -960,9 +960,9 @@ tbody tr:hover { background: var(--bg-inset); }
 .ticker { display: flex; gap: 0; overflow-x: auto; margin-bottom: 14px; background: var(--bg-card); border: 1px solid var(--line); }
 .ticker-item { padding: 7px 12px; border-right: 1px solid var(--line); min-width: 160px; flex-shrink: 0; }
 .ticker-item:last-child { border-right: none; }
-.ticker-teams { font-family: 'Fraunces', serif; font-weight: 500; font-size: 13px; margin-bottom: 1px; }
-.ticker-score { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; }
-.ticker-status { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px; }
+.ticker-teams { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-weight: 500; font-size: 13px; margin-bottom: 1px; }
+.ticker-score { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 12px; font-weight: 500; }
+.ticker-status { font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-top: 2px; }
 .ticker-item.live { border-top: 3px solid var(--warn); }
 .ticker-item.finished { border-top: 3px solid var(--ink-muted); }
 .ticker-item.pending { border-top: 3px solid var(--line); }
