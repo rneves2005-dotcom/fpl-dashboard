@@ -122,6 +122,16 @@ tbody tr:hover { background: var(--bg-inset); }
 .fix-live { background: var(--warn-soft); color: var(--warn); border-color: var(--warn); }
 .fix-pending { background: var(--bg-card); color: var(--ink); border-color: var(--line-strong); }
 
+/* PL standings + top scorers tables */
+.stand-team { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
+.stand-badge { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
+.stand-row.ucl > td:first-child { box-shadow: inset 3px 0 0 var(--good); }
+.stand-row.uel > td:first-child { box-shadow: inset 3px 0 0 var(--blue); }
+.stand-row.rel > td:first-child { box-shadow: inset 3px 0 0 var(--bad); }
+.stand-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; font-size: 10px; color: var(--ink-muted); }
+.stand-legend span { display: inline-flex; align-items: center; gap: 5px; }
+.stand-legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+
 /* ===== PITCH VIEW — FPL-official inspired ===== */
 .view-toggle { background: transparent; border: 1px solid var(--line); color: var(--ink-muted); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; cursor: pointer; border-radius: 2px; margin-left: 4px; transition: all 0.15s; }
 .view-toggle:hover { color: var(--ink); border-color: var(--ink-muted); }
@@ -154,8 +164,8 @@ tbody tr:hover { background: var(--bg-inset); }
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  transform: perspective(760px) rotateX(18deg);
-  transform-origin: 50% 82%;
+  transform: perspective(900px) rotateX(10deg);
+  transform-origin: 50% 84%;
 }
 /* Pitch white markings */
 .pitch-markings {
@@ -1073,6 +1083,14 @@ tbody tr:hover { background: var(--bg-inset); }
       <span class="main-tab-icon">❗</span>
       <span>Threats</span>
     </button>
+    <button class="main-tab" data-tab="standings" onclick="switchTab('standings')">
+      <span class="main-tab-icon">📊</span>
+      <span>Standings</span>
+    </button>
+    <button class="main-tab" data-tab="scorers" onclick="switchTab('scorers')">
+      <span class="main-tab-icon">👟</span>
+      <span>Scorers</span>
+    </button>
   </div>
 
   <!-- TAB: Squad -->
@@ -1106,7 +1124,7 @@ tbody tr:hover { background: var(--bg-inset); }
     <div class="section">
       <div class="section-head">
         <div class="section-title">Mini-League</div>
-        <div class="section-kicker">Live GW projection · top 10</div>
+        <div class="section-kicker">Live GW projection · full table</div>
       </div>
       <div id="league-table"><div class="loading">Loading mini-league...</div></div>
     </div>
@@ -1171,6 +1189,28 @@ tbody tr:hover { background: var(--bg-inset); }
       <div id="threat-list"><div class="loading">Computing EO...</div></div>
     </div>
   </div>
+
+  <!-- TAB: Standings (real PL table) -->
+  <div class="main-tab-panel" id="tab-standings">
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Premier League Table</div>
+        <div class="section-kicker">Live · computed from results</div>
+      </div>
+      <div id="standings-table"><div class="loading">Loading standings...</div></div>
+    </div>
+  </div>
+
+  <!-- TAB: Top Scorers -->
+  <div class="main-tab-panel" id="tab-scorers">
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Top Scorers</div>
+        <div class="section-kicker">Live · goals this season</div>
+      </div>
+      <div id="scorers-table"><div class="loading">Loading top scorers...</div></div>
+    </div>
+  </div>
 </div>
 </div><!-- /.main-col -->
 
@@ -1219,6 +1259,7 @@ const STATE = {
   picks: null,
   history: null,
   leagueStandings: null,
+  allFixtures: null,
   currentGW: 2,
   teamMap: {},
   elMap: {}
@@ -1398,15 +1439,16 @@ async function refreshAll() {
       fpl('/fixtures/?event=' + STATE.currentGW),
       fpl('/entry/' + STATE.entry + '/'),
       fpl('/entry/' + STATE.entry + '/event/' + STATE.currentGW + '/picks/').catch(() => null),
-      fpl('/entry/' + STATE.entry + '/history/')
+      fpl('/entry/' + STATE.entry + '/history/'),
+      fpl('/fixtures/').catch(() => null)
     ];
     if (STATE.league) {
       promises.push(fpl('/leagues-classic/' + STATE.league + '/standings/'));
     }
 
-    const [live, fixtures, entryData, picks, history, league] = await Promise.all(promises);
+    const [live, fixtures, entryData, picks, history, allFixtures, league] = await Promise.all(promises);
     STATE.live = live; STATE.fixtures = fixtures; STATE.entryData = entryData;
-    STATE.picks = picks; STATE.history = history; STATE.leagueStandings = league;
+    STATE.picks = picks; STATE.history = history; STATE.allFixtures = allFixtures; STATE.leagueStandings = league;
 
     // Render everything
     renderHero();
@@ -1417,6 +1459,8 @@ async function refreshAll() {
     renderPriceChanges();
     renderMiniLeague();
     renderThreatList();
+    renderStandings();
+    renderScorers();
     updateMatchBadge();
 
     const now = new Date();
@@ -2354,7 +2398,7 @@ async function renderMiniLeague() {
     document.getElementById('league-table').innerHTML = '<div class="loading">League ID not provided</div>';
     return;
   }
-  const results = STATE.leagueStandings.standings.results.slice(0, 10);
+  const results = STATE.leagueStandings.standings.results;
   const liveMap = {};
   STATE.live.elements.forEach(e => liveMap[e.id] = e.stats.total_points || 0);
 
@@ -2396,6 +2440,74 @@ async function renderMiniLeague() {
     </div>`;
   }).join('');
   document.getElementById('league-table').innerHTML = html;
+}
+
+// ===== Real PL table — computed from finished fixtures =====
+function renderStandings() {
+  const el = document.getElementById('standings-table');
+  if (!el) return;
+  if (!STATE.bootstrap || !STATE.allFixtures) { el.innerHTML = '<div class="loading">No fixture data</div>'; return; }
+  const tbl = {};
+  STATE.bootstrap.teams.forEach(t => tbl[t.id] = { name: t.name, short: t.short_name, code: t.code, P:0,W:0,D:0,L:0,GF:0,GA:0,Pts:0 });
+  STATE.allFixtures.filter(f => f.finished && f.team_h_score != null).forEach(f => {
+    const h = tbl[f.team_h], a = tbl[f.team_a];
+    if (!h || !a) return;
+    const hs = f.team_h_score, as = f.team_a_score;
+    h.P++; a.P++; h.GF += hs; h.GA += as; a.GF += as; a.GA += hs;
+    if (hs > as) { h.W++; h.Pts += 3; a.L++; }
+    else if (hs < as) { a.W++; a.Pts += 3; h.L++; }
+    else { h.D++; a.D++; h.Pts++; a.Pts++; }
+  });
+  const rows = Object.values(tbl).map(r => ({ ...r, GD: r.GF - r.GA }))
+    .sort((x, y) => y.Pts - x.Pts || y.GD - x.GD || y.GF - x.GF || x.name.localeCompare(y.name));
+  const body = rows.map((r, i) => {
+    const pos = i + 1;
+    let zone = '';
+    if (pos <= 5) zone = pos === 5 ? 'uel' : 'ucl';
+    else if (pos >= 18) zone = 'rel';
+    const badge = `https://resources.premierleague.com/premierleague/badges/50/t${r.code}.png`;
+    return `<tr class="stand-row ${zone}">
+      <td class="c" style="width:26px;color:var(--ink-muted)">${pos}</td>
+      <td><span class="stand-team"><img class="stand-badge" src="${badge}" alt="" onerror="this.style.display='none'"><span class="pname">${r.name}</span></span></td>
+      <td class="c">${r.P}</td><td class="c">${r.W}</td><td class="c">${r.D}</td><td class="c">${r.L}</td>
+      <td class="c">${r.GF}</td><td class="c">${r.GA}</td><td class="c">${r.GD > 0 ? '+' : ''}${r.GD}</td>
+      <td class="c" style="font-weight:800">${r.Pts}</td>
+    </tr>`;
+  }).join('');
+  el.innerHTML = `<table>
+    <thead><tr><th class="c">#</th><th>Club</th><th class="c">P</th><th class="c">W</th><th class="c">D</th><th class="c">L</th><th class="c">GF</th><th class="c">GA</th><th class="c">GD</th><th class="c">Pts</th></tr></thead>
+    <tbody>${body}</tbody></table>
+    <div class="stand-legend"><span><i style="background:var(--good)"></i>Champions League</span><span><i style="background:var(--blue)"></i>Europa</span><span><i style="background:var(--bad)"></i>Relegation</span></div>`;
+}
+
+// ===== Top scorers — from bootstrap elements =====
+function renderScorers() {
+  const el = document.getElementById('scorers-table');
+  if (!el) return;
+  if (!STATE.bootstrap) { el.innerHTML = '<div class="loading">No data</div>'; return; }
+  const tm = STATE.teamMap;
+  const posName = { 1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD' };
+  const players = STATE.bootstrap.elements
+    .filter(e => (e.goals_scored || 0) > 0)
+    .sort((a, b) => b.goals_scored - a.goals_scored || b.assists - a.assists || a.minutes - b.minutes)
+    .slice(0, 30);
+  if (!players.length) { el.innerHTML = '<div class="loading">No goals scored yet</div>'; return; }
+  const body = players.map((e, i) => {
+    const t = tm[e.team] || { short: '', code: 0 };
+    const badge = `https://resources.premierleague.com/premierleague/badges/50/t${t.code}.png`;
+    const pn = posName[e.element_type] || '';
+    return `<tr>
+      <td class="c" style="width:26px;color:var(--ink-muted)">${i + 1}</td>
+      <td><span class="stand-team"><img class="stand-badge" src="${badge}" alt="" onerror="this.style.display='none'"><span class="pname">${e.web_name}</span> <span class="pmeta">${t.short}</span></span></td>
+      <td class="c"><span class="pos pos-${pn.toLowerCase()}">${pn}</span></td>
+      <td class="c" style="font-weight:800;color:var(--good)">${e.goals_scored}</td>
+      <td class="c">${e.assists}</td>
+      <td class="c" style="color:var(--ink-muted)">${e.minutes}'</td>
+    </tr>`;
+  }).join('');
+  el.innerHTML = `<table>
+    <thead><tr><th class="c">#</th><th>Player</th><th class="c">Pos</th><th class="c">G</th><th class="c">A</th><th class="c">Min</th></tr></thead>
+    <tbody>${body}</tbody></table>`;
 }
 
 // ============================================================
