@@ -279,6 +279,12 @@
         "from": "Deportivo Cali",
         "note": "OFFICIAL (club statement) · 2026-08-30",
         "c": ""
+      },
+      {
+        "n": "Chema Andres",
+        "from": "VfB Stuttgart",
+        "note": "OFFICIAL (club statement) · 2026-09-01",
+        "c": ""
       }
     ],
     "Chelsea": [
@@ -471,6 +477,12 @@
         "from": "Real Salt Lake",
         "note": "OFFICIAL (club statement) · 2026-08-18",
         "c": ""
+      },
+      {
+        "n": "Ben Chilwell",
+        "from": "RC Strasbourg",
+        "note": "OFFICIAL (club statement) · 2026-09-01",
+        "c": ""
       }
     ],
     "Everton": [
@@ -651,6 +663,18 @@
         "from": "Everton",
         "note": "OFFICIAL (club statement) · 2026-09-01",
         "c": ""
+      },
+      {
+        "n": "Christos Mouzakitis",
+        "from": "Olympiacos",
+        "note": "OFFICIAL (club statement) · 2026-09-01",
+        "c": ""
+      },
+      {
+        "n": "Sorba Thomas",
+        "from": "Stoke City",
+        "note": "OFFICIAL (club statement) · 2026-09-01",
+        "c": ""
       }
     ],
     "Ipswich Town": [
@@ -736,6 +760,12 @@
         "n": "Exequiel Palacios",
         "from": "Bayer Leverkusen",
         "note": "OFFICIAL (club statement) · 2026-08-27",
+        "c": ""
+      },
+      {
+        "n": "Zian Flemming",
+        "from": "Burnley",
+        "note": "OFFICIAL (club statement) · 2026-09-01",
         "c": ""
       }
     ],
@@ -867,6 +897,12 @@
       {
         "n": "Iliman Ndiaye",
         "from": "Everton",
+        "note": "OFFICIAL (club statement) · 2026-09-01",
+        "c": ""
+      },
+      {
+        "n": "Enzo Fernandez",
+        "from": "Chelsea",
         "note": "OFFICIAL (club statement) · 2026-09-01",
         "c": ""
       }
@@ -1124,6 +1160,12 @@
         "n": "Maxwell Adedeji",
         "from": "Leicester City",
         "note": "OFFICIAL (club statement) · 2026-08-31",
+        "c": ""
+      },
+      {
+        "n": "Tosin Adarabioyo",
+        "from": "Chelsea",
+        "note": "OFFICIAL (club statement) · 2026-09-01",
         "c": ""
       }
     ]
