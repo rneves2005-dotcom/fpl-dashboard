@@ -2649,7 +2649,7 @@ function renderROI() {
   if (!rows.length) { el.innerHTML = '<div class="loading">No players</div>'; return; }
   const head = isVal
     ? '<th class="c">#</th><th>Player</th><th class="c">Pos</th><th class="c">Value</th><th class="c">Pts</th><th class="c">£</th><th class="c">Min</th>'
-    : '<th class="c">#</th><th>Player</th><th class="c">Pos</th><th class="c">ROI</th><th class="c">Pts</th><th class="c">G</th><th class="c">A</th><th class="c">CS</th><th class="c">DCg</th><th class="c">Min</th>';
+    : '<th class="c">#</th><th>Player</th><th class="c">Pos</th><th class="c">ROI</th><th class="c">Pts</th><th class="c">£</th><th class="c">G</th><th class="c">A</th><th class="c">CS</th><th class="c">DCg</th><th class="c">Min</th>';
   const body = rows.map((r, i) => {
     const e = r.e, t = tm[e.team] || { short: '', code: 0 }, pn = posName[r.t] || '';
     const badge = `https://resources.premierleague.com/premierleague/badges/50/t${t.code}.png`;
@@ -2663,6 +2663,7 @@ function renderROI() {
          <td class="c" style="color:var(--ink-muted)">${e.minutes}'</td>`
       : `<td class="c"><span class="roi-val">${r.roi.toFixed(2)}</span></td>
          <td class="c" style="font-weight:600">${r.pts}</td>
+         <td class="c" style="color:var(--ink-muted)">£${r.cost.toFixed(1)}</td>
          <td class="c">${r.g}</td><td class="c">${r.a}</td>
          <td class="c" style="color:var(--ink-muted)">${r.cs || '–'}</td>
          <td class="c" style="color:var(--blue)">${r.dg || '–'}</td>
