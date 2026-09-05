@@ -2642,7 +2642,7 @@ function renderROI() {
     const roi = g + a - 0.25 * yc + cscred + w * dg;
     const cost = e.now_cost / 10, value = e.total_points / cost;
     return { e, g, a, yc, cs: cscred, dg, t, roi, value, cost, pts: e.total_points, mine: mineSet.has(e.id) };
-  }).filter(r => (isVal ? (r.pts > 0 && r.e.minutes >= 90) : (r.roi > 0.001 || r.dg > 0))
+  }).filter(r => (roiMine || (isVal ? (r.pts > 0 && r.e.minutes >= 90) : (r.roi > 0.001 || r.dg > 0)))
     && (roiPos === 'ALL' || posName[r.t] === roiPos) && (!roiMine || r.mine));
   rows.sort((x, y) => isVal ? (y.value - x.value || y.pts - x.pts) : (y.roi - x.roi || (y.g + y.a) - (x.g + x.a) || x.e.minutes - y.e.minutes));
   rows = rows.slice(0, 50);
