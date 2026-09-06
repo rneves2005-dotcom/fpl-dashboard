@@ -1184,24 +1184,9 @@ tbody tr.row-you:hover { background: var(--warn-soft); }
     <div class="section">
       <div class="section-head">
         <div class="section-title">Price Change Forecast</div>
-        <div class="section-kicker">Tonight at 01:30 UTC · Transfer velocity model</div>
+        <div class="section-kicker">Tonight ~00:00 GMT · transfer-velocity estimate · your players highlighted</div>
       </div>
-      <div class="price-cards">
-        <div class="price-col">
-          <div class="price-header">
-            <div class="price-title up">▲ Risers</div>
-            <div class="price-confidence">Transfer velocity</div>
-          </div>
-          <div id="risers"><div class="loading">Loading...</div></div>
-        </div>
-        <div class="price-col">
-          <div class="price-header">
-            <div class="price-title down">▼ Fallers</div>
-            <div class="price-confidence">Transfer velocity</div>
-          </div>
-          <div id="fallers"><div class="loading">Loading...</div></div>
-        </div>
-      </div>
+      <div id="price-forecast"><div class="loading">Loading...</div></div>
     </div>
   </div>
 
@@ -2437,37 +2422,34 @@ function renderPriceChanges() {
     </div>`;
   }).join('');
 
-  // === PRICE CHANGE FORECAST (velocity model) ===
-  const filtered = all.filter(p => p.significant && !p.alreadyChanged);
-  const risers = filtered.filter(p => p.net > 0 && p.velPct > 3)
-    .sort((a,b) => b.velPct - a.velPct).slice(0, 8);
-  const fallers = filtered.filter(p => p.net < 0 && p.velPct < -3)
-    .sort((a,b) => a.velPct - b.velPct).slice(0, 8);
-
-  const confidenceFor = velPct => {
-    const abs = Math.abs(velPct);
-    if (abs >= 8) return 'Likely';
-    if (abs >= 5) return 'Probable';
-    return 'Watch';
-  };
-
-  document.getElementById('risers').innerHTML = risers.length ? risers.map(p => {
-    const owned = STATE.picks && STATE.picks.picks.some(pk => pk.element === p.id);
-    return `<div class="price-row">
-      <div><span class="price-name">${p.name}${owned ? ' ⭐' : ''}</span><div class="pmeta">${p.team} · £${p.price}m</div></div>
-      <div class="price-velocity">+${(p.net/1000).toFixed(1)}k</div>
-      <div class="price-confidence">${confidenceFor(p.velPct)}</div>
-    </div>`;
-  }).join('') : '<div class="loading" style="padding:20px">No risers predicted</div>';
-
-  document.getElementById('fallers').innerHTML = fallers.length ? fallers.map(p => {
-    const owned = STATE.picks && STATE.picks.picks.some(pk => pk.element === p.id);
-    return `<div class="price-row">
-      <div><span class="price-name">${p.name}${owned ? ' ⭐' : ''}</span><div class="pmeta">${p.team} · £${p.price}m</div></div>
-      <div class="price-velocity">${(p.net/1000).toFixed(1)}k</div>
-      <div class="price-confidence">${confidenceFor(p.velPct)}</div>
-    </div>`;
-  }).join('') : '<div class="loading" style="padding:20px">No fallers predicted</div>';
+  // === PRICE CHANGE FORECAST — single FPL-style table, sorted by imminence ===
+  const moving = all.filter(p => p.significant && !p.alreadyChanged && Math.abs(p.velPct) >= 3)
+    .sort((a,b) => Math.abs(b.velPct) - Math.abs(a.velPct)).slice(0, 20);
+  const statusOf = v =>
+    v >= 6 ? ['Very likely to rise','rise'] :
+    v >= 3 ? ['Rising','rise'] :
+    v <= -6 ? ['Very likely to drop','drop'] : ['Falling','drop'];
+  const mine = new Set((STATE.picks && STATE.picks.picks) ? STATE.picks.picks.map(pk => pk.element) : []);
+  const rows = moving.map(p => {
+    const [label, dir] = statusOf(p.velPct);
+    const owned = mine.has(p.id);
+    const pill = dir === 'rise' ? 'background:var(--good-soft);color:var(--good)' : 'background:var(--bad-soft);color:var(--bad)';
+    const arrow = p.net > 0 ? '<span style="color:var(--good)">▲</span>' : '<span style="color:var(--bad)">▼</span>';
+    return `<tr style="${owned ? 'background:var(--accent-soft)' : ''}">
+      <td><span class="stand-team"><span class="pname">${p.name}${owned ? ' ⭐' : ''}</span> <span class="pmeta">${p.team} · ${p.pos}</span></span></td>
+      <td class="c"><span style="${pill};font-size:11px;font-weight:600;padding:3px 8px;border-radius:5px;white-space:nowrap">${label}</span></td>
+      <td class="c">${arrow} ${p.own.toFixed(1)}%</td>
+      <td class="c" style="color:var(--ink-muted)">${p.net > 0 ? '+' : ''}${(p.net/1000).toFixed(1)}k</td>
+      <td class="c" style="font-weight:600">£${p.price}m</td>
+    </tr>`;
+  }).join('');
+  const ownedMoving = moving.filter(p => mine.has(p.id));
+  const summary = ownedMoving.length
+    ? `<div style="font-size:12.5px;margin-bottom:10px;padding:9px 13px;background:var(--bg-inset);border-radius:9px">⭐ <b>Your players tonight:</b> ${ownedMoving.map(p => `${p.name} <span style="color:${p.net > 0 ? 'var(--good)' : 'var(--bad)'};font-weight:600">${p.net > 0 ? '▲ rise' : '▼ drop'}</span>`).join(' · ')}</div>`
+    : '<div style="font-size:12.5px;margin-bottom:10px;color:var(--ink-muted)">No owned players near a change tonight.</div>';
+  document.getElementById('price-forecast').innerHTML = summary + `<table>
+    <thead><tr><th>Player</th><th class="c">Status</th><th class="c">Ownership</th><th class="c">Net</th><th class="c">£</th></tr></thead>
+    <tbody>${rows}</tbody></table>`;
 }
 
 // ============================================================
