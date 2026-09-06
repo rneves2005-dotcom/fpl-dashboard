@@ -2707,6 +2707,20 @@ async function draftFetch(path) {
   throw new Error('all proxies failed');
 }
 
+// Draft element ids differ from classic ids (separate bootstraps) — map via each player's permanent `code`.
+async function draftIdMap() {
+  if (STATE.draftIdMap) return STATE.draftIdMap;
+  const codeToClassic = {};
+  (STATE.bootstrap.elements || []).forEach(e => codeToClassic[e.code] = e.id);
+  const map = {};
+  try {
+    const db = await draftFetch('/bootstrap-static');
+    (db.elements || []).forEach(de => { const cid = codeToClassic[de.code]; if (cid !== undefined) map[de.id] = cid; });
+  } catch (e) { /* map stays empty; roster will show as unavailable */ }
+  STATE.draftIdMap = map;
+  return map;
+}
+
 async function renderDraft() {
   const el = document.getElementById('draft-table');
   if (!el) return;
@@ -2753,7 +2767,8 @@ async function renderDraftSquad(details) {
       ((e.player_first_name || '') + ' ' + (e.player_last_name || '')).trim().toLowerCase() === 'rui neves');
     if (!me) { el.innerHTML = '<div class="loading">Your draft team not found in this league</div>'; return; }
     const status = await draftFetch('/league/' + DRAFT_LEAGUE_ID + '/element-status');
-    const mineIds = (status.element_status || []).filter(s => String(s.owner) === String(me.entry_id)).map(s => s.element);
+    const idmap = await draftIdMap();
+    const mineIds = (status.element_status || []).filter(s => String(s.owner) === String(me.entry_id)).map(s => idmap[s.element]).filter(v => v !== undefined);
     STATE.draftIds = mineIds; renderROI();
     if (!mineIds.length) { el.innerHTML = '<div class="loading">No roster found</div>'; return; }
     const liveMap = {};
