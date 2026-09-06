@@ -2707,19 +2707,12 @@ async function draftFetch(path) {
   throw new Error('all proxies failed');
 }
 
-// Draft element ids differ from classic ids (separate bootstraps) — map via each player's permanent `code`.
-async function draftIdMap() {
-  if (STATE.draftIdMap) return STATE.draftIdMap;
-  const codeToClassic = {};
-  (STATE.bootstrap.elements || []).forEach(e => codeToClassic[e.code] = e.id);
-  const map = {};
-  try {
-    const db = await draftFetch('/bootstrap-static');
-    (db.elements || []).forEach(de => { const cid = codeToClassic[de.code]; if (cid !== undefined) map[de.id] = cid; });
-  } catch (e) { /* map stays empty; roster will show as unavailable */ }
-  STATE.draftIdMap = map;
-  return map;
-}
+// Draft element ids diverge from classic ids for 59 players (the draft game has its OWN bootstrap).
+// Embedded map of divergent draftId->classicId (all others are identical) — avoids fetching the
+// large, proxy-flaky draft bootstrap at runtime. Regenerate if the draft adds players: diff the
+// draft vs classic bootstrap-static by permanent `code`.
+const DRAFT_ID_FIX = {554:557,555:566,556:565,557:560,558:561,559:555,560:556,561:563,562:554,563:562,565:559,566:567,567:558,571:572,572:571,574:575,575:577,576:574,577:576,579:580,580:579,593:594,594:595,595:593,598:599,599:598,601:602,602:603,603:604,604:601,605:606,606:607,607:608,608:605,613:614,614:613,617:618,618:617,625:626,626:625,627:629,628:627,629:628,632:639,634:643,635:644,636:647,637:649,638:635,639:636,640:650,641:632,642:637,643:638,644:642,646:640,647:641,649:634,650:646};
+function draftToClassic(id) { return DRAFT_ID_FIX[id] != null ? DRAFT_ID_FIX[id] : id; }
 
 async function renderDraft() {
   const el = document.getElementById('draft-table');
@@ -2767,8 +2760,7 @@ async function renderDraftSquad(details) {
       ((e.player_first_name || '') + ' ' + (e.player_last_name || '')).trim().toLowerCase() === 'rui neves');
     if (!me) { el.innerHTML = '<div class="loading">Your draft team not found in this league</div>'; return; }
     const status = await draftFetch('/league/' + DRAFT_LEAGUE_ID + '/element-status');
-    const idmap = await draftIdMap();
-    const mineIds = (status.element_status || []).filter(s => String(s.owner) === String(me.entry_id)).map(s => idmap[s.element]).filter(v => v !== undefined);
+    const mineIds = (status.element_status || []).filter(s => String(s.owner) === String(me.entry_id)).map(s => draftToClassic(s.element)).filter(id => STATE.elMap[id]);
     STATE.draftIds = mineIds; renderROI();
     if (!mineIds.length) { el.innerHTML = '<div class="loading">No roster found</div>'; return; }
     const liveMap = {};
