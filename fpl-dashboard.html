@@ -2423,8 +2423,9 @@ function renderPriceChanges() {
   }).join('');
 
   // === PRICE CHANGE FORECAST — single FPL-style table, sorted by imminence ===
-  const moving = all.filter(p => p.significant && !p.alreadyChanged && Math.abs(p.velPct) >= 3)
-    .sort((a,b) => Math.abs(b.velPct) - Math.abs(a.velPct)).slice(0, 20);
+  const moved = p => p.significant && !p.alreadyChanged && Math.abs(p.velPct) >= 3;
+  const moving = all.filter(p => moved(p) && Math.abs(p.net) >= 15000)
+    .sort((a,b) => Math.abs(b.velPct) - Math.abs(a.velPct)).slice(0, 25);
   const statusOf = v =>
     v >= 6 ? ['Very likely to rise','rise'] :
     v >= 3 ? ['Rising','rise'] :
@@ -2443,7 +2444,7 @@ function renderPriceChanges() {
       <td class="c" style="font-weight:600">£${p.price}m</td>
     </tr>`;
   }).join('');
-  const ownedMoving = moving.filter(p => mine.has(p.id));
+  const ownedMoving = all.filter(p => mine.has(p.id) && moved(p)).sort((a,b) => Math.abs(b.velPct) - Math.abs(a.velPct));
   const summary = ownedMoving.length
     ? `<div style="font-size:12.5px;margin-bottom:10px;padding:9px 13px;background:var(--bg-inset);border-radius:9px">⭐ <b>Your players tonight:</b> ${ownedMoving.map(p => `${p.name} <span style="color:${p.net > 0 ? 'var(--good)' : 'var(--bad)'};font-weight:600">${p.net > 0 ? '▲ rise' : '▼ drop'}</span>`).join(' · ')}</div>`
     : '<div style="font-size:12.5px;margin-bottom:10px;color:var(--ink-muted)">No owned players near a change tonight.</div>';
