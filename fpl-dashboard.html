@@ -2694,7 +2694,12 @@ function renderROI() {
 // ===== Draft league (draft.premierleague.com — different host/API) =====
 const DRAFT_LEAGUE_ID = '6079';
 async function draftFetch(path) {
-  // The Worker only proxies the classic host, so route the draft host through the generic proxies.
+  // Primary: our own Cloudflare Worker, which routes /draft/* to the draft host (reliable).
+  try {
+    const r = await fetch('https://fpl-proxy.rneves2005.workers.dev/draft' + path);
+    if (r.ok) return r.json();
+  } catch (e) { /* fall through to public proxies */ }
+  // Fallback: generic public proxies (frequently flaky/down for the draft host).
   const direct = 'https://draft.premierleague.com/api' + path;
   const proxies = [
     (u) => 'https://proxy.cors.sh/' + u,
@@ -2704,7 +2709,7 @@ async function draftFetch(path) {
   for (const p of proxies) {
     try { const r = await fetch(p(direct)); if (r.ok) return r.json(); } catch (e) { /* next */ }
   }
-  throw new Error('all proxies failed');
+  throw new Error('all draft proxies failed');
 }
 
 // Draft element ids diverge from classic ids for 59 players (the draft game has its OWN bootstrap).

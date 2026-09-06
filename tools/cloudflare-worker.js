@@ -1,9 +1,10 @@
 // FPL API CORS proxy — deploy as a Cloudflare Worker (free tier).
-// It forwards <worker-url>/<path> to https://fantasy.premierleague.com/api/<path>
-// and adds the CORS headers the browser needs. Caches 30s at the edge.
+// Routes:
+//   <worker-url>/<path>        -> https://fantasy.premierleague.com/api/<path>   (classic game)
+//   <worker-url>/draft/<path>  -> https://draft.premierleague.com/api/<path>     (draft game)
+// Adds the CORS headers the browser needs. Caches 30s at the edge.
 //
-// Deploy: dash.cloudflare.com -> Workers & Pages -> Create -> Worker ->
-//   name it "fpl-proxy" -> Deploy -> Edit code -> paste this -> Deploy.
+// Deploy: dash.cloudflare.com -> Workers & Pages -> fpl-proxy -> Edit code -> paste this -> Deploy.
 // Then the URL is https://fpl-proxy.<your-subdomain>.workers.dev
 
 export default {
@@ -12,7 +13,12 @@ export default {
       return new Response(null, { headers: cors() });
     }
     const url = new URL(request.url);
-    const target = 'https://fantasy.premierleague.com/api' + url.pathname + url.search;
+    let target;
+    if (url.pathname.startsWith('/draft/')) {
+      target = 'https://draft.premierleague.com/api/' + url.pathname.slice(7) + url.search;
+    } else {
+      target = 'https://fantasy.premierleague.com/api' + url.pathname + url.search;
+    }
     const upstream = await fetch(target, {
       headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' },
       cf: { cacheTtl: 30, cacheEverything: true }
