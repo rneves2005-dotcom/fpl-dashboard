@@ -1252,6 +1252,8 @@ tbody tr.row-you:hover { background: var(--warn-soft); }
       #tab-roi .roi-formula code{background:var(--bg-inset);padding:1px 5px;border-radius:4px;color:var(--ink)}
       #tab-roi tr.mine{background:var(--blue-soft)}
       #tab-roi tr.mine td:first-child{box-shadow:inset 3px 0 0 var(--blue)}
+      #tab-roi tr.draftrow{background:var(--good-soft)}
+      #tab-roi tr.draftrow td:first-child{box-shadow:inset 3px 0 0 var(--good)}
       #tab-roi .roi-val{font-weight:800;color:var(--good)}
     </style>
     <div class="section">
@@ -1274,7 +1276,10 @@ tbody tr.row-you:hover { background: var(--warn-soft); }
           <button onclick="setRoiPos('MID',this)">MID</button>
           <button onclick="setRoiPos('FWD',this)">FWD</button>
         </div>
-        <div class="roi-seg"><button id="roi-mine-btn" onclick="toggleRoiMine(this)">My squad</button></div>
+        <div class="roi-seg">
+          <button id="roi-mine-btn" onclick="toggleRoiScope('classic',this)">My squad</button>
+          <button id="roi-draft-btn" onclick="toggleRoiScope('draft',this)">My Draft</button>
+        </div>
       </div>
       <div id="roi-table"><div class="loading">Loading ROI…</div></div>
     </div>
@@ -2600,10 +2605,16 @@ function renderScorers() {
 }
 
 // ===== ROI — normalized involvement index (G + A − 0.25·YC + CS + DefCon×w) =====
-let roiPos = 'ALL', roiMine = false, roiMetric = 'roi';
+let roiPos = 'ALL', roiScope = 'all', roiMetric = 'roi';
 function setRoiMetric(m, btn) { roiMetric = m; document.querySelectorAll('#roi-metseg button').forEach(b => b.classList.toggle('on', b === btn)); renderROI(); }
 function setRoiPos(p, btn) { roiPos = p; document.querySelectorAll('#roi-poseg button').forEach(b => b.classList.toggle('on', b === btn)); renderROI(); }
-function toggleRoiMine(btn) { roiMine = !roiMine; btn.classList.toggle('on', roiMine); renderROI(); }
+function toggleRoiScope(which, btn) {
+  roiScope = (roiScope === which) ? 'all' : which;
+  const mb = document.getElementById('roi-mine-btn'), db = document.getElementById('roi-draft-btn');
+  if (mb) mb.classList.toggle('on', roiScope === 'classic');
+  if (db) db.classList.toggle('on', roiScope === 'draft');
+  renderROI();
+}
 
 // DefCon threshold-games per player, summed across all played GWs (cached per GW).
 async function loadDefcon() {
@@ -2632,18 +2643,24 @@ function renderROI() {
   const isVal = roiMetric === 'value';
   const games = STATE.defconGames;
   if (!games && !isVal) { el.innerHTML = '<div class="loading">Computing DefCon…</div>'; return; }
+  if (roiScope === 'draft' && !STATE.draftIds) { el.innerHTML = '<div class="loading">Loading your draft roster…</div>'; return; }
   const g0 = games || {};
   const w = 0.65;
   const tm = STATE.teamMap, posName = { 1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD' };
   const mineSet = new Set((STATE.picks && STATE.picks.picks) ? STATE.picks.picks.map(p => p.element) : []);
+  const draftSet = new Set(STATE.draftIds || []);
   let rows = STATE.bootstrap.elements.map(e => {
     const g = e.goals_scored || 0, a = e.assists || 0, yc = e.yellow_cards || 0, cs = e.clean_sheets || 0, t = e.element_type;
     const dg = g0[e.id] || 0, cscred = (t === 1 || t === 2) ? cs : 0;
     const roi = g + a - 0.25 * yc + cscred + w * dg;
     const cost = e.now_cost / 10, value = e.total_points / cost;
-    return { e, g, a, yc, cs: cscred, dg, t, roi, value, cost, pts: e.total_points, mine: mineSet.has(e.id) };
-  }).filter(r => (roiMine || (isVal ? (r.pts > 0 && r.e.minutes >= 90) : (r.roi > 0.001 || r.dg > 0)))
-    && (roiPos === 'ALL' || posName[r.t] === roiPos) && (!roiMine || r.mine));
+    return { e, g, a, yc, cs: cscred, dg, t, roi, value, cost, pts: e.total_points, classic: mineSet.has(e.id), draft: draftSet.has(e.id) };
+  }).filter(r => {
+    const inScope = roiScope === 'classic' ? r.classic : roiScope === 'draft' ? r.draft : true;
+    if (!inScope) return false;
+    const passThresh = (roiScope !== 'all') || (isVal ? (r.pts > 0 && r.e.minutes >= 90) : (r.roi > 0.001 || r.dg > 0));
+    return passThresh && (roiPos === 'ALL' || posName[r.t] === roiPos);
+  });
   rows.sort((x, y) => isVal ? (y.value - x.value || y.pts - x.pts) : (y.roi - x.roi || (y.g + y.a) - (x.g + x.a) || x.e.minutes - y.e.minutes));
   rows = rows.slice(0, 50);
   if (!rows.length) { el.innerHTML = '<div class="loading">No players</div>'; return; }
@@ -2668,7 +2685,8 @@ function renderROI() {
          <td class="c" style="color:var(--ink-muted)">${r.cs || '–'}</td>
          <td class="c" style="color:var(--blue)">${r.dg || '–'}</td>
          <td class="c" style="color:var(--ink-muted)">${e.minutes}'</td>`;
-    return `<tr class="${r.mine ? 'mine' : ''}">${idCell}${metricCells}</tr>`;
+    const rowClass = roiScope === 'draft' ? 'draftrow' : (r.classic ? 'mine' : '');
+    return `<tr class="${rowClass}">${idCell}${metricCells}</tr>`;
   }).join('');
   el.innerHTML = `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
 }
@@ -2736,6 +2754,7 @@ async function renderDraftSquad(details) {
     if (!me) { el.innerHTML = '<div class="loading">Your draft team not found in this league</div>'; return; }
     const status = await draftFetch('/league/' + DRAFT_LEAGUE_ID + '/element-status');
     const mineIds = (status.element_status || []).filter(s => String(s.owner) === String(me.entry_id)).map(s => s.element);
+    STATE.draftIds = mineIds; renderROI();
     if (!mineIds.length) { el.innerHTML = '<div class="loading">No roster found</div>'; return; }
     const liveMap = {};
     STATE.live.elements.forEach(e => liveMap[e.id] = e.stats.total_points || 0);
