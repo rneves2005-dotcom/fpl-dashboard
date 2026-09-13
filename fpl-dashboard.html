@@ -1095,6 +1095,10 @@ tbody tr.row-you:hover { background: var(--warn-soft); }
       <span class="main-tab-icon">📊</span>
       <span>Standings</span>
     </button>
+    <button class="main-tab" data-tab="fdr" onclick="switchTab('fdr')">
+      <span class="main-tab-icon">🗓️</span>
+      <span>FDR</span>
+    </button>
     <button class="main-tab" data-tab="scorers" onclick="switchTab('scorers')">
       <span class="main-tab-icon">👟</span>
       <span>Scorers</span>
@@ -1213,6 +1217,48 @@ tbody tr.row-you:hover { background: var(--warn-soft); }
         <div class="section-kicker">Live · computed from results</div>
       </div>
       <div id="standings-table"><div class="loading">Loading standings...</div></div>
+    </div>
+  </div>
+
+  <!-- TAB: FDR (table/form fixture difficulty) -->
+  <div class="main-tab-panel" id="tab-fdr">
+    <style>
+      #tab-fdr .fdr-ctrl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:10px}
+      #tab-fdr .fdr-seg{display:inline-flex;background:var(--bg-inset);border:1px solid var(--line);border-radius:9px;padding:3px;gap:2px}
+      #tab-fdr .fdr-seg button{border:0;background:none;cursor:pointer;font:600 12px/1 inherit;color:var(--ink-muted);padding:6px 11px;border-radius:6px}
+      #tab-fdr .fdr-seg button.on{background:var(--accent);color:#fff}
+      #tab-fdr .fdr-note{font-size:11.5px;color:var(--ink-muted);line-height:1.6;margin-bottom:12px}
+      #tab-fdr .fdr-wrap{overflow-x:auto}
+      #tab-fdr table{border-collapse:collapse;width:100%;font-size:12px}
+      #tab-fdr th,#tab-fdr td{padding:4px 5px;text-align:center;white-space:nowrap}
+      #tab-fdr th{color:var(--ink-muted);font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--line)}
+      #tab-fdr td.fdr-team{text-align:left;font-weight:800;position:sticky;left:0;background:var(--bg-card);z-index:1}
+      #tab-fdr tr.mine td.fdr-team{box-shadow:inset 3px 0 0 var(--blue)}
+      #tab-fdr .fdr-rate{color:var(--ink-muted);font-weight:500;font-size:10.5px;font-variant-numeric:tabular-nums}
+      #tab-fdr .fdr-cell{border-radius:4px;padding:4px 2px;font-weight:800;font-size:11px;line-height:1.15;min-width:40px;display:inline-block;width:100%;box-sizing:border-box}
+      #tab-fdr .fdr-ha{font-size:8px;opacity:.85;margin-left:1px;vertical-align:top}
+      #tab-fdr .fdr-dgw{display:flex;flex-direction:column;gap:2px}
+      #tab-fdr .fdr-run{font-weight:800;font-variant-numeric:tabular-nums}
+      #tab-fdr .fdr-legend{display:flex;gap:5px;align-items:center;margin-top:10px;font-size:10px;color:var(--ink-muted);flex-wrap:wrap}
+      #tab-fdr .fdr-legend i{width:22px;height:12px;border-radius:2px;display:inline-block}
+    </style>
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Fixture Difficulty — table/form</div>
+        <div class="section-kicker">Live · from goals scored &amp; conceded</div>
+      </div>
+      <div class="fdr-ctrl">
+        <div class="fdr-seg" id="fdr-modeseg">
+          <button class="on" onclick="setFdrMode('att',this)">Attack</button>
+          <button onclick="setFdrMode('cs',this)">Clean sheet</button>
+        </div>
+        <div class="fdr-seg" id="fdr-scopeseg">
+          <button class="on" onclick="setFdrScope('all',this)">All</button>
+          <button onclick="setFdrScope('mine',this)">My teams</button>
+        </div>
+      </div>
+      <div class="fdr-note" id="fdr-note"></div>
+      <div class="fdr-wrap"><div id="fdr-grid"><div class="loading">Loading fixtures...</div></div></div>
     </div>
   </div>
 
@@ -1527,6 +1573,7 @@ async function refreshAll() {
     renderMiniLeague();
     renderThreatList();
     renderStandings();
+    renderFDR();
     renderScorers();
     loadDefcon();
     renderDraft();
@@ -2524,6 +2571,68 @@ async function renderMiniLeague() {
 }
 
 // ===== Real PL table — computed from finished fixtures =====
+// ===== FDR — table/form fixture difficulty (directional: attack vs opp GA, CS vs opp GF) =====
+let FDR_MODE = 'att', FDR_SCOPE = 'all';
+function setFdrMode(m, btn){ FDR_MODE = m; btn.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); renderFDR(); }
+function setFdrScope(s, btn){ FDR_SCOPE = s; btn.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); renderFDR(); }
+function renderFDR(){
+  const el = document.getElementById('fdr-grid'); if(!el) return;
+  const note = document.getElementById('fdr-note');
+  if(!STATE.bootstrap || !STATE.allFixtures){ el.innerHTML = '<div class="loading">No fixture data</div>'; return; }
+  const N = 5;
+  const teams = {};
+  STATE.bootstrap.teams.forEach(t => teams[t.id] = { id:t.id, short:t.short_name, gf:0, ga:0, gp:0 });
+  STATE.allFixtures.filter(f => f.finished_provisional && f.team_h_score != null).forEach(f => {
+    const h = teams[f.team_h], a = teams[f.team_a]; if(!h||!a) return;
+    h.gp++; a.gp++; h.gf += f.team_h_score; h.ga += f.team_a_score; a.gf += f.team_a_score; a.ga += f.team_h_score;
+  });
+  Object.values(teams).forEach(t => { t.gfpg = t.gp ? t.gf/t.gp : 0; t.gapg = t.gp ? t.ga/t.gp : 0; });
+  // metric that drives difficulty: attackers care about opponent GA/g; CS-hunters about opponent GF/g
+  const metricOf = t => FDR_MODE === 'att' ? t.gapg : t.gfpg;
+  const vals = Object.values(teams).map(metricOf).sort((x,y)=>x-y);
+  const tierFor = m => {
+    const below = vals.filter(v => v < m).length;
+    const pct = vals.length > 1 ? below/(vals.length-1) : 0.5;   // 0..1 within league
+    // att: leakier opp (high GA) = easier = tier 1 ; cs: higher-scoring opp (high GF) = harder = tier 5
+    return FDR_MODE === 'att' ? 5 - Math.round(pct*4) : 1 + Math.round(pct*4);
+  };
+  const fut = STATE.allFixtures.filter(f => f.event && !f.finished_provisional);
+  const nextGW = fut.length ? Math.min(...fut.map(f=>f.event)) : (STATE.currentGW + 1);
+  const gws = []; for(let i=0;i<N;i++) gws.push(nextGW+i);
+  const cell = {};  // teamId -> gw -> [{short, home, tier}]
+  STATE.allFixtures.filter(f => gws.includes(f.event)).forEach(f => {
+    [[f.team_h,f.team_a,true],[f.team_a,f.team_h,false]].forEach(([tid,oid,home]) => {
+      const opp = teams[oid]; if(!opp) return;
+      cell[tid] = cell[tid] || {}; (cell[tid][f.event] = cell[tid][f.event] || []).push({ short:opp.short, home, tier:tierFor(metricOf(opp)) });
+    });
+  });
+  const mine = new Set();
+  if(STATE.picks && STATE.picks.picks) STATE.picks.picks.forEach(p => { const e = STATE.elMap[p.element]; if(e) mine.add(e.team); });
+  const TIER = {1:['#1f9d57','#fff'],2:['#7fc06a','#16330b'],3:['#c3c7cd','#33383f'],4:['#eb8a53','#2e1405'],5:['#cc3b3b','#fff']};
+  let rows = Object.values(teams).map(t => {
+    const run = gws.reduce((s,g)=> s + ((cell[t.id] && cell[t.id][g]) ? cell[t.id][g].reduce((a,c)=>a+c.tier,0) : 3), 0);
+    return Object.assign({ run }, t);
+  });
+  if(FDR_SCOPE === 'mine') rows = rows.filter(t => mine.has(t.id));
+  rows.sort((a,b) => a.run - b.run || a.short.localeCompare(b.short));
+  const head = `<tr><th class="fdr-team">Team</th><th>Sc/Cn</th>${gws.map(g=>`<th>GW${g}</th>`).join('')}<th>Run</th></tr>`;
+  const body = rows.map(t => {
+    const cells = gws.map(g => {
+      const cs = cell[t.id] && cell[t.id][g];
+      if(!cs || !cs.length) return `<td><span class="fdr-cell" style="background:var(--bg-inset);color:var(--ink-faint)">–</span></td>`;
+      const inner = cs.map(c => { const [bg,fg] = TIER[c.tier]; return `<span class="fdr-cell" style="background:${bg};color:${fg}">${c.short}<span class="fdr-ha">${c.home?'H':'A'}</span></span>`; }).join('');
+      return `<td>${cs.length>1 ? `<div class="fdr-dgw">${inner}</div>` : inner}</td>`;
+    }).join('');
+    return `<tr class="${mine.has(t.id)?'mine':''}"><td class="fdr-team">${t.short}</td><td class="fdr-rate">${t.gfpg.toFixed(1)}/${t.gapg.toFixed(1)}</td>${cells}<td class="fdr-run">${t.run}</td></tr>`;
+  }).join('');
+  if(!rows.length){ el.innerHTML = '<div class="loading">No teams in view</div>'; }
+  else el.innerHTML = `<table>${head}${body}</table>
+    <div class="fdr-legend"><span>Easier</span><i style="background:#1f9d57"></i><i style="background:#7fc06a"></i><i style="background:#c3c7cd"></i><i style="background:#eb8a53"></i><i style="background:#cc3b3b"></i><span>Harder · Run = Σ5 tiers (low = easy) · your teams flagged blue</span></div>`;
+  if(note) note.innerHTML = FDR_MODE === 'att'
+    ? `Your <b>attackers'</b> fixtures, coloured by how many goals the opponent <b>concedes</b> per game — greener = leakier defence = easier to score. <b>Sc/Cn</b> = that team's own goals scored / conceded per game.`
+    : `Your <b>defenders &amp; GK</b> fixtures, coloured by how many goals the opponent <b>scores</b> per game — greener = blunter attack = easier clean sheet. <b>Sc/Cn</b> = scored / conceded per game.`;
+}
+
 function renderStandings() {
   const el = document.getElementById('standings-table');
   if (!el) return;
