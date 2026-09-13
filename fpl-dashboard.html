@@ -2596,7 +2596,9 @@ function renderFDR(){
     // att: leakier opp (high GA) = easier = tier 1 ; cs: higher-scoring opp (high GF) = harder = tier 5
     return FDR_MODE === 'att' ? 5 - Math.round(pct*4) : 1 + Math.round(pct*4);
   };
-  const fut = STATE.allFixtures.filter(f => f.event && !f.finished_provisional);
+  // start at the next FULLY-unstarted GW (skip a current GW that still has a straggler fixture)
+  const startedGW = new Set(STATE.allFixtures.filter(f => f.started).map(f => f.event));
+  const fut = STATE.allFixtures.filter(f => f.event && !startedGW.has(f.event));
   const nextGW = fut.length ? Math.min(...fut.map(f=>f.event)) : (STATE.currentGW + 1);
   const gws = []; for(let i=0;i<N;i++) gws.push(nextGW+i);
   const cell = {};  // teamId -> gw -> [{short, home, tier}]
