@@ -131,6 +131,10 @@ tbody tr:hover { background: var(--bg-inset); }
 .stand-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; font-size: 10px; color: var(--ink-muted); }
 .stand-legend span { display: inline-flex; align-items: center; gap: 5px; }
 .stand-legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.stand-row.live .pname { font-style: italic; }
+.stand-live { display: inline-flex; align-items: center; gap: 3px; font-size: 8px; font-weight: 800; letter-spacing: 0.08em; color: var(--bad); border: 1px solid var(--bad); border-radius: 2px; padding: 1px 3px; margin-left: 6px; vertical-align: middle; }
+.stand-live::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--bad); animation: standpulse 1.4s ease-in-out infinite; }
+@keyframes standpulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
 tbody tr.row-you { background: var(--warn-soft); }
 tbody tr.row-you:hover { background: var(--warn-soft); }
 
@@ -2526,7 +2530,7 @@ function renderStandings() {
   if (!STATE.bootstrap || !STATE.allFixtures) { el.innerHTML = '<div class="loading">No fixture data</div>'; return; }
   const tbl = {};
   STATE.bootstrap.teams.forEach(t => tbl[t.id] = { name: t.name, short: t.short_name, code: t.code, P:0,W:0,D:0,L:0,GF:0,GA:0,Pts:0 });
-  STATE.allFixtures.filter(f => f.finished_provisional && f.team_h_score != null).forEach(f => {
+  STATE.allFixtures.filter(f => f.started && f.team_h_score != null).forEach(f => {
     const h = tbl[f.team_h], a = tbl[f.team_a];
     if (!h || !a) return;
     const hs = f.team_h_score, as = f.team_a_score;
@@ -2534,6 +2538,7 @@ function renderStandings() {
     if (hs > as) { h.W++; h.Pts += 3; a.L++; }
     else if (hs < as) { a.W++; a.Pts += 3; h.L++; }
     else { h.D++; a.D++; h.Pts++; a.Pts++; }
+    if (!f.finished_provisional) { h.live = true; a.live = true; }  // match in progress — provisional
   });
   const rows = Object.values(tbl).map(r => ({ ...r, GD: r.GF - r.GA }))
     .sort((x, y) => y.Pts - x.Pts || y.GD - x.GD || y.GF - x.GF || x.name.localeCompare(y.name));
@@ -2543,9 +2548,10 @@ function renderStandings() {
     if (pos <= 5) zone = pos === 5 ? 'uel' : 'ucl';
     else if (pos >= 18) zone = 'rel';
     const badge = `https://resources.premierleague.com/premierleague/badges/50/t${r.code}.png`;
-    return `<tr class="stand-row ${zone}">
+    const liveTag = r.live ? '<span class="stand-live" title="Match in progress — provisional">LIVE</span>' : '';
+    return `<tr class="stand-row ${zone}${r.live ? ' live' : ''}">
       <td class="c" style="width:26px;color:var(--ink-muted)">${pos}</td>
-      <td><span class="stand-team"><img class="stand-badge" src="${badge}" alt="" onerror="this.style.display='none'"><span class="pname">${r.name}</span></span></td>
+      <td><span class="stand-team"><img class="stand-badge" src="${badge}" alt="" onerror="this.style.display='none'"><span class="pname">${r.name}</span>${liveTag}</span></td>
       <td class="c">${r.P}</td><td class="c">${r.W}</td><td class="c">${r.D}</td><td class="c">${r.L}</td>
       <td class="c">${r.GF}</td><td class="c">${r.GA}</td><td class="c">${r.GD > 0 ? '+' : ''}${r.GD}</td>
       <td class="c" style="font-weight:800">${r.Pts}</td>
@@ -2554,7 +2560,7 @@ function renderStandings() {
   el.innerHTML = `<table>
     <thead><tr><th class="c">#</th><th>Club</th><th class="c">P</th><th class="c">W</th><th class="c">D</th><th class="c">L</th><th class="c">GF</th><th class="c">GA</th><th class="c">GD</th><th class="c">Pts</th></tr></thead>
     <tbody>${body}</tbody></table>
-    <div class="stand-legend"><span><i style="background:var(--good)"></i>Champions League</span><span><i style="background:var(--blue)"></i>Europa</span><span><i style="background:var(--bad)"></i>Relegation</span></div>`;
+    <div class="stand-legend"><span><i style="background:var(--good)"></i>Champions League</span><span><i style="background:var(--blue)"></i>Europa</span><span><i style="background:var(--bad)"></i>Relegation</span><span><span class="stand-live" style="margin-left:0">LIVE</span>in-progress · provisional</span></div>`;
 }
 
 // ===== Top scorers — from bootstrap elements =====
