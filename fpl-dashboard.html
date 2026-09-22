@@ -1099,6 +1099,10 @@ tbody tr.row-you:hover { background: var(--warn-soft); }
       <span class="main-tab-icon">🗓️</span>
       <span>FDR</span>
     </button>
+    <button class="main-tab" data-tab="atk" onclick="switchTab('atk')">
+      <span class="main-tab-icon">⚡</span>
+      <span>Attack</span>
+    </button>
     <button class="main-tab" data-tab="scorers" onclick="switchTab('scorers')">
       <span class="main-tab-icon">👟</span>
       <span>Scorers</span>
@@ -1259,6 +1263,31 @@ tbody tr.row-you:hover { background: var(--warn-soft); }
       </div>
       <div class="fdr-note" id="fdr-note"></div>
       <div class="fdr-wrap"><div id="fdr-grid"><div class="loading">Loading fixtures...</div></div></div>
+    </div>
+  </div>
+
+  <!-- TAB: Attack Index (scoring rate x fixtures) -->
+  <div class="main-tab-panel" id="tab-atk">
+    <style>
+      #tab-atk .atk-note{font-size:11.5px;color:var(--ink-muted);line-height:1.6;margin-bottom:12px}
+      #tab-atk .atk-wrap{overflow-x:auto}
+      #tab-atk table{border-collapse:collapse;width:100%;font-size:12px}
+      #tab-atk th,#tab-atk td{padding:5px 7px;text-align:center;white-space:nowrap}
+      #tab-atk th{color:var(--ink-muted);font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--line)}
+      #tab-atk td.atk-team{text-align:left;font-weight:800}
+      #tab-atk tr.mine td.atk-team{box-shadow:inset 3px 0 0 var(--blue)}
+      #tab-atk .atk-idx{font-weight:800;font-variant-numeric:tabular-nums;border-radius:5px;padding:3px 8px;color:#fff;display:inline-block}
+      #tab-atk .atk-num{color:var(--ink-muted);font-variant-numeric:tabular-nums}
+      #tab-atk td.atk-star{text-align:left;font-weight:700}
+      #tab-atk .atk-run{font-size:10px;color:var(--ink-muted);letter-spacing:.02em}
+    </style>
+    <div class="section">
+      <div class="section-head">
+        <div class="section-title">Attack Index — where the goals are</div>
+        <div class="section-kicker">Live · scoring rate × upcoming fixture ease</div>
+      </div>
+      <div class="atk-note" id="atk-note"></div>
+      <div class="atk-wrap"><div id="atk-grid"><div class="loading">Loading...</div></div></div>
     </div>
   </div>
 
@@ -1574,6 +1603,7 @@ async function refreshAll() {
     renderThreatList();
     renderStandings();
     renderFDR();
+    renderAttack();
     renderScorers();
     loadDefcon();
     renderDraft();
@@ -2573,6 +2603,60 @@ async function renderMiniLeague() {
 // ===== Real PL table — computed from finished fixtures =====
 // ===== FDR — table/form fixture difficulty (directional: attack vs opp GA, CS vs opp GF) =====
 let FDR_MODE = 'att', FDR_SCOPE = 'all';
+// ===== Attack Index — team scoring rate x upcoming opponent leakiness (near-term xG proxy) =====
+function renderAttack(){
+  const el = document.getElementById('atk-grid'); if(!el) return;
+  const note = document.getElementById('atk-note');
+  if(!STATE.bootstrap || !STATE.allFixtures){ el.innerHTML = '<div class="loading">No data</div>'; return; }
+  const N = 4;
+  const teams = {};
+  STATE.bootstrap.teams.forEach(t => teams[t.id] = { id:t.id, short:t.short_name, gf:0, ga:0, gp:0 });
+  STATE.allFixtures.filter(f => f.finished_provisional && f.team_h_score != null).forEach(f => {
+    const h = teams[f.team_h], a = teams[f.team_a]; if(!h||!a) return;
+    h.gp++; a.gp++; h.gf += f.team_h_score; h.ga += f.team_a_score; a.gf += f.team_a_score; a.ga += f.team_h_score;
+  });
+  Object.values(teams).forEach(t => { t.gfpg = t.gp ? t.gf/t.gp : 0; t.gapg = t.gp ? t.ga/t.gp : 0; });
+  const started = new Set(STATE.allFixtures.filter(f => f.started).map(f => f.event));
+  const fut = STATE.allFixtures.filter(f => f.event && !started.has(f.event));
+  const nextGW = fut.length ? Math.min(...fut.map(f=>f.event)) : (STATE.currentGW + 1);
+  const gws = []; for(let i=0;i<N;i++) gws.push(nextGW+i);
+  const opps = {};
+  STATE.allFixtures.filter(f => gws.includes(f.event)).forEach(f => {
+    (opps[f.team_h] = opps[f.team_h] || []).push(f.team_a);
+    (opps[f.team_a] = opps[f.team_a] || []).push(f.team_h);
+  });
+  const bestAtt = {};
+  STATE.bootstrap.elements.forEach(e => {
+    if(e.element_type !== 3 && e.element_type !== 4) return;
+    const cur = bestAtt[e.team];
+    if(!cur || parseFloat(e.form) > parseFloat(cur.form)) bestAtt[e.team] = e;
+  });
+  const mine = new Set();
+  if(STATE.picks && STATE.picks.picks) STATE.picks.picks.forEach(p => { const e = STATE.elMap[p.element]; if(e) mine.add(e.team); });
+  let rows = Object.values(teams).map(t => {
+    const o = opps[t.id] || [];
+    const leak = o.length ? o.reduce((s,oid)=> s + (teams[oid] ? teams[oid].gapg : 1), 0)/o.length : 0;
+    return Object.assign({ leak, idx: t.gfpg*leak, run: o.map(oid => teams[oid] ? teams[oid].short : '?') }, t);
+  });
+  rows.sort((a,b) => b.idx - a.idx);
+  const max = rows[0] ? rows[0].idx : 1;
+  const POS = {3:'MID',4:'FWD'};
+  const body = rows.map((t,i) => {
+    const e = bestAtt[t.id];
+    const star = e ? `${e.web_name} <span class="atk-num">${POS[e.element_type]} £${(e.now_cost/10).toFixed(1)} · ${e.form}</span>` : '&ndash;';
+    const frac = max ? t.idx/max : 0;
+    const bg = `hsl(${Math.round(130*frac)},55%,${Math.round(42 - 12*frac)}%)`;
+    return `<tr class="${mine.has(t.id)?'mine':''}"><td class="atk-team">${i+1}. ${t.short}</td>`
+      + `<td class="atk-num">${t.gfpg.toFixed(1)}</td>`
+      + `<td class="atk-num">${t.leak.toFixed(2)}</td>`
+      + `<td><span class="atk-idx" style="background:${bg}">${t.idx.toFixed(2)}</span></td>`
+      + `<td class="atk-run">${t.run.join(' ')}</td>`
+      + `<td class="atk-star">${star}</td></tr>`;
+  }).join('');
+  el.innerHTML = `<table><thead><tr><th class="atk-team">Team</th><th>GF/g</th><th>Opp GA/g</th><th>ATK idx</th><th>Next ${N}</th><th>Top attacker (form)</th></tr></thead><tbody>${body}</tbody></table>`;
+  if(note) note.innerHTML = `<b>ATK index</b> = a team's <b>goals scored / game</b> &times; its <b>opponents' goals-conceded / game over the next ${N} GWs</b> — a near-term expected-goals proxy for where the FPL attacking points will land. Higher = load this team's attack. Your squad's clubs flagged blue.`;
+}
+
 function setFdrMode(m, btn){ FDR_MODE = m; btn.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); renderFDR(); }
 function setFdrScope(s, btn){ FDR_SCOPE = s; btn.parentNode.querySelectorAll('button').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); renderFDR(); }
 function renderFDR(){
