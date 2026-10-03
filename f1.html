@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>F1 Championship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: sport nav, single column, Drivers/Constructors championship tables + season schedule with latest-race podium. */
+:root{
+  --bg:#eef1f5; --surface:#ffffff; --surface-2:#eaeef3; --line:#dde3ea;
+  --ink:#131a22; --ink-2:#596673; --ink-3:#8c98a5;
+  --accent:#e10600; --accent-soft:color-mix(in srgb,var(--accent) 12%,var(--surface)); --live:#e03131;
+  --shadow:0 1px 2px rgba(16,28,40,.05),0 6px 18px rgba(16,28,40,.05);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1218; --surface:#161d25; --surface-2:#1e2831; --line:#2a333d;
+  --ink:#eef3f8; --ink-2:#9babba; --ink-3:#6a7784; --accent:#ff4136; --live:#ff5c5c;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28); color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1218; --surface:#161d25; --surface-2:#1e2831; --line:#2a333d;
+  --ink:#eef3f8; --ink-2:#9babba; --ink-3:#6a7784; --accent:#ff4136; --live:#ff5c5c;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink); font-family:"Barlow",system-ui,-apple-system,Segoe UI,Roboto,sans-serif; font-size:15px; line-height:1.4; -webkit-font-smoothing:antialiased; padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.wrap{max-width:820px; margin:0 auto; padding-left:16px; padding-right:16px}
+h1{margin:0}
+
+.sportnav{display:flex; gap:6px; flex-wrap:wrap; padding-block:14px 8px; align-items:center}
+.sportnav a{font:inherit; font-weight:600; font-size:13.5px; padding:7px 13px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--ink-2); text-decoration:none; display:inline-flex; align-items:center; gap:5px}
+.sportnav a:hover{color:var(--ink)}
+.sportnav a.active{background:var(--accent); border-color:var(--accent); color:#fff}
+
+.subhead{display:flex; align-items:baseline; gap:10px; padding-bottom:8px}
+.subhead .nm{font-family:"Oswald"; font-weight:700; font-size:22px; letter-spacing:.06em}
+.subhead .tag{color:var(--ink-3); font-size:12px; letter-spacing:.04em; text-transform:uppercase; font-weight:600}
+
+.toolbar{position:sticky; top:env(safe-area-inset-top,0); z-index:10; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(8px); padding-block:8px; margin-bottom:8px}
+.ctrl-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.tabs{display:flex; gap:6px}
+.tab{padding:8px 15px; border:1px solid var(--line); background:var(--surface); color:var(--ink-2); border-radius:999px; font:inherit; font-weight:600; font-size:13px; letter-spacing:.03em; text-transform:uppercase; cursor:pointer}
+.tab:hover{color:var(--ink)}
+.tab.active{background:var(--ink); color:var(--bg); border-color:var(--ink)}
+.refresh{margin-left:auto; display:inline-flex; align-items:center; gap:5px; cursor:pointer; color:var(--ink-2); background:none; border:none; font-weight:600; font-size:12px}
+.refresh:hover{color:var(--accent)}
+.statusline{color:var(--ink-3); font-size:12px; padding:4px 2px 10px}
+.spin{display:inline-block; width:12px; height:12px; border:2px solid var(--line); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); overflow:hidden; margin-bottom:14px}
+.panel-head{padding:9px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); font-family:"Oswald"; font-weight:600; font-size:13px; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-2); display:flex; align-items:center; gap:9px}
+.tbl-scroll{overflow-x:auto}
+table.t{width:100%; border-collapse:collapse; font-size:13.5px; font-variant-numeric:tabular-nums}
+table.t th{font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-3); font-weight:700; padding:8px 8px; text-align:center; border-bottom:1px solid var(--line); white-space:nowrap}
+table.t td{padding:9px 8px; text-align:center; border-bottom:1px solid var(--line); white-space:nowrap}
+table.t tr:last-child td{border-bottom:none}
+table.t .tL{text-align:left}
+table.t .rk{color:var(--ink-3); font-weight:700; width:30px; font-family:"Oswald"; font-size:15px}
+table.t tr.top1 .rk{color:var(--accent)}
+table.t .namecell{display:flex; align-items:center; gap:10px; min-width:0}
+table.t .namecell img{width:22px; height:22px; object-fit:contain; flex:none; border-radius:3px}
+table.t .namecell .tn2{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:600}
+table.t .namecell .sub{color:var(--ink-3); font-weight:500; font-size:11.5px}
+table.t td.pts{font-family:"Oswald"; font-weight:600; font-size:17px; color:var(--accent)}
+
+.flag{width:20px;height:14px;object-fit:cover;border-radius:2px;flex:none;box-shadow:0 0 0 1px var(--line)}
+
+.sched{display:flex; flex-direction:column}
+.race{display:flex; align-items:center; gap:12px; padding:10px 14px; border-bottom:1px solid var(--line)}
+.race:last-child{border-bottom:none}
+.race .rnd{font-family:"Oswald"; font-weight:600; font-size:13px; color:var(--ink-3); width:30px; text-align:center; flex:none}
+.race .gp{flex:1; min-width:0}
+.race .gp b{font-weight:600; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.race .gp span{font-size:11.5px; color:var(--ink-3); font-weight:600}
+.race .st{font-family:"Oswald"; font-weight:600; font-size:11px; letter-spacing:.04em; text-transform:uppercase; padding:3px 9px; border-radius:999px; flex:none}
+.race .st.done{color:var(--ink-3); background:var(--surface-2)}
+.race .st.next{color:#fff; background:var(--accent)}
+.race.nextrace{background:var(--accent-soft)}
+
+.podium{display:flex; gap:10px; padding:14px; flex-wrap:wrap}
+.pod{flex:1; min-width:150px; background:var(--surface-2); border:1px solid var(--line); border-radius:10px; padding:12px; display:flex; align-items:center; gap:10px}
+.pod .pos{font-family:"Oswald"; font-weight:700; font-size:22px; color:var(--ink-3); width:26px}
+.pod.p1 .pos{color:var(--accent)}
+.pod .dn{min-width:0}
+.pod .dn b{display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.pod .dn span{font-size:11.5px; color:var(--ink-3); font-weight:600}
+
+.note{text-align:center; color:var(--ink-2); padding:48px 16px}
+.note .big{font-family:"Oswald"; font-size:20px; font-weight:600; color:var(--ink); margin-bottom:6px}
+.skeleton{height:320px; border-radius:12px; background:linear-gradient(100deg,var(--surface) 30%,var(--surface-2) 50%,var(--surface) 70%); background-size:200% 100%; animation:sh 1.2s linear infinite; border:1px solid var(--line)}
+@keyframes sh{to{background-position:-200% 0}}
+.foot{text-align:center; color:var(--ink-3); font-size:11.5px; padding:8px 0 28px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="sportnav">
+    <a href="scores.html">⚽ Soccer</a>
+    <a href="nfl.html">🏈 NFL</a>
+    <a href="sports.html#nba">🏀 NBA</a>
+    <a href="sports.html#nhl">🏒 NHL</a>
+    <a href="sports.html#mlb">⚾ MLB</a>
+    <a href="f1.html" class="active">🏁 F1</a>
+  </nav>
+  <div class="subhead"><span class="nm">FORMULA 1</span><span class="tag">Championship &amp; schedule</span></div>
+
+  <div class="toolbar">
+    <div class="ctrl-row">
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-v="drivers">Drivers</button>
+        <button class="tab" data-v="constructors">Constructors</button>
+        <button class="tab" data-v="schedule">Schedule</button>
+      </div>
+      <button class="refresh" id="refreshBtn">↻ Refresh</button>
+    </div>
+    <div class="statusline" id="meta"></div>
+  </div>
+
+  <div id="sections" aria-live="polite"></div>
+  <div class="foot">Data: ESPN · F1 2026 season</div>
+</div>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const sectionsEl=$("#sections"), metaEl=$("#meta");
+let state={view:"drivers"};
+let standCache=null, sbCache=null;
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const https=u=>String(u||"").replace(/^http:/,"https:");
+const sm=e=>{const m={};(e.stats||[]).forEach(s=>m[s.name]=s.displayValue);return m;};
+
+/* ---------- STANDINGS ---------- */
+async function getStandings(){
+  if(standCache)return standCache;
+  const d=await fetch("https://site.api.espn.com/apis/v2/sports/racing/f1/standings",{cache:"no-store"}).then(r=>r.json());
+  standCache=d; return d;
+}
+function groupBy(d,kw){return (d.children||[]).find(g=>(g.name||"").toLowerCase().includes(kw));}
+async function renderChampionship(kind){
+  sectionsEl.innerHTML=`<div class="skeleton"></div>`; metaEl.innerHTML=`<span class="spin"></span> Loading…`;
+  try{
+    const d=await getStandings();
+    const g=groupBy(d,kind==="drivers"?"driver":"constructor");
+    const ents=(g&&g.standings&&g.standings.entries)||[];
+    if(!ents.length){sectionsEl.innerHTML=`<div class="note"><div class="big">No standings</div></div>`;metaEl.textContent="";return;}
+    const rows=ents.map((e,i)=>{
+      const m=sm(e); const rank=m.rank||(i+1); const pts=m.championshipPts||m.points||"0";
+      if(kind==="drivers"){
+        const a=e.athlete||{}; const flag=a.flag&&a.flag.href?`<img class="flag" src="${esc(https(a.flag.href))}" alt="">`:"";
+        const team=(e.team&&(e.team.displayName||e.team.name))||((a.team&&a.team.displayName)||"");
+        return `<tr class="${i===0?"top1":""}"><td class="rk">${esc(rank)}</td><td class="tL"><div class="namecell">${flag}<span><span class="tn2">${esc(a.displayName||"")}</span>${team?`<span class="sub">${esc(team)}</span>`:""}</span></div></td><td class="pts">${esc(pts)}</td></tr>`;
+      }else{
+        const t=e.team||{}; const logo=(t.logos&&t.logos[0]&&t.logos[0].href)||"";
+        return `<tr class="${i===0?"top1":""}"><td class="rk">${esc(rank)}</td><td class="tL"><div class="namecell">${logo?`<img src="${esc(https(logo))}" alt="">`:""}<span class="tn2">${esc(t.displayName||t.name||"")}</span></div></td><td class="pts">${esc(pts)}</td></tr>`;
+      }
+    }).join("");
+    sectionsEl.innerHTML=`<div class="panel"><div class="panel-head">🏆 ${kind==="drivers"?"Driver":"Constructor"} Championship</div><div class="tbl-scroll"><table class="t"><thead><tr><th class="rk">#</th><th class="tL">${kind==="drivers"?"Driver":"Constructor"}</th><th>Pts</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+    metaEl.innerHTML=`${kind==="drivers"?"Drivers'":"Constructors'"} championship · 2026 season`;
+  }catch(e){ sectionsEl.innerHTML=`<div class="note"><div class="big">Couldn't load standings</div></div>`; metaEl.textContent=""; }
+}
+
+/* ---------- SCHEDULE ---------- */
+async function renderSchedule(){
+  sectionsEl.innerHTML=`<div class="skeleton"></div>`; metaEl.innerHTML=`<span class="spin"></span> Loading…`;
+  try{
+    const d=sbCache||await fetch("https://site.api.espn.com/apis/site/v2/sports/racing/f1/scoreboard",{cache:"no-store"}).then(r=>r.json());
+    sbCache=d;
+    const cal=((d.leagues||[{}])[0].calendar)||[];
+    const now=new Date();
+    let nextIdx=cal.findIndex(c=>new Date(c.endDate||c.startDate)>=now);
+    const races=cal.map((c,i)=>{
+      const start=c.startDate?new Date(c.startDate):null, end=c.endDate?new Date(c.endDate):start;
+      const done=end&&end<now; const isNext=i===nextIdx;
+      const dr=start?start.toLocaleDateString([],{month:"short",day:"numeric"})+(end&&end.toDateString()!==start.toDateString()?"–"+end.toLocaleDateString([],{day:"numeric"}):""):"";
+      const st=done?`<span class="st done">Done</span>`:(isNext?`<span class="st next">Next</span>`:`<span class="st done" style="background:none;color:var(--ink-3)">Upcoming</span>`);
+      return `<div class="race ${isNext?"nextrace":""}"><span class="rnd">${i+1}</span><span class="gp"><b>${esc((c.label||"").replace(/\s*Grand Prix.*/,"")||c.label)}</b><span>${esc(dr)}</span></span>${st}</div>`;
+    }).join("");
+    // latest race podium
+    const ev=(d.events||[])[0]; let podiumHtml="";
+    if(ev){
+      const cs=((ev.competitions||[{}])[0].competitors||[]).slice().sort((a,b)=>(a.order||99)-(b.order||99));
+      const pod=cs.slice(0,3).map((c,i)=>{const a=c.athlete||{};const flag=a.flag&&a.flag.href?`<img class="flag" src="${esc(https(a.flag.href))}" alt="">`:"";return `<div class="pod p${i+1}"><span class="pos">${i+1}</span>${flag}<span class="dn"><b>${esc(a.displayName||"")}</b><span>${esc((a.flag&&a.flag.alt)||"")}</span></span></div>`;}).join("");
+      if(pod)podiumHtml=`<div class="panel"><div class="panel-head">🏁 Latest — ${esc((ev.shortName||ev.name||"").replace(/\s+in\s+.*/i,"").replace(/\s*Grand Prix.*/i," GP"))}</div><div class="podium">${pod}</div></div>`;
+    }
+    sectionsEl.innerHTML=podiumHtml+`<div class="panel"><div class="panel-head">2026 Race Calendar · ${cal.length} rounds</div><div class="sched">${races}</div></div>`;
+    metaEl.innerHTML=`2026 F1 schedule`;
+  }catch(e){ sectionsEl.innerHTML=`<div class="note"><div class="big">Couldn't load schedule</div></div>`; metaEl.textContent=""; }
+}
+
+function render(){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.v===state.view));
+  if(state.view==="schedule")renderSchedule();
+  else renderChampionship(state.view);
+}
+$("#tabs").onclick=e=>{const b=e.target.closest(".tab");if(!b)return;state.view=b.dataset.v;render();};
+$("#refreshBtn").onclick=()=>{ if(state.view==="schedule"){sbCache=null;renderSchedule();} else {standCache=null;renderChampionship(state.view);} };
+render();
+</script>
+</body>
+</html>
