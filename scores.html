@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Matchday Scores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: centered single column, sticky control bar, vertical stack of broadcast-style match cards. */
+:root{
+  --bg:#eef1f5; --surface:#ffffff; --surface-2:#eaeef3; --line:#dde3ea;
+  --ink:#131a22; --ink-2:#596673; --ink-3:#8c98a5;
+  --accent:#0b8a4b; --accent-soft:#e2f3ea; --live:#e03131; --shadow:0 1px 2px rgba(16,28,40,.06),0 6px 20px rgba(16,28,40,.05);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1218; --surface:#161d25; --surface-2:#1e2831; --line:#2a333d;
+  --ink:#eef3f8; --ink-2:#9babba; --ink-3:#6a7784;
+  --accent:#2bc274; --accent-soft:#143024; --live:#ff5c5c; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1218; --surface:#161d25; --surface-2:#1e2831; --line:#2a333d;
+  --ink:#eef3f8; --ink-2:#9babba; --ink-3:#6a7784;
+  --accent:#2bc274; --accent-soft:#143024; --live:#ff5c5c; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Barlow",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  font-size:15px; line-height:1.4; -webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);
+}
+.wrap{max-width:720px; margin:0 auto; padding-left:16px; padding-right:16px}
+h1,h2,h3{margin:0}
+
+/* ---- Masthead ---- */
+.masthead{display:flex; align-items:baseline; gap:10px; padding-block:18px 10px; flex-wrap:wrap}
+.brand{font-family:"Oswald",sans-serif; font-weight:700; font-size:26px; letter-spacing:.06em; text-transform:uppercase; line-height:1}
+.brand .dot{color:var(--accent)}
+.tag{color:var(--ink-3); font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; font-weight:600}
+
+/* ---- Control bar ---- */
+.controls{
+  position:sticky; top:env(safe-area-inset-top,0); z-index:20;
+  background:color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter:blur(8px);
+  padding-block:10px; margin-bottom:6px; border-bottom:1px solid var(--line);
+  display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+}
+select,button,input[type=date]{font-family:inherit; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:10px}
+.lg-select{flex:1 1 160px; min-width:0; padding:9px 10px; font-weight:600; font-size:14px; cursor:pointer}
+.date-nav{display:flex; align-items:center; gap:6px; margin-left:auto}
+.nav-btn{width:36px; height:36px; display:grid; place-items:center; cursor:pointer; font-size:17px; line-height:1}
+.nav-btn:hover{border-color:var(--accent); color:var(--accent)}
+.date-cur{font-family:"Oswald",sans-serif; font-weight:500; text-align:center; min-width:112px; line-height:1.05}
+.date-cur .d-main{font-size:15px; letter-spacing:.02em}
+.date-cur .d-sub{display:block; font-size:10.5px; color:var(--ink-3); letter-spacing:.08em; text-transform:uppercase; font-family:"Barlow"; font-weight:600}
+.date-cur input{position:absolute; opacity:0; width:0; height:0; pointer-events:none}
+.date-cur{position:relative; cursor:pointer}
+.today-btn{padding:0 11px; height:36px; font-weight:600; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; cursor:pointer}
+.today-btn[hidden]{display:none}
+
+/* ---- Status / meta line ---- */
+.statusline{display:flex; align-items:center; gap:8px; color:var(--ink-3); font-size:12px; padding:4px 2px 12px; min-height:20px}
+.refresh{margin-left:auto; display:inline-flex; align-items:center; gap:5px; cursor:pointer; color:var(--ink-2); background:none; border:none; font-weight:600; font-size:12px; padding:2px 4px}
+.refresh:hover{color:var(--accent)}
+.spin{display:inline-block; width:12px; height:12px; border:2px solid var(--line); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---- Match card ---- */
+.matches{display:flex; flex-direction:column; gap:12px; padding-bottom:40px}
+.match{background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); overflow:hidden}
+.m-head{display:flex; align-items:center; gap:8px; padding:8px 14px; border-bottom:1px solid var(--line); background:var(--surface-2)}
+.m-comp{font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.m-state{margin-left:auto; font-family:"Oswald",sans-serif; font-weight:600; font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; display:inline-flex; align-items:center; gap:6px}
+.m-state.live{color:var(--live)}
+.m-state.ft{color:var(--ink-2)}
+.m-state.pre{color:var(--ink-2)}
+.livedot{width:7px; height:7px; border-radius:50%; background:var(--live); animation:pulse 1.3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1; transform:scale(1)}50%{opacity:.35; transform:scale(.8)}}
+
+.teams{padding:6px 14px 10px}
+.row{display:flex; align-items:center; gap:11px; padding:7px 0}
+.crest{width:30px; height:30px; object-fit:contain; flex:0 0 30px; filter:drop-shadow(0 1px 1px rgba(0,0,0,.12))}
+.crest-ph{width:30px; height:30px; flex:0 0 30px; border-radius:50%; background:var(--surface-2); display:grid; place-items:center; font-family:"Oswald"; font-size:11px; font-weight:600; color:var(--ink-3)}
+.tname{min-width:0; display:flex; flex-direction:column; line-height:1.1}
+.tname b{font-family:"Barlow"; font-weight:600; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.tname span{font-size:11px; color:var(--ink-3); font-weight:600; letter-spacing:.05em; text-transform:uppercase}
+.row .score{margin-left:auto; font-family:"Oswald",sans-serif; font-weight:600; font-size:26px; font-variant-numeric:tabular-nums; line-height:1; min-width:26px; text-align:right; color:var(--ink)}
+.row.loser .tname b,.row.loser .score{color:var(--ink-2); font-weight:500}
+.row.winner .score{color:var(--accent)}
+.kickoff{margin-left:auto; font-family:"Oswald"; font-weight:500; font-size:16px; color:var(--ink-2); font-variant-numeric:tabular-nums}
+
+/* ---- Scorers ---- */
+.scorers{border-top:1px dashed var(--line); padding:9px 14px 11px; display:flex; flex-direction:column; gap:5px}
+.sc-line{display:flex; gap:8px; font-size:13px; align-items:flex-start}
+.sc-abbr{flex:0 0 auto; font-family:"Oswald"; font-weight:600; font-size:11px; letter-spacing:.03em; color:var(--ink-3); min-width:34px; padding-top:1px}
+.sc-names{min-width:0; color:var(--ink)}
+.sc-names .g{white-space:nowrap}
+.sc-names .mark{color:var(--ink-3); font-size:11px; font-weight:600}
+.sc-names .min{color:var(--ink-2); font-variant-numeric:tabular-nums; font-weight:600}
+.ball{color:var(--accent)}
+
+/* ---- Empty / loading / error ---- */
+.note{text-align:center; color:var(--ink-2); padding:48px 16px; font-size:15px}
+.note .big{font-family:"Oswald"; font-size:20px; font-weight:600; color:var(--ink); margin-bottom:6px; letter-spacing:.02em}
+.note button{margin-top:14px; padding:9px 16px; font-weight:600; cursor:pointer; background:var(--accent); color:#fff; border:none; border-radius:10px}
+.skeleton{height:118px; border-radius:14px; background:linear-gradient(100deg,var(--surface) 30%,var(--surface-2) 50%,var(--surface) 70%); background-size:200% 100%; animation:sh 1.2s linear infinite; border:1px solid var(--line)}
+@keyframes sh{to{background-position:-200% 0}}
+
+.foot{text-align:center; color:var(--ink-3); font-size:11.5px; padding:8px 0 28px; letter-spacing:.02em}
+.foot a{color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <h1 class="brand">Match<span class="dot">day</span></h1>
+    <span class="tag">Live scores &amp; scorers</span>
+  </header>
+
+  <div class="controls">
+    <select class="lg-select" id="league" aria-label="Competition"></select>
+    <div class="date-nav">
+      <button class="nav-btn" id="prev" aria-label="Previous day">‹</button>
+      <label class="date-cur" id="datePick">
+        <span class="d-main" id="dMain">Today</span>
+        <span class="d-sub" id="dSub"></span>
+        <input type="date" id="dateInput" aria-label="Pick a date">
+      </label>
+      <button class="nav-btn" id="next" aria-label="Next day">›</button>
+    </div>
+    <button class="today-btn" id="todayBtn" hidden>Today</button>
+  </div>
+
+  <div class="statusline">
+    <span id="meta"></span>
+    <button class="refresh" id="refreshBtn" title="Refresh">↻ Refresh</button>
+  </div>
+
+  <div class="matches" id="matches" aria-live="polite"></div>
+
+  <div class="foot">Data: ESPN · times shown in your local timezone · <a href="https://www.mlssoccer.com/" target="_blank" rel="noopener">MLSsoccer.com</a></div>
+</div>
+
+<script>
+"use strict";
+const LEAGUES = [
+  {code:"usa.1", name:"MLS"},
+  {code:"eng.1", name:"Premier League"},
+  {code:"esp.1", name:"La Liga"},
+  {code:"ita.1", name:"Serie A"},
+  {code:"ger.1", name:"Bundesliga"},
+  {code:"fra.1", name:"Ligue 1"},
+  {code:"uefa.champions", name:"Champions League"},
+  {code:"uefa.europa", name:"Europa League"},
+  {code:"uefa.europa.conf", name:"Conference League"},
+  {code:"eng.fa", name:"FA Cup"},
+  {code:"usa.open", name:"US Open Cup"},
+  {code:"mex.1", name:"Liga MX"},
+  {code:"por.1", name:"Primeira Liga"},
+  {code:"ned.1", name:"Eredivisie"},
+  {code:"usa.nwsl", name:"NWSL"},
+  {code:"fifa.world", name:"World Cup"}
+];
+
+const $ = s => document.querySelector(s);
+const matchesEl = $("#matches"), metaEl = $("#meta");
+let state = { league:"usa.1", date:new Date() };
+let refreshTimer = null, inFlight = false;
+
+// ---- persistence (per-viewer convenience only) ----
+try { const sv = localStorage.getItem("md.league"); if (sv && LEAGUES.some(l=>l.code===sv)) state.league = sv; } catch(e){}
+
+// ---- helpers ----
+const pad = n => String(n).padStart(2,"0");
+const ymd = d => `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
+const sameDay = (a,b) => a.toDateString()===b.toDateString();
+function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function localTime(iso){ try{ return new Date(iso).toLocaleTimeString([], {hour:"numeric", minute:"2-digit"}); }catch(e){ return ""; } }
+
+function buildLeagueSelect(){
+  $("#league").innerHTML = LEAGUES.map(l=>`<option value="${l.code}"${l.code===state.league?" selected":""}>${esc(l.name)}</option>`).join("");
+}
+function setDateLabel(){
+  const d = state.date, today = new Date();
+  const main = sameDay(d,today) ? "Today"
+    : sameDay(d,new Date(today.getTime()-864e5)) ? "Yesterday"
+    : sameDay(d,new Date(today.getTime()+864e5)) ? "Tomorrow"
+    : d.toLocaleDateString([], {month:"short", day:"numeric"});
+  $("#dMain").textContent = main;
+  $("#dSub").textContent = sameDay(d,today) ? d.toLocaleDateString([], {weekday:"long"}) : d.toLocaleDateString([], {weekday:"short", month:"short", day:"numeric"});
+  $("#todayBtn").hidden = sameDay(d,today);
+  const di = $("#dateInput"); di.value = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+}
+
+// ---- rendering ----
+function crest(team){
+  const logo = team && team.logo;
+  const ab = team ? (team.abbreviation || (team.shortDisplayName||"").slice(0,3).toUpperCase()) : "?";
+  return logo ? `<img class="crest" src="${esc(logo)}" alt="" loading="lazy" onerror="this.outerHTML='<span class=&quot;crest-ph&quot;>${esc(ab)}</span>'">`
+              : `<span class="crest-ph">${esc(ab)}</span>`;
+}
+function goalMark(t){
+  const s = (t||"").toLowerCase();
+  if (s.includes("own")) return '<span class="mark"> (OG)</span>';
+  if (s.includes("penalt")) return '<span class="mark"> (P)</span>';
+  return "";
+}
+function scorersFor(comp, teamId){
+  const dets = (comp.details||[]).filter(d=>d.scoringPlay && d.team && String(d.team.id)===String(teamId));
+  if (!dets.length) return "";
+  const parts = dets.map(d=>{
+    const who = (d.athletesInvolved && d.athletesInvolved[0] && d.athletesInvolved[0].displayName) || "Goal";
+    const min = d.clock && d.clock.displayValue ? d.clock.displayValue : "";
+    return `<span class="g">${esc(who)}${goalMark(d.type && d.type.text)} <span class="min">${esc(min)}</span></span>`;
+  });
+  return parts.join(", ");
+}
+
+function matchCard(ev){
+  const comp = ev.competitions && ev.competitions[0];
+  if (!comp) return "";
+  const cs = comp.competitors || [];
+  const home = cs.find(c=>c.homeAway==="home") || cs[0];
+  const away = cs.find(c=>c.homeAway==="away") || cs[1];
+  if (!home || !away) return "";
+  const st = (comp.status && comp.status.type) || {};
+  const sstate = st.state; // pre | in | post
+  const compName = (ev.season && ev.season.slug) ? "" : "";
+  const note = (comp.notes && comp.notes[0] && comp.notes[0].headline) || (LEAGUES.find(l=>l.code===state.league)||{}).name || "";
+
+  let stateChip;
+  if (sstate==="in"){
+    const clk = (comp.status.displayClock || st.shortDetail || "LIVE");
+    stateChip = `<span class="m-state live"><span class="livedot"></span>${esc(clk)}</span>`;
+  } else if (sstate==="post"){
+    const d = st.shortDetail||"FT";
+    stateChip = `<span class="m-state ft">${esc(/^FT|Full/i.test(d)?"FT":d)}</span>`;
+  } else {
+    stateChip = `<span class="m-state pre">${esc(localTime(ev.date))}</span>`;
+  }
+
+  function teamRow(c){
+    const started = sstate!=="pre";
+    const other = c===home?away:home;
+    const cls = c.winner===true ? "winner" : (sstate==="post" && other.winner===true ? "loser" : "");
+    const full = c.team.displayName || c.team.shortDisplayName || "";
+    const ab = c.team.abbreviation || "";
+    const scoreCell = started
+      ? `<span class="score">${esc(c.score!=null?c.score:"0")}</span>`
+      : `<span class="score" style="color:var(--ink-3)">–</span>`;
+    return `<div class="row ${cls}">
+      ${crest(c.team)}
+      <span class="tname"><b>${esc(full)}</b><span>${esc(ab)}</span></span>
+      ${scoreCell}
+    </div>`;
+  }
+
+  // scorers block (only if any goals)
+  let scorersBlock = "";
+  const goalCount = (comp.details||[]).filter(d=>d.scoringPlay).length;
+  if (goalCount){
+    const rows = [away,home].map(c=>{
+      const names = scorersFor(comp, c.team.id);
+      if (!names) return "";
+      return `<div class="sc-line"><span class="sc-abbr"><span class="ball">⚽</span> ${esc(c.team.abbreviation||"")}</span><span class="sc-names">${names}</span></div>`;
+    }).filter(Boolean).join("");
+    if (rows) scorersBlock = `<div class="scorers">${rows}</div>`;
+  }
+
+  return `<article class="match">
+    <div class="m-head"><span class="m-comp">${esc(note)}</span>${stateChip}</div>
+    <div class="teams">${teamRow(away)}${teamRow(home)}</div>
+    ${scorersBlock}
+  </article>`;
+}
+
+function render(data){
+  const evs = (data && data.events) || [];
+  // sort: live first, then upcoming by time, then finished
+  const rank = e => { const s=e.competitions[0].status.type.state; return s==="in"?0:s==="pre"?1:2; };
+  evs.sort((a,b)=> rank(a)-rank(b) || new Date(a.date)-new Date(b.date));
+
+  const anyLive = evs.some(e=>e.competitions[0].status.type.state==="in");
+  if (!evs.length){
+    matchesEl.innerHTML = `<div class="note"><div class="big">No matches</div>Nothing scheduled for this date in ${esc((LEAGUES.find(l=>l.code===state.league)||{}).name||"")}.<br>Try another day or competition.</div>`;
+  } else {
+    matchesEl.innerHTML = evs.map(matchCard).join("");
+  }
+  const now = new Date();
+  metaEl.innerHTML = `${evs.length} ${evs.length===1?"match":"matches"}` + (anyLive?` · <span style="color:var(--live);font-weight:600">● live</span>`:"") + ` · updated ${now.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}`;
+
+  // auto-refresh only when something is live
+  clearTimeout(refreshTimer);
+  if (anyLive && sameDay(state.date, new Date())){
+    refreshTimer = setTimeout(()=>load(true), 30000);
+  }
+}
+
+async function load(silent){
+  if (inFlight) return;
+  inFlight = true;
+  if (!silent){
+    matchesEl.innerHTML = `<div class="skeleton"></div><div class="skeleton" style="margin-top:12px"></div><div class="skeleton" style="margin-top:12px"></div>`;
+    metaEl.innerHTML = `<span class="spin"></span> Loading…`;
+  }
+  const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${state.league}/scoreboard?dates=${ymd(state.date)}`;
+  try{
+    const r = await fetch(url, {cache:"no-store"});
+    if (!r.ok) throw new Error("HTTP "+r.status);
+    const data = await r.json();
+    render(data);
+  }catch(err){
+    matchesEl.innerHTML = `<div class="note"><div class="big">Couldn't load scores</div>${esc(err.message||"Network error")}. The data service may be momentarily unavailable.<br><button id="retry">Try again</button></div>`;
+    metaEl.textContent = "";
+    const rb = document.getElementById("retry"); if (rb) rb.onclick = ()=>load(false);
+  }finally{ inFlight = false; }
+}
+
+// ---- events ----
+function go(days){ state.date = new Date(state.date.getTime()+days*864e5); setDateLabel(); load(false); }
+$("#prev").onclick = ()=>go(-1);
+$("#next").onclick = ()=>go(1);
+$("#todayBtn").onclick = ()=>{ state.date = new Date(); setDateLabel(); load(false); };
+$("#dateInput").onchange = e=>{ const v=e.target.value; if(!v) return; const [y,m,d]=v.split("-").map(Number); state.date=new Date(y,m-1,d); setDateLabel(); load(false); };
+$("#datePick").onclick = e=>{ if (e.target.id!=="dateInput"){ const di=$("#dateInput"); if (di.showPicker) { try{di.showPicker();}catch(_){di.focus();} } else di.focus(); } };
+$("#league").onchange = e=>{ state.league=e.target.value; try{localStorage.setItem("md.league",state.league);}catch(_){} load(false); };
+$("#refreshBtn").onclick = ()=>load(false);
+document.addEventListener("visibilitychange", ()=>{ if(!document.hidden && sameDay(state.date,new Date())) load(true); });
+
+// ---- boot ----
+buildLeagueSelect();
+setDateLabel();
+load(false);
+</script>
+</body>
+</html>
