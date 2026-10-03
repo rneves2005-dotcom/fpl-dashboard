@@ -127,6 +127,8 @@ h1{margin:0}
 .tline.win .sc{color:var(--accent)}
 .tline.lose .sc{color:var(--ink-3); font-weight:500}
 .sc.pre{color:var(--ink-3); font-weight:400}
+.tline.clk{cursor:pointer}
+.tline.clk:hover .tn{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
 .mscorers{display:flex; flex-direction:column; gap:3px; padding:0 13px 9px 76px; margin-top:-2px}
 .sc-line{display:flex; gap:7px; font-size:12.5px; align-items:flex-start; color:var(--ink)}
 .sc-line .ab{flex:none; font-family:"Oswald"; font-weight:600; font-size:10.5px; color:var(--ink-3); min-width:30px; padding-top:1px}
@@ -274,7 +276,8 @@ const localTime=iso=>{try{return new Date(iso).toLocaleTimeString([],{hour:"nume
 const evState=e=>{try{return e.competitions[0].status.type.state;}catch(_){return"pre";}};
 function matchFilter(e){const s=evState(e);return state.filter==="all"||(state.filter==="live"&&s==="in")||(state.filter==="finished"&&s==="post")||(state.filter==="scheduled"&&s==="pre");}
 function savePinned(){try{localStorage.setItem("md.pinned",JSON.stringify(state.pinned));}catch(e){}}
-function orderedLeagues(){const pin=state.pinned.filter(c=>LMAP[c]);const rest=LEAGUES.map(l=>l.code).filter(c=>!pin.includes(c));return[...pin,...rest];}
+const byCountry=(a,b)=>{const A=LMAP[a]||{},B=LMAP[b]||{};return (A.country||"").localeCompare(B.country||"")||(A.name||"").localeCompare(B.name||"");};
+function orderedLeagues(){const pin=state.pinned.filter(c=>LMAP[c]).slice().sort(byCountry);const rest=LEAGUES.map(l=>l.code).filter(c=>!pin.includes(c)).sort(byCountry);return[...pin,...rest];}
 
 function setDateLabel(){
   const d=state.date, today=new Date();
@@ -294,7 +297,7 @@ function crest(team,cls){
 /* ---------- SCORES ---------- */
 function goalMark(t){const s=(t||"").toLowerCase();if(s.includes("own"))return'<span class="mk"> (OG)</span>';if(s.includes("penalt"))return'<span class="mk"> (P)</span>';return"";}
 function scorersFor(comp,id){const d=(comp.details||[]).filter(x=>x.scoringPlay&&x.team&&String(x.team.id)===String(id));if(!d.length)return"";return d.map(x=>{const a=(x.athletesInvolved&&x.athletesInvolved[0])||{};const who=a.displayName||"Goal";const jn=a.jersey?`<span class="jn">${esc(a.jersey)}</span>`:"";const m=x.clock&&x.clock.displayValue?x.clock.displayValue:"";return `<span>${jn}${esc(who)}${goalMark(x.type&&x.type.text)} <span class="min">${esc(m)}</span></span>`;}).join(", ");}
-function matchCard(ev){
+function matchCard(ev,code){
   const comp=ev.competitions&&ev.competitions[0]; if(!comp)return"";
   const cs=comp.competitors||[]; const home=cs.find(c=>c.homeAway==="home")||cs[0]; const away=cs.find(c=>c.homeAway==="away")||cs[1];
   if(!home||!away)return"";
@@ -304,7 +307,7 @@ function matchCard(ev){
   else if(s==="post"){const d=st.shortDetail||"FT";status=`<div class="mstatus">${esc(/^FT|Full/i.test(d)?"FT":d)}</div>`;}
   else{status=`<div class="mstatus"><span class="kot">${esc(localTime(ev.date))}</span><span class="ko-sub">KO</span></div>`;}
   const started=s!=="pre";
-  const line=c=>{const other=c===home?away:home;const cls=c.winner===true?"win":(s==="post"&&other.winner===true?"lose":"");const nm=c.team.displayName||c.team.shortDisplayName||"";const sh=started?`<span class="sc">${esc(c.score!=null?c.score:"0")}</span>`:`<span class="sc pre">–</span>`;return `<div class="tline ${cls}">${crest(c.team)}<span class="tn">${esc(nm)}</span>${sh}</div>`;};
+  const line=c=>{const other=c===home?away:home;const cls=c.winner===true?"win":(s==="post"&&other.winner===true?"lose":"");const nm=c.team.displayName||c.team.shortDisplayName||"";const sh=started?`<span class="sc">${esc(c.score!=null?c.score:"0")}</span>`:`<span class="sc pre">–</span>`;const logo=c.team.logo||(c.team.logos&&c.team.logos[0]&&c.team.logos[0].href)||"";return `<div class="tline clk ${cls}" data-league="${esc(code||"")}" data-tid="${esc(c.team.id||"")}" data-tn="${esc(nm)}" data-logo="${esc(logo)}">${crest(c.team)}<span class="tn">${esc(nm)}</span>${sh}</div>`;};
   let scorers="";
   if((comp.details||[]).some(d=>d.scoringPlay)){const rows=[away,home].map(c=>{const n=scorersFor(comp,c.team.id);return n?`<div class="sc-line"><span class="ab"><span class="ball">⚽</span> ${esc(c.team.abbreviation||"")}</span><span class="nms">${n}</span></div>`:"";}).filter(Boolean).join("");if(rows)scorers=`<div class="mscorers">${rows}</div>`;}
   return `<div class="match"><div class="mrow">${status}<div class="mteams">${line(away)}${line(home)}</div></div>${scorers}</div>`;
@@ -347,7 +350,7 @@ function renderScores(){
     evs.sort((a,b)=>rank(a)-rank(b)||new Date(a.date)-new Date(b.date));
     shown+=evs.length;
     const col=state.collapsed.has(code)?"collapsed":"";
-    html+=`<section class="section ${col}" data-code="${code}"><div class="lhead" data-toggle="${code}"><span class="cflag flag">${l.flag}</span><span class="ctitle"><span class="co">${esc(l.country.toUpperCase())}:</span> ${esc(l.name)}</span><span class="chev">▼</span></div><div class="matchlist">${evs.map(matchCard).join("")}</div></section>`;
+    html+=`<section class="section ${col}" data-code="${code}"><div class="lhead" data-toggle="${code}"><span class="cflag flag">${l.flag}</span><span class="ctitle"><span class="co">${esc(l.country.toUpperCase())}:</span> ${esc(l.name)}</span><span class="chev">▼</span></div><div class="matchlist">${evs.map(e=>matchCard(e,code)).join("")}</div></section>`;
   }
   if(!html){const label=state.active?LMAP[state.active].name:(state.filter!=="all"?state.filter:"this date");sectionsEl.innerHTML=`<div class="note"><div class="big">No matches</div>Nothing ${state.filter==="live"?"live right now":"for "+esc(label)}.<br>Try another day, filter, or competition.</div>`;}
   else sectionsEl.innerHTML=html;
@@ -452,10 +455,10 @@ function renderScorers(data){
 let squadCache={};
 const POSNAMES={G:"Goalkeepers",D:"Defenders",M:"Midfielders",F:"Forwards",O:"Other"};
 function posGroup(p){p=(p||"").toUpperCase();return p.startsWith("G")?"G":p.startsWith("D")?"D":p.startsWith("M")?"M":p.startsWith("F")?"F":"O";}
-async function loadSquad(teamId,name,crestUrl){
-  state.view="squad"; state.squad={id:teamId,name:name,crest:crestUrl,league:state.active};
+async function loadSquad(league,teamId,name,crestUrl){
+  state.active=league; state.view="squad"; state.squad={id:teamId,name:name,crest:crestUrl,league:league};
   renderSidebar(); renderSubbar();
-  const key=state.active+":"+teamId;
+  const key=league+":"+teamId;
   if(squadCache[key]){renderSquad(squadCache[key]);return;}
   sectionsEl.innerHTML=`<div class="skeleton" style="height:360px"></div>`; metaEl.innerHTML=`<span class="spin"></span> Loading squad…`;
   try{
@@ -466,22 +469,15 @@ async function loadSquad(teamId,name,crestUrl){
 function renderSquad(d){
   const team=d.team||{}; const nm=team.displayName||state.squad.name||"Squad";
   const crestU=(team.logos&&team.logos[0]&&team.logos[0].href)||state.squad.crest||"";
-  const ath=d.athletes||[];
-  const groups={G:[],D:[],M:[],F:[],O:[]};
-  ath.forEach(a=>{groups[posGroup((a.position||{}).abbreviation||(a.position||{}).name)].push(a);});
+  const ath=(d.athletes||[]).slice();
   const num=a=>{const n=parseInt(a.jersey,10);return isNaN(n)?999:n;};
-  let rows="";
-  ["G","D","M","F","O"].forEach(g=>{
-    const arr=groups[g].slice().sort((x,y)=>num(x)-num(y));
-    if(!arr.length)return;
-    rows+=`<tr class="grp"><td colspan="5">${POSNAMES[g]}</td></tr>`;
-    rows+=arr.map(a=>{
-      const nat=a.citizenship||(a.birthPlace&&a.birthPlace.country)||"";
-      const age=(a.age!=null&&a.age!=="")?a.age:"";
-      const pos=(a.position||{}).abbreviation||"";
-      return `<tr><td class="rk">${esc(a.jersey||"–")}</td><td class="tL"><span class="tn2">${esc(a.displayName||"")}</span></td><td class="opt" style="color:var(--ink-3)">${esc(pos)}</td><td class="opt">${esc(nat)}</td><td>${esc(age)}</td></tr>`;
-    }).join("");
-  });
+  ath.sort((x,y)=>num(x)-num(y)||(x.displayName||"").localeCompare(y.displayName||""));
+  const rows=ath.map(a=>{
+    const nat=a.citizenship||(a.birthPlace&&a.birthPlace.country)||"";
+    const age=(a.age!=null&&a.age!=="")?a.age:"";
+    const pos=(a.position||{}).abbreviation||"";
+    return `<tr><td class="rk">${esc(a.jersey||"–")}</td><td class="tL"><span class="tn2">${esc(a.displayName||"")}</span></td><td class="opt" style="color:var(--ink-3)">${esc(pos)}</td><td class="opt">${esc(nat)}</td><td>${esc(age)}</td></tr>`;
+  }).join("");
   let coach=""; const c=d.coach&&d.coach[0];
   if(c){const cn=(((c.firstName||"")+" "+(c.lastName||"")).trim())||c.displayName||""; if(cn)coach=` · Mgr: ${esc(cn)}`;}
   sectionsEl.innerHTML=`<div class="panel"><div class="panel-head ph-row">${crestU?`<img class="crest" src="${esc(https(crestU))}" alt="">`:""}<span>${esc(nm)} — Squad</span><button class="backlink" id="sqBack">‹ Back to table</button></div>
@@ -495,7 +491,7 @@ function renderView(){
   renderSidebar(); renderSubbar();
   if(state.view==="standings"){ loadStandings(); }
   else if(state.view==="scorers"){ loadScorers(); }
-  else if(state.view==="squad"){ if(state.squad){const key=state.active+":"+state.squad.id; if(squadCache[key])renderSquad(squadCache[key]); else loadSquad(state.squad.id,state.squad.name,state.squad.crest);} else {state.view="standings";loadStandings();} }
+  else if(state.view==="squad"){ if(state.squad){const key=state.squad.league+":"+state.squad.id; if(squadCache[key])renderSquad(squadCache[key]); else loadSquad(state.squad.league,state.squad.id,state.squad.name,state.squad.crest);} else {state.view="standings";loadStandings();} }
   else { renderScores(); }
 }
 async function loadScores(silent){
@@ -520,7 +516,7 @@ $("#next").onclick=()=>go(1);
 $("#todayBtn").onclick=()=>{state.date=new Date();setDateLabel();loadScores(false);};
 $("#dateInput").onchange=e=>{const v=e.target.value;if(!v)return;const[y,m,d]=v.split("-").map(Number);state.date=new Date(y,m-1,d);setDateLabel();loadScores(false);};
 $("#datePick").onclick=e=>{if(e.target.id!=="dateInput"){const di=$("#dateInput");if(di.showPicker){try{di.showPicker();}catch(_){di.focus();}}else di.focus();}};
-$("#refreshBtn").onclick=()=>{ if(state.view==="standings"){delete standCache[state.active];loadStandings();} else if(state.view==="scorers"){delete scorerCache[state.active];loadScorers();} else if(state.view==="squad"&&state.squad){const k=state.active+":"+state.squad.id;delete squadCache[k];loadSquad(state.squad.id,state.squad.name,state.squad.crest);} else loadScores(false); };
+$("#refreshBtn").onclick=()=>{ if(state.view==="standings"){delete standCache[state.active];loadStandings();} else if(state.view==="scorers"){delete scorerCache[state.active];loadScorers();} else if(state.view==="squad"&&state.squad){const k=state.squad.league+":"+state.squad.id;delete squadCache[k];loadSquad(state.squad.league,state.squad.id,state.squad.name,state.squad.crest);} else loadScores(false); };
 $("#filters").onclick=e=>{const b=e.target.closest(".ftab");if(!b)return;document.querySelectorAll(".ftab").forEach(x=>x.classList.toggle("active",x===b));state.filter=b.dataset.f;try{localStorage.setItem("md.filter",state.filter);}catch(_){}renderScores();};
 sidebarEl.onclick=e=>{
   const pin=e.target.closest(".pin");
@@ -535,8 +531,10 @@ sidebarEl.onclick=e=>{
 };
 subbarEl.onclick=e=>{const t=e.target.closest(".sb-tab");if(!t)return;state.view=t.dataset.v;renderView();};
 sectionsEl.onclick=e=>{
+  const tl=e.target.closest(".tline.clk");
+  if(tl&&tl.dataset.tid){ loadSquad(tl.dataset.league||state.active, tl.dataset.tid, tl.dataset.tn, tl.dataset.logo); return; }
   const tr=e.target.closest("tr.clk");
-  if(tr&&tr.dataset.tid){ loadSquad(tr.dataset.tid, tr.dataset.tn, tr.dataset.logo); return; }
+  if(tr&&tr.dataset.tid){ loadSquad(state.active, tr.dataset.tid, tr.dataset.tn, tr.dataset.logo); return; }
   const h=e.target.closest(".lhead");if(!h)return;const c=h.dataset.toggle;if(state.collapsed.has(c))state.collapsed.delete(c);else state.collapsed.add(c);const sec=h.closest(".section");if(sec)sec.classList.toggle("collapsed");
 };
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&state.view==="scores"&&sameDay(state.date,new Date()))loadScores(true);});
