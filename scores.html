@@ -187,6 +187,26 @@ table.t tr.grp td{background:var(--surface-2); text-align:left; font-family:"Osw
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
 .foot{text-align:center; color:var(--ink-3); font-size:11.5px; padding:6px 0 28px}
 .foot a{color:var(--ink-2)}
+/* lineups */
+.mfoot{display:flex; justify-content:flex-end; padding:0 10px 8px}
+.lnbtn{display:inline-flex; align-items:center; gap:5px; padding:3px 10px; font:600 11px/1 "Barlow",sans-serif; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-3); background:var(--surface); border:1px solid var(--line); border-radius:999px; cursor:pointer}
+.lnbtn:hover{color:var(--accent); border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.lp-wrap{display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:14px}
+.lp-col{min-width:0}
+.lp-head{display:flex; align-items:center; gap:8px; padding:4px 2px 9px; border-bottom:2px solid var(--line); margin-bottom:6px}
+.lp-head .crest{width:26px; height:26px}
+.lp-tn{font-family:"Oswald"; font-weight:600; font-size:15px; letter-spacing:.02em; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.lp-form{margin-left:auto; flex:none; font-size:11px; font-weight:700; color:var(--accent); background:var(--accent-soft); padding:2px 9px; border-radius:999px; font-variant-numeric:tabular-nums}
+.lp-row{display:flex; align-items:center; gap:9px; padding:5px 3px; border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent); font-size:13.5px}
+.lp-j{flex:0 0 22px; text-align:center; color:var(--ink-3); font-variant-numeric:tabular-nums; font-size:12px; font-weight:600}
+.lp-n{flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.lp-row.off .lp-n{color:var(--ink-3)}
+.lp-p{flex:none; color:var(--ink-3); font-size:10px; font-weight:700; letter-spacing:.04em}
+.lp-in{flex:none; color:var(--accent); font-size:11px; font-weight:800}
+.lp-out{flex:none; color:var(--live); font-size:11px; font-weight:800}
+.lp-subh{margin:14px 0 2px; font-family:"Oswald"; font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3)}
+.lp-list.sub .lp-n{color:var(--ink-2)}
+@media (max-width:620px){ .lp-wrap{grid-template-columns:1fr; gap:4px} }
 
 @media (max-width:760px){
   .layout{grid-template-columns:1fr; gap:10px}
@@ -339,7 +359,10 @@ function matchCard(ev,code){
   const line=c=>{const other=c===home?away:home;const cls=c.winner===true?"win":(s==="post"&&other.winner===true?"lose":"");const nm=c.team.displayName||c.team.shortDisplayName||"";const sh=started?`<span class="sc">${esc(c.score!=null?c.score:"0")}</span>`:`<span class="sc pre">–</span>`;const logo=c.team.logo||(c.team.logos&&c.team.logos[0]&&c.team.logos[0].href)||"";return `<div class="tline clk ${cls}" data-league="${esc(code||"")}" data-tid="${esc(c.team.id||"")}" data-tn="${esc(nm)}" data-logo="${esc(logo)}">${crest(c.team)}<span class="tn">${esc(nm)}</span>${sh}</div>`;};
   let scorers="";
   if((comp.details||[]).some(d=>d.scoringPlay)){const rows=[away,home].map(c=>{const n=scorersFor(comp,c.team.id);return n?`<div class="sc-line"><span class="ab"><span class="ball">⚽</span> ${esc(c.team.abbreviation||"")}</span><span class="nms">${n}</span></div>`:"";}).filter(Boolean).join("");if(rows)scorers=`<div class="mscorers">${rows}</div>`;}
-  return `<div class="match"><div class="mrow">${status}<div class="mteams">${line(away)}${line(home)}</div></div>${scorers}</div>`;
+  const hName=home.team.displayName||home.team.shortDisplayName||"", aName=away.team.displayName||away.team.shortDisplayName||"";
+  const hLogo=home.team.logo||(home.team.logos&&home.team.logos[0]&&home.team.logos[0].href)||"", aLogo=away.team.logo||(away.team.logos&&away.team.logos[0]&&away.team.logos[0].href)||"";
+  const lnbtn=ev.id?`<div class="mfoot"><button class="lnbtn" data-eid="${esc(ev.id)}" data-league="${esc(code||"")}" data-hn="${esc(hName)}" data-hl="${esc(hLogo)}" data-an="${esc(aName)}" data-al="${esc(aLogo)}">⊞ Lineups</button></div>`:"";
+  return `<div class="match"><div class="mrow">${status}<div class="mteams">${line(away)}${line(home)}</div></div>${scorers}${lnbtn}</div>`;
 }
 function liveCounts(){const per={};let total=0;for(const c in cache){const n=(cache[c]||[]).filter(e=>evState(e)==="in").length;per[c]=n;total+=n;}return{per,total};}
 
@@ -566,6 +589,59 @@ function renderPlayer(data){
   metaEl.innerHTML=`${esc(nm)}${teamNm?` · ${esc(teamNm)}`:""}`;
 }
 
+/* ---------- LINEUPS ---------- */
+let lineupCache={};
+async function loadLineups(league,eid,home,away){
+  if(!league||!eid)return;
+  state.view="lineups"; state.lineup={eid,league,home:home||{},away:away||{}};
+  renderSubbar();
+  const key=league+":"+eid;
+  if(lineupCache[key]){renderLineups(lineupCache[key]);return;}
+  sectionsEl.innerHTML=`<div class="skeleton" style="height:440px"></div>`; metaEl.innerHTML=`<span class="spin"></span> Loading lineups…`;
+  try{
+    const d=await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${league}/summary?event=${eid}`,{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json();});
+    lineupCache[key]=d; if(state.view==="lineups"&&state.lineup.eid===eid) renderLineups(d);
+  }catch(e){ sectionsEl.innerHTML=`<div class="note"><div class="big">Couldn't load lineups</div>The data service may be momentarily unavailable.<br><button id="lnBack">‹ Back to scores</button></div>`; metaEl.textContent=""; const b=$("#lnBack"); if(b)b.onclick=()=>{state.view="scores";renderView();}; }
+}
+function subMin(v){ if(!v)return""; if(typeof v==="object"){const c=v.clock||v; const m=(c&&(c.displayValue||c.displayClock))||v.displayValue; return m?" "+m:"";} return ""; }
+function lpRow(p){
+  const a=p.athlete||{}; const nm=a.displayName||a.shortName||a.lastName||""; const j=p.jersey||"–"; const pos=((p.position||{}).abbreviation)||"";
+  let mark="";
+  if(p.subbedOut) mark=`<span class="lp-out" title="Subbed off">▼${esc(subMin(p.subbedOut))}</span>`;
+  else if(p.subbedIn) mark=`<span class="lp-in" title="Subbed on">▲${esc(subMin(p.subbedIn))}</span>`;
+  return `<div class="lp-row ${p.subbedOut?"off":""}"><span class="lp-j">${esc(j)}</span><span class="lp-n">${esc(nm)}</span>${mark}<span class="lp-p">${esc(pos)}</span></div>`;
+}
+function lineupCol(t){
+  const team=t.team||{}; const nm=team.displayName||team.shortDisplayName||"";
+  const logo=team.logo||(team.logos&&team.logos[0]&&team.logos[0].href)||"";
+  const form=t.formation?`<span class="lp-form">${esc(t.formation)}</span>`:"";
+  const roster=(t.roster||[]);
+  const ord=(x)=>{const n=parseInt(x.formationPlace,10);return isNaN(n)?999:n;};
+  const xi=roster.filter(x=>x.starter).sort((a,b)=>ord(a)-ord(b));
+  const subs=roster.filter(x=>!x.starter);
+  return `<div class="lp-col">
+    <div class="lp-head">${logo?`<img class="crest" src="${esc(https(logo))}" alt="">`:""}<span class="lp-tn">${esc(nm)}</span>${form}</div>
+    <div class="lp-list">${xi.map(lpRow).join("")}</div>
+    ${subs.length?`<div class="lp-subh">Substitutes</div><div class="lp-list sub">${subs.map(lpRow).join("")}</div>`:""}
+  </div>`;
+}
+function renderLineups(d){
+  const L=state.lineup||{}; const an=(L.away&&L.away.name)||"", hn=(L.home&&L.home.name)||"";
+  const back=`<button class="backlink" id="lnBack">‹ Back to scores</button>`;
+  const ros=(d&&d.rosters)||[];
+  const hasXI=ros.length&&ros.some(r=>(r.roster||[]).some(p=>p.starter));
+  if(!hasXI){
+    sectionsEl.innerHTML=`<div class="panel"><div class="panel-head ph-row"><span>${esc(an)}${an&&hn?" @ ":""}${esc(hn)} — Lineups</span>${back}</div>
+      <div class="note" style="padding:40px 16px"><div class="big">Lineups not announced yet</div>Starting XIs are usually confirmed about an hour before kick-off — check back closer to the match.</div></div>`;
+  } else {
+    const h=ros.find(r=>r.homeAway==="home")||ros[0]; const a=ros.find(r=>r.homeAway==="away")||ros[1];
+    const cols=[a,h].filter(Boolean).map(lineupCol).join("");
+    sectionsEl.innerHTML=`<div class="panel"><div class="panel-head ph-row"><span>Lineups</span>${back}</div><div class="lp-wrap">${cols}</div></div>`;
+  }
+  const b=$("#lnBack"); if(b)b.onclick=()=>{state.view="scores";renderView();};
+  metaEl.innerHTML=`${esc(an)}${an&&hn?" @ ":""}${esc(hn)} · lineups`;
+}
+
 /* ---------- dispatch ---------- */
 function renderView(){
   renderSidebar(); renderSubbar();
@@ -573,6 +649,7 @@ function renderView(){
   else if(state.view==="scorers"){ loadScorers(); }
   else if(state.view==="squad"){ if(state.squad){const key=state.squad.league+":"+state.squad.id; if(squadCache[key])renderSquad(squadCache[key]); else loadSquad(state.squad.league,state.squad.id,state.squad.name,state.squad.crest);} else {state.view="standings";loadStandings();} }
   else if(state.view==="player"){ if(state.player){const key=state.player.league+":"+state.player.id; if(playerCache[key])renderPlayer(playerCache[key]); else loadPlayer(state.player.league,state.player.id,state.player.name);} else backToSquad(); }
+  else if(state.view==="lineups"){ if(state.lineup){const key=state.lineup.league+":"+state.lineup.eid; if(lineupCache[key])renderLineups(lineupCache[key]); else loadLineups(state.lineup.league,state.lineup.eid,state.lineup.home,state.lineup.away);} else {state.view="scores";renderScores();} }
   else { renderScores(); }
 }
 async function loadScores(silent){
@@ -597,7 +674,7 @@ $("#next").onclick=()=>go(1);
 $("#todayBtn").onclick=()=>{state.date=new Date();setDateLabel();loadScores(false);};
 $("#dateInput").onchange=e=>{const v=e.target.value;if(!v)return;const[y,m,d]=v.split("-").map(Number);state.date=new Date(y,m-1,d);setDateLabel();loadScores(false);};
 $("#datePick").onclick=e=>{if(e.target.id!=="dateInput"){const di=$("#dateInput");if(di.showPicker){try{di.showPicker();}catch(_){di.focus();}}else di.focus();}};
-$("#refreshBtn").onclick=()=>{ if(state.view==="standings"){delete standCache[state.active];loadStandings();} else if(state.view==="scorers"){delete scorerCache[state.active];loadScorers();} else if(state.view==="squad"&&state.squad){const k=state.squad.league+":"+state.squad.id;delete squadCache[k];loadSquad(state.squad.league,state.squad.id,state.squad.name,state.squad.crest);} else if(state.view==="player"&&state.player){const k=state.player.league+":"+state.player.id;delete playerCache[k];loadPlayer(state.player.league,state.player.id,state.player.name);} else loadScores(false); };
+$("#refreshBtn").onclick=()=>{ if(state.view==="standings"){delete standCache[state.active];loadStandings();} else if(state.view==="scorers"){delete scorerCache[state.active];loadScorers();} else if(state.view==="squad"&&state.squad){const k=state.squad.league+":"+state.squad.id;delete squadCache[k];loadSquad(state.squad.league,state.squad.id,state.squad.name,state.squad.crest);} else if(state.view==="player"&&state.player){const k=state.player.league+":"+state.player.id;delete playerCache[k];loadPlayer(state.player.league,state.player.id,state.player.name);} else if(state.view==="lineups"&&state.lineup){const k=state.lineup.league+":"+state.lineup.eid;delete lineupCache[k];loadLineups(state.lineup.league,state.lineup.eid,state.lineup.home,state.lineup.away);} else loadScores(false); };
 $("#filters").onclick=e=>{const b=e.target.closest(".ftab");if(!b)return;document.querySelectorAll(".ftab").forEach(x=>x.classList.toggle("active",x===b));state.filter=b.dataset.f;try{localStorage.setItem("md.filter",state.filter);}catch(_){}renderScores();};
 sidebarEl.onclick=e=>{
   const pin=e.target.closest(".pin");
@@ -612,6 +689,8 @@ sidebarEl.onclick=e=>{
 };
 subbarEl.onclick=e=>{const t=e.target.closest(".sb-tab");if(!t)return;state.view=t.dataset.v;renderView();};
 sectionsEl.onclick=e=>{
+  const ln=e.target.closest(".lnbtn");
+  if(ln&&ln.dataset.eid){ loadLineups(ln.dataset.league||state.active, ln.dataset.eid, {name:ln.dataset.hn,logo:ln.dataset.hl}, {name:ln.dataset.an,logo:ln.dataset.al}); return; }
   const tl=e.target.closest(".tline.clk");
   if(tl&&tl.dataset.tid){ loadSquad(tl.dataset.league||state.active, tl.dataset.tid, tl.dataset.tn, tl.dataset.logo); return; }
   const tr=e.target.closest("tr.clk");
