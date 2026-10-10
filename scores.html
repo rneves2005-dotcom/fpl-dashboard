@@ -326,7 +326,8 @@ const evState=e=>{try{return e.competitions[0].status.type.state;}catch(_){retur
 function matchFilter(e){const s=evState(e);return state.filter==="all"||(state.filter==="live"&&s==="in")||(state.filter==="finished"&&s==="post")||(state.filter==="scheduled"&&s==="pre");}
 function savePinned(){try{localStorage.setItem("md.pinned",JSON.stringify(state.pinned));}catch(e){}}
 const byCountry=(a,b)=>{const A=LMAP[a]||{},B=LMAP[b]||{};return (A.country||"").localeCompare(B.country||"")||(A.name||"").localeCompare(B.name||"");};
-function orderedLeagues(){const pin=state.pinned.filter(c=>LMAP[c]).slice().sort(byCountry);const rest=LEAGUES.map(l=>l.code).filter(c=>!pin.includes(c)).sort(byCountry);return[...pin,...rest];}
+const TOP_LEAGUES=["eng.1"]; /* always pinned to the very top, before other pins/A-Z */
+function orderedLeagues(){const top=TOP_LEAGUES.filter(c=>LMAP[c]);const tset=new Set(top);const pin=state.pinned.filter(c=>LMAP[c]&&!tset.has(c)).slice().sort(byCountry);const used=new Set([...top,...pin]);const rest=LEAGUES.map(l=>l.code).filter(c=>!used.has(c)).sort(byCountry);return[...top,...pin,...rest];}
 
 function setDateLabel(){
   const d=state.date, today=new Date();
