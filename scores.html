@@ -617,9 +617,9 @@ function lineupCol(t){
   const logo=team.logo||(team.logos&&team.logos[0]&&team.logos[0].href)||"";
   const form=t.formation?`<span class="lp-form">${esc(t.formation)}</span>`:"";
   const roster=(t.roster||[]);
-  const ord=(x)=>{const n=parseInt(x.formationPlace,10);return isNaN(n)?999:n;};
-  const xi=roster.filter(x=>x.starter).sort((a,b)=>ord(a)-ord(b));
-  const subs=roster.filter(x=>!x.starter);
+  const jn=(x)=>{const n=parseInt(x.jersey,10);return isNaN(n)?999:n;};
+  const xi=roster.filter(x=>x.starter).sort((a,b)=>jn(a)-jn(b));
+  const subs=roster.filter(x=>!x.starter).sort((a,b)=>jn(a)-jn(b));
   return `<div class="lp-col">
     <div class="lp-head">${logo?`<img class="crest" src="${esc(https(logo))}" alt="">`:""}<span class="lp-tn">${esc(nm)}</span>${form}</div>
     <div class="lp-list">${xi.map(lpRow).join("")}</div>
