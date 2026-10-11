@@ -632,15 +632,15 @@ function renderLineups(d){
   const ros=(d&&d.rosters)||[];
   const hasXI=ros.length&&ros.some(r=>(r.roster||[]).some(p=>p.starter));
   if(!hasXI){
-    sectionsEl.innerHTML=`<div class="panel"><div class="panel-head ph-row"><span>${esc(an)}${an&&hn?" @ ":""}${esc(hn)} — Lineups</span>${back}</div>
+    sectionsEl.innerHTML=`<div class="panel"><div class="panel-head ph-row"><span>${esc(hn)}${hn&&an?" v ":""}${esc(an)} — Lineups</span>${back}</div>
       <div class="note" style="padding:40px 16px"><div class="big">Lineups not announced yet</div>Starting XIs are usually confirmed about an hour before kick-off — check back closer to the match.</div></div>`;
   } else {
     const h=ros.find(r=>r.homeAway==="home")||ros[0]; const a=ros.find(r=>r.homeAway==="away")||ros[1];
-    const cols=[a,h].filter(Boolean).map(lineupCol).join("");
+    const cols=[h,a].filter(Boolean).map(lineupCol).join("");
     sectionsEl.innerHTML=`<div class="panel"><div class="panel-head ph-row"><span>Lineups</span>${back}</div><div class="lp-wrap">${cols}</div></div>`;
   }
   const b=$("#lnBack"); if(b)b.onclick=()=>{state.view="scores";renderView();};
-  metaEl.innerHTML=`${esc(an)}${an&&hn?" @ ":""}${esc(hn)} · lineups`;
+  metaEl.innerHTML=`${esc(hn)}${hn&&an?" v ":""}${esc(an)} · lineups`;
 }
 
 /* ---------- dispatch ---------- */
