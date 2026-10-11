@@ -359,11 +359,11 @@ function matchCard(ev,code){
   const started=s!=="pre";
   const line=c=>{const other=c===home?away:home;const cls=c.winner===true?"win":(s==="post"&&other.winner===true?"lose":"");const nm=c.team.displayName||c.team.shortDisplayName||"";const sh=started?`<span class="sc">${esc(c.score!=null?c.score:"0")}</span>`:`<span class="sc pre">–</span>`;const logo=c.team.logo||(c.team.logos&&c.team.logos[0]&&c.team.logos[0].href)||"";return `<div class="tline clk ${cls}" data-league="${esc(code||"")}" data-tid="${esc(c.team.id||"")}" data-tn="${esc(nm)}" data-logo="${esc(logo)}">${crest(c.team)}<span class="tn">${esc(nm)}</span>${sh}</div>`;};
   let scorers="";
-  if((comp.details||[]).some(d=>d.scoringPlay)){const rows=[away,home].map(c=>{const n=scorersFor(comp,c.team.id);return n?`<div class="sc-line"><span class="ab"><span class="ball">⚽</span> ${esc(c.team.abbreviation||"")}</span><span class="nms">${n}</span></div>`:"";}).filter(Boolean).join("");if(rows)scorers=`<div class="mscorers">${rows}</div>`;}
+  if((comp.details||[]).some(d=>d.scoringPlay)){const rows=[home,away].map(c=>{const n=scorersFor(comp,c.team.id);return n?`<div class="sc-line"><span class="ab"><span class="ball">⚽</span> ${esc(c.team.abbreviation||"")}</span><span class="nms">${n}</span></div>`:"";}).filter(Boolean).join("");if(rows)scorers=`<div class="mscorers">${rows}</div>`;}
   const hName=home.team.displayName||home.team.shortDisplayName||"", aName=away.team.displayName||away.team.shortDisplayName||"";
   const hLogo=home.team.logo||(home.team.logos&&home.team.logos[0]&&home.team.logos[0].href)||"", aLogo=away.team.logo||(away.team.logos&&away.team.logos[0]&&away.team.logos[0].href)||"";
   const lnbtn=ev.id?`<div class="mfoot"><button class="lnbtn" data-eid="${esc(ev.id)}" data-league="${esc(code||"")}" data-hn="${esc(hName)}" data-hl="${esc(hLogo)}" data-an="${esc(aName)}" data-al="${esc(aLogo)}">⊞ Lineups</button></div>`:"";
-  return `<div class="match"><div class="mrow">${status}<div class="mteams">${line(away)}${line(home)}</div></div>${scorers}${lnbtn}</div>`;
+  return `<div class="match"><div class="mrow">${status}<div class="mteams">${line(home)}${line(away)}</div></div>${scorers}${lnbtn}</div>`;
 }
 function liveCounts(){const per={};let total=0;for(const c in cache){const n=(cache[c]||[]).filter(e=>evState(e)==="in").length;per[c]=n;total+=n;}return{per,total};}
 
