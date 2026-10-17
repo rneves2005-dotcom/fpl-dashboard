@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lineup Tracker · Matchday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#eef1f5; --surface:#ffffff; --surface-2:#eaeef3; --line:#dde3ea;
+  --ink:#131a22; --ink-2:#596673; --ink-3:#8c98a5;
+  --accent:#0b8a4b; --accent-soft:#e2f3ea; --live:#e03131;
+  --shadow:0 1px 2px rgba(16,28,40,.05),0 6px 18px rgba(16,28,40,.05);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1218; --surface:#161d25; --surface-2:#1e2831; --line:#2a333d;
+  --ink:#eef3f8; --ink-2:#9babba; --ink-3:#6a7784;
+  --accent:#2bc274; --accent-soft:#143024; --live:#ff5c5c;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1218; --surface:#161d25; --surface-2:#1e2831; --line:#2a333d;
+  --ink:#eef3f8; --ink-2:#9babba; --ink-3:#6a7784;
+  --accent:#2bc274; --accent-soft:#143024; --live:#ff5c5c;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink); font-family:"Barlow",system-ui,-apple-system,Segoe UI,Roboto,sans-serif; font-size:15px; line-height:1.4; -webkit-font-smoothing:antialiased; padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);}
+.wrap{max-width:1040px; margin:0 auto; padding:0 16px}
+.flag{line-height:1; font-family:"Apple Color Emoji","Segoe UI Emoji",sans-serif}
+.masthead{display:flex; align-items:baseline; gap:10px; padding-block:16px 10px; flex-wrap:wrap}
+.brand{font-family:"Oswald",sans-serif; font-weight:700; font-size:25px; letter-spacing:.06em; text-transform:uppercase; line-height:1}
+.brand .dot{color:var(--accent)}
+.tag{color:var(--ink-3); font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; font-weight:600}
+.navr{margin-left:auto; display:flex; gap:12px; font-size:14px; align-items:center}
+.navr a{color:var(--ink-2); text-decoration:none; font-weight:600; font-size:13px}
+.navr a:hover{color:var(--accent)}
+
+.controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:16px; position:sticky; top:0; z-index:5; background:color-mix(in srgb,var(--bg) 90%,transparent); backdrop-filter:blur(8px); padding:8px 0}
+.controls label{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-right:4px}
+.controls select{font:inherit; font-size:14px; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:9px; padding:8px 10px; max-width:200px}
+.hvs{font-family:"Oswald"; font-weight:600; color:var(--ink-3); font-size:13px; padding:0 2px}
+.swap{border:1px solid var(--line); background:var(--surface); color:var(--ink-2); border-radius:9px; width:36px; height:36px; cursor:pointer; font-size:15px}
+.swap:hover{color:var(--accent); border-color:var(--accent)}
+
+.track{display:grid; grid-template-columns:1fr 1fr; gap:16px; padding-bottom:50px}
+@media (max-width:720px){ .track{grid-template-columns:1fr} }
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); overflow:hidden; align-self:start}
+.p-head{display:flex; align-items:center; gap:9px; padding:11px 13px; background:var(--surface-2); border-bottom:1px solid var(--line)}
+.p-head .crest{width:26px; height:26px; object-fit:contain; flex:none}
+.p-head .crest-ph{width:26px; height:26px; flex:none; border-radius:50%; background:var(--line); display:grid; place-items:center; font-family:"Oswald"; font-size:9px; font-weight:600; color:var(--ink-3)}
+.p-name{font-family:"Oswald"; font-weight:600; font-size:16px; letter-spacing:.02em; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.p-side{flex:none; font-size:9.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3); border:1px solid var(--line); border-radius:999px; padding:2px 7px}
+.p-count{margin-left:auto; flex:none; font-family:"Oswald"; font-weight:600; font-size:15px; color:var(--accent); font-variant-numeric:tabular-nums}
+.p-acts{display:flex; gap:6px; padding:9px 13px 4px; flex-wrap:wrap}
+.mini{font:inherit; font-weight:600; font-size:11px; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-2); background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:5px 11px; cursor:pointer}
+.mini:hover{color:var(--accent); border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+
+.shirts{display:flex; flex-wrap:wrap; gap:7px; padding:10px 13px 13px}
+.shirt{min-width:44px; height:44px; padding:0 6px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:9px; cursor:pointer; font-family:"Oswald"; font-weight:600; font-size:17px; font-variant-numeric:tabular-nums; display:grid; place-items:center; transition:transform .05s}
+.shirt:hover{border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.shirt:active{transform:scale(.94)}
+.shirt.on{background:var(--accent); border-color:var(--accent); color:#fff}
+.shirt.ph{opacity:.5; cursor:default}
+
+.sel{border-top:1px solid var(--line)}
+.sel table{width:100%; border-collapse:collapse; font-size:13.5px}
+.sel th{font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-3); font-weight:700; padding:7px 10px; text-align:left; border-bottom:1px solid var(--line)}
+.sel th.n,.sel td.n{text-align:center; width:34px}
+.sel th.r,.sel td.r{text-align:right; font-variant-numeric:tabular-nums}
+.sel td{padding:7px 10px; border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent)}
+.sel tr:last-child td{border-bottom:none}
+.sel td.jr{font-family:"Oswald"; font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums}
+.sel td.nm{font-weight:600}
+.sel td.gl{font-family:"Oswald"; font-weight:600; color:var(--accent)}
+.sel tr.hl td{animation:flash 1s ease}
+@keyframes flash{0%{background:var(--accent-soft)}100%{background:transparent}}
+.empty{padding:20px 13px; color:var(--ink-3); font-size:13px; font-style:italic}
+.ldg{padding:28px 13px; color:var(--ink-3); font-size:13px}
+.spin{display:inline-block; width:12px; height:12px; border:2px solid var(--line); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; vertical-align:-2px; margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hint{color:var(--ink-3); font-size:12px; padding:0 0 14px; font-style:italic}
+.foot{text-align:center; color:var(--ink-3); font-size:11.5px; padding:10px 0 30px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <h1 class="brand">Match<span class="dot">day</span></h1>
+    <span class="tag">Lineup Tracker</span>
+    <span class="navr">
+      <a href="scores.html">⚽ Scores</a>
+      <a href="nfl.html" title="NFL">🏈</a><a href="sports.html#nba" title="NBA">🏀</a><a href="f1.html" title="F1">🏁</a>
+    </span>
+  </header>
+
+  <div class="hint">Pick two teams, then tap a shirt number as you spot each player on — their name, age &amp; goals fill in below. Tap again to remove.</div>
+
+  <div class="controls">
+    <span><label>League</label><select id="leagueSel"></select></span>
+    <span><label>Home</label><select id="homeSel"><option value="">Select team…</option></select></span>
+    <button class="swap" id="swapBtn" title="Swap home / away">⇄</button>
+    <span><label>Away</label><select id="awaySel"><option value="">Select team…</option></select></span>
+  </div>
+
+  <div class="track">
+    <section class="panel" id="homePanel"></section>
+    <section class="panel" id="awayPanel"></section>
+  </div>
+
+  <div class="foot">Data: ESPN · manual tracker — selections are yours, nothing is sent anywhere</div>
+</div>
+
+<script>
+"use strict";
+const LEAGUES=[
+  {code:"eng.1",name:"Premier League",country:"England",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {code:"por.1",name:"Primeira Liga",country:"Portugal",flag:"🇵🇹"},
+  {code:"esp.1",name:"La Liga",country:"Spain",flag:"🇪🇸"},
+  {code:"ita.1",name:"Serie A",country:"Italy",flag:"🇮🇹"},
+  {code:"ger.1",name:"Bundesliga",country:"Germany",flag:"🇩🇪"},
+  {code:"fra.1",name:"Ligue 1",country:"France",flag:"🇫🇷"},
+  {code:"usa.1",name:"MLS",country:"USA",flag:"🇺🇸"},
+  {code:"bra.1",name:"Brasileirão",country:"Brazil",flag:"🇧🇷"},
+  {code:"arg.1",name:"Liga Profesional",country:"Argentina",flag:"🇦🇷"},
+  {code:"mex.1",name:"Liga MX",country:"Mexico",flag:"🇲🇽"},
+  {code:"ned.1",name:"Eredivisie",country:"Netherlands",flag:"🇳🇱"},
+  {code:"eng.2",name:"Championship",country:"England",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {code:"tur.1",name:"Süper Lig",country:"Turkey",flag:"🇹🇷"},
+  {code:"sco.1",name:"Premiership",country:"Scotland",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿"},
+  {code:"bel.1",name:"Pro League",country:"Belgium",flag:"🇧🇪"},
+  {code:"sau.1",name:"Saudi Pro League",country:"Saudi Arabia",flag:"🇸🇦"},
+  {code:"uefa.champions",name:"Champions League",country:"Europe",flag:"🇪🇺"},
+  {code:"uefa.europa",name:"Europa League",country:"Europe",flag:"🇪🇺"},
+  {code:"uefa.europa.conf",name:"Conference League",country:"Europe",flag:"🇪🇺"}
+];
+const LMAP=Object.fromEntries(LEAGUES.map(l=>[l.code,l]));
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const https=u=>String(u||"").replace(/^http:/,"https:");
+const ymd=d=>`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;
+
+let state={league:"eng.1", sides:{home:null, away:null}};
+let teamCache={}, rosterCache={}, goalsCache={}, scoreboardCache={};
+
+// Favourite-league ordering: shared localStorage with scores.html (same origin)
+function orderedLeagueCodes(){
+  let pinned=[]; try{const p=JSON.parse(localStorage.getItem("md.pinned")||"[]"); if(Array.isArray(p))pinned=p.filter(c=>LMAP[c]);}catch(e){}
+  const top=["eng.1","por.1"].filter(c=>LMAP[c]);
+  const seen=new Set(); const out=[];
+  [...top,...pinned,...LEAGUES.map(l=>l.code)].forEach(c=>{ if(LMAP[c]&&!seen.has(c)){seen.add(c);out.push(c);} });
+  return out;
+}
+function buildLeagueDropdown(){
+  const sel=$("#leagueSel");
+  sel.innerHTML=orderedLeagueCodes().map(c=>`<option value="${c}" ${c===state.league?"selected":""}>${esc(LMAP[c].name)}</option>`).join("");
+}
+
+async function jget(url){ const r=await fetch(url,{cache:"no-store"}); if(!r.ok)throw new Error(r.status); return r.json(); }
+
+async function teamsFor(code){
+  if(teamCache[code])return teamCache[code];
+  const d=await jget(`https://site.api.espn.com/apis/v2/sports/soccer/${code}/standings`);
+  const groups=d.children&&d.children.length?d.children:(d.standings?[{standings:d.standings}]:[]);
+  const seen={}, out=[];
+  groups.forEach(g=>((g.standings&&g.standings.entries)||[]).forEach(e=>{const t=e.team||{}; if(t.id&&!seen[t.id]){seen[t.id]=1; out.push({id:String(t.id), name:t.shortDisplayName||t.displayName||"", abbr:t.abbreviation||"", logo:(t.logos&&t.logos[0]&&t.logos[0].href)||t.logo||""});}}));
+  out.sort((a,b)=>a.name.localeCompare(b.name));
+  teamCache[code]=out; return out;
+}
+async function goalsFor(code){
+  if(goalsCache[code])return goalsCache[code];
+  const yr=new Date().getFullYear(); let leaders=null;
+  for(const y of [yr,yr-1]){ try{const d=await jget(`https://sports.core.api.espn.com/v2/sports/soccer/leagues/${code}/seasons/${y}/types/1/leaders`); const gl=(d.categories||[]).find(c=>c.name==="goalsLeaders"); if(gl&&gl.leaders&&gl.leaders.length){leaders=gl.leaders;break;}}catch(e){} }
+  const m={}; (leaders||[]).forEach(ld=>{const ref=ld.athlete&&ld.athlete.$ref; const mm=ref&&String(ref).match(/athletes\/(\d+)/); if(mm)m[mm[1]]=Math.round(ld.value||0);});
+  goalsCache[code]=m; return m;
+}
+async function rosterFor(code,teamId){
+  const key=code+":"+teamId;
+  if(rosterCache[key])return rosterCache[key];
+  const [d,goals]=await Promise.all([ jget(`https://site.api.espn.com/apis/site/v2/sports/soccer/${code}/teams/${teamId}/roster`), goalsFor(code) ]);
+  const players=(d.athletes||[]).map(a=>{const jn=parseInt(a.jersey,10); return {id:String(a.id||""), jersey:a.jersey||"", jerseyN:isNaN(jn)?999:jn, name:a.displayName||"", age:(a.age!=null&&a.age!=="")?a.age:"", pos:((a.position||{}).abbreviation)||"", goals:goals[String(a.id)]||0};});
+  players.sort((x,y)=>x.jerseyN-y.jerseyN||x.name.localeCompare(y.name));
+  const team=d.team||{}; const meta={name:team.displayName||team.shortDisplayName||"", logo:(team.logos&&team.logos[0]&&team.logos[0].href)||"", abbr:team.abbreviation||""};
+  const o={players,meta}; rosterCache[key]=o; return o;
+}
+
+async function populateTeams(){
+  const hs=$("#homeSel"), as=$("#awaySel");
+  hs.innerHTML=as.innerHTML=`<option value="">Loading…</option>`;
+  try{
+    const teams=await teamsFor(state.league);
+    const opts=`<option value="">Select team…</option>`+teams.map(t=>`<option value="${esc(t.id)}">${esc(t.name)}</option>`).join("");
+    hs.innerHTML=opts; as.innerHTML=opts;
+    hs.value=""; as.value="";
+    state.sides.home=null; state.sides.away=null;
+    renderPanel("home"); renderPanel("away");
+  }catch(e){ hs.innerHTML=as.innerHTML=`<option value="">Unavailable</option>`; }
+}
+
+async function pickTeam(side,teamId){
+  const panel=$(side==="home"?"#homePanel":"#awayPanel");
+  if(!teamId){ state.sides[side]=null; renderPanel(side); return; }
+  panel.innerHTML=`<div class="ldg"><span class="spin"></span>Loading squad…</div>`;
+  try{
+    const r=await rosterFor(state.league,teamId);
+    state.sides[side]={teamId, meta:r.meta, players:r.players, byJersey:Object.fromEntries(r.players.filter(p=>p.jersey!=="").map(p=>[p.jersey,p])), selected:new Set(), lastPick:null};
+    renderPanel(side);
+  }catch(e){ panel.innerHTML=`<div class="ldg">Couldn't load that squad — try another team.</div>`; }
+}
+
+function renderPanel(side){
+  const panel=$(side==="home"?"#homePanel":"#awayPanel");
+  const S=state.sides[side];
+  const label=side==="home"?"Home":"Away";
+  if(!S){ panel.innerHTML=`<div class="p-head"><span class="p-side">${label}</span><span class="p-name" style="color:var(--ink-3);font-weight:400">No team selected</span></div><div class="empty">Choose a ${label.toLowerCase()} team above.</div>`; return; }
+  const m=S.meta;
+  const crest=m.logo?`<img class="crest" src="${esc(https(m.logo))}" alt="">`:`<span class="crest-ph">${esc((m.abbr||"?").slice(0,3))}</span>`;
+  const shirts=S.players.filter(p=>p.jersey!=="").map(p=>`<button class="shirt ${S.selected.has(p.jersey)?"on":""}" data-j="${esc(p.jersey)}" title="${esc(p.name)}">${esc(p.jersey)}</button>`).join("");
+  panel.innerHTML=`
+    <div class="p-head">${crest}<span class="p-side">${label}</span><span class="p-name">${esc(m.name)}</span><span class="p-count" id="cnt-${side}">${S.selected.size}</span></div>
+    <div class="p-acts">
+      <button class="mini" data-act="prefill" data-side="${side}">⚑ Prefill ESPN XI</button>
+      <button class="mini" data-act="clear" data-side="${side}">Clear</button>
+      <button class="mini" data-act="csv" data-side="${side}">⬇ CSV</button>
+    </div>
+    <div class="shirts" data-side="${side}">${shirts||'<span class="empty" style="padding:0">No shirt numbers listed.</span>'}</div>
+    <div class="sel" id="sel-${side}"></div>`;
+  renderSelected(side);
+}
+
+function renderSelected(side){
+  const S=state.sides[side]; const box=$("#sel-"+side); if(!box)return;
+  const chosen=S.players.filter(p=>S.selected.has(p.jersey)).sort((a,b)=>a.jerseyN-b.jerseyN);
+  const cnt=$("#cnt-"+side); if(cnt)cnt.textContent=S.selected.size;
+  if(!chosen.length){ box.innerHTML=`<div class="empty">Tap a shirt number above and the player appears here.</div>`; return; }
+  const rows=chosen.map(p=>`<tr class="${p.jersey===S.lastPick?"hl":""}"><td class="n jr">${esc(p.jersey)}</td><td class="nm">${esc(p.name)}</td><td class="n" style="color:var(--ink-3)">${esc(p.pos)}</td><td class="r">${esc(p.age)}</td><td class="r gl">${p.goals||0}</td></tr>`).join("");
+  box.innerHTML=`<table><thead><tr><th class="n">#</th><th>Player</th><th class="n">Pos</th><th class="r">Age</th><th class="r">Gls</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function toggleShirt(side,jersey){
+  const S=state.sides[side]; if(!S||!S.byJersey[jersey])return;
+  if(S.selected.has(jersey)){S.selected.delete(jersey); S.lastPick=null;} else {S.selected.add(jersey); S.lastPick=jersey;}
+  const btn=$(`.shirts[data-side="${side}"] .shirt[data-j="${CSS.escape(jersey)}"]`);
+  if(btn)btn.classList.toggle("on",S.selected.has(jersey));
+  renderSelected(side);
+}
+
+async function prefillXI(side){
+  const S=state.sides[side]; if(!S)return;
+  const box=$("#sel-"+side); const prev=box?box.innerHTML:"";
+  if(box)box.innerHTML=`<div class="ldg"><span class="spin"></span>Finding today's lineup…</div>`;
+  try{
+    let evs=scoreboardCache[state.league];
+    if(!evs){ const d=await jget(`https://site.api.espn.com/apis/site/v2/sports/soccer/${state.league}/scoreboard?dates=${ymd(new Date())}`); evs=d.events||[]; scoreboardCache[state.league]=evs; }
+    const ev=evs.find(e=>((e.competitions&&e.competitions[0]&&e.competitions[0].competitors)||[]).some(c=>String(c.team&&c.team.id)===S.teamId));
+    if(!ev)throw new Error("no match");
+    const sum=await jget(`https://site.api.espn.com/apis/site/v2/sports/soccer/${state.league}/summary?event=${ev.id}`);
+    const ros=(sum.rosters||[]).find(r=>String((r.team||{}).id)===S.teamId);
+    const xi=((ros&&ros.roster)||[]).filter(p=>p.starter);
+    if(!xi.length)throw new Error("no xi");
+    S.selected=new Set(); S.lastPick=null;
+    xi.forEach(p=>{const j=p.jersey!=null?String(p.jersey):null; if(j&&S.byJersey[j])S.selected.add(j);});
+    renderPanel(side);
+  }catch(e){
+    if(box){ box.innerHTML=prev||""; }
+    const note=document.createElement("div"); note.className="empty"; note.textContent="No confirmed XI from ESPN yet — keep tapping shirts manually.";
+    if(box)box.prepend(note);
+  }
+}
+
+function exportCSV(side){
+  const S=state.sides[side]; if(!S)return;
+  const chosen=S.players.filter(p=>S.selected.has(p.jersey)).sort((a,b)=>a.jerseyN-b.jerseyN);
+  const cq=v=>{v=v==null?"":String(v); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+  const lines=[["Side","Club","Shirt","Player","Pos","Age","Goals"].join(",")];
+  chosen.forEach(p=>lines.push([side==="home"?"Home":"Away",S.meta.name,p.jersey,p.name,p.pos,p.age,p.goals||0].map(cq).join(",")));
+  const b=new Blob([lines.join("\n")],{type:"text/csv;charset=utf-8"}); const u=URL.createObjectURL(b);
+  const a=document.createElement("a"); a.href=u; a.download=`${S.meta.name||"team"}-lineup.csv`.replace(/\s+/g,"-"); document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),2000);
+}
+
+/* events */
+$("#leagueSel").onchange=e=>{ state.league=e.target.value; populateTeams(); };
+$("#homeSel").onchange=e=>pickTeam("home",e.target.value);
+$("#awaySel").onchange=e=>pickTeam("away",e.target.value);
+$("#swapBtn").onclick=()=>{ const h=$("#homeSel"),a=$("#awaySel"); const hv=h.value,av=a.value; h.value=av; a.value=hv; pickTeam("home",av); pickTeam("away",hv); };
+document.querySelector(".track").addEventListener("click",e=>{
+  const sh=e.target.closest(".shirt"); if(sh&&!sh.classList.contains("ph")){ toggleShirt(sh.closest(".shirts").dataset.side, sh.dataset.j); return; }
+  const mb=e.target.closest(".mini"); if(mb){ const side=mb.dataset.side, act=mb.dataset.act;
+    if(act==="clear"){ const S=state.sides[side]; if(S){S.selected=new Set(); S.lastPick=null; renderPanel(side);} }
+    else if(act==="csv"){ exportCSV(side); }
+    else if(act==="prefill"){ prefillXI(side); }
+  }
+});
+
+/* boot */
+buildLeagueDropdown();
+renderPanel("home"); renderPanel("away");
+populateTeams();
+</script>
+</body>
+</html>
