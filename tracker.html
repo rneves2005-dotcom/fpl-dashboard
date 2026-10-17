@@ -32,7 +32,7 @@
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--bg); color:var(--ink); font-family:"Barlow",system-ui,-apple-system,Segoe UI,Roboto,sans-serif; font-size:15px; line-height:1.4; -webkit-font-smoothing:antialiased; padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);}
-.wrap{max-width:1040px; margin:0 auto; padding:0 16px}
+.wrap{max-width:1240px; margin:0 auto; padding:0 16px}
 .flag{line-height:1; font-family:"Apple Color Emoji","Segoe UI Emoji",sans-serif}
 .masthead{display:flex; align-items:baseline; gap:10px; padding-block:16px 10px; flex-wrap:wrap}
 .brand{font-family:"Oswald",sans-serif; font-weight:700; font-size:25px; letter-spacing:.06em; text-transform:uppercase; line-height:1}
@@ -49,8 +49,9 @@ body{background:var(--bg); color:var(--ink); font-family:"Barlow",system-ui,-app
 .swap{border:1px solid var(--line); background:var(--surface); color:var(--ink-2); border-radius:9px; width:36px; height:36px; cursor:pointer; font-size:15px}
 .swap:hover{color:var(--accent); border-color:var(--accent)}
 
-.track{display:grid; grid-template-columns:1fr 1fr; gap:16px; padding-bottom:50px}
-@media (max-width:720px){ .track{grid-template-columns:1fr} }
+.track{display:grid; grid-template-columns:1fr 1fr 0.82fr; gap:16px; padding-bottom:50px}
+@media (max-width:980px){ .track{grid-template-columns:1fr 1fr} #scorersPanel{grid-column:1/-1} }
+@media (max-width:720px){ .track{grid-template-columns:1fr} #scorersPanel{grid-column:auto} }
 .panel{background:var(--surface); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); overflow:hidden; align-self:start}
 .p-head{display:flex; align-items:center; gap:9px; padding:11px 13px; background:var(--surface-2); border-bottom:1px solid var(--line)}
 .p-head .crest{width:26px; height:26px; object-fit:contain; flex:none}
@@ -81,6 +82,9 @@ body{background:var(--bg); color:var(--ink); font-family:"Barlow",system-ui,-app
 .sel td.gl{font-family:"Oswald"; font-weight:600; color:var(--accent)}
 .sel tr.hl td{animation:flash 1s ease}
 @keyframes flash{0%{background:var(--accent-soft)}100%{background:transparent}}
+.sel tr.lead td{background:var(--accent-soft)}
+.sel tr.lead td.nm{font-weight:700}
+.sel td.ld{font-size:10px; color:var(--accent); font-weight:700}
 .empty{padding:20px 13px; color:var(--ink-3); font-size:13px; font-style:italic}
 .ldg{padding:28px 13px; color:var(--ink-3); font-size:13px}
 .spin{display:inline-block; width:12px; height:12px; border:2px solid var(--line); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; vertical-align:-2px; margin-right:6px}
@@ -113,6 +117,7 @@ body{background:var(--bg); color:var(--ink); font-family:"Barlow",system-ui,-app
   <div class="track">
     <section class="panel" id="homePanel"></section>
     <section class="panel" id="awayPanel"></section>
+    <section class="panel" id="scorersPanel"></section>
   </div>
 
   <div class="foot">Data: ESPN · manual tracker — selections are yours, nothing is sent anywhere</div>
@@ -200,18 +205,18 @@ async function populateTeams(){
     hs.innerHTML=opts; as.innerHTML=opts;
     hs.value=""; as.value="";
     state.sides.home=null; state.sides.away=null;
-    renderPanel("home"); renderPanel("away");
+    renderPanel("home"); renderPanel("away"); renderScorers();
   }catch(e){ hs.innerHTML=as.innerHTML=`<option value="">Unavailable</option>`; }
 }
 
 async function pickTeam(side,teamId){
   const panel=$(side==="home"?"#homePanel":"#awayPanel");
-  if(!teamId){ state.sides[side]=null; renderPanel(side); return; }
+  if(!teamId){ state.sides[side]=null; renderPanel(side); renderScorers(); return; }
   panel.innerHTML=`<div class="ldg"><span class="spin"></span>Loading squad…</div>`;
   try{
     const r=await rosterFor(state.league,teamId);
     state.sides[side]={teamId, meta:r.meta, players:r.players, byJersey:Object.fromEntries(r.players.filter(p=>p.jersey!=="").map(p=>[p.jersey,p])), selected:new Set(), lastPick:null};
-    renderPanel(side);
+    renderPanel(side); renderScorers();
   }catch(e){ panel.innerHTML=`<div class="ldg">Couldn't load that squad — try another team.</div>`; }
 }
 
@@ -242,6 +247,19 @@ function renderSelected(side){
   if(!chosen.length){ box.innerHTML=`<div class="empty">Tap a shirt number above and the player appears here.</div>`; return; }
   const rows=chosen.map(p=>`<tr class="${p.jersey===S.lastPick?"hl":""}"><td class="n jr">${esc(p.jersey)}</td><td class="nm">${esc(p.name)}</td><td class="n" style="color:var(--ink-3)">${esc(p.pos)}</td><td class="r">${esc(p.age)}</td><td class="r gl">${p.goals||0}</td></tr>`).join("");
   box.innerHTML=`<table><thead><tr><th class="n">#</th><th>Player</th><th class="n">Pos</th><th class="r">Age</th><th class="r">Gls</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderScorers(){
+  const panel=$("#scorersPanel");
+  const sides=["home","away"].map(s=>state.sides[s]).filter(Boolean);
+  if(!sides.length){ panel.innerHTML=`<div class="p-head"><span class="p-name" style="color:var(--ink-3);font-weight:400">⚽ Goals</span></div><div class="empty">Pick teams to see their scorers (leader on top).</div>`; return; }
+  const all=[];
+  sides.forEach(S=>S.players.forEach(p=>{ if((p.goals||0)>0) all.push({name:p.name, goals:p.goals, age:p.age, club:S.meta.name, abbr:S.meta.abbr}); }));
+  all.sort((a,b)=>b.goals-a.goals||a.name.localeCompare(b.name));
+  const head=`<div class="p-head"><span class="p-name">⚽ Goals</span><span class="p-count">${all.length}</span></div>`;
+  if(!all.length){ panel.innerHTML=head+`<div class="empty">No goals yet for these teams this season.</div>`; return; }
+  const rows=all.map((p,i)=>`<tr class="${i===0?"lead":""}"><td class="n jr" style="font-size:17px">${p.goals}</td><td class="nm">${esc(p.name)}${i===0?' <span class="ld">LEADER</span>':""}</td><td style="color:var(--ink-2)">${esc(p.club)}</td><td class="r" style="color:var(--ink-3)">${esc(p.age)}</td></tr>`).join("");
+  panel.innerHTML=head+`<div class="sel"><table><thead><tr><th class="n">Gls</th><th>Player</th><th>Club</th><th class="r">Age</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
 function toggleShirt(side,jersey){
@@ -301,7 +319,7 @@ document.querySelector(".track").addEventListener("click",e=>{
 
 /* boot */
 buildLeagueDropdown();
-renderPanel("home"); renderPanel("away");
+renderPanel("home"); renderPanel("away"); renderScorers();
 populateTeams();
 </script>
 </body>
