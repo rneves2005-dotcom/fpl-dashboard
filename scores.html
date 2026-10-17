@@ -208,6 +208,23 @@ table.t tr.grp td{background:var(--surface-2); text-align:left; font-family:"Osw
 .lp-list.sub .lp-n{color:var(--ink-2)}
 @media (max-width:620px){ .lp-wrap{grid-template-columns:1fr; gap:4px} }
 
+/* players explorer */
+.px-bar{display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:10px 12px; border-bottom:1px solid var(--line); background:var(--surface-2)}
+.px-bar input,.px-bar select{font:inherit; font-size:13px; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px 9px}
+.px-bar input.search{flex:1; min-width:130px}
+.px-toggle{padding:6px 12px; border:1px solid var(--line); background:var(--surface); color:var(--ink-2); border-radius:999px; font:inherit; font-weight:600; font-size:12px; cursor:pointer; display:inline-flex; align-items:center; gap:6px}
+.px-toggle:hover{color:var(--ink)}
+.px-toggle.on{background:var(--live); border-color:var(--live); color:#fff}
+.px-csv{margin-left:auto; padding:6px 12px; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:8px; font:inherit; font-weight:600; font-size:12px; cursor:pointer}
+.px-csv:hover{border-color:var(--accent); color:var(--accent)}
+table.t th.sortable{cursor:pointer; user-select:none}
+table.t th.sortable:hover{color:var(--ink)}
+table.t th .ar{font-size:9px; color:var(--accent)}
+td.jn-cell{font-variant-numeric:tabular-nums; color:var(--ink-3); font-weight:600}
+.st-on{color:var(--accent); font-weight:700}
+.st-off{color:var(--live); font-weight:600}
+.st-bench{color:var(--ink-3)}
+
 @media (max-width:760px){
   .layout{grid-template-columns:1fr; gap:10px}
   .sidebar{position:static; flex-direction:row; overflow-x:auto; overflow-y:hidden; max-height:none; gap:6px; padding:2px 0 6px; -webkit-overflow-scrolling:touch}
@@ -385,7 +402,7 @@ function renderSubbar(){
   if(state.active===null){ subbarEl.hidden=true; toolbarEl.classList.remove("lite"); return; }
   const l=LMAP[state.active];
   const isCup=CUPS.has(state.active);
-  const tabs=[["scores","Scores"],["standings","Table"],["scorers","Scorers"]].filter(t=>t[0]==="scores"||!isCup);
+  const tabs=[["scores","Scores"],["standings","Table"],["scorers","Scorers"],["players","Players"]].filter(t=>t[0]==="scores"||!isCup);
   const actView=(state.view==="squad"||state.view==="player")?"standings":state.view;
   subbarEl.hidden=false;
   subbarEl.innerHTML=`<span class="sb-league"><span class="flag">${l.flag}</span> ${esc(l.name)}</span>
@@ -643,11 +660,98 @@ function renderLineups(d){
   metaEl.innerHTML=`${esc(hn)}${hn&&an?" v ":""}${esc(an)} · lineups`;
 }
 
+/* ---------- PLAYERS EXPLORER ---------- */
+let playerBaseCache={}, playersGoalsCache={};
+state.playersF=state.playersF||{q:"",club:"",pos:"",minGoals:0,onlyOn:false};
+state.playersS=state.playersS||{k:"club",dir:1};
+async function playerGoals(code){
+  if(playersGoalsCache[code])return playersGoalsCache[code];
+  const yr=new Date().getFullYear(); const years=[yr,yr-1]; let leaders=null;
+  for(const y of years){ try{const r=await fetch(`https://sports.core.api.espn.com/v2/sports/soccer/leagues/${code}/seasons/${y}/types/1/leaders`); if(r.ok){const d=await r.json(); const gl=(d.categories||[]).find(c=>c.name==="goalsLeaders"); if(gl&&gl.leaders&&gl.leaders.length){leaders=gl.leaders;break;}}}catch(e){} }
+  const m={}; (leaders||[]).forEach(ld=>{const ref=ld.athlete&&ld.athlete.$ref; const mm=ref&&String(ref).match(/athletes\/(\d+)/); if(mm)m[mm[1]]=Math.round(ld.value||0);});
+  playersGoalsCache[code]=m; return m;
+}
+async function playerLive(code){
+  const map={}; let evs=cache[code]||[];
+  if(sameDay(state.date,new Date())){ try{const r=await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${code}/scoreboard?dates=${ymd(new Date())}`,{cache:"no-store"}); if(r.ok){const d=await r.json(); evs=d.events||[]; cache[code]=evs;}}catch(e){} }
+  const live=evs.filter(e=>evState(e)==="in");
+  await Promise.allSettled(live.map(async ev=>{ try{const d=await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${code}/summary?event=${ev.id}`,{cache:"no-store"}).then(r=>r.json()); (d.rosters||[]).forEach(t=>(t.roster||[]).forEach(p=>{const aid=p.athlete&&p.athlete.id; if(aid==null)return; let st; if(p.subbedOut)st="off"; else if(p.starter)st="on"; else if(p.subbedIn)st="on"; else st="bench"; map[String(aid)]=st;}));}catch(e){} }));
+  return {map,hasLive:live.length>0};
+}
+async function loadPlayers(code,silent){
+  state.active=code; state.view="players"; renderSidebar(); renderSubbar();
+  let base=playerBaseCache[code];
+  if(base&&!silent&&state.view==="players"&&state.active===code) renderPlayers(base,base.hasLive);
+  try{
+    if(!base){
+      if(!silent){sectionsEl.innerHTML=`<div class="skeleton" style="height:420px"></div>`; metaEl.innerHTML=`<span class="spin"></span> Building player list…`;}
+      let sd=standCache[code];
+      if(!sd){const r=await fetch(`https://site.api.espn.com/apis/v2/sports/soccer/${code}/standings`,{cache:"no-store"}); if(!r.ok)throw 0; sd=await r.json(); standCache[code]=sd;}
+      const groups=sd.children&&sd.children.length?sd.children:(sd.standings?[{standings:sd.standings}]:[]);
+      const teamMeta={}, teamIds=[];
+      groups.forEach(g=>((g.standings&&g.standings.entries)||[]).forEach(e=>{const t=e.team||{}; if(t.id&&!teamMeta[t.id]){teamMeta[t.id]={name:t.shortDisplayName||t.displayName||"",abbr:t.abbreviation||"",logo:(t.logos&&t.logos[0]&&t.logos[0].href)||t.logo||""}; teamIds.push(String(t.id));}}));
+      if(!teamIds.length)throw 0;
+      const goals=await playerGoals(code);
+      const rosters=await Promise.allSettled(teamIds.map(id=>{const k=code+":"+id; if(squadCache[k])return Promise.resolve(squadCache[k]); return fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${code}/teams/${id}/roster`,{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json();}).then(d=>{squadCache[k]=d;return d;});}));
+      const rows=[];
+      rosters.forEach((res,i)=>{ if(res.status!=="fulfilled")return; const id=teamIds[i]; const meta=teamMeta[id]||{}; (res.value.athletes||[]).forEach(a=>{ const jn=parseInt(a.jersey,10); rows.push({id:String(a.id||""),name:a.displayName||"",club:meta.name||"",clubId:id,abbr:meta.abbr||"",jersey:a.jersey||"–",jerseyN:isNaN(jn)?999:jn,pos:(a.position||{}).abbreviation||"",posG:posGroup((a.position||{}).abbreviation),nat:a.citizenship||(a.birthPlace&&a.birthPlace.country)||"",age:(a.age!=null&&a.age!=="")?a.age:"",goals:goals[String(a.id)]||0,status:""}); }); });
+      base={rows,hasLive:false}; playerBaseCache[code]=base;
+    }
+    const {map,hasLive}=await playerLive(code);
+    base.rows.forEach(r=>r.status=map[r.id]||""); base.hasLive=hasLive;
+    if(state.view==="players"&&state.active===code){
+      if(silent&&$("#pxBody")){ pxRenderBody(base); metaEl.innerHTML=`${esc((LMAP[code]||{}).name||code)} players · ${base.rows.length} total`+(hasLive?` · <span style="color:var(--live);font-weight:600">● live</span> auto-updating`:"")+` · ${new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}`; }
+      else renderPlayers(base,hasLive);
+      if(hasLive&&sameDay(state.date,new Date())){clearTimeout(refreshTimer); refreshTimer=setTimeout(()=>loadPlayers(code,true),30000);}
+    }
+  }catch(e){ if(state.view==="players"&&state.active===code){ sectionsEl.innerHTML=`<div class="note"><div class="big">Couldn't build player list</div>Squad data isn't available for ${esc((LMAP[code]||{}).name||code)} right now.</div>`; metaEl.textContent=""; } }
+}
+function pxFilter(rows){ const f=state.playersF, q=f.q.trim().toLowerCase(); return rows.filter(r=>{ if(f.onlyOn&&r.status!=="on")return false; if(f.club&&r.club!==f.club)return false; if(f.pos&&r.posG!==f.pos)return false; if(f.minGoals&&(r.goals||0)<f.minGoals)return false; if(q&&!(r.name.toLowerCase().includes(q)||r.club.toLowerCase().includes(q)))return false; return true; }); }
+function pxSortRows(rows){ const {k,dir}=state.playersS; const stord={on:0,off:1,bench:2,"":3}; const val=r=> k==="goals"?(r.goals||0):k==="age"?(r.age===""?-1:Number(r.age)):k==="jersey"?r.jerseyN:k==="status"?stord[r.status]:(r[k]||"").toString().toLowerCase(); return rows.slice().sort((a,b)=>{ const va=val(a),vb=val(b); let c=(typeof va==="number"&&typeof vb==="number")?va-vb:String(va).localeCompare(String(vb)); if(c)return dir<0?-c:c; return (a.club||"").localeCompare(b.club||"")||a.jerseyN-b.jerseyN; }); }
+function pxRenderBody(base){
+  const rows=pxSortRows(pxFilter(base.rows));
+  const stHTML={on:'<span class="st-on">● On</span>',off:'<span class="st-off">Off</span>',bench:'<span class="st-bench">Bench</span>',"":'<span style="color:var(--ink-3)">—</span>'};
+  const body=rows.map(r=>`<tr><td class="jn-cell">${esc(r.jersey)}</td><td class="tL"><span class="tn2">${esc(r.name)}</span></td><td class="tL"><span style="color:var(--ink-2)">${esc(r.club)}</span></td><td class="opt" style="color:var(--ink-3)">${esc(r.pos)}</td><td class="opt">${esc(r.nat)}</td><td>${esc(r.age)}</td><td class="gls">${r.goals?esc(r.goals):'<span style="color:var(--ink-3)">0</span>'}</td><td>${stHTML[r.status]||stHTML[""]}</td></tr>`).join("");
+  const tb=$("#pxBody"); if(tb)tb.innerHTML=body||`<tr><td colspan="8" style="padding:24px;color:var(--ink-3)">No players match these filters.</td></tr>`;
+  const cnt=$("#pxCount"); if(cnt)cnt.textContent=`${rows.length} shown`;
+}
+function pxCSV(rows,code){ const L=LMAP[code]||{}; const head=["Competition","Country","Club","Shirt","Player","Pos","Nat","Age","Goals","Status"]; const st={on:"On",off:"Subbed off",bench:"Bench","":""}; const cq=v=>{v=v==null?"":String(v); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}; const lines=[head.join(",")]; rows.forEach(r=>lines.push([L.name||code,L.country||"",r.club,r.jersey,r.name,r.pos,r.nat,r.age,r.goals||0,st[r.status]||""].map(cq).join(","))); return lines.join("\n"); }
+function pxDownload(name,text){ const b=new Blob([text],{type:"text/csv;charset=utf-8"}); const u=URL.createObjectURL(b); const a=document.createElement("a"); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),2000); }
+function renderPlayers(base,hasLive){
+  const code=state.active, L=LMAP[code]||{}; const f=state.playersF, s=state.playersS;
+  const clubs=[...new Set(base.rows.map(r=>r.club).filter(Boolean))].sort();
+  const posOpts=[["","All pos"],["G","GK"],["D","DEF"],["M","MID"],["F","FWD"]];
+  const goalOpts=[[0,"Any goals"],[1,"1+"],[3,"3+"],[5,"5+"],[10,"10+"]];
+  const ar=k=> s.k===k?`<span class="ar">${s.dir<0?"▼":"▲"}</span>`:"";
+  const th=(k,label,cls)=>`<th class="sortable ${cls||""}" data-sk="${k}">${label}${ar(k)}</th>`;
+  const controls=`<div class="px-bar">
+    <input class="search" id="pxQ" type="search" placeholder="Search player / club…" value="${esc(f.q)}">
+    <select id="pxClub"><option value="">All clubs</option>${clubs.map(c=>`<option ${f.club===c?"selected":""}>${esc(c)}</option>`).join("")}</select>
+    <select id="pxPos">${posOpts.map(o=>`<option value="${o[0]}" ${f.pos===o[0]?"selected":""}>${esc(o[1])}</option>`).join("")}</select>
+    <select id="pxGoals">${goalOpts.map(o=>`<option value="${o[0]}" ${f.minGoals==o[0]?"selected":""}>${esc(o[1])}</option>`).join("")}</select>
+    <button class="px-toggle ${f.onlyOn?"on":""}" id="pxOn">${hasLive?'<span class="lv" style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;animation:pulse 1.3s ease-in-out infinite"></span>':"⚽"} On now</button>
+    <button class="px-csv" id="pxCsv">⬇ CSV</button>
+  </div>`;
+  const header=`<thead><tr>${th("jersey","#","rk")}<th class="sortable tL" data-sk="name">Player${ar("name")}</th>${th("club","Club","tL")}${th("pos","Pos","opt")}<th class="opt">Nat</th>${th("age","Age")}${th("goals","Goals")}${th("status","Status")}</tr></thead>`;
+  sectionsEl.innerHTML=`<div class="panel"><div class="panel-head ph-row"><span>${esc(L.name)} — Players</span><span style="margin-left:auto;font-weight:400;font-size:11px;color:var(--ink-3)" id="pxCount"></span></div>${controls}<div class="tbl-scroll"><table class="t">${header}<tbody id="pxBody"></tbody></table></div></div>`;
+  pxRenderBody(base);
+  const bind=(id,ev,fn)=>{const el=$(id); if(el)el[ev]=fn;};
+  bind("#pxQ","oninput",e=>{state.playersF.q=e.target.value;pxRenderBody(base);});
+  bind("#pxClub","onchange",e=>{state.playersF.club=e.target.value;pxRenderBody(base);});
+  bind("#pxPos","onchange",e=>{state.playersF.pos=e.target.value;pxRenderBody(base);});
+  bind("#pxGoals","onchange",e=>{state.playersF.minGoals=Number(e.target.value);pxRenderBody(base);});
+  bind("#pxOn","onclick",e=>{state.playersF.onlyOn=!state.playersF.onlyOn;e.currentTarget.classList.toggle("on",state.playersF.onlyOn);pxRenderBody(base);});
+  bind("#pxCsv","onclick",()=>{const rows=pxSortRows(pxFilter(base.rows));pxDownload(`${code}-players.csv`,pxCSV(rows,code));});
+  sectionsEl.querySelectorAll("th.sortable").forEach(h=>h.onclick=()=>{const k=h.dataset.sk; if(state.playersS.k===k)state.playersS.dir=-state.playersS.dir; else{state.playersS.k=k;state.playersS.dir=(k==="goals"||k==="status")?-1:1;} renderPlayers(base,hasLive);});
+  metaEl.innerHTML=`${esc(L.name)} players · ${base.rows.length} total`+(hasLive?` · <span style="color:var(--live);font-weight:600">● live</span> auto-updating`:"")+` · ${new Date().toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}`;
+}
+
 /* ---------- dispatch ---------- */
 function renderView(){
   renderSidebar(); renderSubbar();
   if(state.view==="standings"){ loadStandings(); }
   else if(state.view==="scorers"){ loadScorers(); }
+  else if(state.view==="players"){ loadPlayers(state.active); }
   else if(state.view==="squad"){ if(state.squad){const key=state.squad.league+":"+state.squad.id; if(squadCache[key])renderSquad(squadCache[key]); else loadSquad(state.squad.league,state.squad.id,state.squad.name,state.squad.crest);} else {state.view="standings";loadStandings();} }
   else if(state.view==="player"){ if(state.player){const key=state.player.league+":"+state.player.id; if(playerCache[key])renderPlayer(playerCache[key]); else loadPlayer(state.player.league,state.player.id,state.player.name);} else backToSquad(); }
   else if(state.view==="lineups"){ if(state.lineup){const key=state.lineup.league+":"+state.lineup.eid; if(lineupCache[key])renderLineups(lineupCache[key]); else loadLineups(state.lineup.league,state.lineup.eid,state.lineup.home,state.lineup.away);} else {state.view="scores";renderScores();} }
@@ -675,7 +779,7 @@ $("#next").onclick=()=>go(1);
 $("#todayBtn").onclick=()=>{state.date=new Date();setDateLabel();loadScores(false);};
 $("#dateInput").onchange=e=>{const v=e.target.value;if(!v)return;const[y,m,d]=v.split("-").map(Number);state.date=new Date(y,m-1,d);setDateLabel();loadScores(false);};
 $("#datePick").onclick=e=>{if(e.target.id!=="dateInput"){const di=$("#dateInput");if(di.showPicker){try{di.showPicker();}catch(_){di.focus();}}else di.focus();}};
-$("#refreshBtn").onclick=()=>{ if(state.view==="standings"){delete standCache[state.active];loadStandings();} else if(state.view==="scorers"){delete scorerCache[state.active];loadScorers();} else if(state.view==="squad"&&state.squad){const k=state.squad.league+":"+state.squad.id;delete squadCache[k];loadSquad(state.squad.league,state.squad.id,state.squad.name,state.squad.crest);} else if(state.view==="player"&&state.player){const k=state.player.league+":"+state.player.id;delete playerCache[k];loadPlayer(state.player.league,state.player.id,state.player.name);} else if(state.view==="lineups"&&state.lineup){const k=state.lineup.league+":"+state.lineup.eid;delete lineupCache[k];loadLineups(state.lineup.league,state.lineup.eid,state.lineup.home,state.lineup.away);} else loadScores(false); };
+$("#refreshBtn").onclick=()=>{ if(state.view==="standings"){delete standCache[state.active];loadStandings();} else if(state.view==="scorers"){delete scorerCache[state.active];loadScorers();} else if(state.view==="squad"&&state.squad){const k=state.squad.league+":"+state.squad.id;delete squadCache[k];loadSquad(state.squad.league,state.squad.id,state.squad.name,state.squad.crest);} else if(state.view==="player"&&state.player){const k=state.player.league+":"+state.player.id;delete playerCache[k];loadPlayer(state.player.league,state.player.id,state.player.name);} else if(state.view==="lineups"&&state.lineup){const k=state.lineup.league+":"+state.lineup.eid;delete lineupCache[k];loadLineups(state.lineup.league,state.lineup.eid,state.lineup.home,state.lineup.away);} else if(state.view==="players"){delete playerBaseCache[state.active];delete playersGoalsCache[state.active];loadPlayers(state.active);} else loadScores(false); };
 $("#filters").onclick=e=>{const b=e.target.closest(".ftab");if(!b)return;document.querySelectorAll(".ftab").forEach(x=>x.classList.toggle("active",x===b));state.filter=b.dataset.f;try{localStorage.setItem("md.filter",state.filter);}catch(_){}renderScores();};
 sidebarEl.onclick=e=>{
   const pin=e.target.closest(".pin");
