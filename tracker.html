@@ -413,6 +413,9 @@ document.querySelector(".track").addEventListener("click",e=>{
   }
 });
 
+/* when you come back to the tab, pull fresh data immediately (background tabs throttle the 30s timer) */
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden&&(state.sides.home||state.sides.away)) refreshLive(true); });
+
 /* boot */
 buildLeagueDropdown();
 renderPanel("home"); renderPanel("away"); renderScorers();
