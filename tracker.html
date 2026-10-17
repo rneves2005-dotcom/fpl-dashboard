@@ -175,6 +175,48 @@ function buildLeagueDropdown(){
 
 async function jget(url){ const r=await fetch(url,{cache:"no-store"}); if(!r.ok)throw new Error(r.status); return r.json(); }
 
+/* ---- FPL API (PL only) for LIVE goals + assists — via CORS proxy (FPL blocks direct CORS) ---- */
+const FPL_PROXIES=[
+  u=>u.replace("https://fantasy.premierleague.com/api","https://fpl-proxy.rneves2005.workers.dev"),
+  u=>"https://proxy.cors.sh/"+u,
+  u=>"https://api.allorigins.win/raw?url="+encodeURIComponent(u),
+  u=>"https://api.codetabs.com/v1/proxy?quest="+encodeURIComponent(u)
+];
+let fplProxy=null, fpl=null, fplLoading=null;
+async function fplApi(endpoint){
+  const direct="https://fantasy.premierleague.com/api"+endpoint;
+  const order=fplProxy?[fplProxy,...FPL_PROXIES.filter(p=>p!==fplProxy)]:FPL_PROXIES;
+  for(const p of order){ try{ const r=await fetch(p(direct),{cache:"no-store"}); if(r.ok){fplProxy=p; return r.json();} }catch(e){} }
+  throw new Error("fpl proxy failed");
+}
+function fnorm(s){ return String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z ]/g," ").replace(/\s+/g," ").trim(); }
+async function loadFPL(){
+  if(fpl)return fpl;
+  if(fplLoading)return fplLoading;
+  fplLoading=(async()=>{
+    const bs=await fplApi("/bootstrap-static/");
+    const ev=(bs.events||[]).find(e=>e.is_current)||(bs.events||[]).find(e=>e.is_next)||{id:1};
+    const gw=ev.id;
+    let live={}; try{ const lv=await fplApi(`/event/${gw}/live/`); (lv.elements||[]).forEach(x=>{live[x.id]={g:(x.stats&&x.stats.goals_scored)||0,a:(x.stats&&x.stats.assists)||0};}); }catch(e){}
+    const full={}, sur={}, web={}, base={}, loadLive={};
+    (bs.elements||[]).forEach(el=>{
+      base[el.id]={g:el.goals_scored||0,a:el.assists||0};
+      loadLive[el.id]=live[el.id]||{g:0,a:0};
+      const f=fnorm(el.first_name+" "+el.second_name), s=fnorm(el.second_name), w=fnorm(el.web_name);
+      if(f){ full[f]=(f in full)?null:el.id; }
+      if(s){ sur[s]=(s in sur)?null:el.id; }
+      if(w){ web[w]=(w in web)?null:el.id; }
+    });
+    fpl={full,sur,web,base,loadLive,now:JSON.parse(JSON.stringify(loadLive)),gw};
+    return fpl;
+  })();
+  try{ return await fplLoading; } finally{ fplLoading=null; }
+}
+function fplMatch(name){ if(!fpl)return null; const n=fnorm(name); if(fpl.full[n]!=null)return fpl.full[n]; if(fpl.web[n]!=null)return fpl.web[n]; const pr=n.split(" "); const last=pr[pr.length-1]; if(fpl.web[last]!=null)return fpl.web[last]; if(fpl.sur[last]!=null)return fpl.sur[last]; const first=pr[0]; const two=pr.length>1?first+" "+last:null; if(two&&fpl.full[two]!=null)return fpl.full[two]; return null; }
+async function refreshFPLlive(){ if(!fpl)return; try{ const lv=await fplApi(`/event/${fpl.gw}/live/`); const now={}; (lv.elements||[]).forEach(x=>{now[x.id]={g:(x.stats&&x.stats.goals_scored)||0,a:(x.stats&&x.stats.assists)||0};}); fpl.now=now; }catch(e){} }
+function fplGA(id){ if(!fpl||id==null)return null; const b=fpl.base[id]||{g:0,a:0}, l0=fpl.loadLive[id]||{g:0,a:0}, ln=fpl.now[id]||{g:0,a:0}; return {g:b.g+(ln.g-l0.g), a:b.a+(ln.a-l0.a), gwG:ln.g, gwA:ln.a}; }
+async function ensureFPL(){ if(state.league!=="eng.1")return; try{ await loadFPL(); }catch(e){ return; } ["home","away"].forEach(s=>{const S=state.sides[s]; if(S)S.players.forEach(p=>{ if(p.fplId===undefined)p.fplId=fplMatch(p.name); });}); }
+
 async function teamsFor(code){
   if(teamCache[code])return teamCache[code];
   const d=await jget(`https://site.api.espn.com/apis/v2/sports/soccer/${code}/standings`);
@@ -255,11 +297,15 @@ function renderSelected(side){
   const chosen=S.players.filter(p=>S.selected.has(p.jersey)).sort((a,b)=>a.jerseyN-b.jerseyN);
   const cnt=$("#cnt-"+side); if(cnt)cnt.textContent=S.selected.size;
   if(!chosen.length){ box.innerHTML=`<div class="empty">Tap a shirt number above and the player appears here.</div>`; return; }
-  const rows=chosen.map(p=>{const lg=(state.liveMatchOn&&state.liveGoals[p.id])||0; return `<tr class="${p.jersey===S.lastPick?"hl":""}"><td class="n jr">${esc(p.jersey)}</td><td class="nm">${esc(p.name)}</td><td class="n" style="color:var(--ink-3)">${esc(p.pos)}</td><td class="r">${esc(p.age)}</td><td class="r gl ${lg?"lit":""}">${effGoals(p)}${lg?`<span class="gspark">+${lg}</span>`:""}</td><td class="r" style="color:var(--ink-2)">${esc(p.assists||0)}</td></tr>`;}).join("");
+  const rows=chosen.map(p=>{const lg=liveGN(p), la=liveAN(p); return `<tr class="${p.jersey===S.lastPick?"hl":""}"><td class="n jr">${esc(p.jersey)}</td><td class="nm">${esc(p.name)}</td><td class="n" style="color:var(--ink-3)">${esc(p.pos)}</td><td class="r">${esc(p.age)}</td><td class="r gl ${lg?"lit":""}">${effGoals(p)}${lg?`<span class="gspark">+${lg}</span>`:""}</td><td class="r" style="color:${la?"var(--live)":"var(--ink-2)"}">${effAssists(p)}${la?`<span class="gspark">+${la}</span>`:""}</td></tr>`;}).join("");
   box.innerHTML=`<table><thead><tr><th class="n">#</th><th>Player</th><th class="n">Pos</th><th class="r">Age</th><th class="r">Gls</th><th class="r">Ast</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
-function effGoals(p){ return (p.goals||0) + ((state.liveMatchOn && state.liveGoals[p.id])||0); }
+const plFPL=p=>state.league==="eng.1"&&p&&p.fplId!=null?fplGA(p.fplId):null;
+function effGoals(p){ const f=plFPL(p); if(f)return f.g; return (p.goals||0)+((state.liveMatchOn&&state.liveGoals[p.id])||0); }
+function effAssists(p){ const f=plFPL(p); if(f)return f.a; return p.assists||0; }
+function liveGN(p){ if(!state.liveMatchOn)return 0; const f=plFPL(p); if(f)return f.gwG; return (state.liveGoals[p.id])||0; }
+function liveAN(p){ if(!state.liveMatchOn)return 0; const f=plFPL(p); return f?f.gwA:0; }
 function computeLiveGoals(){
   const home=state.sides.home, away=state.sides.away; const map={};
   if(!home&&!away) return {map, live:false};
@@ -289,6 +335,7 @@ async function refreshLive(schedule){
   try{ const d=await jget(`https://site.api.espn.com/apis/site/v2/sports/soccer/${state.league}/scoreboard?dates=${ymd(new Date())}`); scoreboardCache[state.league]=d.events||[]; }catch(e){}
   const {map,live}=computeLiveGoals();
   state.liveGoals=map; state.liveMatchOn=live;
+  if(state.league==="eng.1"){ await ensureFPL(); if(fpl) await refreshFPLlive(); }
   renderScorers(); renderSelected("home"); renderSelected("away");
   if(live&&schedule) scoreTimer=setTimeout(()=>refreshLive(true),30000);
 }
@@ -298,16 +345,17 @@ function renderScorers(){
   const sides=["home","away"].map(s=>state.sides[s]).filter(Boolean);
   const liveTag=state.liveMatchOn?`<span class="live-tag"><span class="lv"></span>live</span>`:"";
   if(!sides.length){ panel.innerHTML=`<div class="p-head"><span class="p-name" style="color:var(--ink-3);font-weight:400">⚽ Goals</span></div><div class="empty">Pick teams to see their scorers (leader on top).</div>`; return; }
+  const astLiveTag=(state.liveMatchOn&&state.league==="eng.1")?liveTag:"";
   const goalRows=[];
-  sides.forEach(S=>S.players.forEach(p=>{ const eg=effGoals(p); if(eg>0) goalRows.push({name:p.name, val:eg, live:(state.liveMatchOn&&state.liveGoals[p.id])||0, age:p.age, club:S.meta.name}); }));
+  sides.forEach(S=>S.players.forEach(p=>{ const v=effGoals(p); if(v>0) goalRows.push({name:p.name, val:v, live:liveGN(p), age:p.age, club:S.meta.name}); }));
   goalRows.sort((a,b)=>b.val-a.val||b.live-a.live||a.name.localeCompare(b.name));
   const astRows=[];
-  sides.forEach(S=>S.players.forEach(p=>{ if((p.assists||0)>0) astRows.push({name:p.name, val:p.assists, live:0, age:p.age, club:S.meta.name}); }));
-  astRows.sort((a,b)=>b.val-a.val||a.name.localeCompare(b.name));
+  sides.forEach(S=>S.players.forEach(p=>{ const v=effAssists(p); if(v>0) astRows.push({name:p.name, val:v, live:liveAN(p), age:p.age, club:S.meta.name}); }));
+  astRows.sort((a,b)=>b.val-a.val||b.live-a.live||a.name.localeCompare(b.name));
   const tbl=(rows,col)=> rows.length?`<div class="sel"><table><thead><tr><th class="n">${col}</th><th>Player</th><th>Club</th><th class="r">Age</th></tr></thead><tbody>${rows.map((p,i)=>`<tr class="${i===0?"lead":""}"><td class="n jr ${p.live?"lit":""}" style="font-size:16px">${p.val}</td><td class="nm">${esc(p.name)}${p.live?`<span class="gspark">+${p.live}</span>`:""}${i===0?' <span class="ld">LEADER</span>':""}</td><td style="color:var(--ink-2)">${esc(p.club)}</td><td class="r" style="color:var(--ink-3)">${esc(p.age)}</td></tr>`).join("")}</tbody></table></div>`:`<div class="empty">None yet for these teams.</div>`;
   panel.innerHTML=
     `<div class="p-head"><span class="p-name">⚽ Goals${liveTag}</span><span class="p-count">${goalRows.length}</span></div>`+tbl(goalRows,"Gls")+
-    `<div class="p-head" style="border-top:1px solid var(--line)"><span class="p-name">🅰️ Assists</span><span class="p-count">${astRows.length}</span></div>`+tbl(astRows,"Ast");
+    `<div class="p-head" style="border-top:1px solid var(--line)"><span class="p-name">🅰️ Assists${astLiveTag}</span><span class="p-count">${astRows.length}</span></div>`+tbl(astRows,"Ast");
 }
 
 function toggleShirt(side,jersey){
