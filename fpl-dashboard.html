@@ -140,7 +140,7 @@ tbody tr:hover { background: var(--bg-inset); }
 .mgr-players { display: flex; flex-wrap: wrap; gap: 6px; }
 .mgr-pl { border: 1px solid var(--line); background: var(--bg); padding: 5px 9px; font-size: 12px; display: flex; align-items: center; gap: 6px; }
 .mgr-pl .mp-pts { font-weight: 700; color: var(--ink-muted); min-width: 14px; text-align: right; }
-.mgr-pl.cap { border-color: var(--accent); background: var(--accent-soft); }
+.mgr-pl.iscap { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
 .mgr-pl .mp-c { font-size: 9px; font-weight: 700; color: var(--accent); }
 .mgr-bench { border-top: 1px dashed var(--line-strong); margin-top: 10px; padding-top: 9px; }
 .mgr-bench .mgr-pl { opacity: .72; }
@@ -2642,7 +2642,7 @@ function showMgrTeam(entry) {
     if (pk.position <= 11) xi[e.element_type].push(o); else bench.push(o);
   });
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const plHtml = p => `<div class="mgr-pl ${p.cap ? 'cap' : ''}"><span>${esc(p.name)}</span><span style="color:var(--ink-faint);font-size:10px">${esc(p.club)}</span>${p.cap ? '<span class="mp-c">C</span>' : p.vc ? '<span class="mp-c" style="color:var(--ink-muted)">V</span>' : ''}<span class="mp-pts">${p.pts}</span></div>`;
+  const plHtml = p => `<div class="mgr-pl ${p.cap ? 'iscap' : ''}"><span>${esc(p.name)}</span><span style="color:var(--ink-faint);font-size:10px">${esc(p.club)}</span>${p.cap ? '<span class="mp-c">C</span>' : p.vc ? '<span class="mp-c" style="color:var(--ink-muted)">V</span>' : ''}<span class="mp-pts">${p.pts}</span></div>`;
   let body = '';
   [1, 2, 3, 4].forEach(t => { if (xi[t].length) body += `<div class="mgr-posrow"><div class="mgr-poslabel">${posLabel[t]}</div><div class="mgr-players">${xi[t].map(plHtml).join('')}</div></div>`; });
   if (bench.length) body += `<div class="mgr-bench"><div class="mgr-poslabel">Bench</div><div class="mgr-players">${bench.map(plHtml).join('')}</div></div>`;
