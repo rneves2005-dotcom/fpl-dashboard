@@ -122,6 +122,28 @@ tbody tr:hover { background: var(--bg-inset); }
 .fix-live { background: var(--warn-soft); color: var(--warn); border-color: var(--warn); }
 .fix-pending { background: var(--bg-card); color: var(--ink); border-color: var(--line-strong); }
 
+/* clickable manager name + team modal */
+.lgname { cursor: pointer; }
+.lgname:hover { color: var(--accent); text-decoration: underline; }
+.mgr-overlay { position: fixed; inset: 0; background: rgba(26,24,21,.55); display: flex; align-items: flex-start; justify-content: center; padding: 40px 16px; z-index: 1000; overflow-y: auto; }
+.mgr-modal { background: var(--bg-card); border: 1px solid var(--line-strong); max-width: 580px; width: 100%; box-shadow: 0 12px 44px rgba(0,0,0,.28); }
+.mgr-head { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line-strong); background: var(--bg-inset); }
+.mgr-head .mh-name { font-weight: 700; font-size: 15px; }
+.mgr-head .mh-team { color: var(--ink-muted); font-size: 12px; }
+.mgr-head .mh-gw { margin-left: auto; text-align: right; }
+.mgr-head .mh-gw b { font-size: 19px; }
+.mgr-close { cursor: pointer; border: 1px solid var(--line-strong); background: var(--bg); padding: 4px 9px; font-size: 13px; border-radius: 2px; }
+.mgr-close:hover { background: var(--ink); color: var(--bg); }
+.mgr-body { padding: 12px 16px 16px; }
+.mgr-posrow { margin-bottom: 9px; }
+.mgr-poslabel { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; }
+.mgr-players { display: flex; flex-wrap: wrap; gap: 6px; }
+.mgr-pl { border: 1px solid var(--line); background: var(--bg); padding: 5px 9px; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+.mgr-pl .mp-pts { font-weight: 700; color: var(--ink-muted); min-width: 14px; text-align: right; }
+.mgr-pl.cap { border-color: var(--accent); background: var(--accent-soft); }
+.mgr-pl .mp-c { font-size: 9px; font-weight: 700; color: var(--accent); }
+.mgr-bench { border-top: 1px dashed var(--line-strong); margin-top: 10px; padding-top: 9px; }
+.mgr-bench .mgr-pl { opacity: .72; }
 /* PL standings + top scorers tables */
 .stand-team { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
 .stand-badge { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
@@ -2570,6 +2592,10 @@ async function renderMiniLeague() {
     return { ...r, gwLive: pts, chip, capId, vcId, tf: eh.event_transfers || 0, hits: eh.event_transfers_cost || 0 };
   });
 
+  // Store full picks per manager for the click-to-view-team modal
+  STATE.leaguePicks = {};
+  withLive.forEach((r, i) => { if (picksData[i]) STATE.leaguePicks[r.entry] = { picks: picksData[i], name: r.player_name, team: r.entry_name, gwLive: r.gwLive, chip: r.chip }; });
+
   // Sort by projected total
   const sorted = [...withLive].sort((a,b) => (b.total - b.event_total + b.gwLive) - (a.total - a.event_total + a.gwLive));
 
@@ -2581,7 +2607,7 @@ async function renderMiniLeague() {
     const hitsCell = r.hits > 0 ? `<span style="color:var(--bad);font-weight:700">-${r.hits}</span>` : '<span style="color:var(--ink-faint)">0</span>';
     return `<tr class="${isYou ? 'row-you' : ''}">
       <td class="c" style="color:var(--ink-muted)">${projRank}</td>
-      <td><div class="pname">${r.player_name}${isYou ? ' · YOU' : ''}</div><div class="pmeta">${r.entry_name}</div></td>
+      <td><div class="pname lgname" onclick="showMgrTeam(${r.entry})" title="View team">${r.player_name}${isYou ? ' · YOU' : ''}</div><div class="pmeta">${r.entry_name}</div></td>
       <td class="c" style="font-weight:800">${r.gwLive}</td>
       <td class="c" style="color:var(--ink-muted)">${projTotal}</td>
       <td class="c">${hitsCell}</td>
@@ -2599,6 +2625,38 @@ async function renderMiniLeague() {
       </tr></thead>
       <tbody>${rows}</tbody>
     </table></div>`;
+}
+
+// ===== Click a manager's name -> view their team =====
+function closeMgrTeam() { const o = document.getElementById('mgr-overlay'); if (o) o.remove(); }
+function showMgrTeam(entry) {
+  const d = STATE.leaguePicks && STATE.leaguePicks[entry];
+  if (!d || !d.picks || !d.picks.picks) return;
+  const liveMap = {}; (STATE.live.elements || []).forEach(e => liveMap[e.id] = e.stats.total_points || 0);
+  const teamShort = id => { const e = STATE.elMap[id]; if (!e) return ''; const t = STATE.bootstrap.teams.find(x => x.id === e.team); return t ? t.short_name : ''; };
+  const posLabel = ['', 'GK', 'DEF', 'MID', 'FWD'];
+  const xi = { 1: [], 2: [], 3: [], 4: [] }, bench = [];
+  d.picks.picks.slice().sort((a, b) => a.position - b.position).forEach(pk => {
+    const e = STATE.elMap[pk.element]; if (!e) return;
+    const o = { name: e.web_name, club: teamShort(pk.element), pts: liveMap[pk.element] || 0, cap: pk.is_captain, vc: pk.is_vice_captain };
+    if (pk.position <= 11) xi[e.element_type].push(o); else bench.push(o);
+  });
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const plHtml = p => `<div class="mgr-pl ${p.cap ? 'cap' : ''}"><span>${esc(p.name)}</span><span style="color:var(--ink-faint);font-size:10px">${esc(p.club)}</span>${p.cap ? '<span class="mp-c">C</span>' : p.vc ? '<span class="mp-c" style="color:var(--ink-muted)">V</span>' : ''}<span class="mp-pts">${p.pts}</span></div>`;
+  let body = '';
+  [1, 2, 3, 4].forEach(t => { if (xi[t].length) body += `<div class="mgr-posrow"><div class="mgr-poslabel">${posLabel[t]}</div><div class="mgr-players">${xi[t].map(plHtml).join('')}</div></div>`; });
+  if (bench.length) body += `<div class="mgr-bench"><div class="mgr-poslabel">Bench</div><div class="mgr-players">${bench.map(plHtml).join('')}</div></div>`;
+  const chipTxt = d.chip ? ' · ' + chipLabel(d.chip) : '';
+  const html = `<div class="mgr-overlay" id="mgr-overlay" onclick="if(event.target===this)closeMgrTeam()">
+    <div class="mgr-modal">
+      <div class="mgr-head">
+        <div><div class="mh-name">${esc(d.name)}</div><div class="mh-team">${esc(d.team)}${chipTxt}</div></div>
+        <div class="mh-gw"><b>${d.gwLive}</b><div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)">GW pts</div></div>
+        <button class="mgr-close" onclick="closeMgrTeam()">&times;</button>
+      </div>
+      <div class="mgr-body">${body}</div>
+    </div></div>`;
+  document.body.insertAdjacentHTML('beforeend', html);
 }
 
 // ===== Real PL table — computed from finished fixtures =====
