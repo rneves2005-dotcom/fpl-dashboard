@@ -144,6 +144,36 @@ tbody tr:hover { background: var(--bg-inset); }
 .mgr-pl .mp-c { font-size: 9px; font-weight: 700; color: var(--accent); }
 .mgr-bench { border-top: 1px dashed var(--line-strong); margin-top: 10px; padding-top: 9px; }
 .mgr-bench .mgr-pl { opacity: .72; }
+.mgr-pl.clk { cursor: pointer; }
+.mgr-pl.clk:hover { border-color: var(--line-strong); }
+/* player profile modal */
+.pp-modal { max-width: 640px; }
+.pp-head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--line-strong); background: var(--bg-inset); }
+.pp-badge { width: 42px; height: 42px; object-fit: contain; flex: none; }
+.pp-name { font-weight: 800; font-size: 18px; }
+.pp-sub { color: var(--ink-muted); font-size: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pp-tag { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 7px; border-radius: 10px; }
+.pp-tag.rise { background: var(--good-soft); color: var(--good); }
+.pp-tag.fall { background: var(--bad-soft); color: var(--bad); }
+.pp-tag.hold { background: var(--bg-card); color: var(--ink-muted); border: 1px solid var(--line); }
+.pp-tiles { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--line); border-bottom: 1px solid var(--line-strong); }
+.pp-tile { background: var(--bg-card); padding: 9px 3px; text-align: center; }
+.pp-tile .ppt-n { font-weight: 800; font-size: 15px; }
+.pp-tile .ppt-l { font-size: 8px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin-top: 2px; }
+.pp-body { padding: 13px 16px 16px; }
+.pp-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 560px) { .pp-row2 { grid-template-columns: 1fr; } .pp-tiles { grid-template-columns: repeat(4, 1fr); } }
+.pp-sectlabel { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 6px; }
+.pp-fxrow { display: flex; flex-wrap: wrap; gap: 5px; }
+.pp-fx { text-align: center; }
+.ppf-gw { font-size: 8px; color: var(--ink-faint); margin-bottom: 2px; }
+.ppf-chip { font-size: 11px; font-weight: 700; padding: 4px 7px; border-radius: 3px; background: var(--bg-inset); display: flex; align-items: center; gap: 5px; justify-content: center; }
+.pp-ptschip b { color: var(--accent); margin-left: 2px; }
+.pp-hist { font-size: 11px; width: 100%; margin-top: 2px; }
+.pp-hist th { font-size: 8px; }
+.pp-hist td { padding: 5px 7px; border-bottom: 1px solid var(--line); }
+.pp-hist td.c, .pp-hist th.c { text-align: center; }
+.pp-none { color: var(--ink-faint); font-size: 12px; }
 /* PL standings + top scorers tables */
 .stand-team { display: inline-flex; align-items: center; gap: 7px; min-width: 0; }
 .stand-badge { width: 18px; height: 18px; object-fit: contain; flex-shrink: 0; }
@@ -2096,7 +2126,7 @@ function renderPitch() {
     const nameDisplay = el.web_name.length > 10 ? el.web_name.substring(0, 9) + '…' : el.web_name;
     const multDisplay = pk.multiplier > 1 && pk.position <= 11 ? `<span class="pt-mult">×${pk.multiplier}</span>` : '';
 
-    return `<div class="player-card">
+    return `<div class="player-card" onclick="showPlayerProfile(${el.id})" style="cursor:pointer" title="View profile">
       ${leftMarker}${rightMarker}${liveDotHtml}
       <div class="shirt">
         <img src="${kitUrl}" alt="${team.short} kit" loading="lazy"
@@ -2638,11 +2668,11 @@ function showMgrTeam(entry) {
   const xi = { 1: [], 2: [], 3: [], 4: [] }, bench = [];
   d.picks.picks.slice().sort((a, b) => a.position - b.position).forEach(pk => {
     const e = STATE.elMap[pk.element]; if (!e) return;
-    const o = { name: e.web_name, club: teamShort(pk.element), pts: liveMap[pk.element] || 0, cap: pk.is_captain, vc: pk.is_vice_captain };
+    const o = { name: e.web_name, club: teamShort(pk.element), pts: liveMap[pk.element] || 0, cap: pk.is_captain, vc: pk.is_vice_captain, elId: pk.element };
     if (pk.position <= 11) xi[e.element_type].push(o); else bench.push(o);
   });
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const plHtml = p => `<div class="mgr-pl ${p.cap ? 'iscap' : ''}"><span>${esc(p.name)}</span><span style="color:var(--ink-faint);font-size:10px">${esc(p.club)}</span>${p.cap ? '<span class="mp-c">C</span>' : p.vc ? '<span class="mp-c" style="color:var(--ink-muted)">V</span>' : ''}<span class="mp-pts">${p.pts}</span></div>`;
+  const plHtml = p => `<div class="mgr-pl clk ${p.cap ? 'iscap' : ''}" onclick="showPlayerProfile(${p.elId})" title="View profile"><span>${esc(p.name)}</span><span style="color:var(--ink-faint);font-size:10px">${esc(p.club)}</span>${p.cap ? '<span class="mp-c">C</span>' : p.vc ? '<span class="mp-c" style="color:var(--ink-muted)">V</span>' : ''}<span class="mp-pts">${p.pts}</span></div>`;
   let body = '';
   [1, 2, 3, 4].forEach(t => { if (xi[t].length) body += `<div class="mgr-posrow"><div class="mgr-poslabel">${posLabel[t]}</div><div class="mgr-players">${xi[t].map(plHtml).join('')}</div></div>`; });
   if (bench.length) body += `<div class="mgr-bench"><div class="mgr-poslabel">Bench</div><div class="mgr-players">${bench.map(plHtml).join('')}</div></div>`;
@@ -2657,6 +2687,50 @@ function showMgrTeam(entry) {
       <div class="mgr-body">${body}</div>
     </div></div>`;
   document.body.insertAdjacentHTML('beforeend', html);
+}
+
+// ===== Click a player -> full profile (form, fixtures w/ FDR, season history) =====
+const PP_TIER = { 1: ['#1f9d57', '#fff'], 2: ['#7fc06a', '#16330b'], 3: ['#c3c7cd', '#33383f'], 4: ['#eb8a53', '#2e1405'], 5: ['#cc3b3b', '#fff'] };
+function closePlayerProfile() { const o = document.getElementById('pp-overlay'); if (o) o.remove(); }
+async function showPlayerProfile(elId) {
+  const e = STATE.elMap[elId]; if (!e) return;
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const tm = STATE.teamMap[e.team] || {};
+  const posLabel = ['', 'Goalkeeper', 'Defender', 'Midfielder', 'Forward'][e.element_type];
+  const net = (e.transfers_in_event || 0) - (e.transfers_out_event || 0);
+  let priceTag;
+  if (e.cost_change_event > 0) priceTag = '<span class="pp-tag rise">Risen this GW</span>';
+  else if (e.cost_change_event < 0) priceTag = '<span class="pp-tag fall">Fallen this GW</span>';
+  else if (net > 2000) priceTag = '<span class="pp-tag rise">Likely to rise</span>';
+  else if (net < -2000) priceTag = '<span class="pp-tag fall">Likely to fall</span>';
+  else priceTag = '<span class="pp-tag hold">Stable</span>';
+  const badge = (typeof getBadgeUrl === 'function' && tm.short) ? getBadgeUrl(tm.short, 50) : (tm.code ? `https://resources.premierleague.com/premierleague/badges/50/t${tm.code}.png` : '');
+  const tiles = [['Form', e.form], ['Pts/Match', e.points_per_game], ['GW', e.event_points], ['Total', e.total_points], ['Bonus', e.bonus], ['ICT', e.ict_index], ['Sel%', e.selected_by_percent + '%']];
+  closePlayerProfile();
+  document.body.insertAdjacentHTML('beforeend', `<div class="mgr-overlay" id="pp-overlay" onclick="if(event.target===this)closePlayerProfile()">
+    <div class="mgr-modal pp-modal">
+      <div class="pp-head">
+        ${badge ? `<img class="pp-badge" src="${badge}" onerror="this.style.display='none'">` : ''}
+        <div><div class="pp-name">${esc(e.web_name)}</div><div class="pp-sub">${posLabel} · ${esc(tm.name || tm.short || '')} · £${(e.now_cost / 10).toFixed(1)}m ${priceTag}</div></div>
+        <button class="mgr-close" style="margin-left:auto" onclick="closePlayerProfile()">&times;</button>
+      </div>
+      <div class="pp-tiles">${tiles.map(t => `<div class="pp-tile"><div class="ppt-n">${t[1]}</div><div class="ppt-l">${t[0]}</div></div>`).join('')}</div>
+      <div class="pp-body" id="pp-body"><div class="loading">Loading form &amp; fixtures…</div></div>
+    </div></div>`);
+  let sum = null;
+  try { sum = await fpl('/element-summary/' + elId + '/'); } catch (err) {}
+  const bodyEl = document.getElementById('pp-body'); if (!bodyEl) return;
+  if (!sum) { bodyEl.innerHTML = '<div class="pp-none">Couldn’t load match details.</div>'; return; }
+  const oppShort = id => (STATE.teamMap[id] && STATE.teamMap[id].short) || '?';
+  const last5 = (sum.history || []).slice(-5).map(h => `<div class="pp-fx"><div class="ppf-gw">GW${h.round}</div><div class="ppf-chip pp-ptschip">${oppShort(h.opponent_team)}${h.was_home ? 'H' : 'A'}<b>${h.total_points}</b></div></div>`).join('');
+  const next5 = (sum.fixtures || []).slice(0, 5).map(f => { const opp = oppShort(f.is_home ? f.team_a : f.team_h); const [bg, fg] = PP_TIER[f.difficulty] || PP_TIER[3]; return `<div class="pp-fx"><div class="ppf-gw">GW${f.event}</div><div class="ppf-chip" style="background:${bg};color:${fg}">${opp} ${f.is_home ? 'H' : 'A'}</div></div>`; }).join('');
+  const rows = (sum.history || []).slice(-8).reverse().map(h => `<tr><td>${h.round}</td><td>${oppShort(h.opponent_team)} ${h.was_home ? '(H)' : '(A)'}</td><td class="c"><b>${h.total_points}</b></td><td class="c">${h.minutes}</td><td class="c">${h.goals_scored}</td><td class="c">${h.assists}</td><td class="c">${h.expected_goal_involvements || '0.0'}</td><td class="c">${h.bonus}</td></tr>`).join('');
+  bodyEl.innerHTML = `<div class="pp-row2">
+      <div><div class="pp-sectlabel">Last 5</div><div class="pp-fxrow">${last5 || '<span class="pp-none">—</span>'}</div></div>
+      <div><div class="pp-sectlabel">Next 5</div><div class="pp-fxrow">${next5 || '<span class="pp-none">—</span>'}</div></div>
+    </div>
+    <div class="pp-sectlabel" style="margin-top:13px">This season (recent)</div>
+    <div style="overflow-x:auto"><table class="pp-hist"><thead><tr><th>GW</th><th>Opp</th><th class="c">Pts</th><th class="c">Min</th><th class="c">G</th><th class="c">A</th><th class="c">xGI</th><th class="c">Bns</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
 // ===== Real PL table — computed from finished fixtures =====
