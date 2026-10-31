@@ -85,6 +85,8 @@ table.grid{border-collapse:separate; border-spacing:0; width:max-content; min-wi
 .grid thead th.col.fam-euro{border-top-color:var(--fam-euro); background:color-mix(in srgb,var(--fam-euro-bg) 100%,var(--surface-2))}
 .grid thead th.col.fam-cup{border-top-color:var(--fam-cup); background:color-mix(in srgb,var(--fam-cup-bg) 100%,var(--surface-2))}
 .grid thead th .comp{display:block; font-size:10px; font-weight:800; letter-spacing:.04em}
+.grid thead th.col.man .comp{text-decoration:underline dotted; text-underline-offset:2px}
+.grid thead th.col.man .comp::after{content:" ✎"; font-size:8px}
 .grid thead th.fam-pl .comp{color:var(--fam-pl)} .grid thead th.fam-euro .comp{color:var(--fam-euro)} .grid thead th.fam-cup .comp{color:var(--fam-cup)}
 .grid thead th .opp{display:block; font-size:11.5px; color:var(--ink-2); font-weight:700; letter-spacing:0}
 .grid thead th .dt{display:block; font-size:9px; color:var(--ink-3); font-weight:600}
@@ -220,6 +222,7 @@ const norm=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase(
 const lastTok=s=>{const p=norm(s).split(" ");return p[p.length-1]||"";};
 
 async function load(){
+  try{ MANUAL=await fetch("manual_games.json",{cache:"no-store"}).then(r=>r.ok?r.json():[]); }catch(e){ MANUAL=[]; }
   const bs=await fplApi("/bootstrap-static/");
   const teams={}; (bs.teams||[]).forEach(t=>teams[t.id]={id:t.id,short:t.short_name,name:t.name,code:t.code,
     badge:`https://resources.premierleague.com/premierleague/badges/50/t${t.code}.png`, espn:ESPN_ID[t.short_name]||null});
@@ -320,6 +323,34 @@ const EXTRA={
   ]}
 };
 const espnTeamCache={};
+let MANUAL=[]; // hand-entered games for competitions ESPN doesn't cover (e.g. Portuguese Taça da Liga)
+
+/* match a hand-typed name to an existing player row (FPL web_name or ESPN display name) */
+function nameKeys(p){ const full=norm(p.full||p.name||""); return {full, web:norm(p.name||""), last:lastTok(p.full||p.name||""), tokens:full.split(" ").filter(Boolean)}; }
+function applyManual(teamKey, players){
+  const games=(MANUAL||[]).filter(g=>String(g.team)===String(teamKey));
+  if(!games.length) return null;
+  const idx=players.map(p=>({id:p.id, k:nameKeys(p)}));
+  const findId=nm=>{ const en=norm(nm), el=lastTok(nm);
+    let h=idx.find(x=>x.k.full===en||x.k.web===en); if(h)return h.id;
+    h=idx.find(x=>x.k.web===el||x.k.last===el); if(h)return h.id;
+    let hs=idx.filter(x=>el.length>=4&&x.k.tokens.includes(el)); if(hs.length===1)return hs[0].id;
+    return null;
+  };
+  const cols=[], extra=[], made={};
+  games.forEach(g=>{
+    let gf=g.gf, ga=g.ga;
+    if((gf==null||ga==null)&&g.score){ const m=String(g.score).match(/(\d+)\s*[-:xX]\s*(\d+)/); if(m){gf=+m[1]; ga=+m[2];} }
+    const mins=g.minutes||g.players||{}; const byPid={};
+    Object.keys(mins).forEach(nm=>{ let id=findId(nm);
+      if(id==null){ id="man:"+norm(nm).replace(/ /g,"_"); if(!made[id]){ made[id]=1; extra.push({id, name:nm, full:nm, pos:"—", et:3}); } }
+      byPid[id]={min:(+mins[nm]||0)};
+    });
+    const date=(typeof g.date==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(g.date))?g.date+"T12:00:00":g.date; // noon-local so a date-only value doesn't shift a day across timezones
+    cols.push({date, comp:g.comp||"CUP", family:g.family||"cup", opp:String(g.opp||"—").toUpperCase().slice(0,5), home:!!g.home, gf, ga, byPid, manual:true});
+  });
+  return {cols, players:extra};
+}
 
 function matchFpl(espnName, players){
   const en=norm(espnName), el=lastTok(espnName);
@@ -451,6 +482,12 @@ function render(){
     meta={name:t.name, badge:t.badge};
     allCols=timeline(view.team); basePlayers=DATA.playersByTeam[view.team]; cc=cupCache[view.team];
   }
+  // merge any hand-entered games (competitions ESPN/FPL can't provide)
+  const man=applyManual(view.team, basePlayers);
+  if(man && man.cols.length){
+    allCols=allCols.concat(man.cols).sort((a,b)=>(+new Date(a.date||0))-(+new Date(b.date||0)));
+    basePlayers=basePlayers.concat(man.players);
+  }
   let cols=allCols;
   if(view.comp==="pl") cols=cols.filter(c=>c.family==="pl");
 
@@ -463,7 +500,7 @@ function render(){
     <th class="pl">Player</th><th class="tagc"></th>
     ${cols.map(c=>{const dd=c.date?new Date(c.date):null; const dt=dd?`${String(dd.getDate()).padStart(2,"0")}/${String(dd.getMonth()+1).padStart(2,"0")}`:(c.gw?"GW"+c.gw:"");
       const hasRes=(c.gf!=null&&c.ga!=null); const r=hasRes?(c.gf>c.ga?"w":c.gf<c.ga?"l":"d"):""; const res=hasRes?`<span class="res r-${r}">${c.gf}-${c.ga}</span>`:"";
-      return `<th class="col fam-${c.family}"><span class="comp">${c.comp}</span><span class="opp">${esc(c.opp)}</span><span class="dt">${dt}</span>${res}</th>`;}).join("")}
+      return `<th class="col fam-${c.family}${c.manual?" man":""}"${c.manual?' title="manually entered (ESPN has no feed for this competition)"':""}><span class="comp">${c.comp}</span><span class="opp">${esc(c.opp)}</span><span class="dt">${dt}</span>${res}</th>`;}).join("")}
     <th>Σ′</th><th>St</th><th>${isExtra?"Lg%":"PL%"}</th>
   </tr>`;
 

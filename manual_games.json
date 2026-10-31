@@ -1,0 +1,33 @@
+[
+  {
+    "team": "_schema",
+    "_README": "Hand-entered games for competitions ESPN has NO data feed for (e.g. the Portuguese Taca da Liga / League Cup). One object per game. This _schema stub is ignored by the app. Fields: team = 'scp' for Sporting, or the FPL numeric team id (e.g. 1 = Arsenal). comp = short label shown in the column header (e.g. 'T.LIGA', 'TAÇA'). family = 'cup' | 'euro' | 'pl' (sets the header colour: cups=violet, Europe=blue, league=green). date = 'YYYY-MM-DD'. opp = short opponent code (<=5 chars, e.g. 'MAR'). home = true or false. score = 'GF-GA' from THIS team's point of view, so a 2-0 away win is '2-0'. minutes = { 'Player Name': minutes, ... } for everyone who featured; a player left out = blank cell. Names are matched to existing rows by surname, so 'Rui Silva' or just 'Silva' both work; a name that matches nobody gets its own new row."
+  },
+  {
+    "team": "scp",
+    "comp": "T.LIGA",
+    "family": "cup",
+    "date": "2026-10-27",
+    "opp": "MAR",
+    "home": true,
+    "score": "2-1",
+    "minutes": {
+      "Rui Silva": 90,
+      "Vagiannidis": 90,
+      "Quaresma": 90,
+      "Felicissimo": 90,
+      "Andersen": 90,
+      "Catamo": 90,
+      "Zekri": 73,
+      "Derry": 73,
+      "Pedro Lima": 78,
+      "Simoes": 85,
+      "Ioannidis": 85,
+      "Dias": 17,
+      "Cardoso": 17,
+      "Couto": 12,
+      "Nel": 5,
+      "Justo": 5
+    }
+  }
+]
