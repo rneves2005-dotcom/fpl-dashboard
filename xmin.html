@@ -140,7 +140,7 @@ td.drop{box-shadow:inset 0 0 0 2px var(--live)}
     </span>
     <span class="seg" id="compSeg">
       <button data-comp="all" class="on">All comps</button>
-      <button data-comp="pl">PL only</button>
+      <button data-comp="pl">League only</button>
     </span>
   </div>
 
@@ -154,7 +154,7 @@ td.drop{box-shadow:inset 0 0 0 2px var(--live)}
     <span class="k" style="color:var(--live)">▢ minutes just dropped</span>
   </div>
   <div class="legend">
-    <span class="fam pl"><i></i>Premier League</span>
+    <span class="fam pl"><i></i><span id="flabel">Premier League</span></span>
     <span class="fam euro"><i></i>Europe (CL/EL/ECL)</span>
     <span class="fam cup"><i></i>Domestic cups (FA · EFL)</span>
   </div>
@@ -201,7 +201,8 @@ const CUP_LEAGUES=[
   {path:"uefa.europa",        code:"EL",  family:"euro"},
   {path:"uefa.europa.conf",   code:"ECL", family:"euro"},
   {path:"eng.fa",             code:"FAC", family:"cup"},
-  {path:"eng.league_cup",     code:"EFL", family:"cup"}
+  {path:"eng.league_cup",     code:"EFL", family:"cup"},
+  {path:"eng.charity",        code:"SHLD",family:"cup"}
 ];
 
 let DATA=null;   // {teams, playersByTeam, gws, plStats, plCol, abbrByEspnId}
@@ -253,7 +254,9 @@ async function load(){
 function buildTeamDropdown(){
   const sel=$("#teamSel");
   const list=Object.values(DATA.teams).sort((a,b)=>a.name.localeCompare(b.name));
-  sel.innerHTML=list.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("");
+  const pl=list.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("");
+  const ex=Object.keys(EXTRA).map(k=>`<option value="${k}">${esc(EXTRA[k].name)}</option>`).join("");
+  sel.innerHTML=`<optgroup label="Premier League">${pl}</optgroup>`+(ex?`<optgroup label="Other leagues">${ex}</optgroup>`:"");
 }
 
 /* ---------- cup / Europe minutes for one team (lazy, cached) ---------- */
@@ -278,10 +281,38 @@ function espnMinutes(summary, espnId){
     else if(p.subbedIn) mins=clk.length?Math.max(1,90-clk[0]):1;
     else mins=0;
     const stat=n=>{const s=(p.stats||[]).find(s=>s.name===n); return s?Math.round(s.value):0;};
-    out[id]={min:mins, g:stat("totalGoals"), a:stat("goalAssists"), name:ath.displayName||""};
+    out[id]={min:mins, g:stat("totalGoals"), a:stat("goalAssists"),
+      name:ath.shortName||ath.displayName||"", fullName:ath.displayName||"",
+      pos:(p.position&&p.position.abbreviation)||(ath.position&&ath.position.abbreviation)||""};
   });
   return out;
 }
+
+/* map ESPN soccer position codes -> FPL-style buckets (order matters: GK, MID, DEF, FWD).
+   "SUB"/blank is not a position (ESPN reports it for unused subs) — handled by the caller's vote, guarded here too. */
+function espnPos(abbr){
+  const a=String(abbr||"").toUpperCase();
+  if(!a||a==="SUB"||a==="N/A") return {et:3,pos:"—"};
+  if(a[0]==="G") return {et:1,pos:"GK"};
+  if(/^(DM|CDM|CM|AM|CAM|LM|RM|LCM|RCM|LDM|RDM|MF|M)/.test(a)) return {et:3,pos:"MID"};
+  if(/^(CD|CB|LB|RB|LD|RD|LWB|RWB|WB|FB|SW|D)/.test(a)) return {et:2,pos:"DEF"};
+  if(/^(CF|ST|LW|RW|SS|LF|RF|LS|RS|F|W)/.test(a)) return {et:4,pos:"FWD"};
+  return {et:3,pos:a};
+}
+
+/* non-PL teams the user tracks (fully ESPN-sourced — no FPL backbone) */
+const EXTRA={
+  scp:{espn:2250, name:"Sporting CP", badge:"https://a.espncdn.com/i/teamlogos/soccer/500/2250.png", leagues:[
+    {path:"por.1",            code:"LIGA", family:"pl"},
+    {path:"uefa.champions",   code:"CL",   family:"euro"},
+    {path:"uefa.europa",      code:"EL",   family:"euro"},
+    {path:"uefa.europa.conf", code:"ECL",  family:"euro"},
+    {path:"por.taca.de.portugal", code:"TAÇA", family:"cup"},
+    {path:"por.taca.da.liga",     code:"T.LIGA", family:"cup"},
+    {path:"por.super_cup",        code:"S.TAÇA", family:"cup"}
+  ]}
+};
+const espnTeamCache={};
 
 function matchFpl(espnName, players){
   const en=norm(espnName), el=lastTok(espnName);
@@ -322,6 +353,41 @@ async function loadCups(teamId){
   if(String(view.team)===String(teamId)) render();
 }
 function setCupSpin(on){ const el=$("#cupspin"); if(el) el.innerHTML = on?'<span class="spin"></span>loading cups & Europe…':''; }
+
+/* ---------- full timeline for a non-PL (ESPN-native) team ---------- */
+async function loadEspnTeam(key){
+  if(espnTeamCache[key]){ if(view.team===key) render(); return; }
+  const cfg=EXTRA[key]; if(!cfg){ espnTeamCache[key]={players:[],cols:[]}; return; }
+  render(); // show loading card
+  const cols=[]; const pmap={}; const seen={};
+  for(const lg of cfg.leagues){
+    const sched=await espn(`${lg.path}/teams/${cfg.espn}/schedule`);
+    const evs=(sched&&sched.events||[]).filter(e=>{const c=(e.competitions||[{}])[0]; return c.status&&c.status.type&&c.status.type.completed;});
+    for(const e of evs){
+      const comp=(e.competitions||[{}])[0]; const cs=comp.competitors||[];
+      const opp=cs.find(c=>String(c.team&&c.team.id)!==String(cfg.espn));
+      const me=cs.find(c=>String(c.team&&c.team.id)===String(cfg.espn));
+      const home=me&&me.homeAway==="home";
+      const oppShort=((opp&&opp.team&&(opp.team.abbreviation||opp.team.shortDisplayName||opp.team.displayName))||"—").toUpperCase().slice(0,4);
+      const sum=await espn(`${lg.path}/summary?event=${e.id}`); if(!sum)continue;
+      const mins=espnMinutes(sum,cfg.espn); if(!mins)continue;
+      const byPid={};
+      Object.keys(mins).forEach(id=>{ const m=mins[id]; byPid[id]={min:m.min,g:m.g,a:m.a};
+        if(m.min>0) seen[id]=true;
+        if(!pmap[id]) pmap[id]={id, name:m.name, full:m.fullName, votes:{}};
+        const ab=String(m.pos||"").toUpperCase();
+        if(ab && ab!=="SUB" && ab!=="N/A") pmap[id].votes[ab]=(pmap[id].votes[ab]||0)+1;
+      });
+      cols.push({date:e.date, comp:lg.code, family:lg.family, opp:oppShort, home, byPid});
+    }
+  }
+  cols.sort((a,b)=>(+new Date(a.date))-(+new Date(b.date)));
+  // resolve each player's position from the most frequent real (non-SUB) code they were listed at
+  Object.values(pmap).forEach(p=>{ let best="",n=-1; for(const k in p.votes){ if(p.votes[k]>n){n=p.votes[k]; best=k;} } const pp=espnPos(best); p.pos=pp.pos; p.et=pp.et; delete p.votes; });
+  const players=Object.values(pmap).filter(p=>seen[p.id]);
+  espnTeamCache[key]={players, cols};
+  if(view.team===key) render();
+}
 
 /* ---------- build one date-ordered timeline for a team ---------- */
 function timeline(teamId){
@@ -365,12 +431,23 @@ function cellHtml(c, d){
 }
 
 function render(){
-  const out=$("#out"); const t=DATA.teams[view.team]; if(!t){out.innerHTML="";return;}
-  let cols=timeline(view.team);
+  const out=$("#out");
+  const extra=EXTRA[view.team]; const isExtra=!!extra;
+  let meta, allCols, basePlayers, cc=null;
+  if(isExtra){
+    meta={name:extra.name, badge:extra.badge};
+    const cache=espnTeamCache[view.team];
+    if(!cache){ out.innerHTML=`<div class="card"><div class="ldg"><span class="spin"></span>Loading ${esc(extra.name)} — league, Europe &amp; cups from ESPN…</div></div>`; return; }
+    allCols=cache.cols; basePlayers=cache.players;
+  } else {
+    const t=DATA.teams[view.team]; if(!t){out.innerHTML="";return;}
+    meta={name:t.name, badge:t.badge};
+    allCols=timeline(view.team); basePlayers=DATA.playersByTeam[view.team]; cc=cupCache[view.team];
+  }
+  let cols=allCols;
   if(view.comp==="pl") cols=cols.filter(c=>c.family==="pl");
-  const cc=cupCache[view.team];
 
-  let players=DATA.playersByTeam[view.team].map(p=>({...p, st:playerStats(p.id,p.et,cols)}));
+  let players=basePlayers.map(p=>({...p, st:playerStats(p.id,p.et,cols)}));
   if(view.filt==="reg") players=players.filter(p=>p.st.plPct>=40||p.st.total>=180);
   if(view.sort==="pos") players.sort((a,b)=>a.et-b.et||b.st.total-a.st.total);
   else players.sort((a,b)=>b.st.total-a.st.total);
@@ -379,7 +456,7 @@ function render(){
     <th class="pl">Player</th><th class="tagc"></th>
     ${cols.map(c=>{const dd=c.date?new Date(c.date):null; const dt=dd?`${String(dd.getDate()).padStart(2,"0")}/${String(dd.getMonth()+1).padStart(2,"0")}`:(c.gw?"GW"+c.gw:"");
       return `<th class="col fam-${c.family}"><span class="comp">${c.comp}</span><span class="opp">${esc(c.opp)}</span><span class="dt">${dt}</span></th>`;}).join("")}
-    <th>Σ′</th><th>St</th><th>PL%</th>
+    <th>Σ′</th><th>St</th><th>${isExtra?"Lg%":"PL%"}</th>
   </tr>`;
 
   let lastEt=null;
@@ -388,9 +465,8 @@ function render(){
     const sep=(view.sort==="pos"&&lastEt!==null&&p.et!==lastEt)?"rowsep":""; lastEt=p.et;
     const lastPlIdx=(()=>{ let idx=-1; cols.forEach((c,i)=>{if(c.family==="pl")idx=i;}); return idx; })();
     const cells=cols.map((c,i)=>{ let d=c.byPid[p.id];
-      if(d){ d={...d, __et:p.et, __drop:(s.drop&&i===lastPlIdx)}; }
-      else if(c.family==="pl"){ d={min:0,g:0,a:0,cs:0,dc:0,pl:true,__et:p.et}; }
-      return cellHtml(c,d===undefined?null:d); }).join("");
+      if(d) d={...d, __drop:(s.drop&&i===lastPlIdx)};
+      return cellHtml(c, d||null); }).join("");
     return `<tr class="${sep}">
       <td class="pl" title="${esc(p.name)}">${esc(p.name)}<span class="pos">${esc(p.pos)}</span></td>
       <td class="tagc">${s.tag}</td>
@@ -400,20 +476,22 @@ function render(){
     </tr>`;
   }).join("");
 
-  const nCup=cols.filter(c=>c.family!=="pl").length;
-  const subTxt=`${players.length} players · ${cols.filter(c=>c.family==="pl").length} PL`+(nCup?` · ${nCup} cup/Euro`:"");
+  const nLg=cols.filter(c=>c.family==="pl").length, nCup=cols.length-nLg;
+  const subTxt=`${players.length} players · ${nLg} ${isExtra?"Liga":"PL"}`+(nCup?` · ${nCup} cup/Euro`:"");
   out.innerHTML=`<div class="card">
-    <div class="chead"><img class="crest" src="${esc(t.badge)}" alt="" onerror="this.style.display='none'"><span class="ttl">${esc(t.name)}</span>
+    <div class="chead"><img class="crest" src="${esc(meta.badge)}" alt="" onerror="this.style.display='none'"><span class="ttl">${esc(meta.name)}</span>
       <span class="sub">${subTxt}</span><span class="cupspin" id="cupspin"></span></div>
     <div class="scroll"><table class="grid"><thead>${head}</thead><tbody>${body}</tbody></table></div>
   </div>`;
-  if(!cc) setCupSpin(true);
+  if(!isExtra && !cc) setCupSpin(true);
+  const flabel=$("#flabel"); if(flabel) flabel.textContent=isExtra?"Liga Portugal":"Premier League";
   const note=$("#note");
   if(cc&&cc.misses>0) note.innerHTML=`One row per player, every game in date order — league, Europe and cups together. <span class="miss">${cc.misses} cup appearance(s) couldn't be matched to an FPL player (academy/trialist) and are omitted.</span>`;
+  else note.textContent="One row per player, every game in date order — league, Europe and cups together, so you can see who gets rested after midweek. “Start” ≈ 60+ minutes.";
 }
 
 /* events */
-$("#teamSel").onchange=e=>{ view.team=e.target.value; render(); loadCups(view.team); };
+$("#teamSel").onchange=e=>{ view.team=e.target.value; render(); if(EXTRA[view.team]) loadEspnTeam(view.team); else loadCups(view.team); };
 $("#sortSeg").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b)return; view.sort=b.dataset.sort; $("#sortSeg").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); render();});
 $("#filtSeg").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b)return; view.filt=b.dataset.filt; $("#filtSeg").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); render();});
 $("#compSeg").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b)return; view.comp=b.dataset.comp; $("#compSeg").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); render();});
