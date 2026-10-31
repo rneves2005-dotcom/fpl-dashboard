@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
-"""Weekly FPL Hall-of-Fame elite tracker (the '17-elite' process).
+"""Weekly FPL elite tracker — the 27 ("Mag 27" = 17 HoF + 10 strong10_last_year).
 
 Each GW after the deadline it:
-  1. Pulls the 17 verified elite managers' squads for the current GW
-  2. Diffs vs the previous GW -> transfers-IN per manager, ownership swings,
-     and flags EARLY CLUSTERS (2+ elites onto the same new name = the buy signal)
-  3. Prints the current consensus template + the fixture-swing calendar (next 5 GWs)
+  1. Pulls all 27 managers' GW picks (detecting Free Hit) + their GW transfers.
+  2. 27-MANAGER TRANSFER BOARD — consensus BUYS / SELLS + EARLY CLUSTERS (2+ onto
+     the same new name = the buy signal), each split [HoF / strong10].
+  3. Current consensus template (owned by >= half of the 27; Free-Hit squads are
+     unwound to the manager's prior-GW team so a 1-week rental doesn't distort it).
+  4. Fixture-swing calendar (next 5 GWs) to cross against the clusters.
 
-Dollimore (leading indicator) and Crellin (deadline tripwire) are highlighted.
-Snapshots (elite_snap_gwN.json) and the report (elite_scan_gwN.md) land beside this file.
+Dollimore (leading indicator) + Crellin (deadline tripwire) are flagged among buyers.
+The 10 are the FIXED hof_manager_ids.json["strong10_last_year"] set — NOT the live
+league-940453 standings (those fluctuate). Transfers are only visible AFTER the
+deadline locks: this is a LAGGING view of the current GW, a LEADING signal for next.
+
+Snapshots (elite_snap_gwN.json) + report (elite_scan_gwN.md) land beside this file.
 
 Usage:  python3 elite_scan.py
 """
@@ -18,7 +24,7 @@ BASE = "https://fantasy.premierleague.com/api"
 HERE = os.path.dirname(os.path.abspath(__file__))
 IDS_FILE = os.path.normpath(os.path.join(HERE, "..", "hof_manager_ids.json"))
 POS = {1: "GK", 2: "DEF", 3: "MID", 4: "FWD"}
-LEADING = {"Tom Dollimore": "🧭 leading-indicator", "Ben Crellin": "⏰ deadline-tripwire"}
+LEADING = {179777: "🧭 Dollimore (leading)", 53517: "⏰ Crellin (deadline)"}
 WATCH = ["ARS", "LIV", "CHE", "MCI", "MUN", "TOT", "BHA", "NEW", "EVE"]
 
 
@@ -28,6 +34,18 @@ def get(path):
         return json.load(r)
 
 
+def load_managers():
+    d = json.load(open(IDS_FILE))
+    hof = d["verified"]                      # 17
+    strong = {k: v for k, v in d["strong10_last_year"].items() if not k.startswith("_")}  # 10
+    mgrs = {}
+    for n, i in hof.items():
+        mgrs[i] = {"name": n, "group": "HoF"}
+    for n, i in strong.items():
+        mgrs.setdefault(i, {"name": n, "group": "S10"})  # don't double-count an overlap
+    return mgrs, len(hof), len(strong)
+
+
 def main():
     boot = get("bootstrap-static/")
     els = {e["id"]: e for e in boot["elements"]}
@@ -35,22 +53,44 @@ def main():
     cur = next((e for e in boot["events"] if e["is_current"]),
                next((e for e in boot["events"] if e["is_next"]), boot["events"][0]))
     gw = cur["id"]
-    ids = json.load(open(IDS_FILE))["verified"]
+    mgrs, n_hof, n_s10 = load_managers()
 
     squads, own = {}, {}
-    for name, eid in ids.items():
+    buys, sells = {}, {}          # element_id -> list of entry_ids
+    fh = []                        # managers on Free Hit this GW
+    done = 0
+    for eid, meta in mgrs.items():
         try:
-            d = get(f"entry/{eid}/event/{gw}/picks/")
+            picks = get(f"entry/{eid}/event/{gw}/picks/")
         except Exception as ex:
-            print(f"  skip {name} ({eid}): {ex}")
-            continue
-        s = set(p["element"] for p in d["picks"])
-        squads[name] = s
-        for el in s:
-            own[el] = own.get(el, 0) + 1
-    N = len(squads)
+            print(f"  skip picks {meta['name']} ({eid}): {ex}")
+            picks = None
+        if picks is not None:
+            durable = picks
+            if picks.get("active_chip") == "freehit":
+                fh.append(eid)
+                try:                                   # unwind the 1-week FH rental
+                    durable = get(f"entry/{eid}/event/{gw-1}/picks/")
+                except Exception:
+                    durable = picks
+            s = set(p["element"] for p in durable["picks"])
+            squads[eid] = s
+            for el in s:
+                own[el] = own.get(el, 0) + 1
+            done += 1
+        try:
+            tr = [t for t in get(f"entry/{eid}/transfers/") if t["event"] == gw]
+        except Exception as ex:
+            print(f"  skip transfers {meta['name']} ({eid}): {ex}")
+            tr = []
+        for t in tr:
+            buys.setdefault(t["element_in"], []).append(eid)
+            sells.setdefault(t["element_out"], []).append(eid)
 
-    json.dump({"gw": gw, "squads": {k: sorted(v) for k, v in squads.items()},
+    N = len(mgrs)
+    json.dump({"gw": gw, "n": N, "members": sorted(mgrs.keys()),
+               "groups": {str(i): m["group"] for i, m in mgrs.items()},
+               "squads": {str(i): sorted(v) for i, v in squads.items()},
                "own": {str(k): v for k, v in own.items()}},
               open(os.path.join(HERE, f"elite_snap_gw{gw}.json"), "w"))
 
@@ -58,41 +98,53 @@ def main():
         e = els[el]
         return f"{e['web_name']} ({POS[e['element_type']]} {teams[e['team']]}, £{e['now_cost']/10})"
 
-    L = [f"# Elite Scan — GW{gw}   ({N}/17 managers)\n"]
+    def split(ids):
+        h = sum(1 for i in ids if mgrs[i]["group"] == "HoF")
+        return f"{h} HoF / {len(ids)-h} S10"
 
+    def leaders(ids):
+        fl = [LEADING[i] for i in ids if i in LEADING]
+        return ("  ⟵ " + ", ".join(fl)) if fl else ""
+
+    moved = len(set([i for v in buys.values() for i in v]))
+    L = [f"# Elite Scan — GW{gw}   (the 27: {n_hof} HoF + {n_s10} strong10)\n",
+         f"_{moved}/{N} managers made at least one GW{gw} transfer"
+         + (f" · {len(fh)} on Free Hit (squad unwound to GW{gw-1})" if fh else "") + "._\n"]
+
+    L.append("## 🔥 Early clusters — 2+ of the 27 bought this GW (the buy signal)\n")
+    clusters = sorted([(el, m) for el, m in buys.items() if len(m) >= 2], key=lambda x: -len(x[1]))
+    L += [f"- **{tag(el)}** — **{len(m)}×** [{split(m)}] → now owned by {own.get(el,0)}/{N}{leaders(m)}"
+          for el, m in clusters] or ["- none this week"]
+
+    L.append("\n## 💸 Consensus sells\n")
+    sell_sorted = sorted(sells.items(), key=lambda x: -len(x[1]))
+    L += [f"- {tag(el)} — **{len(m)}×** [{split(m)}]" for el, m in sell_sorted[:10] if len(m) >= 2] \
+         or ["- none with 2+ sellers"]
+
+    L.append("\n## 👀 Single buys — watch (1 manager; act only on a fixture swing + a 2nd mover)\n")
+    singles = sorted([(el, m[0]) for el, m in buys.items() if len(m) == 1],
+                     key=lambda x: els[x[0]]["element_type"])
+    L += [f"- {tag(el)} ← {mgrs[who]['name']} [{mgrs[who]['group']}]{leaders([who])}" for el, who in singles] or ["- none"]
+
+    # ownership swings only vs a prior snapshot with the SAME membership (else denominators differ)
     prev_path = os.path.join(HERE, f"elite_snap_gw{gw-1}.json")
     if os.path.exists(prev_path):
         prev = json.load(open(prev_path))
-        pown = {int(k): v for k, v in prev["own"].items()}
-        psq = {k: set(v) for k, v in prev["squads"].items()}
-        moves = {}
-        for name, s in squads.items():
-            if name in psq:
-                for el in s - psq[name]:
-                    moves.setdefault(el, []).append(name)
+        if prev.get("n") == N and set(prev.get("members", [])) == set(mgrs.keys()):
+            pown = {int(k): v for k, v in prev["own"].items()}
+            risers = sorted(((el, own.get(el, 0) - pown.get(el, 0)) for el in set(own) | set(pown)),
+                            key=lambda x: -x[1])
+            L.append("\n## 📈 Ownership swings (durable, FH-unwound)\n")
+            L += [f"- {tag(el)}  +{d} → {own.get(el,0)}/{N}" for el, d in risers[:8] if d > 0]
+            L += [f"- {tag(el)}  {d} → {own.get(el,0)}/{N}" for el, d in risers[-5:] if d < 0]
 
-        L.append("## 🔥 EARLY CLUSTERS — 2+ elites bought this GW (ACT)\n")
-        clusters = sorted([(el, m) for el, m in moves.items() if len(m) >= 2], key=lambda x: -len(x[1]))
-        L += [f"- **{tag(el)}** — +{len(m)}: {', '.join(m)} → now **{own.get(el,0)}/{N}**" for el, m in clusters] or ["- none this week"]
-
-        L.append("\n## 👀 Single movers — watch (1 elite; act only if a fixture swing + a 2nd mover confirm)\n")
-        singles = sorted([(el, m[0]) for el, m in moves.items() if len(m) == 1], key=lambda x: els[x[0]]["element_type"])
-        L += [f"- {tag(el)} ← {who}{'  ⟵ ' + LEADING[who] if who in LEADING else ''}" for el, who in singles] or ["- none"]
-
-        risers = sorted(((el, own.get(el, 0) - pown.get(el, 0)) for el in set(own) | set(pown)), key=lambda x: -x[1])
-        L.append("\n## 📈 Ownership swings\n")
-        L += [f"- {tag(el)}  {'+' if d>0 else ''}{d} → {own.get(el,0)}/{N}" for el, d in risers[:8] if d]
-        L += [f"- {tag(el)}  {d} → {own.get(el,0)}/{N}" for el, d in risers[-5:] if d < 0]
-    else:
-        L.append("_Baseline GW — no prior snapshot to diff. Consensus + fixtures below; transfer deltas begin next GW._\n")
-
-    L.append("\n## 🧭 Current consensus (owned by ≥ half of the elites)\n")
+    L.append("\n## 🧭 Current consensus template (owned by ≥ half of the 27)\n")
     for el, c in sorted(own.items(), key=lambda x: -x[1]):
         if c >= N / 2:
-            L.append(f"- {tag(el)} — **{c}/{N}**")
+            hofc = sum(1 for i in squads if el in squads[i] and mgrs[i]["group"] == "HoF")
+            L.append(f"- {tag(el)} — **{c}/{N}** ({hofc}/{n_hof} HoF)")
 
     L.append("\n## 📅 Fixture swing — next 5 GWs (position early, Dollimore-style)\n")
-    tid = {v: k for k, v in teams.items()}
     gws = [gw + i for i in range(1, 6)]
     grid = {c: {} for c in WATCH}
     for g in gws:
@@ -125,7 +177,7 @@ def main():
 
     out = os.path.join(HERE, f"elite_scan_gw{gw}.md")
     open(out, "w").write("\n".join(L))
-    print(f"Wrote {out}   ({N}/17 managers, GW{gw})")
+    print(f"Wrote {out}   ({done}/{N} managers scanned, GW{gw}, {len(clusters)} clusters)")
 
 
 if __name__ == "__main__":
