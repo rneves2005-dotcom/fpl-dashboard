@@ -88,6 +88,8 @@ table.grid{border-collapse:separate; border-spacing:0; width:max-content; min-wi
 .grid thead th.fam-pl .comp{color:var(--fam-pl)} .grid thead th.fam-euro .comp{color:var(--fam-euro)} .grid thead th.fam-cup .comp{color:var(--fam-cup)}
 .grid thead th .opp{display:block; font-size:11.5px; color:var(--ink-2); font-weight:700; letter-spacing:0}
 .grid thead th .dt{display:block; font-size:9px; color:var(--ink-3); font-weight:600}
+.grid thead th .res{display:block; font-size:9.5px; font-weight:800; letter-spacing:0; margin-top:1px}
+.grid thead th .res.r-w{color:var(--accent)} .grid thead th .res.r-l{color:var(--live)} .grid thead th .res.r-d{color:var(--ink-2)}
 .grid td{padding:3px 6px; text-align:center; font-size:12.5px; font-weight:600}
 /* sticky player columns */
 .grid th.pl,.grid td.pl{position:sticky; left:0; z-index:6; background:var(--surface); text-align:left; min-width:134px; max-width:156px; overflow:hidden; text-overflow:ellipsis; font-weight:600; padding-left:12px}
@@ -169,6 +171,10 @@ td.drop{box-shadow:inset 0 0 0 2px var(--live)}
 "use strict";
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* read a score from an FPL int or an ESPN competitor.score (object {value,displayValue} or string) */
+const scoreVal=s=>{ if(s==null)return null; if(typeof s==="number")return s;
+  if(typeof s==="object")return s.value!=null?Math.round(s.value):(s.displayValue!=null?parseInt(s.displayValue,10):null);
+  const n=parseInt(s,10); return isNaN(n)?null:n; };
 
 /* ---------- FPL API via CORS proxy (same chain as the rest of the dashboard) ---------- */
 const FPL_PROXIES=[
@@ -224,9 +230,10 @@ async function load(){
   const fx=await fplApi("/fixtures/");
   const plCol={}; Object.keys(teams).forEach(id=>plCol[id]={});
   (fx||[]).forEach(f=>{ if(!gws.includes(f.event))return;
-    const add=(me,opp,home)=>{ const c=plCol[me][f.event]||(plCol[me][f.event]={gw:f.event,opp:teams[opp].short,home,date:f.kickoff_time,count:0}); c.count++;
-      if(c.count>1){c.opp+="+"+teams[opp].short;} };
-    add(f.team_h,f.team_a,true); add(f.team_a,f.team_h,false);
+    const add=(me,opp,home,gf,ga)=>{ const c=plCol[me][f.event]||(plCol[me][f.event]={gw:f.event,opp:teams[opp].short,home,date:f.kickoff_time,count:0,gf:null,ga:null});
+      c.count++; if(c.count>1){c.opp+="+"+teams[opp].short; c.gf=null; c.ga=null;} else { c.gf=gf; c.ga=ga; } };
+    add(f.team_h,f.team_a,true,f.team_h_score,f.team_a_score);
+    add(f.team_a,f.team_h,false,f.team_a_score,f.team_h_score);
   });
 
   // full PL stat bundle per player per gw, from event/{gw}/live (one fetch per gw, parallel)
@@ -307,7 +314,7 @@ const EXTRA={
     {path:"uefa.champions",   code:"CL",   family:"euro"},
     {path:"uefa.europa",      code:"EL",   family:"euro"},
     {path:"uefa.europa.conf", code:"ECL",  family:"euro"},
-    {path:"por.taca.de.portugal", code:"TAÇA", family:"cup"},
+    {path:"por.taca.portugal",    code:"TAÇA", family:"cup"},
     {path:"por.taca.da.liga",     code:"T.LIGA", family:"cup"},
     {path:"por.super_cup",        code:"S.TAÇA", family:"cup"}
   ]}
@@ -345,7 +352,7 @@ async function loadCups(teamId){
       const byPid={};
       Object.values(mins).forEach(m=>{ const fid=matchFpl(m.name,players);
         if(fid!=null){ byPid[fid]={min:m.min,g:m.g,a:m.a}; } else if(m.min>0){ misses++; } });
-      cols.push({date:e.date, comp:lg.code, family:lg.family, opp:(oppShort||"").toUpperCase().slice(0,4), home, byPid});
+      cols.push({date:e.date, comp:lg.code, family:lg.family, opp:(oppShort||"").toUpperCase().slice(0,4), home, gf:scoreVal(me&&me.score), ga:scoreVal(opp&&opp.score), byPid});
     }
   }
   cupCache[teamId]={cols,misses};
@@ -378,7 +385,7 @@ async function loadEspnTeam(key){
         const ab=String(m.pos||"").toUpperCase();
         if(ab && ab!=="SUB" && ab!=="N/A") pmap[id].votes[ab]=(pmap[id].votes[ab]||0)+1;
       });
-      cols.push({date:e.date, comp:lg.code, family:lg.family, opp:oppShort, home, byPid});
+      cols.push({date:e.date, comp:lg.code, family:lg.family, opp:oppShort, home, gf:scoreVal(me&&me.score), ga:scoreVal(opp&&opp.score), byPid});
     }
   }
   cols.sort((a,b)=>(+new Date(a.date))-(+new Date(b.date)));
@@ -395,7 +402,7 @@ function timeline(teamId){
   DATA.gws.forEach(gw=>{ const c=DATA.plCol[teamId][gw]; if(!c)return;
     const byPid={};
     DATA.playersByTeam[teamId].forEach(p=>{ const s=DATA.plStats[p.id][gw]; if(s) byPid[p.id]={min:s.min,g:s.g,a:s.a,cs:s.cs,gc:s.gc,dc:s.dc,pl:true}; });
-    cols.push({date:c.date, sortKey:c.date?+new Date(c.date):gw*1e10, comp:"PL", family:"pl", opp:c.opp, home:c.home, gw, byPid});
+    cols.push({date:c.date, sortKey:c.date?+new Date(c.date):gw*1e10, comp:"PL", family:"pl", opp:c.opp, home:c.home, gw, gf:c.gf, ga:c.ga, byPid});
   });
   const cc=cupCache[teamId];
   if(cc) cc.cols.forEach(c=>cols.push({...c, sortKey:c.date?+new Date(c.date):0}));
@@ -455,7 +462,8 @@ function render(){
   const head=`<tr>
     <th class="pl">Player</th><th class="tagc"></th>
     ${cols.map(c=>{const dd=c.date?new Date(c.date):null; const dt=dd?`${String(dd.getDate()).padStart(2,"0")}/${String(dd.getMonth()+1).padStart(2,"0")}`:(c.gw?"GW"+c.gw:"");
-      return `<th class="col fam-${c.family}"><span class="comp">${c.comp}</span><span class="opp">${esc(c.opp)}</span><span class="dt">${dt}</span></th>`;}).join("")}
+      const hasRes=(c.gf!=null&&c.ga!=null); const r=hasRes?(c.gf>c.ga?"w":c.gf<c.ga?"l":"d"):""; const res=hasRes?`<span class="res r-${r}">${c.gf}-${c.ga}</span>`:"";
+      return `<th class="col fam-${c.family}"><span class="comp">${c.comp}</span><span class="opp">${esc(c.opp)}</span><span class="dt">${dt}</span>${res}</th>`;}).join("")}
     <th>Σ′</th><th>St</th><th>${isExtra?"Lg%":"PL%"}</th>
   </tr>`;
 
