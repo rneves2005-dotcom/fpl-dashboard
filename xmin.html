@@ -92,6 +92,9 @@ table.grid{border-collapse:separate; border-spacing:0; width:max-content; min-wi
 .grid thead th .dt{display:block; font-size:9px; color:var(--ink-3); font-weight:600}
 .grid thead th .res{display:block; font-size:9.5px; font-weight:800; letter-spacing:0; margin-top:1px}
 .grid thead th .res.r-w{color:var(--accent)} .grid thead th .res.r-l{color:var(--live)} .grid thead th .res.r-d{color:var(--ink-2)}
+.grid thead th .res.r-live{color:var(--live); animation:livepulse 1.4s ease-in-out infinite}
+.grid thead th.col.live{background:color-mix(in srgb,var(--live) 9%,var(--surface-2))}
+@keyframes livepulse{50%{opacity:.45}}
 .grid td{padding:3px 6px; text-align:center; font-size:12.5px; font-weight:600}
 /* sticky player columns */
 .grid th.pl,.grid td.pl{position:sticky; left:0; z-index:6; background:var(--surface); text-align:left; min-width:134px; max-width:156px; overflow:hidden; text-overflow:ellipsis; font-weight:600; padding-left:12px}
@@ -226,15 +229,18 @@ async function load(){
   const bs=await fplApi("/bootstrap-static/");
   const teams={}; (bs.teams||[]).forEach(t=>teams[t.id]={id:t.id,short:t.short_name,name:t.name,code:t.code,
     badge:`https://resources.premierleague.com/premierleague/badges/50/t${t.code}.png`, espn:ESPN_ID[t.short_name]||null});
-  const finished=(bs.events||[]).filter(e=>e.finished).map(e=>e.id).sort((a,b)=>a-b);
-  const gws=finished.length?finished:[(bs.events||[]).find(e=>e.is_current)?.id].filter(Boolean);
-
   // PL opponent + venue + date per team per gw (date from kickoff_time)
   const fx=await fplApi("/fixtures/");
+  const finished=(bs.events||[]).filter(e=>e.finished).map(e=>e.id);
+  const cur=(bs.events||[]).find(e=>e.is_current);
+  const curStarted=cur && (fx||[]).some(f=>f.event===cur.id && f.started);  // include the live/in-progress GW
+  const gwset=new Set(finished); if(curStarted) gwset.add(cur.id);
+  const gws=[...gwset].sort((a,b)=>a-b);
   const plCol={}; Object.keys(teams).forEach(id=>plCol[id]={});
   (fx||[]).forEach(f=>{ if(!gws.includes(f.event))return;
-    const add=(me,opp,home,gf,ga)=>{ const c=plCol[me][f.event]||(plCol[me][f.event]={gw:f.event,opp:teams[opp].short,home,date:f.kickoff_time,count:0,gf:null,ga:null});
-      c.count++; if(c.count>1){c.opp+="+"+teams[opp].short; c.gf=null; c.ga=null;} else { c.gf=gf; c.ga=ga; } };
+    const live=!!f.started && !f.finished;
+    const add=(me,opp,home,gf,ga)=>{ const c=plCol[me][f.event]||(plCol[me][f.event]={gw:f.event,opp:teams[opp].short,home,date:f.kickoff_time,count:0,gf:null,ga:null,live:false});
+      c.count++; if(c.count>1){c.opp+="+"+teams[opp].short; c.gf=null; c.ga=null;} else { c.gf=gf; c.ga=ga; c.live=live; } };
     add(f.team_h,f.team_a,true,f.team_h_score,f.team_a_score);
     add(f.team_a,f.team_h,false,f.team_a_score,f.team_h_score);
   });
@@ -433,7 +439,7 @@ function timeline(teamId){
   DATA.gws.forEach(gw=>{ const c=DATA.plCol[teamId][gw]; if(!c)return;
     const byPid={};
     DATA.playersByTeam[teamId].forEach(p=>{ const s=DATA.plStats[p.id][gw]; if(s) byPid[p.id]={min:s.min,g:s.g,a:s.a,cs:s.cs,gc:s.gc,dc:s.dc,pl:true}; });
-    cols.push({date:c.date, sortKey:c.date?+new Date(c.date):gw*1e10, comp:"PL", family:"pl", opp:c.opp, home:c.home, gw, gf:c.gf, ga:c.ga, byPid});
+    cols.push({date:c.date, sortKey:c.date?+new Date(c.date):gw*1e10, comp:"PL", family:"pl", opp:c.opp, home:c.home, gw, gf:c.gf, ga:c.ga, live:c.live, byPid});
   });
   const cc=cupCache[teamId];
   if(cc) cc.cols.forEach(c=>cols.push({...c, sortKey:c.date?+new Date(c.date):0}));
@@ -445,15 +451,15 @@ function minClass(m){ if(m==null)return "m0"; if(m>=80)return"m90"; if(m>=60)ret
 const dcThresh=et=>et===3||et===4?12:10;
 
 function playerStats(pid, et, cols){
-  const plRow=[], allMin=[]; let plStarts=0, plGames=0, g=0, a=0, starts=0, apps=0, total=0;
+  const plRow=[], plFin=[], allMin=[]; let plStarts=0, plGames=0, g=0, a=0, starts=0, apps=0, total=0;
   cols.forEach(c=>{ const d=c.byPid[pid]; const m=d?d.min:(c.family==="pl"?0:null);
-    if(c.family==="pl"){ plGames++; const mm=d?d.min:0; plRow.push(mm); if(mm>=60)plStarts++; }
+    if(c.family==="pl"){ const mm=d?d.min:0; plRow.push(mm); if(!c.live){ plGames++; if(mm>=60)plStarts++; plFin.push(mm); } }
     if(d){ g+=d.g||0; a+=d.a||0; if(d.min>0){apps++; total+=d.min; if(d.min>=60)starts++;} }
     allMin.push(m);
   });
   const plPct=plGames?Math.round(100*plStarts/plGames):0;
-  // recent PL drop: was a regular, latest PL game <45 after prior 70+
-  let drop=false; const last=plRow[plRow.length-1], prev=plRow[plRow.length-2];
+  // recent PL drop: was a regular, latest FINISHED PL game <45 after prior 70+ (ignore the live GW)
+  let drop=false; const last=plFin[plFin.length-1], prev=plFin[plFin.length-2];
   if(plStarts>=Math.ceil(plGames*0.4) && last!=null && last<45 && (prev==null||prev>=70)) drop=true;
   let tag;
   if(plPct>=85) tag="🔒"; else if(plPct>=55) tag=drop?"🔄":"✅"; else if(plPct>=25||starts>=2) tag="🔄"; else tag="🪑";
@@ -499,8 +505,12 @@ function render(){
   const head=`<tr>
     <th class="pl">Player</th><th class="tagc"></th>
     ${cols.map(c=>{const dd=c.date?new Date(c.date):null; const dt=dd?`${String(dd.getDate()).padStart(2,"0")}/${String(dd.getMonth()+1).padStart(2,"0")}`:(c.gw?"GW"+c.gw:"");
-      const hasRes=(c.gf!=null&&c.ga!=null); const r=hasRes?(c.gf>c.ga?"w":c.gf<c.ga?"l":"d"):""; const res=hasRes?`<span class="res r-${r}">${c.gf}-${c.ga}</span>`:"";
-      return `<th class="col fam-${c.family}${c.manual?" man":""}"${c.manual?' title="manually entered (ESPN has no feed for this competition)"':""}><span class="comp">${c.comp}</span><span class="opp">${esc(c.opp)}</span><span class="dt">${dt}</span>${res}</th>`;}).join("")}
+      const hasRes=(c.gf!=null&&c.ga!=null);
+      let res="";
+      if(c.live){ res=`<span class="res r-live">${hasRes?c.gf+"-"+c.ga+" ":""}•LIVE</span>`; }
+      else if(hasRes){ const r=c.gf>c.ga?"w":c.gf<c.ga?"l":"d"; res=`<span class="res r-${r}">${c.gf}-${c.ga}</span>`; }
+      const ttl=c.manual?' title="manually entered (ESPN has no feed for this competition)"':(c.live?' title="live — in progress"':"");
+      return `<th class="col fam-${c.family}${c.manual?" man":""}${c.live?" live":""}"${ttl}><span class="comp">${c.comp}</span><span class="opp">${esc(c.opp)}</span><span class="dt">${dt}</span>${res}</th>`;}).join("")}
     <th>Σ′</th><th>St</th><th>${isExtra?"Lg%":"PL%"}</th>
   </tr>`;
 
@@ -508,7 +518,7 @@ function render(){
   const body=players.map(p=>{
     const s=p.st;
     const sep=(view.sort==="pos"&&lastEt!==null&&p.et!==lastEt)?"rowsep":""; lastEt=p.et;
-    const lastPlIdx=(()=>{ let idx=-1; cols.forEach((c,i)=>{if(c.family==="pl")idx=i;}); return idx; })();
+    const lastPlIdx=(()=>{ let idx=-1; cols.forEach((c,i)=>{if(c.family==="pl"&&!c.live)idx=i;}); return idx; })();
     const cells=cols.map((c,i)=>{ let d=c.byPid[p.id];
       if(d) d={...d, __drop:(s.drop&&i===lastPlIdx)};
       return cellHtml(c, d||null); }).join("");
