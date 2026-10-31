@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Minutes Tracker · Matchday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#eef1f5; --surface:#ffffff; --surface-2:#eaeef3; --line:#dde3ea;
+  --ink:#131a22; --ink-2:#596673; --ink-3:#8c98a5;
+  --accent:#0b8a4b; --accent-soft:#e2f3ea; --live:#e03131;
+  --amber:#e39a2b; --orange:#d9743a;
+  --fam-pl:#0b8a4b; --fam-euro:#2f6fe0; --fam-cup:#8b5cf6;
+  --fam-pl-bg:#0b8a4b14; --fam-euro-bg:#2f6fe014; --fam-cup-bg:#8b5cf614;
+  --gold:#d9a227; --asst:#2f6fe0; --cs:#0e9488;
+  --shadow:0 1px 2px rgba(16,28,40,.05),0 6px 18px rgba(16,28,40,.05);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1218; --surface:#161d25; --surface-2:#1e2831; --line:#2a333d;
+  --ink:#eef3f8; --ink-2:#9babba; --ink-3:#6a7784;
+  --accent:#2bc274; --accent-soft:#143024; --live:#ff5c5c;
+  --amber:#e3a63f; --orange:#df8450;
+  --fam-pl:#2bc274; --fam-euro:#5b8cff; --fam-cup:#a78bfa;
+  --fam-pl-bg:#2bc27420; --fam-euro-bg:#5b8cff20; --fam-cup-bg:#a78bfa20;
+  --gold:#e3b84a; --asst:#5b8cff; --cs:#2dd4bf;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1218; --surface:#161d25; --surface-2:#1e2831; --line:#2a333d;
+  --ink:#eef3f8; --ink-2:#9babba; --ink-3:#6a7784;
+  --accent:#2bc274; --accent-soft:#143024; --live:#ff5c5c;
+  --amber:#e3a63f; --orange:#df8450;
+  --fam-pl:#2bc274; --fam-euro:#5b8cff; --fam-cup:#a78bfa;
+  --fam-pl-bg:#2bc27420; --fam-euro-bg:#5b8cff20; --fam-cup-bg:#a78bfa20;
+  --gold:#e3b84a; --asst:#5b8cff; --cs:#2dd4bf;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink); font-family:"Barlow",system-ui,-apple-system,Segoe UI,Roboto,sans-serif; font-size:15px; line-height:1.4; -webkit-font-smoothing:antialiased; padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);}
+.wrap{max-width:1500px; margin:0 auto; padding:0 16px}
+.masthead{display:flex; align-items:baseline; gap:10px; padding-block:16px 10px; flex-wrap:wrap}
+.brand{font-family:"Oswald",sans-serif; font-weight:700; font-size:25px; letter-spacing:.06em; text-transform:uppercase; line-height:1}
+.brand .dot{color:var(--accent)}
+.tag{color:var(--ink-3); font-size:12.5px; letter-spacing:.04em; text-transform:uppercase; font-weight:600}
+.navr{margin-left:auto; display:flex; gap:12px; font-size:14px; align-items:center}
+.navr a{color:var(--ink-2); text-decoration:none; font-weight:600; font-size:13px}
+.navr a:hover{color:var(--accent)}
+
+.controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:12px; position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 92%,transparent); backdrop-filter:blur(8px); padding:8px 0}
+.controls label{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-right:4px}
+.controls select{font:inherit; font-size:14px; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:9px; padding:8px 10px}
+.seg{display:inline-flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; background:var(--surface)}
+.seg button{font:inherit; font-size:12.5px; font-weight:600; color:var(--ink-2); background:transparent; border:0; padding:8px 11px; cursor:pointer}
+.seg button.on{background:var(--accent); color:#fff}
+
+.legend{display:flex; gap:14px; flex-wrap:wrap; align-items:center; color:var(--ink-2); font-size:12px; margin-bottom:8px}
+.legend .k{display:inline-flex; align-items:center; gap:5px}
+.sw{width:15px; height:15px; border-radius:4px; border:1px solid var(--line); display:inline-block}
+.sw.m90{background:var(--accent)} .sw.m75{background:color-mix(in srgb,var(--accent) 55%,var(--surface))}
+.sw.m45{background:var(--amber)} .sw.m15{background:var(--orange)} .sw.m0{background:var(--surface-2)}
+.fam{display:inline-flex; align-items:center; gap:5px; font-weight:600}
+.fam i{width:13px;height:13px;border-radius:3px;display:inline-block}
+.fam.pl i{background:var(--fam-pl)} .fam.euro i{background:var(--fam-euro)} .fam.cup i{background:var(--fam-cup)}
+
+.card{background:var(--surface); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); overflow:hidden; margin-bottom:40px}
+.chead{display:flex; align-items:center; gap:10px; padding:11px 14px; background:var(--surface-2); border-bottom:1px solid var(--line)}
+.chead .crest{width:26px;height:26px;object-fit:contain;flex:none}
+.chead .ttl{font-family:"Oswald"; font-weight:600; font-size:17px; letter-spacing:.02em}
+.chead .sub{color:var(--ink-3); font-size:12px; margin-left:auto}
+.chead .cupspin{color:var(--ink-3); font-size:11.5px; margin-left:auto}
+
+.scroll{overflow-x:auto}
+table.grid{border-collapse:separate; border-spacing:0; width:max-content; min-width:100%; font-variant-numeric:tabular-nums}
+.grid th,.grid td{border-bottom:1px solid var(--line); border-right:1px solid color-mix(in srgb,var(--line) 55%,transparent); white-space:nowrap}
+.grid thead th{position:sticky; top:0; z-index:5; background:var(--surface-2); font-size:10px; text-transform:uppercase; letter-spacing:.03em; color:var(--ink-3); font-weight:700; padding:5px 7px; text-align:center; vertical-align:bottom}
+.grid thead th.col{border-top:3px solid var(--line)}
+.grid thead th.col.fam-pl{border-top-color:var(--fam-pl); background:color-mix(in srgb,var(--fam-pl-bg) 100%,var(--surface-2))}
+.grid thead th.col.fam-euro{border-top-color:var(--fam-euro); background:color-mix(in srgb,var(--fam-euro-bg) 100%,var(--surface-2))}
+.grid thead th.col.fam-cup{border-top-color:var(--fam-cup); background:color-mix(in srgb,var(--fam-cup-bg) 100%,var(--surface-2))}
+.grid thead th .comp{display:block; font-size:10px; font-weight:800; letter-spacing:.04em}
+.grid thead th.fam-pl .comp{color:var(--fam-pl)} .grid thead th.fam-euro .comp{color:var(--fam-euro)} .grid thead th.fam-cup .comp{color:var(--fam-cup)}
+.grid thead th .opp{display:block; font-size:11.5px; color:var(--ink-2); font-weight:700; letter-spacing:0}
+.grid thead th .dt{display:block; font-size:9px; color:var(--ink-3); font-weight:600}
+.grid td{padding:3px 6px; text-align:center; font-size:12.5px; font-weight:600}
+/* sticky player columns */
+.grid th.pl,.grid td.pl{position:sticky; left:0; z-index:6; background:var(--surface); text-align:left; min-width:134px; max-width:156px; overflow:hidden; text-overflow:ellipsis; font-weight:600; padding-left:12px}
+.grid thead th.pl{z-index:8}
+.grid td.pl .pos{color:var(--ink-3); font-weight:700; font-size:10px; margin-left:5px}
+.grid td.tagc{position:sticky; left:146px; z-index:6; background:var(--surface); font-size:11px; text-align:center; padding:0 5px}
+.grid thead th.tagc{left:146px; z-index:8}
+.grid td.sum{font-family:"Oswald"; font-weight:600}
+.grid td.pct{font-weight:700}
+.grid tr:hover td{background:color-mix(in srgb,var(--accent-soft) 55%,transparent)}
+.grid tr:hover td.pl,.grid tr:hover td.tagc{background:color-mix(in srgb,var(--accent-soft) 85%,var(--surface))}
+/* minutes heat cells */
+td.m90{background:var(--accent); color:#fff}
+td.m75{background:color-mix(in srgb,var(--accent) 50%,var(--surface)); color:var(--ink)}
+td.m45{background:var(--amber); color:#241704}
+td.m15{background:var(--orange); color:#fff}
+td.m0{color:var(--ink-3); font-weight:400}
+td.drop{box-shadow:inset 0 0 0 2px var(--live)}
+.rowsep td{border-bottom:2px solid var(--line)}
+.ldg{padding:40px 16px; color:var(--ink-3); font-size:14px; text-align:center}
+.spin{display:inline-block; width:13px; height:13px; border:2px solid var(--line); border-top-color:var(--accent); border-radius:50%; animation:spin .7s linear infinite; vertical-align:-2px; margin-right:7px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.note{color:var(--ink-3); font-size:12px; margin:2px 0 14px; font-style:italic}
+.miss{color:var(--orange); font-style:normal}
+.foot{text-align:center; color:var(--ink-3); font-size:11.5px; padding:4px 0 30px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <h1 class="brand">Match<span class="dot">day</span></h1>
+    <span class="tag">Minutes Tracker</span>
+    <span class="navr">
+      <a href="scores.html">⚽ Scores</a>
+      <a href="tracker.html">📋 Lineups</a>
+      <a href="fpl-dashboard.html">FPL</a>
+    </span>
+  </header>
+
+  <div class="controls">
+    <span><label>Team</label><select id="teamSel"><option value="">Loading…</option></select></span>
+    <span class="seg" id="sortSeg">
+      <button data-sort="mins" class="on">Most minutes</button>
+      <button data-sort="pos">By position</button>
+    </span>
+    <span class="seg" id="filtSeg">
+      <button data-filt="all" class="on">All</button>
+      <button data-filt="reg">Regulars only</button>
+    </span>
+    <span class="seg" id="compSeg">
+      <button data-comp="all" class="on">All comps</button>
+      <button data-comp="pl">PL only</button>
+    </span>
+  </div>
+
+  <div class="legend">
+    <span class="k"><span class="sw m90"></span>80–90′</span>
+    <span class="k"><span class="sw m75"></span>60–79′</span>
+    <span class="k"><span class="sw m45"></span>30–59′</span>
+    <span class="k"><span class="sw m15"></span>1–29′</span>
+    <span class="k"><span class="sw m0"></span>0′</span>
+    <span class="k">🔒 nailed · ✅ regular · 🔄 rotating · 🪑 fringe</span>
+    <span class="k" style="color:var(--live)">▢ minutes just dropped</span>
+  </div>
+  <div class="legend">
+    <span class="fam pl"><i></i>Premier League</span>
+    <span class="fam euro"><i></i>Europe (CL/EL/ECL)</span>
+    <span class="fam cup"><i></i>Domestic cups (FA · EFL)</span>
+  </div>
+  <div class="note" id="note">One row per player, every game in date order — league, Europe and cups together, so you can see who gets rested after midweek. “Start” ≈ 60+ minutes.</div>
+
+  <div id="out"><div class="card"><div class="ldg"><span class="spin"></span>Pulling every player's minutes, gameweek by gameweek…</div></div></div>
+
+  <div class="foot">Data: official FPL API (Premier League) + ESPN (cups &amp; Europe) · cup minutes derived from substitution times</div>
+</div>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- FPL API via CORS proxy (same chain as the rest of the dashboard) ---------- */
+const FPL_PROXIES=[
+  u=>u.replace("https://fantasy.premierleague.com/api","https://fpl-proxy.rneves2005.workers.dev"),
+  u=>"https://proxy.cors.sh/"+u,
+  u=>"https://api.allorigins.win/raw?url="+encodeURIComponent(u),
+  u=>"https://api.codetabs.com/v1/proxy?quest="+encodeURIComponent(u)
+];
+let fplProxy=null;
+async function fplApi(endpoint){
+  const direct="https://fantasy.premierleague.com/api"+endpoint;
+  const order=fplProxy?[fplProxy,...FPL_PROXIES.filter(p=>p!==fplProxy)]:FPL_PROXIES;
+  let err;
+  for(const p of order){ try{ const r=await fetch(p(direct),{cache:"no-store"}); if(r.ok){fplProxy=p; return r.json();} }catch(e){err=e;} }
+  throw err||new Error("fpl proxy failed");
+}
+/* ---------- ESPN (CORS * — direct fetch, one retry) ---------- */
+async function espn(path){
+  const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+path;
+  for(let i=0;i<2;i++){ try{ const r=await fetch(url,{cache:"no-store"}); if(r.ok) return r.json(); }catch(e){} }
+  return null;
+}
+
+const POS={1:"GK",2:"DEF",3:"MID",4:"FWD"};
+/* FPL short_name -> ESPN global team id (ESPN ids are shared across all competitions) */
+const ESPN_ID={ARS:359,AVL:362,BHA:331,BOU:349,BRE:337,CHE:363,COV:388,CRY:384,EVE:368,FUL:370,HUL:306,IPS:373,LEE:357,LIV:364,MCI:382,MUN:360,NEW:361,NFO:393,SUN:366,TOT:367};
+/* ESPN league path -> {code, family} */
+const CUP_LEAGUES=[
+  {path:"uefa.champions",     code:"CL",  family:"euro"},
+  {path:"uefa.europa",        code:"EL",  family:"euro"},
+  {path:"uefa.europa.conf",   code:"ECL", family:"euro"},
+  {path:"eng.fa",             code:"FAC", family:"cup"},
+  {path:"eng.league_cup",     code:"EFL", family:"cup"}
+];
+
+let DATA=null;   // {teams, playersByTeam, gws, plStats, plCol, abbrByEspnId}
+const cupCache={}; // teamId -> {cols:[...], misses:n}
+let view={team:"", sort:"mins", filt:"all", comp:"all"};
+
+/* ---------- normalise names for the per-team ESPN↔FPL join ---------- */
+const norm=s=>String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").trim();
+const lastTok=s=>{const p=norm(s).split(" ");return p[p.length-1]||"";};
+
+async function load(){
+  const bs=await fplApi("/bootstrap-static/");
+  const teams={}; (bs.teams||[]).forEach(t=>teams[t.id]={id:t.id,short:t.short_name,name:t.name,code:t.code,
+    badge:`https://resources.premierleague.com/premierleague/badges/50/t${t.code}.png`, espn:ESPN_ID[t.short_name]||null});
+  const finished=(bs.events||[]).filter(e=>e.finished).map(e=>e.id).sort((a,b)=>a-b);
+  const gws=finished.length?finished:[(bs.events||[]).find(e=>e.is_current)?.id].filter(Boolean);
+
+  // PL opponent + venue + date per team per gw (date from kickoff_time)
+  const fx=await fplApi("/fixtures/");
+  const plCol={}; Object.keys(teams).forEach(id=>plCol[id]={});
+  (fx||[]).forEach(f=>{ if(!gws.includes(f.event))return;
+    const add=(me,opp,home)=>{ const c=plCol[me][f.event]||(plCol[me][f.event]={gw:f.event,opp:teams[opp].short,home,date:f.kickoff_time,count:0}); c.count++;
+      if(c.count>1){c.opp+="+"+teams[opp].short;} };
+    add(f.team_h,f.team_a,true); add(f.team_a,f.team_h,false);
+  });
+
+  // full PL stat bundle per player per gw, from event/{gw}/live (one fetch per gw, parallel)
+  const plStats={}; (bs.elements||[]).forEach(e=>plStats[e.id]={});
+  const results=await Promise.allSettled(gws.map(gw=>fplApi(`/event/${gw}/live/`).then(d=>({gw,d}))));
+  results.forEach(r=>{ if(r.status!=="fulfilled")return; const {gw,d}=r.value; (d.elements||[]).forEach(x=>{ if(!plStats[x.id])return; const s=x.stats||{};
+    plStats[x.id][gw]={min:s.minutes||0,g:s.goals_scored||0,a:s.assists||0,cs:s.clean_sheets||0,gc:s.goals_conceded||0,dc:s.defensive_contribution||0}; }); });
+  const gotGws=gws.filter(gw=>results.some(r=>r.status==="fulfilled"&&r.value.gw===gw));
+
+  // group players by team (keep name parts for the cup join)
+  const playersByTeam={}; Object.keys(teams).forEach(id=>playersByTeam[id]=[]);
+  (bs.elements||[]).forEach(e=>{
+    const played=gotGws.reduce((s,gw)=>s+((plStats[e.id][gw]&&plStats[e.id][gw].min)||0),0);
+    if(played<=0 && e.minutes<=0) return; // skip never-played
+    playersByTeam[e.team].push({id:e.id, name:e.web_name, pos:POS[e.element_type]||"", et:e.element_type, status:e.status,
+      web:norm(e.web_name), full:norm(e.first_name+" "+e.second_name)});
+  });
+  DATA={teams,playersByTeam,gws:gotGws,plStats,plCol};
+  buildTeamDropdown();
+  const def=Object.values(teams).sort((a,b)=>a.name.localeCompare(b.name))[0];
+  view.team=String(def.id); $("#teamSel").value=view.team;
+  render(); loadCups(view.team);
+}
+
+function buildTeamDropdown(){
+  const sel=$("#teamSel");
+  const list=Object.values(DATA.teams).sort((a,b)=>a.name.localeCompare(b.name));
+  sel.innerHTML=list.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("");
+}
+
+/* ---------- cup / Europe minutes for one team (lazy, cached) ---------- */
+function parseClock(s){ const m=String(s||"").match(/(\d+)/); return m?Math.min(90,parseInt(m[1],10)):null; }
+
+function espnMinutes(summary, espnId){
+  const ros=(summary.rosters||[]).find(r=>String(r.team&&r.team.id)===String(espnId));
+  if(!ros) return null;
+  const subClocks={}; // athleteId -> [minute,...]
+  (summary.keyEvents||[]).forEach(ev=>{ const tt=(ev.type&&ev.type.text)||""; if(!/ubstitut/i.test(tt))return;
+    const clk=parseClock(ev.clock&&ev.clock.displayValue);
+    (ev.participants||[]).forEach(p=>{ const id=p.athlete&&p.athlete.id; if(id!=null&&clk!=null){(subClocks[id]||(subClocks[id]=[])).push(clk);} });
+  });
+  const out={};
+  (ros.roster||[]).forEach(p=>{
+    const ath=p.athlete||{}; const id=ath.id; if(id==null)return;
+    const clk=(subClocks[id]||[]).slice().sort((a,b)=>a-b);
+    let mins=0;
+    if(p.starter&&!p.subbedOut) mins=90;
+    else if(p.starter&&p.subbedOut) mins=clk.length?clk[0]:90;
+    else if(p.subbedIn&&p.subbedOut&&clk.length>=2) mins=Math.max(1,clk[clk.length-1]-clk[0]);
+    else if(p.subbedIn) mins=clk.length?Math.max(1,90-clk[0]):1;
+    else mins=0;
+    const stat=n=>{const s=(p.stats||[]).find(s=>s.name===n); return s?Math.round(s.value):0;};
+    out[id]={min:mins, g:stat("totalGoals"), a:stat("goalAssists"), name:ath.displayName||""};
+  });
+  return out;
+}
+
+function matchFpl(espnName, players){
+  const en=norm(espnName), el=lastTok(espnName);
+  let p=players.find(x=>x.full===en); if(p)return p.id;
+  p=players.find(x=>x.web===en); if(p)return p.id;
+  p=players.find(x=>x.web===el); if(p)return p.id;
+  let hits=players.filter(x=>x.full.split(" ").includes(el)); if(hits.length===1)return hits[0].id;
+  hits=players.filter(x=>x.full.includes(el)&&el.length>=4); if(hits.length===1)return hits[0].id;
+  return null;
+}
+
+async function loadCups(teamId){
+  if(cupCache[teamId]){ if(String(view.team)===String(teamId)) render(); return; }
+  const t=DATA.teams[teamId]; if(!t||!t.espn){ cupCache[teamId]={cols:[],misses:0}; return; }
+  setCupSpin(true);
+  const players=DATA.playersByTeam[teamId];
+  const cols=[]; let misses=0;
+  for(const lg of CUP_LEAGUES){
+    const sched=await espn(`${lg.path}/teams/${t.espn}/schedule`);
+    const evs=(sched&&sched.events||[]).filter(e=>{const c=(e.competitions||[{}])[0]; return c.status&&c.status.type&&c.status.type.completed;});
+    for(const e of evs){
+      const comp=(e.competitions||[{}])[0]; const cs=comp.competitors||[];
+      const me=cs.find(c=>String(c.team&&c.team.id)===String(t.espn));
+      const opp=cs.find(c=>String(c.team&&c.team.id)!==String(t.espn));
+      const home=me&&me.homeAway==="home";
+      const oppShort=(opp&&opp.team&&(opp.team.abbreviation||opp.team.shortDisplayName||opp.team.displayName))||"—";
+      const sum=await espn(`${lg.path}/summary?event=${e.id}`);
+      if(!sum){continue;}
+      const mins=espnMinutes(sum,t.espn); if(!mins)continue;
+      const byPid={};
+      Object.values(mins).forEach(m=>{ const fid=matchFpl(m.name,players);
+        if(fid!=null){ byPid[fid]={min:m.min,g:m.g,a:m.a}; } else if(m.min>0){ misses++; } });
+      cols.push({date:e.date, comp:lg.code, family:lg.family, opp:(oppShort||"").toUpperCase().slice(0,4), home, byPid});
+    }
+  }
+  cupCache[teamId]={cols,misses};
+  setCupSpin(false);
+  if(String(view.team)===String(teamId)) render();
+}
+function setCupSpin(on){ const el=$("#cupspin"); if(el) el.innerHTML = on?'<span class="spin"></span>loading cups & Europe…':''; }
+
+/* ---------- build one date-ordered timeline for a team ---------- */
+function timeline(teamId){
+  const cols=[];
+  DATA.gws.forEach(gw=>{ const c=DATA.plCol[teamId][gw]; if(!c)return;
+    const byPid={};
+    DATA.playersByTeam[teamId].forEach(p=>{ const s=DATA.plStats[p.id][gw]; if(s) byPid[p.id]={min:s.min,g:s.g,a:s.a,cs:s.cs,gc:s.gc,dc:s.dc,pl:true}; });
+    cols.push({date:c.date, sortKey:c.date?+new Date(c.date):gw*1e10, comp:"PL", family:"pl", opp:c.opp, home:c.home, gw, byPid});
+  });
+  const cc=cupCache[teamId];
+  if(cc) cc.cols.forEach(c=>cols.push({...c, sortKey:c.date?+new Date(c.date):0}));
+  cols.sort((a,b)=>a.sortKey-b.sortKey);
+  return cols;
+}
+
+function minClass(m){ if(m==null)return "m0"; if(m>=80)return"m90"; if(m>=60)return"m75"; if(m>=30)return"m45"; if(m>=1)return"m15"; return"m0"; }
+const dcThresh=et=>et===3||et===4?12:10;
+
+function playerStats(pid, et, cols){
+  const plRow=[], allMin=[]; let plStarts=0, plGames=0, g=0, a=0, starts=0, apps=0, total=0;
+  cols.forEach(c=>{ const d=c.byPid[pid]; const m=d?d.min:(c.family==="pl"?0:null);
+    if(c.family==="pl"){ plGames++; const mm=d?d.min:0; plRow.push(mm); if(mm>=60)plStarts++; }
+    if(d){ g+=d.g||0; a+=d.a||0; if(d.min>0){apps++; total+=d.min; if(d.min>=60)starts++;} }
+    allMin.push(m);
+  });
+  const plPct=plGames?Math.round(100*plStarts/plGames):0;
+  // recent PL drop: was a regular, latest PL game <45 after prior 70+
+  let drop=false; const last=plRow[plRow.length-1], prev=plRow[plRow.length-2];
+  if(plStarts>=Math.ceil(plGames*0.4) && last!=null && last<45 && (prev==null||prev>=70)) drop=true;
+  let tag;
+  if(plPct>=85) tag="🔒"; else if(plPct>=55) tag=drop?"🔄":"✅"; else if(plPct>=25||starts>=2) tag="🔄"; else tag="🪑";
+  if(drop&&tag==="🔒") tag="🔄";
+  return {allMin,plPct,plStarts,plGames,g,a,starts,apps,total,drop,tag};
+}
+
+function cellHtml(c, d){
+  if(d==null){ return `<td class="m0"></td>`; }
+  const m=d.min, cls=minClass(m), dp=d.__drop?" drop":"", mLabel=(m===0?"–":m);
+  const ttl=`${c.comp} ${c.home?"vs":"@"} ${c.opp}${c.date?" · "+new Date(c.date).toLocaleDateString(undefined,{day:"2-digit",month:"short"}):""} — ${m}′`;
+  return `<td class="${cls}${dp}" title="${esc(ttl)}">${mLabel}</td>`;
+}
+
+function render(){
+  const out=$("#out"); const t=DATA.teams[view.team]; if(!t){out.innerHTML="";return;}
+  let cols=timeline(view.team);
+  if(view.comp==="pl") cols=cols.filter(c=>c.family==="pl");
+  const cc=cupCache[view.team];
+
+  let players=DATA.playersByTeam[view.team].map(p=>({...p, st:playerStats(p.id,p.et,cols)}));
+  if(view.filt==="reg") players=players.filter(p=>p.st.plPct>=40||p.st.total>=180);
+  if(view.sort==="pos") players.sort((a,b)=>a.et-b.et||b.st.total-a.st.total);
+  else players.sort((a,b)=>b.st.total-a.st.total);
+
+  const head=`<tr>
+    <th class="pl">Player</th><th class="tagc"></th>
+    ${cols.map(c=>{const dd=c.date?new Date(c.date):null; const dt=dd?`${String(dd.getDate()).padStart(2,"0")}/${String(dd.getMonth()+1).padStart(2,"0")}`:(c.gw?"GW"+c.gw:"");
+      return `<th class="col fam-${c.family}"><span class="comp">${c.comp}</span><span class="opp">${esc(c.opp)}</span><span class="dt">${dt}</span></th>`;}).join("")}
+    <th>Σ′</th><th>St</th><th>PL%</th>
+  </tr>`;
+
+  let lastEt=null;
+  const body=players.map(p=>{
+    const s=p.st;
+    const sep=(view.sort==="pos"&&lastEt!==null&&p.et!==lastEt)?"rowsep":""; lastEt=p.et;
+    const lastPlIdx=(()=>{ let idx=-1; cols.forEach((c,i)=>{if(c.family==="pl")idx=i;}); return idx; })();
+    const cells=cols.map((c,i)=>{ let d=c.byPid[p.id];
+      if(d){ d={...d, __et:p.et, __drop:(s.drop&&i===lastPlIdx)}; }
+      else if(c.family==="pl"){ d={min:0,g:0,a:0,cs:0,dc:0,pl:true,__et:p.et}; }
+      return cellHtml(c,d===undefined?null:d); }).join("");
+    return `<tr class="${sep}">
+      <td class="pl" title="${esc(p.name)}">${esc(p.name)}<span class="pos">${esc(p.pos)}</span></td>
+      <td class="tagc">${s.tag}</td>
+      ${cells}
+      <td class="sum">${s.total}</td><td class="sum">${s.starts}</td>
+      <td class="pct" style="color:${s.plPct>=70?'var(--accent)':s.plPct>=40?'var(--amber)':'var(--ink-3)'}">${s.plPct}%</td>
+    </tr>`;
+  }).join("");
+
+  const nCup=cols.filter(c=>c.family!=="pl").length;
+  const subTxt=`${players.length} players · ${cols.filter(c=>c.family==="pl").length} PL`+(nCup?` · ${nCup} cup/Euro`:"");
+  out.innerHTML=`<div class="card">
+    <div class="chead"><img class="crest" src="${esc(t.badge)}" alt="" onerror="this.style.display='none'"><span class="ttl">${esc(t.name)}</span>
+      <span class="sub">${subTxt}</span><span class="cupspin" id="cupspin"></span></div>
+    <div class="scroll"><table class="grid"><thead>${head}</thead><tbody>${body}</tbody></table></div>
+  </div>`;
+  if(!cc) setCupSpin(true);
+  const note=$("#note");
+  if(cc&&cc.misses>0) note.innerHTML=`One row per player, every game in date order — league, Europe and cups together. <span class="miss">${cc.misses} cup appearance(s) couldn't be matched to an FPL player (academy/trialist) and are omitted.</span>`;
+}
+
+/* events */
+$("#teamSel").onchange=e=>{ view.team=e.target.value; render(); loadCups(view.team); };
+$("#sortSeg").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b)return; view.sort=b.dataset.sort; $("#sortSeg").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); render();});
+$("#filtSeg").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b)return; view.filt=b.dataset.filt; $("#filtSeg").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); render();});
+$("#compSeg").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b)return; view.comp=b.dataset.comp; $("#compSeg").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); render();});
+
+/* boot */
+load().catch(e=>{ $("#out").innerHTML=`<div class="card"><div class="ldg">Couldn't load FPL data — the proxy may be waking up. Refresh in a moment.<br><small>${esc(e&&e.message||e)}</small></div></div>`; });
+</script>
+</body>
+</html>
