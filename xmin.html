@@ -260,7 +260,8 @@ async function load(){
     playersByTeam[e.team].push({id:e.id, name:e.web_name, pos:POS[e.element_type]||"", et:e.element_type, status:e.status,
       web:norm(e.web_name), full:norm(e.first_name+" "+e.second_name)});
   });
-  DATA={teams,playersByTeam,gws:gotGws,plStats,plCol};
+  const byId={}; (bs.elements||[]).forEach(e=>byId[e.id]={id:e.id,name:e.web_name,pos:POS[e.element_type]||"",et:e.element_type,status:e.status});
+  DATA={teams,playersByTeam,gws:gotGws,plStats,plCol,byId,liveGw:(curStarted&&cur?cur.id:null)};
   buildTeamDropdown();
   const def=Object.values(teams).sort((a,b)=>a.name.localeCompare(b.name))[0];
   view.team=String(def.id); $("#teamSel").value=view.team;
@@ -272,7 +273,8 @@ function buildTeamDropdown(){
   const list=Object.values(DATA.teams).sort((a,b)=>a.name.localeCompare(b.name));
   const pl=list.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join("");
   const ex=Object.keys(EXTRA).map(k=>`<option value="${k}">${esc(EXTRA[k].name)}</option>`).join("");
-  sel.innerHTML=`<optgroup label="Premier League">${pl}</optgroup>`+(ex?`<optgroup label="Other leagues">${ex}</optgroup>`:"");
+  const sq=Object.keys(SQUADS).map(k=>`<option value="${k}">${esc(SQUADS[k].name)}</option>`).join("");
+  sel.innerHTML=`<optgroup label="My squads">${sq}</optgroup><optgroup label="Premier League">${pl}</optgroup>`+(ex?`<optgroup label="Other leagues">${ex}</optgroup>`:"");
 }
 
 /* ---------- cup / Europe minutes for one team (lazy, cached) ---------- */
@@ -327,6 +329,11 @@ const EXTRA={
     {path:"por.taca.da.liga",     code:"T.LIGA", family:"cup"},
     {path:"por.super_cup",        code:"S.TAÇA", family:"cup"}
   ]}
+};
+/* the user's own fantasy squads — custom player lists over the FPL minutes grid (columns are gameweeks, not a single opponent, since the 15 play for different clubs). Update the id lists after a transfer. */
+const SQUADS={
+  myclassic:{name:"⭐ My Classic XV", league:"940453", ids:[109,496,304,112,115,8,31,124,40,154,290,68,411,346,166]},
+  mydraft:{name:"⭐ My Draft XV", league:"6079", ids:[109,496,31,229,114,356,60,13,426,156,237,627,346,295,526]}
 };
 const espnTeamCache={};
 let MANUAL=[]; // hand-entered games for competitions ESPN doesn't cover (e.g. Portuguese Taça da Liga)
@@ -477,12 +484,20 @@ function cellHtml(c, d){
 function render(){
   const out=$("#out");
   const extra=EXTRA[view.team]; const isExtra=!!extra;
+  const squad=SQUADS[view.team]; const isSquad=!!squad;
   let meta, allCols, basePlayers, cc=null;
   if(isExtra){
     meta={name:extra.name, badge:extra.badge};
     const cache=espnTeamCache[view.team];
     if(!cache){ out.innerHTML=`<div class="card"><div class="ldg"><span class="spin"></span>Loading ${esc(extra.name)} — league, Europe &amp; cups from ESPN…</div></div>`; return; }
     allCols=cache.cols; basePlayers=cache.players;
+  } else if(isSquad){
+    meta={name:squad.name, badge:""};
+    allCols=DATA.gws.map((gw,i)=>{
+      const byPid={}; squad.ids.forEach(id=>{ const s=DATA.plStats[id]&&DATA.plStats[id][gw]; byPid[id]=s?{min:s.min,g:s.g,a:s.a}:{min:0}; });
+      return {family:"pl", comp:"GAME", opp:String(i+1), date:null, gf:null, ga:null, live:(gw===DATA.liveGw), byPid};
+    });
+    basePlayers=squad.ids.map(id=>DATA.byId[id]).filter(Boolean);
   } else {
     const t=DATA.teams[view.team]; if(!t){out.innerHTML="";return;}
     meta={name:t.name, badge:t.badge};
@@ -538,15 +553,16 @@ function render(){
       <span class="sub">${subTxt}</span><span class="cupspin" id="cupspin"></span></div>
     <div class="scroll"><table class="grid"><thead>${head}</thead><tbody>${body}</tbody></table></div>
   </div>`;
-  if(!isExtra && !cc) setCupSpin(true);
+  if(!isExtra && !isSquad && !cc) setCupSpin(true);
   const flabel=$("#flabel"); if(flabel) flabel.textContent=isExtra?"Liga Portugal":"Premier League";
   const note=$("#note");
-  if(cc&&cc.misses>0) note.innerHTML=`One row per player, every game in date order — league, Europe and cups together. <span class="miss">${cc.misses} cup appearance(s) couldn't be matched to an FPL player (academy/trialist) and are omitted.</span>`;
+  if(isSquad) note.textContent=`Your 15, minutes per gameweek (Game 1 = GW1). No opponent column — each player is at a different club. “Start” ≈ 60+ minutes · edit the roster in the SQUADS list after a transfer.`;
+  else if(cc&&cc.misses>0) note.innerHTML=`One row per player, every game in date order — league, Europe and cups together. <span class="miss">${cc.misses} cup appearance(s) couldn't be matched to an FPL player (academy/trialist) and are omitted.</span>`;
   else note.textContent="One row per player, every game in date order — league, Europe and cups together, so you can see who gets rested after midweek. “Start” ≈ 60+ minutes.";
 }
 
 /* events */
-$("#teamSel").onchange=e=>{ view.team=e.target.value; render(); if(EXTRA[view.team]) loadEspnTeam(view.team); else loadCups(view.team); };
+$("#teamSel").onchange=e=>{ view.team=e.target.value; render(); if(EXTRA[view.team]) loadEspnTeam(view.team); else if(!SQUADS[view.team]) loadCups(view.team); };
 $("#sortSeg").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b)return; view.sort=b.dataset.sort; $("#sortSeg").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); render();});
 $("#filtSeg").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b)return; view.filt=b.dataset.filt; $("#filtSeg").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); render();});
 $("#compSeg").addEventListener("click",e=>{const b=e.target.closest("button"); if(!b)return; view.comp=b.dataset.comp; $("#compSeg").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); render();});
