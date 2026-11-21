@@ -1385,6 +1385,7 @@ tbody tr.row-you:hover { background: var(--warn-soft); }
         <div class="roi-seg" id="roi-metseg">
           <button class="on" onclick="setRoiMetric('roi',this)">ROI</button>
           <button onclick="setRoiMetric('value',this)">Value</button>
+          <button onclick="setRoiMetric('form',this)">Form</button>
         </div>
         <div class="roi-seg" id="roi-poseg">
           <button class="on" onclick="setRoiPos('ALL',this)">All</button>
@@ -2965,8 +2966,9 @@ function renderROI() {
   if (!el) return;
   if (!STATE.bootstrap) { el.innerHTML = '<div class="loading">No data</div>'; return; }
   const isVal = roiMetric === 'value';
+  const isForm = roiMetric === 'form';
   const games = STATE.defconGames;
-  if (!games && !isVal) { el.innerHTML = '<div class="loading">Computing DefCon…</div>'; return; }
+  if (!games && !isVal && !isForm) { el.innerHTML = '<div class="loading">Computing DefCon…</div>'; return; }
   if (roiScope === 'draft' && !STATE.draftIds) { el.innerHTML = '<div class="loading">Loading your draft roster…</div>'; return; }
   const g0 = games || {};
   const w = 0.65;
@@ -2978,17 +2980,19 @@ function renderROI() {
     const dg = g0[e.id] || 0, cscred = (t === 1 || t === 2) ? cs : 0;
     const roi = g + a - 0.25 * yc + cscred + w * dg;
     const cost = e.now_cost / 10, value = e.total_points / cost;
-    return { e, g, a, yc, cs: cscred, dg, t, roi, value, cost, pts: e.total_points, classic: mineSet.has(e.id), draft: draftSet.has(e.id) };
+    return { e, g, a, yc, cs: cscred, dg, t, roi, value, form: parseFloat(e.form) || 0, cost, pts: e.total_points, classic: mineSet.has(e.id), draft: draftSet.has(e.id) };
   }).filter(r => {
     const inScope = roiScope === 'classic' ? r.classic : roiScope === 'draft' ? r.draft : true;
     if (!inScope) return false;
-    const passThresh = (roiScope !== 'all') || (isVal ? (r.pts > 0 && r.e.minutes >= 90) : (r.roi > 0.001 || r.dg > 0));
+    const passThresh = (roiScope !== 'all') || (isVal ? (r.pts > 0 && r.e.minutes >= 90) : isForm ? (r.e.minutes >= 90) : (r.roi > 0.001 || r.dg > 0));
     return passThresh && (roiPos === 'ALL' || posName[r.t] === roiPos);
   });
-  rows.sort((x, y) => isVal ? (y.value - x.value || y.pts - x.pts) : (y.roi - x.roi || (y.g + y.a) - (x.g + x.a) || x.e.minutes - y.e.minutes));
+  rows.sort((x, y) => isForm ? (y.form - x.form || y.pts - x.pts) : isVal ? (y.value - x.value || y.pts - x.pts) : (y.roi - x.roi || (y.g + y.a) - (x.g + x.a) || x.e.minutes - y.e.minutes));
   rows = rows.slice(0, 50);
   if (!rows.length) { el.innerHTML = '<div class="loading">No players</div>'; return; }
-  const head = isVal
+  const head = isForm
+    ? '<th class="c">#</th><th>Player</th><th class="c">Pos</th><th class="c">Form</th><th class="c">Pts</th><th class="c">£</th><th class="c">Min</th>'
+    : isVal
     ? '<th class="c">#</th><th>Player</th><th class="c">Pos</th><th class="c">Value</th><th class="c">Pts</th><th class="c">£</th><th class="c">Min</th>'
     : '<th class="c">#</th><th>Player</th><th class="c">Pos</th><th class="c">ROI</th><th class="c">Pts</th><th class="c">£</th><th class="c">G</th><th class="c">A</th><th class="c">CS</th><th class="c">DCg</th><th class="c">Min</th>';
   const body = rows.map((r, i) => {
@@ -2997,7 +3001,12 @@ function renderROI() {
     const idCell = `<td class="c" style="width:26px;color:var(--ink-muted)">${i + 1}</td>
       <td><span class="stand-team"><img class="stand-badge" src="${badge}" alt="" onerror="this.style.display='none'"><span class="pname">${e.web_name}</span> <span class="pmeta">${t.short}</span></span></td>
       <td class="c"><span class="pos pos-${pn.toLowerCase()}">${pn}</span></td>`;
-    const metricCells = isVal
+    const metricCells = isForm
+      ? `<td class="c"><span class="roi-val">${r.form.toFixed(1)}</span></td>
+         <td class="c">${r.pts}</td>
+         <td class="c" style="color:var(--ink-muted)">£${r.cost.toFixed(1)}</td>
+         <td class="c" style="color:var(--ink-muted)">${e.minutes}'</td>`
+      : isVal
       ? `<td class="c"><span class="roi-val">${r.value.toFixed(1)}</span></td>
          <td class="c">${r.pts}</td>
          <td class="c" style="color:var(--ink-muted)">£${r.cost.toFixed(1)}</td>
