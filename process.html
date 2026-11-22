@@ -131,6 +131,22 @@ tr:hover td{background:var(--bg-inset)}
     <table id="t-fixtures"><thead></thead><tbody></tbody></table>
   </div>
 
+  <div class="section">
+    <div class="section-head"><div class="section-title">5 · Form · Who's Showing Up</div><div class="section-kicker">top 25 by form · is it real or a flash?</div></div>
+    <div class="legend">
+      The hottest players by FPL <b>form</b> (avg points, last ~30 days). <b>xGI90</b> with <span style="color:var(--good)">✓</span> = the form is backed by underlying numbers; <span style="color:var(--warn)">⚡</span> = hot but thin underlying → regression risk (a flash). <span style="color:var(--blue)">●</span> = in your squad. <b>Next</b> = GW12 opponent (greener = leakier). Filter by position.
+    </div>
+    <div class="bar" style="border:none;padding:0 0 8px">
+      <span class="status">Position:</span>
+      <button class="btn ghost on" id="fp-0" onclick="setFormPos(0)">All</button>
+      <button class="btn ghost" id="fp-2" onclick="setFormPos(2)">DEF</button>
+      <button class="btn ghost" id="fp-3" onclick="setFormPos(3)">MID</button>
+      <button class="btn ghost" id="fp-4" onclick="setFormPos(4)">FWD</button>
+      <button class="btn ghost" id="fp-1" onclick="setFormPos(1)">GK</button>
+    </div>
+    <table id="t-form"><thead></thead><tbody></tbody></table>
+  </div>
+
   <div class="foot" id="foot"></div>
 </div>
 
@@ -173,6 +189,7 @@ const S=(m)=>document.getElementById('status').textContent=m;
 let MODEL=null;       // computed team data
 let BASIS='season';   // 'season' | 'l5'
 let HORIZON=5;        // next N fixtures
+let FORM_POS=0;       // form filter: 0=all, 1/2/3/4 = GK/DEF/MID/FWD
 let sortKey='xgd', sortDir=-1;
 
 function setBasis(b){
@@ -258,7 +275,7 @@ async function load(){
     computeProjections();
     renderTargets(); renderProcess(); renderFixtures();
     S('loading your squads…');
-    await loadSquads(); renderSquad();
+    await loadSquads(); renderSquad(); renderForm();
     S('rendered · '+Object.keys(T).length+' teams');
     document.getElementById('foot').innerHTML='Source: FPL API (bootstrap + '+playedGws.length+'× event/live for team xG + fixtures) via Cloudflare proxy. xGD=team xG for − against. Luck=actual GD − xGD. Fixture ease uses opponent per-game xG (±8% home/away). GW in progress counts as partial. Not advice — a process lens.';
   }catch(e){ S('error'); document.getElementById('foot').innerHTML='<span class="err">'+e.message+'</span>'; }
@@ -395,6 +412,34 @@ function renderSquadTable(id,rows,isClassic,err){
   }).join('');
   document.querySelector('#'+id+' thead').innerHTML=`<tr><th class="l">Player</th><th class="l">Pos</th><th>£</th><th>Min/g</th><th>ppg</th><th title="player xGI as % of team's total xGI — a weak-team asset needs a HIGH share">Share</th><th class="l">Sig</th><th class="l">${isClassic?'Best affordable upgrade':'Best free agent'}</th></tr>`;
   document.querySelector('#'+id+' tbody').innerHTML=err?`<tr><td colspan="8" class="err">couldn't load — ${err}</td></tr>`:(body||'<tr><td colspan="8" style="color:var(--ink-faint)">—</td></tr>');
+}
+function setFormPos(p){FORM_POS=p;[0,1,2,3,4].forEach(k=>{const b=document.getElementById('fp-'+k);if(b)b.classList.toggle('on',k===p);});if(MODEL)renderForm();}
+function renderForm(){
+  if(!MODEL) return;
+  const owned=new Set([...(MODEL.sq&&MODEL.sq.classic||[]),...(MODEL.sq&&MODEL.sq.draft||[])].map(x=>x.e.id));
+  const pos={1:'GK',2:'DEF',3:'MID',4:'FWD'};
+  let rows=MODEL.elements.filter(e=>(FORM_POS===0||e.element_type===FORM_POS)&&e.minutes>300&&parseFloat(e.form||0)>0);
+  rows.sort((a,b)=>parseFloat(b.form)-parseFloat(a.form));
+  rows=rows.slice(0,25);
+  document.querySelector('#t-form thead').innerHTML=`<tr><th class="l">Player</th><th class="l">Team</th><th class="l">Pos</th><th>£</th><th>Form</th><th>GW</th><th>xGI90</th><th>Own%</th><th class="l">Next</th></tr>`;
+  document.querySelector('#t-form tbody').innerHTML=rows.map(e=>{
+    const tm=MODEL.T[e.team], nx=tm&&tm.next&&tm.next[0];
+    const nxt=nx?`<span class="fx" style="background:${scaleBg(MODEL.T[nx.opp].xgapg,0.9,1.9)}">${MODEL.teams[nx.opp].name}${nx.home?'':'·a'}</span>`:'';
+    const xgi90=parseFloat(e.expected_goal_involvements_per_90||0);
+    const backed=e.element_type>=3?(xgi90>=0.45?' <span style="color:var(--good)" title="form backed by underlying">✓</span>':' <span style="color:var(--warn)" title="hot but thin underlying — regression risk">⚡</span>'):'';
+    const you=owned.has(e.id)?' <span style="color:var(--blue)" title="in your squad">●</span>':'';
+    return `<tr>
+      <td class="l team">${e.web_name}${you}</td>
+      <td class="l">${MODEL.teams[e.team].name}</td>
+      <td class="l">${pos[e.element_type]}</td>
+      <td class="num">£${(e.now_cost/10).toFixed(1)}</td>
+      <td class="num" style="background:${scaleBg(parseFloat(e.form),2,8)};font-weight:600">${e.form}</td>
+      <td class="num">${e.event_points}</td>
+      <td class="num">${xgi90.toFixed(2)}${backed}</td>
+      <td class="num">${e.selected_by_percent}%</td>
+      <td class="l">${nxt}</td>
+    </tr>`;
+  }).join('');
 }
 function renderProcess(){
   const cols=[['pos','#',0],['name','Team',1],['pl','Pl'],['pts','Pts'],['gd','GD'],['xgf','xGF'],['xga','xGA'],['xgd','xGD'],['luck','Luck'],['l5xgd','L5 xGD'],['tag','',1]];
