@@ -90,7 +90,7 @@ tr:hover td{background:var(--bg-inset)}
     <div class="section-head"><div class="section-title">1 · My Squad · Weakest Link</div><div class="section-kicker">projected ppg · cut the biggest upgrade gap</div></div>
     <div class="legend">
       <b>ppg</b> = projected FPL points/game over your horizon = minutes gate × per-90 output (xG/xA + clean sheets + DefCon) × fixture ease — comparable across attack & defense.
-      The <span class="tag trap">CUT</span> is the <b>weakest link</b>: biggest gap to the best replacement at its position (not merely the lowest ppg). <span class="tag fade">FIT?</span> minutes/injury risk · <span class="tag exo">BENCH</span>. Respects Horizon + Season/Last-5.
+      The <span class="tag trap">CUT</span> is the <b>weakest link</b>: biggest gap to the best replacement at its position (not merely the lowest ppg). <span class="tag fade">FIT?</span> minutes/injury risk · <span class="tag exo">BENCH</span>. <span style="color:var(--warn)">⚠</span> = penalty taker (xG pen-aided; missed-pen xG stripped, takers deprioritised in suggestions since FPL data can't isolate scored-pen xG). Respects Horizon + Season/Last-5.
     </div>
     <div class="squad-grid">
       <div><div class="section-kicker" style="margin-bottom:4px">Classic · 940453 · bank £<span id="sq-bank">—</span></div><table id="t-classic"><thead></thead><tbody></tbody></table></div>
@@ -159,6 +159,7 @@ async function draftFpl(path){
   throw new Error('draft API unreachable: '+path);
 }
 const clamp=(v,lo,hi)=>Math.max(lo,Math.min(v,hi));
+const penTaker=e=>e.penalties_order!=null&&e.penalties_order<=2;
 const S=(m)=>document.getElementById('status').textContent=m;
 
 let MODEL=null;       // computed team data
@@ -313,7 +314,8 @@ function expPPG(e){
   const playShare=mpg/90;
   const app=Math.min(mpg/60,1)*2;
   const per90=m=>parseFloat(e[m]||0)/e.minutes*90;
-  const xg90=per90('expected_goals'), xa90=per90('expected_assists');
+  const npxg=Math.max(0,parseFloat(e.expected_goals||0)-(e.penalties_missed||0)*0.76); // strip MISSED-pen xG (reliable; scored-pen xG not in FPL data)
+  const xg90=npxg/e.minutes*90, xa90=per90('expected_assists');
   const gv={1:6,2:6,3:5,4:4}[e.element_type], csVal={1:4,2:4,3:1,4:0}[e.element_type];
   const attMult=tm.fixAttMult||1, pCS=Math.exp(-(tm.projDef||tm.xgapg||1.4));
   const dc90=parseFloat(e.defensive_contribution_per_90||0);
@@ -341,7 +343,7 @@ async function loadSquads(){
   }catch(e){MODEL.sq.draftErr=e.message;}
 }
 function bestUpgrade(ownE,pool,budget){
-  const cur=expPPG(ownE).ppg; let best=null;
+  const cur=expPPG(ownE).ppg; let bN=null,bP=null; // best non-taker / best taker
   pool.forEach(c=>{
     if(c.element_type!==ownE.element_type||c.id===ownE.id) return;
     if(budget!=null&&c.now_cost>budget) return;
@@ -349,10 +351,12 @@ function bestUpgrade(ownE,pool,budget){
     if(avail<0.75) return;
     const tm=MODEL.T[c.team]; if(!tm||!c.minutes) return;
     const mpgC=(MODEL.recMpg&&MODEL.recMpg[c.id]!=null)?MODEL.recMpg[c.id]:c.minutes/(tm.pl||1); if(mpgC<60) return;
-    const p=expPPG(c).ppg;
-    if(p>cur&&(!best||p>best.ppg)) best={e:c,ppg:p};
+    const p=expPPG(c).ppg; if(p<=cur) return;
+    if(penTaker(c)){ if(!bP||p>bP.ppg) bP={e:c,ppg:p}; }
+    else { if(!bN||p>bN.ppg) bN={e:c,ppg:p}; }
   });
-  return best?{...best,gap:best.ppg-cur}:null;
+  const b=bN||bP; // prefer a non-penalty-taker; only fall back to a taker if nothing else beats the current player
+  return b?{...b,gap:b.ppg-cur,pen:!bN&&!!bP}:null;
 }
 function renderSquad(){
   if(!MODEL.sq) return;
@@ -371,9 +375,9 @@ function renderSquadTable(id,rows,isClassic,err){
   const body=rows.map(r=>{
     const cut=weak&&r.e.id===weak.e.id;
     const sig=cut?'<span class="tag trap">CUT</span>':r.flag==='fit?'?'<span class="tag fade">FIT?</span>':r.bench?'<span class="tag exo">BENCH</span>':'';
-    const up=r.up?`${r.up.e.web_name} <span style="color:var(--good);font-weight:600">+${r.up.gap.toFixed(2)}</span>`:'<span style="color:var(--ink-faint)">— none better</span>';
+    const up=r.up?`${r.up.e.web_name}${r.up.pen?' <span style="color:var(--warn)" title="pen-taker — only option; xG pen-aided, discount">⚠</span>':''} <span style="color:var(--good);font-weight:600">+${r.up.gap.toFixed(2)}</span>`:'<span style="color:var(--ink-faint)">— none better</span>';
     return `<tr${cut?' style="background:var(--bad-soft)"':''}>
-      <td class="l team">${r.e.web_name}${r.isC?' ©':''}</td>
+      <td class="l team">${r.e.web_name}${penTaker(r.e)?' <span style="color:var(--warn)" title="penalty taker — xG pen-aided">⚠</span>':''}${r.isC?' ©':''}</td>
       <td class="l">${pos[r.e.element_type]}</td>
       <td class="num">${isClassic?'£'+(r.e.now_cost/10).toFixed(1):'—'}</td>
       <td class="num">${Math.round(r.mpg)}'</td>
