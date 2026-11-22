@@ -376,7 +376,7 @@ function renderSquad(){
 }
 function renderSquadTable(id,rows,isClassic,err){
   const pos={1:'GK',2:'DEF',3:'MID',4:'FWD'};
-  let weak=null; rows.forEach(r=>{if(r.up&&(!weak||r.up.gap>weak.up.gap))weak=r;});
+  let weak=null; rows.filter(r=>!r.bench).forEach(r=>{if(r.up&&(!weak||r.up.gap>weak.up.gap))weak=r;}); // CUT among STARTERS only — a cheap bench enabler always has a huge gap, so it'd always win and mean nothing
   rows.sort((a,b)=>((a.bench?1:0)-(b.bench?1:0))||(b.ppg-a.ppg));
   const body=rows.map(r=>{
     const cut=weak&&r.e.id===weak.e.id;
