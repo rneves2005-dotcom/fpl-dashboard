@@ -29,5 +29,32 @@
       "Nel": 5,
       "Justo": 5
     }
+  },
+  {
+    "team": "scp",
+    "comp": "TAÇA",
+    "family": "cup",
+    "date": "2026-11-21",
+    "opp": "SERRA",
+    "home": true,
+    "score": "4-0",
+    "minutes": {
+      "Rui Silva": 90,
+      "Vagiannidis": 90,
+      "Felicissimo": 90,
+      "Blopa": 90,
+      "Ba": 46,
+      "Altimira": 46,
+      "Pedro Lima": 69,
+      "Simoes": 90,
+      "Irankunda": 75,
+      "Luis Guilherme": 46,
+      "Nel": 90,
+      "Catamo": 44,
+      "Andersen": 44,
+      "Inacio": 44,
+      "Zalazar": 21,
+      "Derry": 15
+    }
   }
 ]
