@@ -195,12 +195,18 @@ async function load(){
     S('loading '+playedGws.length+' gameweeks of xG…');
     const lives=await Promise.all(playedGws.map(gw=>fpl('/event/'+gw+'/live/').then(d=>[gw,d]).catch(()=>[gw,null])));
     // teamXG[gw][teamId] = sum player expected_goals
-    const txg={};
+    const txg={}, pmin={};
     lives.forEach(([gw,d])=>{
       if(!d) return; const m={};
-      d.elements.forEach(x=>{const t=pteam[x.id]; if(t){m[t]=(m[t]||0)+parseFloat(x.stats.expected_goals||0);}});
+      d.elements.forEach(x=>{const t=pteam[x.id]; const mn=parseFloat(x.stats.minutes||0);
+        if(t){m[t]=(m[t]||0)+parseFloat(x.stats.expected_goals||0);}
+        (pmin[x.id]=pmin[x.id]||[]).push([gw,mn]);
+      });
       txg[gw]=m;
     });
+    // RECENT minutes per player (last 4 GWs) — reflects current role, not a season avg dragged by pre-transfer weeks
+    const recMpg={};
+    for(const id in pmin){const a=pmin[id].sort((p,q)=>p[0]-q[0]).slice(-4); recMpg[id]=a.reduce((s,r)=>s+r[1],0)/(a.length||1);}
 
     // Build per-team season + last5 from fixtures
     const T={};
@@ -238,7 +244,7 @@ async function load(){
     const _v=Object.values(T),avgXGF=_v.reduce((s,o)=>s+o.xgfpg,0)/_v.length,avgXGA=_v.reduce((s,o)=>s+o.xgapg,0)/_v.length;
     const curGw=(boot.events.find(e=>e.is_current)||{}).id||playedGws[playedGws.length-1];
     const byCode={}; boot.elements.forEach(e=>byCode[e.code]=e);
-    MODEL={T,teams,avgXGF,avgXGA,byId:Object.fromEntries(boot.elements.map(e=>[e.id,e])),byCode,elements:boot.elements,curGw};
+    MODEL={T,teams,avgXGF,avgXGA,byId:Object.fromEntries(boot.elements.map(e=>[e.id,e])),byCode,elements:boot.elements,curGw,recMpg};
     document.getElementById('asof').textContent='GW'+(playedGws[playedGws.length-1]||'—')+' · '+new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
     computeProjections();
     renderTargets(); renderProcess(); renderFixtures();
@@ -302,7 +308,9 @@ function renderTargets(){
 function expPPG(e){
   const tm=MODEL.T[e.team];
   if(!tm||!e.minutes) return {ppg:0,mpg:0,flag:'no mins'};
-  const gp=tm.pl||1, mpg=Math.min(e.minutes/gp,90), playShare=mpg/90;
+  const gp=tm.pl||1;
+  const mpg=(MODEL.recMpg&&MODEL.recMpg[e.id]!=null)?Math.min(MODEL.recMpg[e.id],90):Math.min(e.minutes/gp,90);
+  const playShare=mpg/90;
   const app=Math.min(mpg/60,1)*2;
   const per90=m=>parseFloat(e[m]||0)/e.minutes*90;
   const xg90=per90('expected_goals'), xa90=per90('expected_assists');
@@ -339,7 +347,8 @@ function bestUpgrade(ownE,pool,budget){
     if(budget!=null&&c.now_cost>budget) return;
     const av=c.chance_of_playing_next_round, avail=av!=null?av/100:(c.status==='a'?1:0.3);
     if(avail<0.75) return;
-    const tm=MODEL.T[c.team]; if(!tm||!c.minutes||c.minutes/(tm.pl||1)<60) return;
+    const tm=MODEL.T[c.team]; if(!tm||!c.minutes) return;
+    const mpgC=(MODEL.recMpg&&MODEL.recMpg[c.id]!=null)?MODEL.recMpg[c.id]:c.minutes/(tm.pl||1); if(mpgC<60) return;
     const p=expPPG(c).ppg;
     if(p>cur&&(!best||p>best.ppg)) best={e:c,ppg:p};
   });
