@@ -511,6 +511,8 @@ function render(){
   }
   let cols=allCols;
   if(view.comp==="pl") cols=cols.filter(c=>c.family==="pl");
+  // drop empty ESPN "shell" columns (fixture logged but no minutes for anyone) so a manual entry doesn't double with an empty ESPN twin for the same game
+  cols=cols.filter(c=>c.manual || c.family==="pl" || Object.values(c.byPid||{}).some(d=>d&&d.min>0));
 
   let players=basePlayers.map(p=>({...p, st:playerStats(p.id,p.et,cols)}));
   if(view.filt==="reg") players=players.filter(p=>p.st.plPct>=40||p.st.total>=180);
