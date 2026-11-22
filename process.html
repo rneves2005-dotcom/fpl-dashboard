@@ -90,6 +90,7 @@ tr:hover td{background:var(--bg-inset)}
     <div class="section-head"><div class="section-title">1 · My Squad · Weakest Link</div><div class="section-kicker">projected ppg · cut the biggest upgrade gap</div></div>
     <div class="legend">
       <b>ppg</b> = projected FPL points/game over your horizon = minutes gate × per-90 output (xG/xA + clean sheets + DefCon) × fixture ease — comparable across attack & defense.
+      <b>Share</b> = the player's xGI as a % of his team's total — a weak-team asset needs a HIGH share to be worth it (the Mbeumo/Wissa-at-Brentford test; read it next to the team code).
       The <span class="tag trap">CUT</span> is the <b>weakest link</b>: biggest gap to the best replacement at its position (not merely the lowest ppg). <span class="tag fade">FIT?</span> injury risk · <span class="tag fade">MINS ⏱</span> curated forward minutes risk the data can't see yet (e.g. a returning starter) · <span class="tag exo">BENCH</span>. <span style="color:var(--warn)">⚠</span> = penalty taker — pens are COUNTED as the real points they are; the flag + the suggestion's team code just let you judge pen-reliance and team strength yourself (a great taker on a weak team). Respects Horizon + Season/Last-5.
     </div>
     <div class="squad-grid">
@@ -163,8 +164,10 @@ const penTaker=e=>e.penalties_order!=null&&e.penalties_order<=2;
 // Forward minutes risk the DATA can't see yet (squad competition / a returning starter displacing them).
 // Manual overlay — recent minutes still look fine until the benching actually happens. Review weekly.
 const MINUTES_RISK={
-  'Konsa':'Saliba back from injury — likely loses the Arsenal CB spot soon',
+  'Konsa':'Saliba returning — may lose the Arsenal CB spot (or shift to RB, as at the WC). Watch the teamsheet.',
 };
+// involvement share: player's xGI as a fraction of the team's total xGI — a weak-team asset needs a HIGH share to matter (the Mbeumo/Wissa-at-Brentford test)
+const shareOf=e=>{const o=MODEL.T[e.team];const x=parseFloat(e.expected_goals||0)+parseFloat(e.expected_assists||0);return(o&&o.xgiTotal)?x/o.xgiTotal:0;};
 const S=(m)=>document.getElementById('status').textContent=m;
 
 let MODEL=null;       // computed team data
@@ -246,7 +249,7 @@ async function load(){
     });
 
     // market sentiment: net transfers this GW per team (the "template" forming)
-    boot.elements.forEach(e=>{const o=T[e.team];if(o){o.netT+=(e.transfers_in_event||0)-(e.transfers_out_event||0);}});
+    boot.elements.forEach(e=>{const o=T[e.team];if(o){o.netT+=(e.transfers_in_event||0)-(e.transfers_out_event||0);o.xgiTotal=(o.xgiTotal||0)+parseFloat(e.expected_goals||0)+parseFloat(e.expected_assists||0);}});
     const _v=Object.values(T),avgXGF=_v.reduce((s,o)=>s+o.xgfpg,0)/_v.length,avgXGA=_v.reduce((s,o)=>s+o.xgapg,0)/_v.length;
     const curGw=(boot.events.find(e=>e.is_current)||{}).id||playedGws[playedGws.length-1];
     const byCode={}; boot.elements.forEach(e=>byCode[e.code]=e);
@@ -329,7 +332,7 @@ function expPPG(e){
   const attackPts=(xg90*gv+xa90*3)*attMult*playShare;
   const csPts=csVal*pCS*Math.min(mpg/70,1), dcPts=2*pDefCon*playShare;
   let ppg=(app+attackPts+csPts+dcPts)*avail;
-  const risk=MINUTES_RISK[e.web_name]; if(risk) ppg*=0.65; // haircut for imminent minutes loss not yet in the data
+  const risk=MINUTES_RISK[e.web_name]; if(risk) ppg*=0.85; // mild haircut — flags the risk without nuking a player who's still starting (uncertain until the teamsheet)
   return {ppg,mpg,avail,risk,flag:risk?'mins':(avail<0.6?'fit?':'')};
 }
 async function loadSquads(){
@@ -378,19 +381,20 @@ function renderSquadTable(id,rows,isClassic,err){
   const body=rows.map(r=>{
     const cut=weak&&r.e.id===weak.e.id;
     const sig=cut?'<span class="tag trap">CUT</span>':r.flag==='mins'?`<span class="tag fade" title="${r.risk||''}">MINS ⏱</span>`:r.flag==='fit?'?'<span class="tag fade">FIT?</span>':r.bench?'<span class="tag exo">BENCH</span>':'';
-    const up=r.up?`${r.up.e.web_name} <span style="color:var(--ink-muted);font-size:10px">${MODEL.teams[r.up.e.team].name}</span>${r.up.pen?' <span style="color:var(--warn)" title="penalty taker — pens counted; judge pen-reliance + team strength">⚠</span>':''} <span style="color:var(--good);font-weight:600">+${r.up.gap.toFixed(2)}</span>`:'<span style="color:var(--ink-faint)">— none better</span>';
+    const up=r.up?`${r.up.e.web_name} <span style="color:var(--ink-muted);font-size:10px">${MODEL.teams[r.up.e.team].name} ${(shareOf(r.up.e)*100).toFixed(0)}%</span>${r.up.pen?' <span style="color:var(--warn)" title="penalty taker — pens counted; judge pen-reliance + team strength">⚠</span>':''} <span style="color:var(--good);font-weight:600">+${r.up.gap.toFixed(2)}</span>`:'<span style="color:var(--ink-faint)">— none better</span>';
     return `<tr${cut?' style="background:var(--bad-soft)"':''}>
       <td class="l team">${r.e.web_name}${penTaker(r.e)?' <span style="color:var(--warn)" title="penalty taker — xG pen-aided">⚠</span>':''}${r.isC?' ©':''}</td>
       <td class="l">${pos[r.e.element_type]}</td>
       <td class="num">${isClassic?'£'+(r.e.now_cost/10).toFixed(1):'—'}</td>
       <td class="num">${Math.round(r.mpg)}'</td>
       <td class="num" style="background:${scaleBg(r.ppg,1.5,6)};font-weight:600">${r.ppg.toFixed(2)}</td>
+      <td class="num" style="background:${scaleBg(shareOf(r.e),0.08,0.35)}" title="xGI share of team">${(shareOf(r.e)*100).toFixed(0)}%</td>
       <td class="l">${sig}</td>
       <td class="l" style="font-size:11px">${up}</td>
     </tr>`;
   }).join('');
-  document.querySelector('#'+id+' thead').innerHTML=`<tr><th class="l">Player</th><th class="l">Pos</th><th>£</th><th>Min/g</th><th>ppg</th><th class="l">Sig</th><th class="l">${isClassic?'Best affordable upgrade':'Best free agent'}</th></tr>`;
-  document.querySelector('#'+id+' tbody').innerHTML=err?`<tr><td colspan="7" class="err">couldn't load — ${err}</td></tr>`:(body||'<tr><td colspan="7" style="color:var(--ink-faint)">—</td></tr>');
+  document.querySelector('#'+id+' thead').innerHTML=`<tr><th class="l">Player</th><th class="l">Pos</th><th>£</th><th>Min/g</th><th>ppg</th><th title="player xGI as % of team's total xGI — a weak-team asset needs a HIGH share">Share</th><th class="l">Sig</th><th class="l">${isClassic?'Best affordable upgrade':'Best free agent'}</th></tr>`;
+  document.querySelector('#'+id+' tbody').innerHTML=err?`<tr><td colspan="8" class="err">couldn't load — ${err}</td></tr>`:(body||'<tr><td colspan="8" style="color:var(--ink-faint)">—</td></tr>');
 }
 function renderProcess(){
   const cols=[['pos','#',0],['name','Team',1],['pl','Pl'],['pts','Pts'],['gd','GD'],['xgf','xGF'],['xga','xGA'],['xgd','xGD'],['luck','Luck'],['l5xgd','L5 xGD'],['tag','',1]];
