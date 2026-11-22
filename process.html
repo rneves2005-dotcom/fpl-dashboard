@@ -75,15 +75,20 @@ tr:hover td{background:var(--bg-inset)}
     <button class="btn" id="reload" onclick="load()">↻ Refresh</button>
     <span class="status" id="status">idle</span>
     <span class="spacer"></span>
+    <span class="status">Horizon:</span>
+    <button class="btn ghost" id="h-1" onclick="setHorizon(1)">Next 1</button>
+    <button class="btn ghost" id="h-3" onclick="setHorizon(3)">Next 3</button>
+    <button class="btn ghost on" id="h-5" onclick="setHorizon(5)">Next 5</button>
+    <span style="display:inline-block;width:12px"></span>
     <span class="status">Fixture basis:</span>
     <button class="btn ghost on" id="b-season" onclick="setBasis('season')">Season</button>
     <button class="btn ghost" id="b-l5" onclick="setBasis('l5')">Last 5</button>
   </div>
 
   <div class="section">
-    <div class="section-head"><div class="section-title">1 · Transfer Score</div><div class="section-kicker">projected net xG/game · next 5 · opponent + venue weighted</div></div>
+    <div class="section-head"><div class="section-title">1 · Transfer Score</div><div class="section-kicker">projected net xG/game · next <span class="hz-lbl">5</span> · opponent + venue weighted</div></div>
     <div class="legend">
-      <b>xG Score</b> = projected net xG per game over the next 5 (your attack × opponents' leakiness − your defense × opponents' threat, venue-adjusted) — one number for how ownable a team's assets are.
+      <b>xG Score</b> = projected net xG per game over the next <span class="hz-lbl">5</span> (your attack × opponents' leakiness − your defense × opponents' threat, venue-adjusted) — one number for how ownable a team's assets are.
       <b>Att</b> = projected xG created (buy their attackers, higher=greener), <b>Def</b> = projected xG conceded (buy their clean sheets, lower=greener).
       <b>Market</b> = net transfers this GW (the "template" forming — green bought / red sold). <b>Signal</b> crosses process with sentiment:
       <span class="tag con">CONSENSUS</span> good + crowd buying (safe/template) · <span class="tag edge">EDGE</span> good + crowd NOT on it (front-run) · <span class="tag trap">TRAP</span> weak + crowd buying (fade) · <span class="tag exo">EXODUS</span> weak + sold.
@@ -103,9 +108,9 @@ tr:hover td{background:var(--bg-inset)}
   </div>
 
   <div class="section">
-    <div class="section-head"><div class="section-title">3 · Fixture xG-Projection</div><div class="section-kicker">next 5 · opponent quality, venue-adjusted</div></div>
+    <div class="section-head"><div class="section-title">3 · Fixture xG-Projection</div><div class="section-kicker">next <span class="hz-lbl">5</span> · opponent quality, venue-adjusted</div></div>
     <div class="legend">
-      For each team's next 5 games: <b>Att-ease</b> = how leaky the defenses they'll face (opponent xGA/game). <b>Higher = greener = buy their ATTACKERS.</b>
+      For each team's next <span class="hz-lbl">5</span> games: <b>Att-ease</b> = how leaky the defenses they'll face (opponent xGA/game). <b>Higher = greener = buy their ATTACKERS.</b>
       <b>Def-ease</b> = how weak the attacks they'll face (opponent xGF/game). <b>Lower = greener = buy their DEFENDERS / clean sheets.</b>
       Each opponent nudged ±8% for home/away. Opponent strength uses <b id="basis-lbl">season</b> per-game xG (toggle above).
     </div>
@@ -136,6 +141,7 @@ const S=(m)=>document.getElementById('status').textContent=m;
 
 let MODEL=null;       // computed team data
 let BASIS='season';   // 'season' | 'l5'
+let HORIZON=5;        // next N fixtures
 let sortKey='xgd', sortDir=-1;
 
 function setBasis(b){
@@ -143,6 +149,12 @@ function setBasis(b){
   document.getElementById('b-season').classList.toggle('on',b==='season');
   document.getElementById('b-l5').classList.toggle('on',b==='l5');
   document.getElementById('basis-lbl').textContent=b==='season'?'season':'last-5';
+  if(MODEL){renderTargets();renderFixtures();}
+}
+function setHorizon(n){
+  HORIZON=n;
+  [1,3,5].forEach(k=>document.getElementById('h-'+k).classList.toggle('on',k===n));
+  document.querySelectorAll('.hz-lbl').forEach(el=>el.textContent=n);
   if(MODEL){renderTargets();renderFixtures();}
 }
 
@@ -228,8 +240,8 @@ function renderTargets(){
   const {T,avgXGF,avgXGA}=MODEL, useL5=BASIS==='l5';
   const oA=o=>useL5?o.l5xfpg:o.xgfpg, oD=o=>useL5?o.l5xapg:o.xgapg;
   let rows=Object.values(T).map(o=>{
-    let pa=0,pd=0,n=o.next.length||1;
-    o.next.forEach(fx=>{const op=T[fx.opp],vA=fx.home?1.08:0.92,vD=fx.home?0.92:1.08;
+    const nx=o.next.slice(0,HORIZON); let pa=0,pd=0,n=nx.length||1;
+    nx.forEach(fx=>{const op=T[fx.opp],vA=fx.home?1.08:0.92,vD=fx.home?0.92:1.08;
       pa+=oA(o)*(oD(op)/avgXGA)*vA;   // own attack × opp leakiness(rel) × venue
       pd+=oD(o)*(oA(op)/avgXGF)*vD;   // own leakiness × opp attack(rel) × venue
     });
@@ -290,8 +302,8 @@ function renderFixtures(){
   const oppAtt=o=>useL5?o.l5xfpg:o.xgfpg;   // opponent per-game xG-for (their attack)
   const oppDef=o=>useL5?o.l5xapg:o.xgapg;   // opponent per-game xG-against (their leakiness)
   const rows=Object.values(T).map(o=>{
-    let aEase=0,dEase=0,n=o.next.length||1;
-    const chips=o.next.map(fx=>{
+    const nx=o.next.slice(0,HORIZON); let aEase=0,dEase=0,n=nx.length||1;
+    const chips=nx.map(fx=>{
       const op=T[fx.opp];
       const vA=fx.home?1.08:0.92, vD=fx.home?0.92:1.08;
       aEase+=oppDef(op)*vA;          // leaky opp D, boosted if we're home
@@ -302,7 +314,7 @@ function renderFixtures(){
     return {o,chips,aEase,dEase};
   });
   rows.sort((a,b)=>b.aEase-a.aEase);
-  document.querySelector('#t-fixtures thead').innerHTML=`<tr><th class="l">Team</th><th class="l">Next 5 (· a = away)</th><th>Att-ease</th><th>Def-ease</th><th class="l">Read</th></tr>`;
+  document.querySelector('#t-fixtures thead').innerHTML=`<tr><th class="l">Team</th><th class="l">Next ${HORIZON} (· a = away)</th><th>Att-ease</th><th>Def-ease</th><th class="l">Read</th></tr>`;
   document.querySelector('#t-fixtures tbody').innerHTML=rows.map(({o,chips,aEase,dEase})=>{
     const read = aEase>=1.45?'<span class="tag buy">ATT run</span>':(dEase<=1.15?'<span class="tag buy">CS run</span>':'');
     return `<tr>
