@@ -52,6 +52,10 @@ tr:hover td{background:var(--bg-inset)}
 .tag.buy{background:var(--good-soft);color:var(--good)}
 .tag.fade{background:var(--bad-soft);color:var(--bad)}
 .tag.elite{background:#1A1815;color:var(--bg)}
+.tag.con{background:var(--blue-soft);color:var(--blue)}
+.tag.edge{background:#FBF0CF;color:#8A6D10}
+.tag.trap{background:var(--bad-soft);color:var(--bad)}
+.tag.exo{background:#EFEAE0;color:var(--ink-faint)}
 .foot{font-size:10px;color:var(--ink-faint);margin-top:18px;line-height:1.6}
 .err{color:var(--bad);font-size:12px;padding:20px 0}
 @media (max-width:720px){.masthead{grid-template-columns:1fr}.masthead-left,.masthead-right{display:none}table{font-size:11px}td,th{padding:4px 4px}}
@@ -77,7 +81,18 @@ tr:hover td{background:var(--bg-inset)}
   </div>
 
   <div class="section">
-    <div class="section-head"><div class="section-title">1 · Process vs Results</div><div class="section-kicker">xG-difference = true quality · Luck = GD − xGD</div></div>
+    <div class="section-head"><div class="section-title">1 · Transfer Score</div><div class="section-kicker">projected net xG/game · next 5 · opponent + venue weighted</div></div>
+    <div class="legend">
+      <b>xG Score</b> = projected net xG per game over the next 5 (your attack × opponents' leakiness − your defense × opponents' threat, venue-adjusted) — one number for how ownable a team's assets are.
+      <b>Att</b> = projected xG created (buy their attackers, higher=greener), <b>Def</b> = projected xG conceded (buy their clean sheets, lower=greener).
+      <b>Market</b> = net transfers this GW (the "template" forming — green bought / red sold). <b>Signal</b> crosses process with sentiment:
+      <span class="tag con">CONSENSUS</span> good + crowd buying (safe/template) · <span class="tag edge">EDGE</span> good + crowd NOT on it (front-run) · <span class="tag trap">TRAP</span> weak + crowd buying (fade) · <span class="tag exo">EXODUS</span> weak + sold.
+    </div>
+    <table id="t-score"><thead></thead><tbody></tbody></table>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-title">2 · Process vs Results</div><div class="section-kicker">xG-difference = true quality · Luck = GD − xGD</div></div>
     <div class="legend">
       <b>xGD</b> ranks teams by real quality (attack xGF minus defense xGA). <b>Luck = actual GD − xGD</b>:
       <span class="chip" style="background:var(--good-soft);color:var(--good)">green / negative</span> = results <b>behind</b> process → unlucky, regress <b>UP</b> → <b>BUY</b>;
@@ -88,7 +103,7 @@ tr:hover td{background:var(--bg-inset)}
   </div>
 
   <div class="section">
-    <div class="section-head"><div class="section-title">2 · Fixture xG-Projection</div><div class="section-kicker">next 5 · opponent quality, venue-adjusted</div></div>
+    <div class="section-head"><div class="section-title">3 · Fixture xG-Projection</div><div class="section-kicker">next 5 · opponent quality, venue-adjusted</div></div>
     <div class="legend">
       For each team's next 5 games: <b>Att-ease</b> = how leaky the defenses they'll face (opponent xGA/game). <b>Higher = greener = buy their ATTACKERS.</b>
       <b>Def-ease</b> = how weak the attacks they'll face (opponent xGF/game). <b>Lower = greener = buy their DEFENDERS / clean sheets.</b>
@@ -128,7 +143,7 @@ function setBasis(b){
   document.getElementById('b-season').classList.toggle('on',b==='season');
   document.getElementById('b-l5').classList.toggle('on',b==='l5');
   document.getElementById('basis-lbl').textContent=b==='season'?'season':'last-5';
-  if(MODEL) renderFixtures();
+  if(MODEL){renderTargets();renderFixtures();}
 }
 
 async function load(){
@@ -155,7 +170,7 @@ async function load(){
 
     // Build per-team season + last5 from fixtures
     const T={};
-    Object.values(teams).forEach(t=>T[t.id]={...t,pl:0,w:0,d:0,l:0,gf:0,ga:0,pts:0,gd:0,xgf:0,xga:0,hist:[]});
+    Object.values(teams).forEach(t=>T[t.id]={...t,pl:0,w:0,d:0,l:0,gf:0,ga:0,pts:0,gd:0,xgf:0,xga:0,netT:0,hist:[]});
     const played=fixtures.filter(f=>(f.finished||f.started)&&f.event).sort((a,b)=>a.event-b.event);
     played.forEach(f=>{
       const gw=f.event, hg=f.team_h_score, ag=f.team_a_score;
@@ -184,10 +199,13 @@ async function load(){
       if(T[f.team_a].next.length<5) T[f.team_a].next.push({opp:f.team_h,home:false,ev:f.event});
     });
 
-    MODEL={T,teams};
+    // market sentiment: net transfers this GW per team (the "template" forming)
+    boot.elements.forEach(e=>{const o=T[e.team];if(o){o.netT+=(e.transfers_in_event||0)-(e.transfers_out_event||0);}});
+    const _v=Object.values(T),avgXGF=_v.reduce((s,o)=>s+o.xgfpg,0)/_v.length,avgXGA=_v.reduce((s,o)=>s+o.xgapg,0)/_v.length;
+    MODEL={T,teams,avgXGF,avgXGA};
     document.getElementById('asof').textContent='GW'+(playedGws[playedGws.length-1]||'—')+' · '+new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
     S('rendered · '+Object.keys(T).length+' teams');
-    renderProcess(); renderFixtures();
+    renderTargets(); renderProcess(); renderFixtures();
     document.getElementById('foot').innerHTML='Source: FPL API (bootstrap + '+playedGws.length+'× event/live for team xG + fixtures) via Cloudflare proxy. xGD=team xG for − against. Luck=actual GD − xGD. Fixture ease uses opponent per-game xG (±8% home/away). GW in progress counts as partial. Not advice — a process lens.';
   }catch(e){ S('error'); document.getElementById('foot').innerHTML='<span class="err">'+e.message+'</span>'; }
   btn.disabled=false;
@@ -206,6 +224,38 @@ function tagFor(o){ // quick BUY/FADE/ELITE badge
   return '';
 }
 
+function renderTargets(){
+  const {T,avgXGF,avgXGA}=MODEL, useL5=BASIS==='l5';
+  const oA=o=>useL5?o.l5xfpg:o.xgfpg, oD=o=>useL5?o.l5xapg:o.xgapg;
+  let rows=Object.values(T).map(o=>{
+    let pa=0,pd=0,n=o.next.length||1;
+    o.next.forEach(fx=>{const op=T[fx.opp],vA=fx.home?1.08:0.92,vD=fx.home?0.92:1.08;
+      pa+=oA(o)*(oD(op)/avgXGA)*vA;   // own attack × opp leakiness(rel) × venue
+      pd+=oD(o)*(oA(op)/avgXGF)*vD;   // own leakiness × opp attack(rel) × venue
+    });
+    pa/=n; pd/=n; return {o,pa,pd,score:pa-pd,netT:o.netT||0};
+  });
+  const bs=[...rows].sort((a,b)=>b.score-a.score), bm=[...rows].sort((a,b)=>b.netT-a.netT);
+  const sr={},mr={}; bs.forEach((r,i)=>sr[r.o.id]=i); bm.forEach((r,i)=>mr[r.o.id]=i);
+  const N=rows.length, th=Math.round(N/3);
+  const sig=r=>{const sp=sr[r.o.id],mp=mr[r.o.id],pt=sp<th,pb=sp>=N-th,mt=mp<th,mb=mp>=N-th;
+    if(pt&&mt)return['CONSENSUS','con']; if(pt)return['EDGE','edge'];
+    if(pb&&mt)return['TRAP','trap']; if(pb&&mb)return['EXODUS','exo']; return['',''];};
+  rows.sort((a,b)=>b.score-a.score);
+  document.querySelector('#t-score thead').innerHTML='<tr><th class="l">#</th><th class="l">Team</th><th>xG Score</th><th>Att</th><th>Def</th><th>Market</th><th class="l">Signal</th></tr>';
+  document.querySelector('#t-score tbody').innerHTML=rows.map((r,i)=>{
+    const [lbl,cls]=sig(r), k=r.netT/1000;
+    return `<tr>
+      <td class="pos">${i+1}</td>
+      <td class="l team">${r.o.name}</td>
+      <td class="num" style="background:${scaleBg(r.score,-0.6,1.2)};font-weight:600">${(r.score>0?'+':'')+r.score.toFixed(2)}</td>
+      <td class="num" style="background:${scaleBg(r.pa,0.9,1.9)}">${r.pa.toFixed(2)}</td>
+      <td class="num" style="background:${scaleBg(r.pd,0.9,1.9,true)}">${r.pd.toFixed(2)}</td>
+      <td class="num" style="color:${k>0?'var(--good)':k<0?'var(--bad)':'var(--ink-faint)'};font-weight:600">${(k>=0?'+':'')+k.toFixed(0)}k</td>
+      <td class="l">${lbl?`<span class="tag ${cls}">${lbl}</span>`:''}</td>
+    </tr>`;
+  }).join('');
+}
 function renderProcess(){
   const cols=[['pos','#',0],['name','Team',1],['pl','Pl'],['pts','Pts'],['gd','GD'],['xgf','xGF'],['xga','xGA'],['xgd','xGD'],['luck','Luck'],['l5xgd','L5 xGD'],['tag','',1]];
   const rows=Object.values(MODEL.T).slice();
