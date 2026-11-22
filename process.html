@@ -369,14 +369,14 @@ function renderSquad(){
   const el=document.getElementById('sq-bank'); if(el) el.textContent=(MODEL.sq.bank||0).toFixed(1);
   const owned=new Set(MODEL.sq.classic.map(x=>x.e.id));
   const pool=MODEL.elements.filter(c=>!owned.has(c.id));
-  const crows=MODEL.sq.classic.map(x=>{const r=expPPG(x.e);const budget=(MODEL.sq.bank||0)*10+x.e.now_cost;return {...x,...r,up:x.bench?null:bestUpgrade(x.e,pool,budget)};});
+  const crows=MODEL.sq.classic.map(x=>{const r=expPPG(x.e);const budget=(MODEL.sq.bank||0)*10+x.e.now_cost;return {...x,...r,up:bestUpgrade(x.e,pool,budget)};});
   const drows=MODEL.sq.draft.map(x=>{const r=expPPG(x.e);return {...x,...r,up:bestUpgrade(x.e,MODEL.sq.fa,null)};});
   renderSquadTable('t-classic',crows,true,MODEL.sq.classicErr);
   renderSquadTable('t-draft',drows,false,MODEL.sq.draftErr);
 }
 function renderSquadTable(id,rows,isClassic,err){
   const pos={1:'GK',2:'DEF',3:'MID',4:'FWD'};
-  let weak=null; rows.filter(r=>!r.bench).forEach(r=>{if(r.up&&(!weak||r.up.gap>weak.up.gap))weak=r;});
+  let weak=null; rows.forEach(r=>{if(r.up&&(!weak||r.up.gap>weak.up.gap))weak=r;});
   rows.sort((a,b)=>((a.bench?1:0)-(b.bench?1:0))||(b.ppg-a.ppg));
   const body=rows.map(r=>{
     const cut=weak&&r.e.id===weak.e.id;
