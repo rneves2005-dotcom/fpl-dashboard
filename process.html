@@ -38,6 +38,7 @@ html,body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sa
 .legend{font-size:11px;color:var(--ink-muted);margin:6px 0 12px;line-height:1.6}
 .legend b{color:var(--ink)}
 .chip{display:inline-block;padding:1px 5px;border-radius:2px;font-size:10px;font-weight:600;margin-right:3px}
+.squad-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
 th{text-align:right;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);padding:5px 7px;border-bottom:1px solid var(--line-strong);cursor:pointer;white-space:nowrap}
 th.l,td.l{text-align:left}
@@ -58,7 +59,7 @@ tr:hover td{background:var(--bg-inset)}
 .tag.exo{background:#EFEAE0;color:var(--ink-faint)}
 .foot{font-size:10px;color:var(--ink-faint);margin-top:18px;line-height:1.6}
 .err{color:var(--bad);font-size:12px;padding:20px 0}
-@media (max-width:720px){.masthead{grid-template-columns:1fr}.masthead-left,.masthead-right{display:none}table{font-size:11px}td,th{padding:4px 4px}}
+@media (max-width:720px){.masthead{grid-template-columns:1fr}.masthead-left,.masthead-right{display:none}table{font-size:11px}td,th{padding:4px 4px}.squad-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -86,7 +87,19 @@ tr:hover td{background:var(--bg-inset)}
   </div>
 
   <div class="section">
-    <div class="section-head"><div class="section-title">1 · Transfer Score</div><div class="section-kicker">projected net xG/game · next <span class="hz-lbl">5</span> · opponent + venue weighted</div></div>
+    <div class="section-head"><div class="section-title">1 · My Squad · Weakest Link</div><div class="section-kicker">projected ppg · cut the biggest upgrade gap</div></div>
+    <div class="legend">
+      <b>ppg</b> = projected FPL points/game over your horizon = minutes gate × per-90 output (xG/xA + clean sheets + DefCon) × fixture ease — comparable across attack & defense.
+      The <span class="tag trap">CUT</span> is the <b>weakest link</b>: biggest gap to the best replacement at its position (not merely the lowest ppg). <span class="tag fade">FIT?</span> minutes/injury risk · <span class="tag exo">BENCH</span>. Respects Horizon + Season/Last-5.
+    </div>
+    <div class="squad-grid">
+      <div><div class="section-kicker" style="margin-bottom:4px">Classic · 940453 · bank £<span id="sq-bank">—</span></div><table id="t-classic"><thead></thead><tbody></tbody></table></div>
+      <div><div class="section-kicker" style="margin-bottom:4px">Draft · 6079 · vs free agents</div><table id="t-draft"><thead></thead><tbody></tbody></table></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head"><div class="section-title">2 · Transfer Score</div><div class="section-kicker">projected net xG/game · next <span class="hz-lbl">5</span> · opponent + venue weighted</div></div>
     <div class="legend">
       <b>xG Score</b> = projected net xG per game over the next <span class="hz-lbl">5</span> (your attack × opponents' leakiness − your defense × opponents' threat, venue-adjusted) — one number for how ownable a team's assets are.
       <b>Att</b> = projected xG created (buy their attackers, higher=greener), <b>Def</b> = projected xG conceded (buy their clean sheets, lower=greener).
@@ -97,7 +110,7 @@ tr:hover td{background:var(--bg-inset)}
   </div>
 
   <div class="section">
-    <div class="section-head"><div class="section-title">2 · Process vs Results</div><div class="section-kicker">xG-difference = true quality · Luck = GD − xGD</div></div>
+    <div class="section-head"><div class="section-title">3 · Process vs Results</div><div class="section-kicker">xG-difference = true quality · Luck = GD − xGD</div></div>
     <div class="legend">
       <b>xGD</b> ranks teams by real quality (attack xGF minus defense xGA). <b>Luck = actual GD − xGD</b>:
       <span class="chip" style="background:var(--good-soft);color:var(--good)">green / negative</span> = results <b>behind</b> process → unlucky, regress <b>UP</b> → <b>BUY</b>;
@@ -108,7 +121,7 @@ tr:hover td{background:var(--bg-inset)}
   </div>
 
   <div class="section">
-    <div class="section-head"><div class="section-title">3 · Fixture xG-Projection</div><div class="section-kicker">next <span class="hz-lbl">5</span> · opponent quality, venue-adjusted</div></div>
+    <div class="section-head"><div class="section-title">4 · Fixture xG-Projection</div><div class="section-kicker">next <span class="hz-lbl">5</span> · opponent quality, venue-adjusted</div></div>
     <div class="legend">
       For each team's next <span class="hz-lbl">5</span> games: <b>Att-ease</b> = how leaky the defenses they'll face (opponent xGA/game). <b>Higher = greener = buy their ATTACKERS.</b>
       <b>Def-ease</b> = how weak the attacks they'll face (opponent xGF/game). <b>Lower = greener = buy their DEFENDERS / clean sheets.</b>
@@ -137,6 +150,15 @@ async function fpl(ep){
   for(const p of PROXIES){try{const r=await fetch(p(direct));if(r.ok){wp=p;return r.json();}}catch(e){}}
   throw new Error('FPL API unreachable: '+ep);
 }
+async function draftFpl(path){
+  const direct='https://draft.premierleague.com/api'+path;
+  try{const r=await fetch('https://fpl-proxy.rneves2005.workers.dev/draft'+path);if(r.ok)return r.json();}catch(e){}
+  for(const p of [u=>'https://proxy.cors.sh/'+u,u=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),u=>'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(u)]){
+    try{const r=await fetch(p(direct));if(r.ok)return r.json();}catch(e){}
+  }
+  throw new Error('draft API unreachable: '+path);
+}
+const clamp=(v,lo,hi)=>Math.max(lo,Math.min(v,hi));
 const S=(m)=>document.getElementById('status').textContent=m;
 
 let MODEL=null;       // computed team data
@@ -149,13 +171,13 @@ function setBasis(b){
   document.getElementById('b-season').classList.toggle('on',b==='season');
   document.getElementById('b-l5').classList.toggle('on',b==='l5');
   document.getElementById('basis-lbl').textContent=b==='season'?'season':'last-5';
-  if(MODEL){renderTargets();renderFixtures();}
+  if(MODEL){computeProjections();renderTargets();renderFixtures();renderSquad();}
 }
 function setHorizon(n){
   HORIZON=n;
   [1,3,5].forEach(k=>document.getElementById('h-'+k).classList.toggle('on',k===n));
   document.querySelectorAll('.hz-lbl').forEach(el=>el.textContent=n);
-  if(MODEL){renderTargets();renderFixtures();}
+  if(MODEL){computeProjections();renderTargets();renderFixtures();renderSquad();}
 }
 
 async function load(){
@@ -214,10 +236,15 @@ async function load(){
     // market sentiment: net transfers this GW per team (the "template" forming)
     boot.elements.forEach(e=>{const o=T[e.team];if(o){o.netT+=(e.transfers_in_event||0)-(e.transfers_out_event||0);}});
     const _v=Object.values(T),avgXGF=_v.reduce((s,o)=>s+o.xgfpg,0)/_v.length,avgXGA=_v.reduce((s,o)=>s+o.xgapg,0)/_v.length;
-    MODEL={T,teams,avgXGF,avgXGA};
+    const curGw=(boot.events.find(e=>e.is_current)||{}).id||playedGws[playedGws.length-1];
+    const byCode={}; boot.elements.forEach(e=>byCode[e.code]=e);
+    MODEL={T,teams,avgXGF,avgXGA,byId:Object.fromEntries(boot.elements.map(e=>[e.id,e])),byCode,elements:boot.elements,curGw};
     document.getElementById('asof').textContent='GW'+(playedGws[playedGws.length-1]||'—')+' · '+new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
-    S('rendered · '+Object.keys(T).length+' teams');
+    computeProjections();
     renderTargets(); renderProcess(); renderFixtures();
+    S('loading your squads…');
+    await loadSquads(); renderSquad();
+    S('rendered · '+Object.keys(T).length+' teams');
     document.getElementById('foot').innerHTML='Source: FPL API (bootstrap + '+playedGws.length+'× event/live for team xG + fixtures) via Cloudflare proxy. xGD=team xG for − against. Luck=actual GD − xGD. Fixture ease uses opponent per-game xG (±8% home/away). GW in progress counts as partial. Not advice — a process lens.';
   }catch(e){ S('error'); document.getElementById('foot').innerHTML='<span class="err">'+e.message+'</span>'; }
   btn.disabled=false;
@@ -236,17 +263,20 @@ function tagFor(o){ // quick BUY/FADE/ELITE badge
   return '';
 }
 
-function renderTargets(){
+function computeProjections(){
   const {T,avgXGF,avgXGA}=MODEL, useL5=BASIS==='l5';
   const oA=o=>useL5?o.l5xfpg:o.xgfpg, oD=o=>useL5?o.l5xapg:o.xgapg;
-  let rows=Object.values(T).map(o=>{
+  Object.values(T).forEach(o=>{
     const nx=o.next.slice(0,HORIZON); let pa=0,pd=0,n=nx.length||1;
     nx.forEach(fx=>{const op=T[fx.opp],vA=fx.home?1.08:0.92,vD=fx.home?0.92:1.08;
-      pa+=oA(o)*(oD(op)/avgXGA)*vA;   // own attack × opp leakiness(rel) × venue
-      pd+=oD(o)*(oA(op)/avgXGF)*vD;   // own leakiness × opp attack(rel) × venue
-    });
-    pa/=n; pd/=n; return {o,pa,pd,score:pa-pd,netT:o.netT||0};
+      pa+=oA(o)*(oD(op)/avgXGA)*vA; pd+=oD(o)*(oA(op)/avgXGF)*vD;});
+    o.projAtt=pa/n; o.projDef=pd/n; o.score=o.projAtt-o.projDef;
+    o.fixAttMult=clamp(o.projAtt/((oA(o))||1),0.5,1.7);
   });
+}
+function renderTargets(){
+  const {T}=MODEL;
+  let rows=Object.values(T).map(o=>({o,pa:o.projAtt,pd:o.projDef,score:o.score,netT:o.netT||0}));
   const bs=[...rows].sort((a,b)=>b.score-a.score), bm=[...rows].sort((a,b)=>b.netT-a.netT);
   const sr={},mr={}; bs.forEach((r,i)=>sr[r.o.id]=i); bm.forEach((r,i)=>mr[r.o.id]=i);
   const N=rows.length, th=Math.round(N/3);
@@ -267,6 +297,84 @@ function renderTargets(){
       <td class="l">${lbl?`<span class="tag ${cls}">${lbl}</span>`:''}</td>
     </tr>`;
   }).join('');
+}
+// ---- My Squad: projected points-per-game + weakest-link ----
+function expPPG(e){
+  const tm=MODEL.T[e.team];
+  if(!tm||!e.minutes) return {ppg:0,mpg:0,flag:'no mins'};
+  const gp=tm.pl||1, mpg=Math.min(e.minutes/gp,90), playShare=mpg/90;
+  const app=Math.min(mpg/60,1)*2;
+  const per90=m=>parseFloat(e[m]||0)/e.minutes*90;
+  const xg90=per90('expected_goals'), xa90=per90('expected_assists');
+  const gv={1:6,2:6,3:5,4:4}[e.element_type], csVal={1:4,2:4,3:1,4:0}[e.element_type];
+  const attMult=tm.fixAttMult||1, pCS=Math.exp(-(tm.projDef||tm.xgapg||1.4));
+  const dc90=parseFloat(e.defensive_contribution_per_90||0);
+  const pDefCon=e.element_type===2?clamp((dc90-2)/10,0,0.85):e.element_type===3?clamp((dc90-4)/14,0,0.5):0;
+  const coP=e.chance_of_playing_next_round;
+  const avail=coP!=null?coP/100:(e.status==='a'?1:e.status==='d'?0.75:0.2);
+  const attackPts=(xg90*gv+xa90*3)*attMult*playShare;
+  const csPts=csVal*pCS*Math.min(mpg/70,1), dcPts=2*pDefCon*playShare;
+  const ppg=(app+attackPts+csPts+dcPts)*avail;
+  return {ppg,mpg,avail,flag:avail<0.6?'fit?':''};
+}
+async function loadSquads(){
+  MODEL.sq={classic:[],draft:[],bank:0,fa:[]};
+  try{
+    const pk=await fpl('/entry/37889/event/'+MODEL.curGw+'/picks/');
+    MODEL.sq.bank=((pk.entry_history||{}).bank||0)/10;
+    MODEL.sq.classic=pk.picks.map(p=>({e:MODEL.byId[p.element],isC:p.is_captain,bench:p.position>11})).filter(x=>x.e);
+  }catch(e){MODEL.sq.classicErr=e.message;}
+  try{
+    const db=await draftFpl('/bootstrap-static'); const dById={}; db.elements.forEach(x=>dById[x.id]=x);
+    const es=await draftFpl('/league/6079/element-status'); const rows=es.element_status||[];
+    const toCl=de=>de&&MODEL.byCode[de.code];
+    MODEL.sq.draft=rows.filter(s=>s.owner===27317).map(s=>({e:toCl(dById[s.element])})).filter(x=>x.e);
+    MODEL.sq.fa=rows.filter(s=>s.owner==null).map(s=>toCl(dById[s.element])).filter(Boolean);
+  }catch(e){MODEL.sq.draftErr=e.message;}
+}
+function bestUpgrade(ownE,pool,budget){
+  const cur=expPPG(ownE).ppg; let best=null;
+  pool.forEach(c=>{
+    if(c.element_type!==ownE.element_type||c.id===ownE.id) return;
+    if(budget!=null&&c.now_cost>budget) return;
+    const av=c.chance_of_playing_next_round, avail=av!=null?av/100:(c.status==='a'?1:0.3);
+    if(avail<0.75) return;
+    const tm=MODEL.T[c.team]; if(!tm||!c.minutes||c.minutes/(tm.pl||1)<60) return;
+    const p=expPPG(c).ppg;
+    if(p>cur&&(!best||p>best.ppg)) best={e:c,ppg:p};
+  });
+  return best?{...best,gap:best.ppg-cur}:null;
+}
+function renderSquad(){
+  if(!MODEL.sq) return;
+  const el=document.getElementById('sq-bank'); if(el) el.textContent=(MODEL.sq.bank||0).toFixed(1);
+  const owned=new Set(MODEL.sq.classic.map(x=>x.e.id));
+  const pool=MODEL.elements.filter(c=>!owned.has(c.id));
+  const crows=MODEL.sq.classic.map(x=>{const r=expPPG(x.e);const budget=(MODEL.sq.bank||0)*10+x.e.now_cost;return {...x,...r,up:x.bench?null:bestUpgrade(x.e,pool,budget)};});
+  const drows=MODEL.sq.draft.map(x=>{const r=expPPG(x.e);return {...x,...r,up:bestUpgrade(x.e,MODEL.sq.fa,null)};});
+  renderSquadTable('t-classic',crows,true,MODEL.sq.classicErr);
+  renderSquadTable('t-draft',drows,false,MODEL.sq.draftErr);
+}
+function renderSquadTable(id,rows,isClassic,err){
+  const pos={1:'GK',2:'DEF',3:'MID',4:'FWD'};
+  let weak=null; rows.filter(r=>!r.bench).forEach(r=>{if(r.up&&(!weak||r.up.gap>weak.up.gap))weak=r;});
+  rows.sort((a,b)=>((a.bench?1:0)-(b.bench?1:0))||(b.ppg-a.ppg));
+  const body=rows.map(r=>{
+    const cut=weak&&r.e.id===weak.e.id;
+    const sig=cut?'<span class="tag trap">CUT</span>':r.flag==='fit?'?'<span class="tag fade">FIT?</span>':r.bench?'<span class="tag exo">BENCH</span>':'';
+    const up=r.up?`${r.up.e.web_name} <span style="color:var(--good);font-weight:600">+${r.up.gap.toFixed(2)}</span>`:'<span style="color:var(--ink-faint)">— none better</span>';
+    return `<tr${cut?' style="background:var(--bad-soft)"':''}>
+      <td class="l team">${r.e.web_name}${r.isC?' ©':''}</td>
+      <td class="l">${pos[r.e.element_type]}</td>
+      <td class="num">${isClassic?'£'+(r.e.now_cost/10).toFixed(1):'—'}</td>
+      <td class="num">${Math.round(r.mpg)}'</td>
+      <td class="num" style="background:${scaleBg(r.ppg,1.5,6)};font-weight:600">${r.ppg.toFixed(2)}</td>
+      <td class="l">${sig}</td>
+      <td class="l" style="font-size:11px">${up}</td>
+    </tr>`;
+  }).join('');
+  document.querySelector('#'+id+' thead').innerHTML=`<tr><th class="l">Player</th><th class="l">Pos</th><th>£</th><th>Min/g</th><th>ppg</th><th class="l">Sig</th><th class="l">${isClassic?'Best affordable upgrade':'Best free agent'}</th></tr>`;
+  document.querySelector('#'+id+' tbody').innerHTML=err?`<tr><td colspan="7" class="err">couldn't load — ${err}</td></tr>`:(body||'<tr><td colspan="7" style="color:var(--ink-faint)">—</td></tr>');
 }
 function renderProcess(){
   const cols=[['pos','#',0],['name','Team',1],['pl','Pl'],['pts','Pts'],['gd','GD'],['xgf','xGF'],['xga','xGA'],['xgd','xGD'],['luck','Luck'],['l5xgd','L5 xGD'],['tag','',1]];
