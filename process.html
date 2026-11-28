@@ -147,6 +147,24 @@ tr:hover td{background:var(--bg-inset)}
     <table id="t-form"><thead></thead><tbody></tbody></table>
   </div>
 
+  <div class="section">
+    <div class="section-head"><div class="section-title">6 · Finishing · xG Over / Under</div><div class="section-kicker">goals vs expected · the player-level regression signal</div></div>
+    <div class="legend">
+      Per-player conversion vs chance quality (season). <b>ΔG = goals − xG</b> (finishing-only, regresses fastest) · <b>ΔGI = (G+A) − (xG+xA)</b> (total involvement).
+      <span class="chip" style="background:var(--bad-soft);color:var(--bad)">red / positive</span> = scoring <b>above</b> his chances → riding hot finishing, regress <b>DOWN</b> → <b>FADE / don't pay up</b>;
+      <span class="chip" style="background:var(--good-soft);color:var(--good)">green / negative</span> = scoring <b>below</b> his chances → due a bounce, regress <b>UP</b> → <b>BUY</b>.
+      <b>xGI90</b> = is the chance volume even there (quality underneath the luck). <span style="color:var(--warn)">⚠</span> = penalty taker (pens inflate both G and xG — judge net of them). <span style="color:var(--blue)">●</span> = in your squad. Min 450'. Click any header to sort.
+    </div>
+    <div class="bar" style="border:none;padding:0 0 8px">
+      <span class="status">Position:</span>
+      <button class="btn ghost on" id="xp-0" onclick="setXgPos(0)">All</button>
+      <button class="btn ghost" id="xp-4" onclick="setXgPos(4)">FWD</button>
+      <button class="btn ghost" id="xp-3" onclick="setXgPos(3)">MID</button>
+      <button class="btn ghost" id="xp-2" onclick="setXgPos(2)">DEF</button>
+    </div>
+    <table id="t-xg"><thead></thead><tbody></tbody></table>
+  </div>
+
   <div class="foot" id="foot"></div>
 </div>
 
@@ -190,6 +208,8 @@ let MODEL=null;       // computed team data
 let BASIS='season';   // 'season' | 'l5'
 let HORIZON=5;        // next N fixtures
 let FORM_POS=0;       // form filter: 0=all, 1/2/3/4 = GK/DEF/MID/FWD
+let XG_POS=0;         // finishing-table position filter
+let xgSortKey='dg', xgSortDir=-1;
 let sortKey='xgd', sortDir=-1;
 
 function setBasis(b){
@@ -275,7 +295,7 @@ async function load(){
     computeProjections();
     renderTargets(); renderProcess(); renderFixtures();
     S('loading your squads…');
-    await loadSquads(); renderSquad(); renderForm();
+    await loadSquads(); renderSquad(); renderForm(); renderXG();
     S('rendered · '+Object.keys(T).length+' teams');
     document.getElementById('foot').innerHTML='Source: FPL API (bootstrap + '+playedGws.length+'× event/live for team xG + fixtures) via Cloudflare proxy. xGD=team xG for − against. Luck=actual GD − xGD. Fixture ease uses opponent per-game xG (±8% home/away). GW in progress counts as partial. Not advice — a process lens.';
   }catch(e){ S('error'); document.getElementById('foot').innerHTML='<span class="err">'+e.message+'</span>'; }
@@ -285,6 +305,7 @@ async function load(){
 // ---- color helpers ----
 function hx2(a,b,t){const p=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];const A=p(a),B=p(b);return'#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('');}
 function luckBg(v){const m=Math.min(Math.abs(v)/11,1);return v>0.3?hx2('#FFFFFF','#FBE1E1',m):v<-0.3?hx2('#FFFFFF','#E3EFE4',m):'transparent';}
+function pLuckBg(v){const m=Math.min(Math.abs(v)/4,1);return v>0.25?hx2('#FFFFFF','#FBE1E1',m):v<-0.25?hx2('#FFFFFF','#E3EFE4',m):'transparent';} // player ΔG/ΔGI scale: + = over (fade/red), − = under (buy/green)
 function goodBg(v,max){const m=Math.max(0,Math.min(v/max,1));return hx2('#FFFFFF','#E3EFE4',m);}
 function scaleBg(v,lo,hi,invert){let t=(v-lo)/(hi-lo);t=Math.max(0,Math.min(t,1));if(invert)t=1-t;return hx2('#FBE1E1','#E3EFE4',t);} // low=red high=green (invert flips)
 
@@ -440,6 +461,52 @@ function renderForm(){
       <td class="l">${nxt}</td>
     </tr>`;
   }).join('');
+}
+function setXgPos(p){XG_POS=p;[0,2,3,4].forEach(k=>{const b=document.getElementById('xp-'+k);if(b)b.classList.toggle('on',k===p);});if(MODEL)renderXG();}
+function xgSort(k){ if(xgSortKey===k)xgSortDir*=-1; else {xgSortKey=k;xgSortDir=(k==='name')?1:-1;} renderXG(); }
+function renderXG(){
+  if(!MODEL) return;
+  const owned=new Set([...(MODEL.sq&&MODEL.sq.classic||[]),...(MODEL.sq&&MODEL.sq.draft||[])].map(x=>x.e.id));
+  const pos={1:'GK',2:'DEF',3:'MID',4:'FWD'};
+  let rows=MODEL.elements
+    .filter(e=>(XG_POS===0?e.element_type>=2:e.element_type===XG_POS)&&e.minutes>=450&&(parseFloat(e.expected_goals||0)+parseFloat(e.expected_assists||0))>=1.0)
+    .map(e=>{
+      const g=e.goals_scored, a=e.assists, xg=parseFloat(e.expected_goals||0), xa=parseFloat(e.expected_assists||0);
+      return {e,g,a,xg,xa,dg:g-xg,dgi:(g+a)-(xg+xa),xgi90:parseFloat(e.expected_goal_involvements_per_90||0)};
+    });
+  rows.sort((A,B)=>{
+    if(xgSortKey==='name') return xgSortDir*(''+A.e.web_name).localeCompare(''+B.e.web_name);
+    if(xgSortKey==='min')  return xgSortDir*(A.e.minutes-B.e.minutes);
+    if(xgSortKey==='own')  return xgSortDir*(parseFloat(A.e.selected_by_percent)-parseFloat(B.e.selected_by_percent));
+    return xgSortDir*((A[xgSortKey]??0)-(B[xgSortKey]??0));
+  });
+  const H=(k,l,left)=>`<th class="${left?'l':''}" onclick="xgSort('${k}')">${l}</th>`;
+  document.querySelector('#t-xg thead').innerHTML='<tr>'+
+    H('name','Player',1)+'<th class="l">Team</th><th class="l">Pos</th>'+
+    H('min','Min')+H('g','G')+H('xg','xG')+H('dg','ΔG')+H('a','A')+H('xa','xA')+
+    H('dgi','ΔGI')+H('xgi90','xGI90')+H('own','Own%')+'<th class="l">Read</th></tr>';
+  const sgn=v=>(v>0?'+':'')+v.toFixed(2);
+  document.querySelector('#t-xg tbody').innerHTML=rows.map(r=>{
+    const e=r.e;
+    const read=r.dg>=2?'<span class="tag fade">HOT</span>':r.dg<=-2?'<span class="tag buy">COLD</span>':'';
+    const you=owned.has(e.id)?' <span style="color:var(--blue)" title="in your squad">●</span>':'';
+    const pen=penTaker(e)?' <span style="color:var(--warn)" title="penalty taker — pens inflate G and xG">⚠</span>':'';
+    return `<tr>
+      <td class="l team">${e.web_name}${pen}${you}</td>
+      <td class="l">${MODEL.teams[e.team].name}</td>
+      <td class="l">${pos[e.element_type]}</td>
+      <td class="num">${e.minutes}</td>
+      <td class="num">${r.g}</td>
+      <td class="num">${r.xg.toFixed(2)}</td>
+      <td class="num" style="background:${pLuckBg(r.dg)};font-weight:600">${sgn(r.dg)}</td>
+      <td class="num">${r.a}</td>
+      <td class="num">${r.xa.toFixed(2)}</td>
+      <td class="num" style="background:${pLuckBg(r.dgi)};font-weight:600">${sgn(r.dgi)}</td>
+      <td class="num">${r.xgi90.toFixed(2)}</td>
+      <td class="num">${e.selected_by_percent}%</td>
+      <td class="l">${read}</td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="13" style="color:var(--ink-faint)">—</td></tr>';
 }
 function renderProcess(){
   const cols=[['pos','#',0],['name','Team',1],['pl','Pl'],['pts','Pts'],['gd','GD'],['xgf','xGF'],['xga','xGA'],['xgd','xGD'],['luck','Luck'],['l5xgd','L5 xGD'],['tag','',1]];
