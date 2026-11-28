@@ -148,7 +148,7 @@ tr.you:hover td{background:#F0D9C3}
     <table class="ledger"><thead><tr><th class="l">Manager</th><th class="l">Out → In</th></tr></thead><tbody id="ledgerb"></tbody></table>
   </div>
 
-  <div class="foot" id="foot">Source: FPL API (entry summary + picks + transfers for the 27) via Cloudflare proxy. Manager set = hof_manager_ids.json (17 HoF + 10 strong-10) + your entry as reference. GW in progress counts as partial.</div>
+  <div class="foot" id="foot">Source: FPL API (entry summary + picks + transfers for the 27) via Cloudflare proxy. Manager set = hof_manager_ids.json (17 HoF + 10 strong-10) + your entry as reference. <b>GW points are computed live</b> from the match feed — starting XI + captain, with provisional bonus, auto-subs (a 0-min starter whose match has finished) and VC promotion — because FPL's own stored total lags mid-gameweek. Reload for the latest.</div>
 </div>
 
 <div class="ov" id="ov" hidden>
@@ -190,6 +190,40 @@ let MODEL=null, sortK='total', grp='all';
 
 function fmtRank(n){ if(n==null)return '—'; if(n>=1e6)return (n/1e6).toFixed(2)+'M'; if(n>=1e3)return Math.round(n/1e3)+'k'; return ''+n; }
 
+// Live GW points, FPL-accurate: start XI + captain multiplier, with provisional auto-subs
+// (a 0-min starter whose match is FINISHED is replaced by the first eligible bench player that
+// keeps a valid formation) and VC promotion if the captain's match finished with 0 minutes.
+function livePoints(sq, teamUnfinished){
+  const done = p => p.min===0 && !teamUnfinished.has(p.tid);   // definitively 0 (match over)
+  const played = p => p.min>0;
+  let xi = sq.filter(p=>p.slot<=11).map(p=>({...p}));
+  const bench = sq.filter(p=>p.slot>11).sort((a,b)=>a.slot-b.slot);
+  const benchGK = bench.find(p=>p.pos==='GK');
+  const benchOut = bench.filter(p=>p.pos!=='GK');
+  // GK auto-sub
+  const gkIdx = xi.findIndex(p=>p.pos==='GK');
+  if(gkIdx>=0 && done(xi[gkIdx]) && benchGK && played(benchGK)) xi[gkIdx]={...benchGK};
+  // outfield auto-subs, bench in order, keep a valid formation (1 GK, DEF>=3, MID>=2, FWD>=1)
+  const count = arr => ({GK:arr.filter(p=>p.pos==='GK').length,DEF:arr.filter(p=>p.pos==='DEF').length,MID:arr.filter(p=>p.pos==='MID').length,FWD:arr.filter(p=>p.pos==='FWD').length});
+  const valid = c => c.GK===1 && c.DEF>=3 && c.MID>=2 && c.FWD>=1 && (c.DEF+c.MID+c.FWD)===10;
+  const used=new Set();
+  xi.forEach((p,idx)=>{
+    if(p.pos==='GK' || !done(p)) return;
+    for(const b of benchOut){
+      if(used.has(b.slot) || !played(b)) continue;
+      const trial = xi.map((q,j)=> j===idx?{...b}:q);
+      if(valid(count(trial))){ xi[idx]={...b}; used.add(b.slot); break; }
+    }
+  });
+  // effective captain: VC takes over if the captain's match finished with 0 minutes
+  const capMult = (sq.find(p=>p.cap)||{}).mult || 2;
+  let capP = xi.find(p=>p.cap);
+  if(!capP || done(capP)){ const vc = xi.find(p=>p.vc && !done(p)); capP = vc || null; }
+  let total = xi.reduce((s,p)=>s+p.gp,0);
+  if(capP) total += capP.gp*(capMult-1);
+  return total;
+}
+
 async function load(){
   const btn=document.getElementById('reload'); btn.disabled=true;
   try{
@@ -202,6 +236,9 @@ async function load(){
     S('loading GW'+GW+' live scores…');
     let livept={},livemin={};
     try{const lv=await fpl('/event/'+GW+'/live/'); lv.elements.forEach(x=>{livept[x.id]=x.stats.total_points;livemin[x.id]=x.stats.minutes;});}catch(e){}
+    // which teams still have an unfinished fixture — a 0-min starter is only "done" (auto-subbable) once his match is finished
+    let teamUnfinished=new Set();
+    try{const fx=await fpl('/fixtures/?event='+GW); fx.forEach(f=>{ if(!f.finished){teamUnfinished.add(f.team_h);teamUnfinished.add(f.team_a);} });}catch(e){}
     S('loading manager list…');
     const ids=await fetch('hof_manager_ids.json').then(r=>r.json());
     const roster=[];
@@ -220,10 +257,10 @@ async function load(){
       const eh=picks.entry_history||{};
       let cap=null;
       const squad=picks.picks.map(p=>{ const e=els[p.element]; if(!e)return null; if(p.is_captain)cap=e.web_name;
-        return {name:e.web_name,team:teams[e.team],pos:POS[e.element_type],cap:p.is_captain,vc:p.is_vice_captain,mult:p.multiplier,bench:p.position>11,slot:p.position,gp:livept[p.element]||0,min:livemin[p.element]||0}; }).filter(Boolean);
+        return {name:e.web_name,team:teams[e.team],tid:e.team,pos:POS[e.element_type],cap:p.is_captain,vc:p.is_vice_captain,mult:p.multiplier,bench:p.position>11,slot:p.position,gp:livept[p.element]||0,min:livemin[p.element]||0}; }).filter(Boolean);
       const tw=(trs||[]).filter(t=>t.event===GW).map(t=>({inn:els[t.element_in]?els[t.element_in].web_name:'?',out:els[t.element_out]?els[t.element_out].web_name:'?',
         inTeam:els[t.element_in]?teams[els[t.element_in].team]:'',outTeam:els[t.element_out]?teams[els[t.element_out].team]:''}));
-      return {...m,team:summ?summ.name:'',gw:eh.points||0,hit:eh.event_transfers_cost||0,total:summ?summ.summary_overall_points:0,
+      return {...m,team:summ?summ.name:'',gw:livePoints(squad,teamUnfinished),official:eh.points||0,hit:eh.event_transfers_cost||0,total:summ?summ.summary_overall_points:0,
         orank:summ?summ.summary_overall_rank:null,chip:picks.active_chip,cap,squad,transfers:tw};
     },6);
     MODEL={gw:GW,managers:mgrs.filter(Boolean)};
